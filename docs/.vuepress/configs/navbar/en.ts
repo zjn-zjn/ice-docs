@@ -34,24 +34,23 @@ export const navbarEn: NavbarConfig = [
       {
         text: 'Changelog',
         link: '/CHANGELOG.html',
-      }
-    ],
-  },
-  {
-    text: `Source`,
-    children: [
-      {
-        text: 'Github',
-        link: 'https://github.com/zjn-zjn/ice',
       },
       {
-        text: 'Gitee',
-        link: 'https://gitee.com/waitmoon/ice',
-      }
+        text: 'Upgrade Guide',
+        link: '/upgrade/upgrade_guide.html',
+      },
     ],
   },
   {
     text: `Comminicate`,
     link: '/guide/#exchange-discussion'
   },
+  {
+    text: 'Github',
+    link: 'https://github.com/zjn-zjn/ice'    
+  },
+  {
+    text: 'Gitee',
+    link: 'https://gitee.com/waitmoon/ice'
+  }
 ]

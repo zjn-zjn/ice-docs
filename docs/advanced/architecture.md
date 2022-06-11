@@ -1,6 +1,6 @@
 # Architecture
 
-## Architecture Design
+## Architecture diagram
 
 <img src="/images/advanced/architecture.png" width="100%" height="100%">
 

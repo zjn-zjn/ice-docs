@@ -10,12 +10,13 @@
 
 **备注：** 如果启动时报找不到ice相关的表，则需手动创建ice相关表结构，表结构sql地址：
 
-https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql
+[https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
 ## 安装server
 
 ### 下载安装包
-http://waitmoon.com/downloads/
+
+[http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
 解压tar包 
 
@@ -35,8 +36,7 @@ spring:
     password: password
     initialization-mode: always
 ice:
-  rmi: #rmi配置
-    port: 8212 #rmi端口
+  port: 18121 #与客户端通信端口
   pool: #线程池配置(用于更新client)
     core-size: 4
     max-size: 4
@@ -63,7 +63,7 @@ http://localhost:8121/
 
 部署用于测试&体验地址(仅app=1有真实部署的client)
 
-http://waitmoon.com
+[http://waitmoon.com](http://waitmoon.com)
 
 ## Client接入
 
@@ -75,7 +75,7 @@ http://waitmoon.com
   <dependency>
     <groupId>com.waitmoon.ice</groupId>
     <artifactId>ice-client-spring-boot-starter</artifactId>
-    <version>0.0.9</version>
+    <version>1.0.1</version>
   </dependency>
 ```
 
@@ -84,17 +84,10 @@ http://waitmoon.com
 ```
 ice: #ice client配置
   app: 1 #与后台配置app对应
-  rmi:  #rmi配置
-    server: 127.0.0.1:8212 #server rmi地址(serverHost:serverRmiPort)
-    mode: ONE_WAY #默认ONE_WAY,在client与server网络互通的条件下,可以选用TWO_WAY,TWO_WAY比ONE_WAY更好
-    port: 8210 #默认0(随机选取通信端口),在TWO_WAY并且有防火墙的条件下可以指定端口,在ONE_WAY下不需要配置
-  pool: #线程池配置(用于并发节点)
+  server: 127.0.0.1:8212 #server 地址(serverHost:serverPort)
+  pool: #线程池配置(用于并发关系节点)
     parallelism: -1 #默认-1,≤0表示采用默认配置
 ```
-
-**备注：启动失败** 
-
-若确认与server网络是畅通的,需要考虑server的rmi关于-Djava.rmi.server.hostname=xxx.xxx.xxx.xxx的配置(在server的启动脚本ice.sh内添加)
 
 ## 开发&配置
 
