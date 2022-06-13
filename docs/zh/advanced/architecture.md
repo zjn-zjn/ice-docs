@@ -2,7 +2,8 @@
 
 ## 架构图
 
-<img src="/images/advanced/architecture.png" width="100%" height="100%">
+![架构图](/images/advanced/architecture-dark.png#dark)
+![架构图](/images/advanced/architecture-light.png#light)
 
 **IceServer：** 提供页面操作及配置的存储和管理。
 
@@ -10,7 +11,8 @@
 
 ## 节点类图
 
-<img src="/images/advanced/class.png" width="100%" height="100%">
+![类图](/images/advanced/class-dark.png#dark)
+![类图](/images/advanced/class-light.png#light)
 
 **BaseNode：** 所有ice节点的基类，提供通用节点操作，如节点生效时间等。
 

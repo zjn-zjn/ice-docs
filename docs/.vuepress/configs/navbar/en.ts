@@ -3,6 +3,10 @@ import { version } from '../meta'
 
 export const navbarEn: NavbarConfig = [
   {
+    text: 'Home',
+    link: '/',
+  },
+  {
     text: 'Guide',
     link: '/guide/',
   },

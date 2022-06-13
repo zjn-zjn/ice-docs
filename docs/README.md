@@ -19,6 +19,15 @@ features:
 footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ---
 
+### Non-Spring Support
+> Directly rely on ice-core intelligence
+
+````java
+  IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); // application and server addresses
+  New thread (iceNioClient::connect).start(); //connect() is a block method, which can run with new thread
+  iceNioClient.destroy(); //It's best to clean up after application shutdown~
+````
+
 <!-- ### test
 <CodeGroup>
    <CodeGroupItem title="1" active>

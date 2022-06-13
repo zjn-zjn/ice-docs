@@ -25,7 +25,8 @@ Recharge 50  dollar and get 10 points (10.5-10.7)
 
 Simply dismantling, to complete this activity, we need to develop the following modules:
 
-<img src="/images/introduction/2.png" width="50%" height="50%">
+![](/images/introduction/2-dark.png#dark)
+![](/images/introduction/2-light.png#light)
 
 As shown in the figure, when the user recharges successfully, a parameter package Pack (like Activiti/Drools Fact) corresponding to the recharge scenario will be generated. The package will contain the recharge user's uid, recharge amount cost, recharge time requestTime and other information. We can get the value in the package through the defined key (similar to map.get(key)).
 
@@ -35,11 +36,13 @@ There is nothing wrong with how the module is designed. The key point is how to 
 
 Like Activiti, Flowable implementation:
 
-<img src="/images/introduction/3.png" width="55%" height="55%">
+![](/images/introduction/3-dark.png#dark)
+![](/images/introduction/3-light.png#light)
 
 Flowchart implementation should be the most common arrangement method we think of~ It looks very concise and easy to understand. Through special design, such as removing some unnecessary lines, the UI can be made more concise. But because of the time attribute, time is actually a rule condition, and after adding it becomes:
 
-<img src="/images/introduction/4.png" width="65%" height="65%">
+![](/images/introduction/4-dark.png#dark)
+![](/images/introduction/4-light.png#light)
 
 looks ok too
 
@@ -47,11 +50,13 @@ looks ok too
 
 Like Drools implementation (When X Then Y):
 
-<img src="/images/introduction/5.png" width="80%" height="80%">
+![](/images/introduction/5-dark.png#dark)
+![](/images/introduction/5-light.png#light)
 
 This looks fine too, try it with the timeline:
 
-<img src="/images/introduction/6.png" width="100%" height="100%">
+![](/images/introduction/6-dark.png#dark)
+![](/images/introduction/6-light.png#light)
 
 It's still relatively concise, at least compared to the flowchart format, and I would be more willing to modify this.
 
@@ -119,11 +124,12 @@ Some actions that do not interfere with the process, such as assembly work, etc.
 
 With the above nodes, how do we assemble it?
 
-<img src="/images/introduction/7.png" width="45%" height="45%">
+![](/images/introduction/7-dark.png#dark)
+![](/images/introduction/7-light.png#light)
 
 As shown in the figure, using the tree structure (the traditional tree is mirrored and rotated), the execution order is similar to in-order traversal. It is executed from the root, which is a relationship node, and the child nodes are executed from top to bottom. If the user's recharge amount is 70 Element, the execution process:
 
-[ScoreFlow-100:false]→[AND:false]→[ScoreFlow-50:true]→[PointResult:true]→[AND:true]→[ANY:true]
+```[ScoreFlow-100:false]→[AND:false]→[ScoreFlow-50:true]→[PointResult:true]→[AND:true]→[ANY:true]```
 
 At this time, it can be seen that the time that needs to be stripped out before can be integrated into each node, and the time configuration is returned to the node. If the execution time is not reached, such as the node that issued the points will take effect after 10.5 days, then before 10.5 , it can be understood that this node does not exist.
 
@@ -139,7 +145,8 @@ One more thorny question, when the timeline is complex, what to do with test wor
 
 An event that started in 10.1 must be developed and launched before 10.1. For example, how can I test an event that started in 10.1 in 9.15? In ice, it just needs to be modified slightly:
 
-<img src="/images/introduction/8.png" width="45%" height="45%">
+![](/images/introduction/8-dark.png#dark)
+![](/images/introduction/8-light.png#light)
 
 As shown in the figure, a node TimeChangeNone (changing the requestTime in the package) is introduced, which is responsible for changing the time. The execution of the subsequent nodes depends on the time in the package. TimeChangeNone is similar to a plug-in for changing time. If the test is parallel, then You can add a time change plug-in to the business that each person is responsible for for multiple tests.
 
@@ -151,7 +158,8 @@ In fact, the tree structure is used for decoupling. When the flow chart and exec
 
 Because the execution process after executing it is no longer under its control, it can be reused:
 
-<img src="/images/introduction/9.png" width="80%" height="80%">
+![](/images/introduction/9-dark.png#dark)
+![](/images/introduction/9-light.png#light)
 
 As shown in the figure, TimeChangeNone is used in the participation activity. If there is still an H5 page that needs to be presented, and different presentations are also related to time, what should I do? Just use the same instance in the render activity, change one, and the other will be updated, avoiding the problem of changing the time everywhere.
 
@@ -159,7 +167,8 @@ Similarly, if there is a problem on the line, such as the sendAmount interface h
 
 #### Introduce forward node
 
-<img src="/images/introduction/10.png" width="35%" height="35%">
+![](/images/introduction/10-dark.png#dark)
+![](/images/introduction/10-light.png#light)
 
 In the above logic, we can see that some AND nodes are closely bound. In order to simplify the view and configuration, the concept of forward node is added. This node will be executed if and only when the execution result of the current node is not false. , the semantics are consistent with the two nodes connected by AND.
 
@@ -167,6 +176,12 @@ In the above logic, we can see that some AND nodes are closely bound. In order t
 
 Interested friends are welcome to join the group to discuss and exchange~
 
-Personal WeChat (add me to the exchange group):
+Personal WeChat (add me to the wechat group):
 
-<img src="/images/introduction/11.jpeg" width="30%" height="30%">
+![](/images/introduction/11-dark.jpeg#dark)
+![](/images/introduction/11-light.jpeg#light)
+
+QQ group code:587368939
+
+![](/images/introduction/12-dark.png#dark =510x)
+![](/images/introduction/12-light.png#light =510x)

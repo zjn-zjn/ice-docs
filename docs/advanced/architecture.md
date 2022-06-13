@@ -2,7 +2,8 @@
 
 ## Architecture diagram
 
-<img src="/images/advanced/architecture.png" width="100%" height="100%">
+![Architecture](/images/advanced/architecture-dark.png#dark)
+![Architecture](/images/advanced/architecture-light.png#light)
 
 **IceServer:** Provides storage and management of page operations and configurations.
 
@@ -10,7 +11,8 @@
 
 ## Node class diagram
 
-<img src="/images/advanced/class.png" width="100%" height="100%">
+![class](/images/advanced/class-dark.png#dark)
+![class](/images/advanced/class-light.png#light)
 
 **BaseNode:** The base class of all ice nodes, providing common node operations, such as node valid time, etc.
 

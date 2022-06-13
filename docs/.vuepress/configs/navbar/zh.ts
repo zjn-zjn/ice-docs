@@ -7,7 +7,7 @@ export const navbarZh: NavbarConfig = [
     link: '/zh/',
   },
   {
-    text: '文档',
+    text: '指南',
     link: '/zh/guide/',
   },
   {

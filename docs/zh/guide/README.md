@@ -31,7 +31,8 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 简单拆解一下，想要完成这个活动，我们需要开发如下模块：
 
-<img src="/images/introduction/2.png" width="50%" height="50%">
+![](/images/introduction/2-dark.png#dark)
+![](/images/introduction/2-light.png#light)
 
 如图，当用户充值成功后，会产生对应充值场景的参数包裹Pack(类Activiti/Drools的Fact)，包裹里会有充值用户的uid，充值金额cost，充值的时间requestTime等信息。我们可以通过定义的key，拿到包裹中的值(类似map.get(key))。
 
@@ -41,11 +42,13 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 类Activiti、 Flowable实现：
 
-<img src="/images/introduction/3.png" width="55%" height="55%">
+![](/images/introduction/3-dark.png#dark)
+![](/images/introduction/3-light.png#light)
 
 流程图式实现，应该是我们最常想到的编排方式了~ 看起来非常的简洁易懂，通过特殊的设计，如去掉一些不必要的线，可以把UI做的更简洁一些。但由于有时间属性，其实时间也是一个规则条件，加上之后就变成了：
 
-<img src="/images/introduction/4.png" width="65%" height="65%">
+![](/images/introduction/4-dark.png#dark)
+![](/images/introduction/4-light.png#light)
 
 看起来也还好
 
@@ -53,11 +56,13 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 类Drools实现(When X Then Y)：
 
-<img src="/images/introduction/5.png" width="80%" height="80%">
+![](/images/introduction/5-dark.png#dark)
+![](/images/introduction/5-light.png#light)
 
 这个看起来也还好，再加上时间线试试：
 
-<img src="/images/introduction/6.png" width="100%" height="100%">
+![](/images/introduction/6-dark.png#dark)
+![](/images/introduction/6-light.png#light)
 
 依旧比较简洁，至少比较流程图式，我会比较愿意修改这个。
 
@@ -125,11 +130,12 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 有了以上节点，我们要怎么组装呢？
 
-<img src="/images/introduction/7.png" width="45%" height="45%">
+![](/images/introduction/7-dark.png#dark)
+![](/images/introduction/7-light.png#light)
 
 如图，使用树形结构(对传统树做了镜像和旋转)，执行顺序还是类似于中序遍历，从root执行，root是个关系节点，从上到下执行子节点，若用户充值金额是70元，执行流程：
 
-[ScoreFlow-100:false]→[AND:false]→[ScoreFlow-50:true]→[PointResult:true]→[AND:true]→[ANY:true]
+```[ScoreFlow-100:false]→[AND:false]→[ScoreFlow-50:true]→[PointResult:true]→[AND:true]→[ANY:true]```
 
 这个时候可以看到，之前需要剥离出的时间，已经可以融合到各个节点上了，把时间配置还给节点，如果没到执行时间，如发放积分的节点10.5日之后才生效，那么在10.5之前，可以理解为这个节点不存在。
 
@@ -145,7 +151,8 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 一个10.1开始的活动，一定是在10.1之前开发上线完毕，比如我在9.15要怎么去测试一个10.1开始的活动？在ice中，只需要稍微修改一下：
 
-<img src="/images/introduction/8.png" width="45%" height="45%">
+![](/images/introduction/8-dark.png#dark)
+![](/images/introduction/8-light.png#light)
 
 如图，引入一个负责更改时间的节点TimeChangeNone(更改包裹中的requestTime)，后面的节点执行都是依赖于包裹中的时间即可，TimeChangeNone类似于一个改时间的插件一样，如果测试并行，那就给多个测试每人在自己负责的业务上加上改时间插件即可。
 
@@ -157,7 +164,8 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 因为自己执行完后的执行流程不再由自己掌控，就可以做到复用：
 
-<img src="/images/introduction/9.png" width="80%" height="80%">
+![](/images/introduction/9-dark.png#dark)
+![](/images/introduction/9-light.png#light)
 
 如图，参与活动这里用到的TimeChangeNone，如果现在还有个H5页面需要做呈现，不同的呈现也与时间相关，怎么办？只需要在呈现活动这里使用同一个实例，更改其中一个，另一个也会被更新，避免了到处改时间的问题。
 
@@ -165,7 +173,8 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 #### 引入前置节点
 
-<img src="/images/introduction/10.png" width="35%" height="40%">
+![](/images/introduction/10-dark.png#dark)
+![](/images/introduction/10-light.png#light)
 
 上面的逻辑中可以看到有一些AND节点紧密绑定的关系，为了视图与配置简化，增加了前置(forward)节点概念，当且仅当前置节点执行结果为非false时才会执行本节点，语义与AND相连的两个节点一致。
 
@@ -175,8 +184,12 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 个人微信(加我进交流群)：
 
-<img src="/images/introduction/11.jpeg" width="30%" height="30%">
+![](/images/introduction/11-dark.jpeg#dark)
+![](/images/introduction/11-light.jpeg#light)
 
 **(Q群：587368939)~**
+
+![](/images/introduction/12-dark.png#dark =510x)
+![](/images/introduction/12-light.png#light =510x)
 
 **微信公众号：ICE研究中心**
