@@ -84,7 +84,7 @@ http://localhost:8121/
 ```
 ice: #ice client配置
   app: 1 #与后台配置app对应
-  server: 127.0.0.1:8212 #server 地址(serverHost:serverPort)
+  server: 127.0.0.1:18121 #server 地址(serverHost:serverPort)
   pool: #线程池配置(用于并发关系节点)
     parallelism: -1 #默认-1,≤0表示采用默认配置
 ```
