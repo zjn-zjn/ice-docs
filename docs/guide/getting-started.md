@@ -6,7 +6,9 @@
 
 Install mysql, **new ice database** to store configuration
 
-`CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;`
+```sql
+CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
+```
 
 **Remarks:** If the ice-related table cannot be found during startup, you need to manually create the ice-related table structure. The sql address of the table structure:
 
@@ -24,7 +26,7 @@ tar -xzvf ice-server-*.tar.gz
 
 ### Edit configuration file
 
-````
+```yml
 server:
    port: 8121 #Port
 spring:
@@ -40,7 +42,7 @@ ice:
      max-size: 4
      keep-alive-seconds: 60
      queue-capacity: 60000
-````
+```
 
 ### start/stop/restart server
 
@@ -69,23 +71,23 @@ Refer to github ice-test module
 
 ### Add pom dependency
 
-````
-  <dependency>
-    <groupId>com.waitmoon.ice</groupId>
-    <artifactId>ice-client-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
-  </dependency>
-````
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
 
 ### Add ice configuration
 
-````
+```yml
 ice: #ice client configuration
    app: 1 #corresponds to the background configuration app
    server: 127.0.0.1:18121 #server address (serverHost:serverPort)
    pool: #Thread pool configuration (for concurrent relation nodes)
      parallelism: -1 #default-1,≤0 means the default configuration
-````
+```
 
 ## Development & Configuration
 

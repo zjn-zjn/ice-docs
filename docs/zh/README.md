@@ -23,9 +23,9 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 > 直接依赖ice-core即可
 
 ```java
-  IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); //传入app和server地址
-  new Thread(iceNioClient::connect).start(); //connect()为阻塞方法，可启动新线程运行
-  iceNioClient.destroy(); //使用完/应用关停后最好清理一下~ 
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); //传入app和server地址
+new Thread(iceNioClient::connect).start(); //connect()为阻塞方法，可启动新线程运行
+iceNioClient.destroy(); //应用关停后最好清理一下~ 
 ```
 
 <!-- <CodeGroup>

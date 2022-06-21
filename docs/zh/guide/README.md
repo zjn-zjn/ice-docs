@@ -182,7 +182,7 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 
 有兴趣的小伙伴欢迎入群一起探讨交流~ 
 
-个人微信(加我进交流群)：
+个人微信(因微信群超过200人，加我微信邀请入群~)：
 
 ![](/images/introduction/11-dark.jpeg#dark)
 ![](/images/introduction/11-light.jpeg#light)

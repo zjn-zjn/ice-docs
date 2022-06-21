@@ -12,21 +12,22 @@ import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
 const isProd = process.env.NODE_ENV === 'production'
 
-// module.exports = {
-//   plugins: [
-//     ['vuepress-plugin-baidu-tongji-analytics', {
-//       key: 'c57dc88e320872392bdc6a8501dfe40c',
-//       dev: true
-//     }]
-//   ]
-// }
-
 export default defineUserConfig({
   // set site base to default value
   base: '/docs/',
 
   // extra tags in `<head>`
-  head,
+  head:[[
+    'script', {}, `
+    var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c57dc88e320872392bdc6a8501dfe40c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+    `
+  ]],
 
   // site-level locales config
   locales: {

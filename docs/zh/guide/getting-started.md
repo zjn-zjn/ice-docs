@@ -6,7 +6,9 @@
 
 安装mysql，**新建ice数据库**用于存储配置
 
-`CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;`
+```sql
+CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
+```
 
 **备注：** 如果启动时报找不到ice相关的表，则需手动创建ice相关表结构，表结构sql地址：
 
@@ -26,7 +28,7 @@ tar -xzvf ice-server-*.tar.gz
 
 application-prod.yml
 
-```
+```yml
 server:
   port: 8121 #端口
 spring:
@@ -65,28 +67,48 @@ http://localhost:8121/
 
 [http://waitmoon.com](http://waitmoon.com)
 
-## Client接入
+## Client接入(Spring)
 
 参考github ice-test模块
 
 ### 增加pom依赖
 
-```
-  <dependency>
-    <groupId>com.waitmoon.ice</groupId>
-    <artifactId>ice-client-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
-  </dependency>
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <version>1.0.1</version>
+</dependency>
 ```
 
 ### 增加ice配置
 
-```
+```yml
 ice: #ice client配置
   app: 1 #与后台配置app对应
   server: 127.0.0.1:18121 #server 地址(serverHost:serverPort)
   pool: #线程池配置(用于并发关系节点)
     parallelism: -1 #默认-1,≤0表示采用默认配置
+```
+
+## Client接入(非Spring)
+
+### 增加pom依赖
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
+### 运行Client
+
+```java
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); //传入app和server地址
+new Thread(iceNioClient::connect).start(); //connect()为阻塞方法，可启动新线程运行
+iceNioClient.destroy(); //应用关停后最好清理一下~ 
 ```
 
 ## 开发&配置
