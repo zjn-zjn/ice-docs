@@ -8,7 +8,20 @@ export const navbarEn: NavbarConfig = [
   },
   {
     text: 'Guide',
-    link: '/guide/',
+    children: [
+      {
+        text: 'Get started',
+        link: '/guide/getting-started.html'
+      },
+      {
+        text: 'Detailed guide',
+        link: '/guide/detail.html'
+      },
+      {
+        text: 'Introduction',
+        link: '/guide/README.md'
+      },
+    ]
   },
   {
     text: 'Experience',

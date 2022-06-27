@@ -8,7 +8,20 @@ export const navbarZh: NavbarConfig = [
   },
   {
     text: '指南',
-    link: '/zh/guide/',
+    children: [
+      {
+        text: '快速上手',
+        link: '/zh/guide/getting-started.html'
+      },
+      {
+        text: '详细指南',
+        link: '/zh/guide/detail.html'
+      },
+      {
+        text: '项目简介',
+        link: '/zh/guide/README.md'
+      },
+    ]
   },
   {
     text: '体验',

@@ -11,7 +11,7 @@ actions:
     type: secondary
 features:
   - title: 编排思想
-    details: 全新的编排思想，在保障解耦和复用的同时，提供了更大的配置自由度。
+    details: 全新的编排思想，在保障解耦和复用的同时，提供了更大的配置自由度，极大的降低了规则维护成本。
   - title: 性能卓越
     details: 几乎不消耗任何性能，只需关注业务自身性能。
   - title: 接入简单

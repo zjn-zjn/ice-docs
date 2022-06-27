@@ -3,9 +3,10 @@ import type { SidebarConfig } from '@vuepress/theme-default'
 export const sidebarZh: SidebarConfig = {
   '/zh/guide/': [
     {
-      text: '文档',
+      text: '指南',
       children: [
         '/zh/guide/getting-started.html',
+        '/zh/guide/detail.html',
         '/zh/guide/README.md',
       ],
     },

@@ -11,7 +11,7 @@ actions:
      type: secondary
 features:
    - title: Orchestration Ideas
-     details: The brand-new orchestration idea provides greater freedom of configuration while ensuring decoupling and reuse.
+     details: The new orchestration idea provides greater freedom of configuration while ensuring decoupling and reuse, which greatly reduces the cost of rule maintenance.
    - title: High performance
      details: It consumes almost no performance, just focus on the performance of the business itself.
    - title: Access cost
