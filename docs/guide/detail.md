@@ -141,7 +141,7 @@ Click a node to pop up related operations
 
 ice can integrate various expression engines such as Aviator to simplify node configuration.
 
-**example:**
+**eg:**
 Taking Aviator as an example, if you want to make an Aviator-based Flow node:
 
 ````java
