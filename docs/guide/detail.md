@@ -90,7 +90,80 @@ roam.put("e", "a");
 roam.getUnion("@e");//"a"
 ```
 
+## Background configuration
 
+### app
+
+app is used to distinguish different applications, such as ice-test with app=1, when ice-test starts, it will go to ice-server to pull all the configurations of app 1 and initialize it according to the configuration
+
+### Add ice
+
+- **ID** iceId can be triggered by iceId
+- **name** description
+- **Scenario** Subscription scenarios, you can use "," to separate subscriptions to multiple scenarios, which will be triggered when any scenario occurs
+- **Configuration ID** The root node ID of the ice tree
+- **Debug** log printing, refer to DebugEnum, and accumulate the values ​​corresponding to the content to be printed, such as printing IN_PACK (Pack-1 before executing ice) and PROCESS (Executing process-2)
+- **operate**
+- - **Edit** Edit ice
+- - **View Details** View detailed node configuration
+- - **Backup** Backup configuration
+- - **Backup History** can be restored from historical backups
+- - **Export** Export the current configuration (including unpublished changes)
+
+### configure node
+
+Click a node to pop up related operations
+
+- **View/Edit Nodes**
+- **Add child nodes** only relationship nodes
+- **Add pre-node** Add pre-execution node
+- **Convert Node** can convert the current node to any node
+- **Move Node Up and Down** Move Node
+- **Delete this node** The deletion of a node is a soft delete, it is just disconnected, not physically deleted, it can be added back by adding a node ID
+
+**Other configuration:**
+- **confName** is the class name of the leaf node. When adding a leaf node for the first time, you need to manually enter the full class name, and there will be a check to see if the class actually exists in the client. When adding a leaf node, a running client for verification
+- **Node ID** Adding child nodes by node ID is the embodiment of object-level reusability. Nodes with the same ID will only have one copy in memory, and if you change one of them, the rest will change together.
+- **debug** node's debug is only used to display in processInfo
+- **invers** inverts the node, if the node should return false, it will return true after inversion, so node classes such as ContainsFlow do not need to develop an additional NotContainsFlow
+
+### publish, clear, import, export
+
+- **Release** All changes will only be real hot updated to the client after they are released, and unreleased change nodes will have a "^" mark
+- **clear** clears all changes, reverts to last release
+- **import** import configuration
+- **export** export the current configuration (including unpublished changes)
+- **Instance selection**
+- - **Server** server configuration, currently only supports editing operations in Server mode
+- - **Client:host/app/uniqueId** corresponds to the real configuration display in the client, only supports viewing operations
+
+## Combining with expression engine
+
+ice can integrate various expression engines such as Aviator to simplify node configuration.
+
+**example:**
+Taking Aviator as an example, if you want to make an Aviator-based Flow node:
+
+````java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class AviatorFlow extends BaseLeafRoamFlow {
+
+    private String exp;//Aviator expression for configuration and hot update
+
+    private Expression compiledExpression;
+
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return (boolean) compiledExpression.execute(roam);
+    }
+
+    public void setExp(String exp) { //For better performance, recompile when setting/updating exp
+        this.exp = exp;
+        this.compiledExpression = AviatorEvaluator.compile(exp);
+    }
+}
+````
 
 
 

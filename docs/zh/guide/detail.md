@@ -60,8 +60,8 @@ pack为执行ice前需要组装的包裹
 
 ### 调用Ice方法
 
-- void syncProcess(IcePack pack) 同步执行
-- List\<Future\<IceContext\>\> asyncProcess(IcePack pack) 异步执行并返回futures
+- **void syncProcess(IcePack pack)** 同步执行
+- **List\<Future\<IceContext\>\> asyncProcess(IcePack pack)** 异步执行并返回futures
 
 业务中可能会往roam中又放入了执行结果等信息，在执行结束后可以从roam里获得想要的数据。
 
@@ -69,10 +69,10 @@ pack为执行ice前需要组装的包裹
 
 roam提供了节点执行所需的数据源或存放执行结果供后续执行使用，roam为ConcurrentHashMap的扩展。
 
-- put/get 重写了ConcurrentHashMap的put/get，忽略了ConcurrentHashMap的key/value空指针异常
-- putValue/getValue 忽略了类型匹配校验，节约了强转操作，使用时注意类型是否匹配
-- putMulti/getMulti 使用"."分隔并构建拥有层级关系型的数据结构
-- getUnion 如果参数是以"@"开头的字符串会去roam里拿数据并返回，否则返回参数自身
+- **put/get** 重写了ConcurrentHashMap的put/get，忽略了ConcurrentHashMap的key/value空指针异常
+- **putValue/getValue** 忽略了类型匹配校验，节约了强转操作，使用时注意类型是否匹配
+- **putMulti/getMulti** 使用"."分隔并构建拥有层级关系型的数据结构
+- **getUnion** 如果参数是以"@"开头的字符串会去roam里拿数据并返回，否则返回参数自身
 
 ```java
 roam.putValue("a", 1); //{"a":1}
@@ -89,6 +89,87 @@ roam.getUnion("@e");//1
 roam.put("e", "a");
 roam.getUnion("@e");//"a"
 ```
+
+## 后台配置
+
+视频地址：https://www.bilibili.com/video/BV1Q34y1R7KF
+
+<iframe src="//player.bilibili.com/player.html?aid=807134055&bvid=BV1Q34y1R7KF&cid=456033283&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+### app
+
+app用于区分不同的应用，如app=1的ice-test，在ice-test启动时，会根据配置去ice-server拉取app为1的所有配置并初始化
+
+### 新增ice
+
+- **ID** iceId 可以通过iceId触发
+- **名称** 描述
+- **场景** 订阅的场景，可用","分隔订阅多个场景，当任一场景发生时触发
+- **配置ID** ice树的root节点Id
+- **Debug** 日志打印，参考DebugEnum，将需要打印的内容对应的值进行累加，如想要打印IN_PACK(执行ice前的Pack-1)和PROCESS(执行过程-2)
+- **操作**
+- - **编辑** 编辑ice
+- - **查看详情**  查看详细节点配置
+- - **备份** 备份配置
+- - **备份历史** 可以从历史备份中恢复
+- - **导出** 导出当前配置(包含未发布的变更)
+
+### 配置节点
+
+单击节点，弹出相关操作
+
+- **查看/编辑节点**
+- **添加子节点** 仅限关系关系节点
+- **添加前置节点** 添加前置执行节点
+- **转换节点** 可将当前节点转换成任意节点
+- **上下移节点** 移动节点
+- **删除本节点** 节点的删除为软删除，只是断开连接，并未物理删除，可通过添加节点ID的方式添加回来
+
+**其他配置：** 
+- **confName** 叶子节点的类名，第一次添加的叶子节点需要手动输入全类名，并会有校验该类是否在client中真实存在，添加叶子节点时需要有一个运行中的client用于校验
+- **节点ID** 通过节点ID的方式添加子节点即为对象级别复用性的体现，ID相同的节点在内存中只会有一份，更改其中之一其余的都会一起变化
+- **debug** 节点的debug仅用于在processInfo中是否展现
+- **invers** 反转节点，如节点本该返回false，反转后会返回true，如此ContainsFlow等节点类就不需要再额外开发一个NotContainsFlow 
+
+### 发布、清除、导入、导出
+
+- **发布** 所有的变更只有在发布后才会真实的热更新到client中，未发布的变更节点会有"^"标识
+- **清除** 清除所有变更，恢复到上次发布版本
+- **导入** 导入配置
+- **导出** 导出当前配置(包含未发布的变更)
+- **实例选择**
+- - **Server** server配置，目前仅Server模式下支持编辑操作
+- - **Client:host/app/uniqueId** 对应client中真实的配置展现，仅支持查看操作
+
+## 与表达式引擎结合
+
+ice可以融合如Aviator等各种表达式引擎，简化节点配置。
+
+**例：**
+以Aviator为例，如果想要做一个基于Aviator的Flow节点：
+
+```java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class AviatorFlow extends BaseLeafRoamFlow {
+
+    private String exp;//可供配置与热更新的Aviator表达式
+
+    private Expression compiledExpression;
+
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return (boolean) compiledExpression.execute(roam);
+    }
+
+    public void setExp(String exp) { //为了更好的性能，设置/更新表达式时重新编译
+        this.exp = exp;
+        this.compiledExpression = AviatorEvaluator.compile(exp);
+    }
+}
+```
+
+
 
 
 
