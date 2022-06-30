@@ -21,6 +21,10 @@ export const navbarEn: NavbarConfig = [
         text: 'Introduction',
         link: '/guide/README.md'
       },
+      {
+        text: 'Common problem',
+        link: '/guide/qa.html'
+      },
     ]
   },
   {

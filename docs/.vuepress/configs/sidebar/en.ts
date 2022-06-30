@@ -8,6 +8,7 @@ export const sidebarEn: SidebarConfig = {
         '/guide/getting-started.html',
         '/guide/detail.html',
         '/guide/README.md',
+        '/guide/qa.html'
       ],
     },
   ],

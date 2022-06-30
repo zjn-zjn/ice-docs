@@ -70,6 +70,9 @@ export default defineUserConfig({
         sidebar: sidebarEn,
         // page meta
         editLinkText: 'Edit this page on GitHub',
+        selectLanguageName: 'English',
+        selectLanguageText: '选择语言',
+        selectLanguageAriaLabel: '选择语言',
       },
 
       /**
@@ -79,8 +82,8 @@ export default defineUserConfig({
         // navbar
         navbar: navbarZh,
         selectLanguageName: '简体中文',
-        selectLanguageText: '选择语言',
-        selectLanguageAriaLabel: '选择语言',
+        selectLanguageText: 'Language',
+        selectLanguageAriaLabel: 'Language',
         // sidebar
         sidebar: sidebarZh,
         // page meta

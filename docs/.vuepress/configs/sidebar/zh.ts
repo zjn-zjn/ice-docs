@@ -8,6 +8,7 @@ export const sidebarZh: SidebarConfig = {
         '/zh/guide/getting-started.html',
         '/zh/guide/detail.html',
         '/zh/guide/README.md',
+        '/zh/guide/qa.html'
       ],
     },
   ],

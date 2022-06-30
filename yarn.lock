@@ -5142,11 +5142,6 @@ vue@^3.2.37:
     "@vue/server-renderer" "3.2.37"
     "@vue/shared" "3.2.37"
 
-vuepress-plugin-baidu-tongji-analytics@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-baidu-tongji-analytics/-/vuepress-plugin-baidu-tongji-analytics-1.0.2.tgz#7ac884c7c31213e9458cac76f6ac79775a74d8aa"
-  integrity sha512-nrlExfAGnLhnniLdK4XAup2o2ZeE/lGT8jLJMAmFCD7AvDvf6Dl2hZ6LSK/8lS0p7ByUUCY4NGagqeqLn8N5mQ==
-
 vuepress-plugin-md-enhance@^2.0.0-beta.82:
   version "2.0.0-beta.82"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-md-enhance/-/vuepress-plugin-md-enhance-2.0.0-beta.82.tgz#61389aae79053594b695a1a420c17644f1f48e49"

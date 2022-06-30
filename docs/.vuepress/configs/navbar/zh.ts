@@ -21,6 +21,10 @@ export const navbarZh: NavbarConfig = [
         text: '项目简介',
         link: '/zh/guide/README.md'
       },
+      {
+        text: '常见问题',
+        link: '/zh/guide/qa.html'
+      },
     ]
   },
   {

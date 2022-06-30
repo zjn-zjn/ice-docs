@@ -165,18 +165,16 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 }
 ````
 
+## Node error handling
 
+- **Uniform processing: IceErrorHandle**
 
+Set the handle instance of IceErrorHandle (inherit IceErrorHandle and implement the handle method), ```IceErrorHanele.setHandle(IceErrorHandle customHandle)``` to change the unified error handling of all nodes; the default implementation is DefaultIceErrorHandle: directly return NodeRunStateEnum.SHUT_DOWN, do not process and terminate the entire process.
 
+- **The leaf node overrides the errorHandle method**
 
+The leaf node rewrites the ```NodeRunStateEnum errorHandle(IceContext cxt)``` method to handle the error that occurs in the current leaf node. If NodeRunStateEnum.SHUT_DOWN is returned, the entire process will be terminated. If the leaf node overrides the errorHandle method. There will be no unified error handling, but you can go through ``super.errorHandle(cxt)``` for unified processing again.
 
+- **Configuration processing**
 
-
-
-
-
-
-
-
-
-
+The node provides the iceErrorStateEnum configuration, if the configuration is not empty, it has the highest priority and will use the configuration as the return value first. The configuration processing only affects the return value, and the errorHandle method/unified handle processing method rewritten by the leaf node will still be executed.
