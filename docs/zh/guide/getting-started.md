@@ -77,7 +77,7 @@ http://localhost:8121/
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
@@ -87,6 +87,7 @@ http://localhost:8121/
 ice: #ice client配置
   app: 1 #与后台配置app对应
   server: 127.0.0.1:18121 #server 地址(serverHost:serverPort)
+  scan: com.ice.test #用于扫描叶子节点，多个包用','分隔(默认扫描全部，扫描全部会拖慢应用启动速度)
   pool: #线程池配置(用于并发关系节点)
     parallelism: -1 #默认-1,≤0表示采用默认配置
 ```
@@ -99,15 +100,15 @@ ice: #ice client配置
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
 ### 运行Client
 
 ```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); //传入app和server地址
-new Thread(iceNioClient::connect).start(); //connect()为阻塞方法，可启动新线程运行
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
+iceNioClient.connect(); //连接远程server，初始化ice配置
 iceNioClient.destroy(); //应用关停后最好清理一下~ 
 ```
 

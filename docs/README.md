@@ -22,11 +22,11 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ### Non-Spring Support
 > Directly rely on ice-core intelligence
 
-````java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); // application and server addresses
-New thread (iceNioClient::connect).start(); //connect() is a block method, which can run with new thread
-iceNioClient.destroy(); //It's best to clean up after application shutdown~
-````
+```java
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //Incoming app, server address and leaf node scan path
+iceNioClient.connect(); //Connect to the remote server and initialize the ice configuration
+iceNioClient.destroy(); //It is best to clean up after the application is closed~
+```
 
 <!-- ### test
 <CodeGroup>

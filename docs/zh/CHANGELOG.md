@@ -1,3 +1,15 @@
+# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.0...1.0.2) (2022-07-05)
+
+### 功能
+
+* **Jackson替换Fastjson:** 使用Jackson替换Fastjson (close [#8](https://github.com/zjn-zjn/ice/issues/8))
+* **配置叶子节点优化** 通过客户端实现的节点反馈给服务端配置节点 (close [#9](https://github.com/zjn-zjn/ice/issues/9))
+
+### 修复
+
+* **putMutli在构建多层级时可能出现的线程安全问题** IceRoam的putMutli在构建多层级时可能出现的线程安全问题
+* **错误处理增加错误入参** 错误处理增加错误入参
+
 
 # [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.0) (2022-06-11)
 

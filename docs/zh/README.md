@@ -23,8 +23,8 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 > 直接依赖ice-core即可
 
 ```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121"); //传入app和server地址
-new Thread(iceNioClient::connect).start(); //connect()为阻塞方法，可启动新线程运行
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
+iceNioClient.connect(); //连接远程server，初始化ice配置
 iceNioClient.destroy(); //应用关停后最好清理一下~ 
 ```
 

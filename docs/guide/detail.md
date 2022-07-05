@@ -173,7 +173,7 @@ Set the handle instance of IceErrorHandle (inherit IceErrorHandle and implement 
 
 - **The leaf node overrides the errorHandle method**
 
-The leaf node rewrites the ```NodeRunStateEnum errorHandle(IceContext cxt)``` method to handle the error that occurs in the current leaf node. If NodeRunStateEnum.SHUT_DOWN is returned, the entire process will be terminated. If the leaf node overrides the errorHandle method. There will be no unified error handling, but you can go through ``super.errorHandle(cxt)``` for unified processing again.
+The leaf node rewrites the ```NodeRunStateEnum errorHandle(IceContext cxt, Throwable t)``` method to handle the error that occurs in the current leaf node. If NodeRunStateEnum.SHUT_DOWN is returned, the entire process will be terminated. If the leaf node overrides the errorHandle method. There will be no unified error handling, but you can go through ```super.errorHandle(cxt, t)``` for unified processing again.
 
 - **Configuration processing**
 

@@ -1,3 +1,15 @@
+# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.0...1.0.2) (2022-07-05)
+
+### Function
+
+**Jackson replaces Fastjson:** Use Jackson to replace Fastjson (closed [#8](https://github.com/zjn-zjn/ice/issues/8))
+* **Configuration leaf node optimization** The node implemented by the client is fed back to the server configuration node (closed [#9](https://github.com/zjn-zjn/ice/issues/9))
+
+### Fixes
+
+**Possible problems at device security level**
+* **Increase error input parameters for error handling **Add error input parameters for error handling
+
 # [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.1) (2022-06-11)
 
 ### Features

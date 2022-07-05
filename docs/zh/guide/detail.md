@@ -177,7 +177,7 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
 - **叶子节点重写errorHandle方法**
 
-叶子节点重写```NodeRunStateEnum errorHandle(IceContext cxt)```方法，处理当前叶子节点发生的error，如果返回NodeRunStateEnum.SHUT_DOWN将会终止整个流程。叶子节点如果重写了errorHandle方法。就不会再走统一error处理，不过可以通过```super.errorHandle(cxt)```再走一遍统一处理。
+叶子节点重写```NodeRunStateEnum errorHandle(IceContext cxt, Throwable t)```方法，处理当前叶子节点发生的error，如果返回NodeRunStateEnum.SHUT_DOWN将会终止整个流程。叶子节点如果重写了errorHandle方法。就不会再走统一error处理，不过可以通过```super.errorHandle(cxt, t)```再走一遍统一处理。
 
 - **配置处理**
 

@@ -75,7 +75,7 @@ Refer to github ice-test module
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
@@ -85,8 +85,29 @@ Refer to github ice-test module
 ice: #ice client configuration
    app: 1 #corresponds to the background configuration app
    server: 127.0.0.1:18121 #server address (serverHost:serverPort)
+   scan: com.ice.test #used to scan leaf nodes, multiple packages are separated by ',' (scan all by default, scanning all will slow down the application startup speed)
    pool: #Thread pool configuration (for concurrent relation nodes)
      parallelism: -1 #default-1,≤0 means the default configuration
+```
+
+## Client access (non-Spring)
+
+### Add pom dependency
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>1.0.2</version>
+</dependency>
+```
+
+### Run Client
+
+```java
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //Incoming app, server address and leaf node scan path
+iceNioClient.connect(); //Connect to the remote server and initialize the ice configuration
+iceNioClient.destroy(); //It is best to clean up after the application is closed~
 ```
 
 ## Development & Configuration
