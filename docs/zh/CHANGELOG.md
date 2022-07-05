@@ -1,4 +1,4 @@
-# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.0...1.0.2) (2022-07-05)
+# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.1...1.0.2) (2022-07-05)
 
 #### 功能
 * **Jackson替换Fastjson:** 使用Jackson替换Fastjson (close [#8](https://github.com/zjn-zjn/ice/issues/8))
@@ -8,7 +8,7 @@
 #### 修复
 * **putMutli线程安全问题:** 修复IceRoam的putMutli在构建多层级时可能出现的线程安全问题
 
-# [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.0) (2022-06-11)
+# [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.1) (2022-06-11)
 
 #### 功能
 * **去除rmi:** 使用netty替换rmi通信 (close [#5](https://github.com/zjn-zjn/ice/issues/5))

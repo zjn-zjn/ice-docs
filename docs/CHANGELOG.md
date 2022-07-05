@@ -1,4 +1,4 @@
-# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.0...1.0.2) (2022-07-05)
+# [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.1...1.0.2) (2022-07-05)
 
 #### Feature
 * **Jackson replaces Fastjson:** Use Jackson to replace Fastjson (close [#8](https://github.com/zjn-zjn/ice/issues/8))
@@ -8,7 +8,7 @@
 #### Fixed
 * **putMutli thread safety issue:** Fix IceRoam's putMutli thread safety issue that may occur when building multiple layers
 
-# [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.0) (2022-06-11)
+# [1.0.1](https://github.com/zjn-zjn/ice/compare/0.0.9...1.0.1) (2022-06-11)
 
 #### Feature
 * **Remove rmi:** Replace rmi communication with netty (close [#5](https://github.com/zjn-zjn/ice/issues/5))
