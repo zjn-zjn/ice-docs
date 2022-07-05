@@ -9,6 +9,7 @@
 
 * **代码**
 * * Ice.processCxt和Ice.processSingleCxt更名为processCtx和processSingleCtx
+* * IceErrorHandle.handleError()和BaseNode.errorHandle()增加错误入参Throwable t
 
 
 ## v1.0.1

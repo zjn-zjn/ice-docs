@@ -9,6 +9,7 @@
 
 * **Code**
 * * Ice.processCxt and Ice.processSingleCxt renamed to processCtx and processSingleCtx
+* * IceErrorHandle.handleError() and BaseNode.errorHandle() add error input parameter Throwable t
 
 ## v1.0.1
 > Don't use 1.0.0! ! ! The 1.0.0 jar package is incomplete due to network problems when packaging and pushing the central warehouse!
