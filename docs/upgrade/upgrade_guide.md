@@ -1,10 +1,11 @@
 # Upgrade guide
+> Upgrade the server first, then upgrade the client
 
 ## v1.0.1-v1.0.2
 
 * **Configuration**
 * * Client
-* * * Added ice.scan configuration for scanning leaf nodes (scan all by default), multiple packages are separated by ',' , recommended configuration, if not configured, it will scan all
+* * * Added ice.scan configuration for scanning leaf nodes (scan all by default, scanning all will slow down the application startup speed), multiple packages are separated by ','
 
 * **Code**
 * * Ice.processCxt and Ice.processSingleCxt renamed to processCtx and processSingleCtx

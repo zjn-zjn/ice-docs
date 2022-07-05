@@ -1,10 +1,11 @@
 # 升级指南
+> 先升server，再升client
 
 ## v1.0.1-v1.0.2
 
 * **配置**
 * * 客户端
-* * * 新增ice.scan配置，用于扫描叶子节点(默认扫描全部)，多个包用','分隔，推荐配置，不配置的话会扫描全部
+* * * 新增ice.scan配置，用于扫描叶子节点(默认扫描全部，扫描全部会拖慢应用启动速度)，多个包用','分隔
 
 * **代码**
 * * Ice.processCxt和Ice.processSingleCxt更名为processCtx和processSingleCtx
