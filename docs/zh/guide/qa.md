@@ -34,8 +34,7 @@ Caused by: java.net.ConnectException: Connection refused
 一般为节点初始化失败错误，此类报错不会终止client启动
 
 ```
-ERROR (IceConfCache.java:62)- ice error conf:{"id":118,"type":6,"confName":"*.*.*Flow"} please check! e:
-java.lang.ClassNotFoundException: *.*.*Flow
+ERROR (IceConfCache.java:62)- class not found conf:{"id":118,"type":6,"confName":"*.*.*Flow"}
 ```
 
 节点初始化error，在该client中未找到对应的节点类，请检查节点类是否正常或app配置是否正常。

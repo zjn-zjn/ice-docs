@@ -34,8 +34,7 @@ If the connection to the server fails, you need to check whether the configurati
 Generally, it is a node initialization failure error. Such an error will not stop the client from starting.
 
 ````
-ERROR (IceConfCache.java:62)- ice error conf:{"id":118,"type":6,"confName":"*.*.*Flow"} please check! e:
-java.lang.ClassNotFoundException: *.*.*Flow
+ERROR (IceConfCache.java:62)- class not found conf:{"id":118,"type":6,"confName":"*.*.*Flow"}
 ````
 
 Node initialization error, the corresponding node class is not found in the client, please check whether the node class is normal or the app configuration is normal.
