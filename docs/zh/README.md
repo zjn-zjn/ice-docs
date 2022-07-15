@@ -19,13 +19,15 @@ features:
 footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ---
 
-### 非Spring支持
-> 直接依赖ice-core即可
+### 最新版本
+> v1.0.3~
 
-```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
-iceNioClient.connect(); //连接远程server，初始化ice配置
-iceNioClient.destroy(); //应用关停后最好清理一下~ 
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <version>1.0.3</version>
+</dependency>
 ```
 
 <!-- <CodeGroup>

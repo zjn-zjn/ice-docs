@@ -77,7 +77,7 @@ http://localhost:8121/
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
@@ -100,7 +100,7 @@ ice: #ice client配置
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 

@@ -1,3 +1,9 @@
+# [1.0.3](https://github.com/zjn-zjn/ice/compare/1.0.2...1.0.3) (2022-07-14)
+
+#### Fixed
+* **Blocked on start up:** Blocked on start up with node filed autowired of spring beans use @Bean (close [#11](https://github.com/zjn-zjn/ice/issues/11))
+
+
 # [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.1...1.0.2) (2022-07-05)
 
 #### Feature

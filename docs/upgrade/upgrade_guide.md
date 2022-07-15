@@ -1,7 +1,7 @@
 # Upgrade guide
 > Upgrade the server first, then upgrade the client
 
-## v1.0.1-v1.0.2
+## v1.0.1-v1.0.2/v1.0.3
 
 * **Configuration**
 * * Client

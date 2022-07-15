@@ -16,16 +16,18 @@ features:
      details: It consumes almost no performance, just focus on the performance of the business itself.
    - title: Access cost
      details: Low cost to learn to understand, develop configuration and abstraction.
-footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
+footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon | 皖ICP备2020019699号 | 皖ICP备2020019699号-1
 ---
 
-### Non-Spring Support
-> Directly rely on ice-core intelligence
+### Latest version
+> v1.0.3~
 
-```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //Incoming app, server address and leaf node scan path
-iceNioClient.connect(); //Connect to the remote server and initialize the ice configuration
-iceNioClient.destroy(); //It is best to clean up after the application is closed~
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <version>1.0.3</version>
+</dependency>
 ```
 
 <!-- ### test
