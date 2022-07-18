@@ -12,6 +12,8 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 **备注：** 如果启动时报找不到ice相关的表，则需手动创建ice相关表结构，表结构sql地址：
 
+[https://gitee.com/waitmoon/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://gitee.com/waitmoon/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
+或
 [https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
 ## 安装server
