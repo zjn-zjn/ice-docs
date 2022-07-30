@@ -63,7 +63,7 @@ export const navbarZh: NavbarConfig = [
     ],
   },
   {
-    text: `交流`,
+    text: `交流群`,
     link: '/zh/guide/#交流探讨'
   },
   {
