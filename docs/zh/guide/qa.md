@@ -52,3 +52,7 @@ ERROR (IceConfCache.java:91)- sonId:73 not exist please check! conf:{"id":70,"so
 - **server挂了会影响client吗？**
 
 server仅负责配置的操作、存储与热更新，clinet在运行时不依赖server，server宕机后，会导致新的client无法启动(无法与server连通也就无法初始化配置)以及无法操作配置后台。
+
+- **server支持集群吗？**
+
+目前server仅支持单机部署，即将支持主备做HA。

@@ -1,8 +1,12 @@
+# [1.0.4](https://github.com/zjn-zjn/ice/compare/1.0.3...1.0.4) (2022-07-30)
+
+#### Improve
+* **Ensure that the application is completed, then ice provides services:** origin used CommandLineRunner to init ice client，But this startup lags behind services such as TomcatServer. It will cause the ice service provided to the outside world to be unavailable in a short period of time. (close [#12](https://github.com/zjn-zjn/ice/issues/12))
+
 # [1.0.3](https://github.com/zjn-zjn/ice/compare/1.0.2...1.0.3) (2022-07-14)
 
 #### Fixed
 * **Blocked on start up:** Blocked on start up with node filed autowired of spring beans use @Bean (close [#11](https://github.com/zjn-zjn/ice/issues/11))
-
 
 # [1.0.2](https://github.com/zjn-zjn/ice/compare/1.0.1...1.0.2) (2022-07-05)
 

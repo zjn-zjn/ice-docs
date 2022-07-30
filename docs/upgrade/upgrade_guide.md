@@ -1,6 +1,11 @@
 # Upgrade guide
 > Upgrade the server first, then upgrade the client
 
+## v1.0.3-v1.0.4
+
+* **Code**
+* * IceNioClient.connect() rename start(), only non-Spring projects need to be modified
+
 ## v1.0.1-v1.0.2/v1.0.3
 
 * **Configuration**

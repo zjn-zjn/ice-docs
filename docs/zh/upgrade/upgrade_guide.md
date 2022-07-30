@@ -1,6 +1,11 @@
 # 升级指南
 > 先升server，再升client
 
+## v1.0.3-v1.0.4
+
+* **代码**
+* * IceNioClient.connect()变成start()，仅非Spring项目使用需修改
+
 ## v1.0.1-v1.0.2/v1.0.3
 
 * **配置**

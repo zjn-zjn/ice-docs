@@ -16,7 +16,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## Install server
 
-### Download the installation package
+### Download the installation package(latest v1.0.3)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -75,7 +75,7 @@ Refer to github ice-test module
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
@@ -98,7 +98,7 @@ ice: #ice client configuration
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
@@ -106,7 +106,7 @@ ice: #ice client configuration
 
 ```java
 IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //Incoming app, server address and leaf node scan path
-iceNioClient.connect(); //Connect to the remote server and initialize the ice configuration
+iceNioClient.start(); //Connect to the remote server and initialize the ice configuration
 iceNioClient.destroy(); //It is best to clean up after the application is closed~
 ```
 

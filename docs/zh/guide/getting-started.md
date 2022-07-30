@@ -18,7 +18,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## 安装server
 
-### 下载安装包
+### 下载安装包(最新v1.0.3)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -79,7 +79,7 @@ http://localhost:8121/
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
@@ -102,7 +102,7 @@ ice: #ice client配置
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
@@ -110,7 +110,7 @@ ice: #ice client配置
 
 ```java
 IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
-iceNioClient.connect(); //连接远程server，初始化ice配置
+iceNioClient.start(); //连接远程server，初始化ice配置
 iceNioClient.destroy(); //应用关停后最好清理一下~ 
 ```
 
