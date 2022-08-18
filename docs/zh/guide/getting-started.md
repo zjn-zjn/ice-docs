@@ -18,7 +18,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## 安装server
 
-### 下载安装包(最新v1.0.3)
+### 下载安装包(最新v1.1.0)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -41,6 +41,8 @@ spring:
     initialization-mode: always
 ice:
   port: 18121 #与客户端通信端口
+#  ha: #高可用配置，当前默认支持zookeeper
+#    address: localhost:2181,localhost:2182,localhost:2183
   pool: #线程池配置(用于更新client)
     core-size: 4
     max-size: 4
@@ -79,7 +81,17 @@ http://localhost:8121/
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
+</dependency>
+```
+
+#### 高可用额外依赖
+
+```xml
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.1</version>
 </dependency>
 ```
 
@@ -88,6 +100,7 @@ http://localhost:8121/
 ```yml
 ice: #ice client配置
   app: 1 #与后台配置app对应
+#  server: zookeeper:localhost:2181,localhost:2182,localhost:2183 #server高可用配置
   server: 127.0.0.1:18121 #server 地址(serverHost:serverPort)
   scan: com.ice.test #用于扫描叶子节点，多个包用','分隔(默认扫描全部，扫描全部会拖慢应用启动速度)
   pool: #线程池配置(用于并发关系节点)
@@ -102,7 +115,17 @@ ice: #ice client配置
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
+</dependency>
+```
+
+#### 高可用额外依赖
+
+```xml
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.1</version>
 </dependency>
 ```
 

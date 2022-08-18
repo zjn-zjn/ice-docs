@@ -16,7 +16,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## Install server
 
-### Download the installation package(latest v1.0.3)
+### Download the installation package(latest v1.1.0)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -28,20 +28,22 @@ tar -xzvf ice-server-*.tar.gz
 
 ```yml
 server:
-   port: 8121 #Port
+  port: 8121 #Port
 spring:
-   datasource: #Database configuration
-     url: jdbc:mysql://127.0.0.1:3306/ice?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
-     username: username
-     password: password
-     initialization-mode: always
+  datasource: #Database configuration
+    url: jdbc:mysql://127.0.0.1:3306/ice?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
+    username: username
+    password: password
+    initialization-mode: always
 ice:
-   port: 18121 #port for client
-   pool: #Thread pool configuration (used to update the client)
-     core-size: 4
-     max-size: 4
-     keep-alive-seconds: 60
-     queue-capacity: 60000
+  port: 18121 #port for client
+#  ha: #ha config, now default zk
+#    address: localhost:2181,localhost:2182,localhost:2183
+  pool: #Thread pool configuration (used to update the client)
+    core-size: 4
+    max-size: 4
+    keep-alive-seconds: 60
+    queue-capacity: 60000
 ```
 
 ### start/stop/restart server
@@ -75,19 +77,30 @@ Refer to github ice-test module
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
 </dependency>
 ```
+
+#### High availability additional dependencies
+
+````xml
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.1</version>
+</dependency>
+````
 
 ### Add ice configuration
 
 ```yml
 ice: #ice client configuration
-   app: 1 #corresponds to the background configuration app
-   server: 127.0.0.1:18121 #server address (serverHost:serverPort)
-   scan: com.ice.test #used to scan leaf nodes, multiple packages are separated by ',' (scan all by default, scanning all will slow down the application startup speed)
-   pool: #Thread pool configuration (for concurrent relation nodes)
-     parallelism: -1 #default-1,≤0 means the default configuration
+  app: 1 #corresponds to the background configuration app
+#  server: zookeeper:localhost:2181,localhost:2182,localhost:2183 #server high availability configuration
+  server: 127.0.0.1:18121 #server address (serverHost:serverPort)
+  scan: com.ice.test #used to scan leaf nodes, multiple packages are separated by ',' (scan all by default, scanning all will slow down the application startup speed)
+  pool: #Thread pool configuration (for concurrent relation nodes)
+    parallelism: -1 #default-1,≤0 means the default configuration
 ```
 
 ## Client access (non-Spring)
@@ -98,9 +111,18 @@ ice: #ice client configuration
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
 </dependency>
 ```
+#### High availability additional dependencies
+
+````xml
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.1</version>
+</dependency>
+````
 
 ### Run Client
 

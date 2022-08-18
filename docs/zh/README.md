@@ -20,13 +20,13 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ---
 
 ### 最新版本
-> v1.0.4~
+> v1.1.0~
 
 ```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 

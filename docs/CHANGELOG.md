@@ -1,3 +1,8 @@
+# [1.1.0](https://github.com/zjn-zjn/ice/compare/1.0.4...1.1.0) (2022-07-30)
+
+#### Feature
+* **ice-server high availability:** Default supports using zk as a high-availability solution for ice-server close [#13](https://github.com/zjn-zjn/ice/issues/13))
+
 # [1.0.4](https://github.com/zjn-zjn/ice/compare/1.0.3...1.0.4) (2022-07-30)
 
 #### Improve

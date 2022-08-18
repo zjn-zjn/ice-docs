@@ -1,6 +1,15 @@
 # Upgrade guide
 > Upgrade the server first, then upgrade the client
 
+## v1.0.4-v1.1.0
+
+* **Configuration**
+* * Server
+* * * Added ice.ha configuration to support server high availability, no configuration required for stand-alone server
+
+** Client
+* * * ice.server configuration supports server high availability, such as ice.server=zookeeper:localhost:2181, the single-server server is the same as the previous configuration
+
 ## v1.0.3-v1.0.4
 
 * **Code**

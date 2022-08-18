@@ -1,6 +1,15 @@
 # 升级指南
 > 先升server，再升client
 
+## v1.0.4-v1.1.0
+
+* **配置**
+* * 服务端
+* * * 新增ice.ha配置，用于支持server高可用，单机server无需配置
+
+* * 客户端
+* * * ice.server配置支持server高可用，如ice.server=zookeeper:localhost:2181，单机server与以往配置一致
+
 ## v1.0.3-v1.0.4
 
 * **代码**
