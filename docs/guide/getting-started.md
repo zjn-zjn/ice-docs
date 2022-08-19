@@ -65,7 +65,7 @@ http://localhost:8121/
 
 Deploy for testing & experience address (only app=1 has real deployed client)
 
-[http://waitmoon.com](http://waitmoon.com)
+[http://eg.waitmoon.com](http://eg.waitmoon.com)
 
 ## Client access
 

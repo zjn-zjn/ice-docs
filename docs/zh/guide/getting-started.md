@@ -69,7 +69,7 @@ http://localhost:8121/
 
 部署用于测试&体验地址(仅app=1有真实部署的client)
 
-[http://waitmoon.com](http://waitmoon.com)
+[http://eg.waitmoon.com](http://eg.waitmoon.com)
 
 ## Client接入(Spring)
 
