@@ -4,7 +4,7 @@ ice is a lightweight, high-performance, and stable component-based process/rule 
 
 If you have questions in use, or want to consult and understand, you can join the group chat, and I will answer everyone's questions carefully.
 
-Since the community group has increased to more than 200 people, **You can follow my WeChat official account, click <font color=red>personal WeChat</font>, and note <font color=red>ice</font> when adding friends, and I will add you to the group.**
+Since the community group has increased to more than 200 people, **You can follow my WeChat official account, click <span style="color:red">personal WeChat</span>, and note <span style="color:red">ice</span> when adding friends, and I will add you to the group.**
 
 ![](/images/wechat-dark.jpg#dark)
 ![](/images/wechat-light.jpg#light)

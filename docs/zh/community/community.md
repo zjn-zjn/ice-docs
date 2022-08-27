@@ -4,7 +4,7 @@ ice是轻量，高性能，稳定，提供可视化编排的组件式流程/规�
 
 如果你在使用中有问题，或者想咨询了解，可以加入群聊，我会细心答复每一个人的疑问。
 
-由于社区群已经增加到200人以上，**你可以关注我的微信公众号，点击<font color=red>个人微信</font>，加好友时备注<font color=red>ice</font>，我会拉你入群。**
+由于社区群已经增加到200人以上，**你可以关注我的微信公众号，点击<span style="color:red">个人微信</span>，加好友时备注<span style="color:red">ice</span>，我会拉你入群。**
 
 ![](/images/wechat-dark.jpg#dark)
 ![](/images/wechat-light.jpg#light)
