@@ -63,8 +63,17 @@ export const navbarEn: NavbarConfig = [
     ],
   },
   {
-    text: `Comminicate`,
-    link: '/guide/#exchange-discussion'
+    text: `Communicate`,
+    link: '/community/community.html'
+  },
+  {
+    "text":`Recommend`,
+    children:[
+      {
+        text:"Process Orchestration Framework-Kstry",
+        link:"http://kstry.cn"
+      }
+    ]
   },
   {
     text: 'Github',

@@ -63,8 +63,17 @@ export const navbarZh: NavbarConfig = [
     ],
   },
   {
-    text: `交流群`,
-    link: '/zh/guide/#交流探讨'
+    text: `加入群聊`,
+    link: '/zh/community/community.html'
+  },
+  {
+    "text":`推荐`,
+    children:[
+      {
+        text:"流程编排框架-Kstry",
+        link:"http://kstry.cn"
+      }
+    ]
   },
   {
     text: 'Github',

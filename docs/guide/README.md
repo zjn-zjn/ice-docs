@@ -171,17 +171,3 @@ Similarly, if there is a problem on the line, such as the sendAmount interface h
 ![](/images/introduction/10-light.png#light)
 
 In the above logic, we can see that some AND nodes are closely bound. In order to simplify the view and configuration, the concept of forward node is added. This node will be executed if and only when the execution result of the current node is not false. , the semantics are consistent with the two nodes connected by AND.
-
-## Exchange discussion
-
-Interested friends are welcome to join the group to discuss and exchange~
-
-Personal WeChat (add me to the wechat group):
-
-![](/images/introduction/11-dark.jpeg#dark)
-![](/images/introduction/11-light.jpeg#light)
-
-QQ group code:587368939
-
-![](/images/introduction/12-dark.png#dark =510x)
-![](/images/introduction/12-light.png#light =510x)

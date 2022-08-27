@@ -177,19 +177,3 @@ X公司将在国庆放假期间，开展一个为期七天的充值小活动，�
 ![](/images/introduction/10-light.png#light)
 
 上面的逻辑中可以看到有一些AND节点紧密绑定的关系，为了视图与配置简化，增加了前置(forward)节点概念，当且仅当前置节点执行结果为非false时才会执行本节点，语义与AND相连的两个节点一致。
-
-## 交流探讨
-
-有兴趣的小伙伴欢迎入群一起探讨交流~ 
-
-个人微信(因微信群超过200人，加我微信邀请入群~)：
-
-![](/images/introduction/11-dark.jpeg#dark)
-![](/images/introduction/11-light.jpeg#light)
-
-**(Q群：587368939)~**
-
-![](/images/introduction/12-dark.png#dark =510x)
-![](/images/introduction/12-light.png#light =510x)
-
-**微信公众号：waitmoon**
