@@ -29,7 +29,7 @@ export const navbarZh: NavbarConfig = [
   },
   {
     text: '体验',
-    link: 'http://eg.waitmoon.com/config/list/1'
+    link: 'http://124.221.148.247:8121/config/list/1'
   },
   {
     text: '更多',

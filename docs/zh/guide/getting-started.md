@@ -20,7 +20,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ### 下载安装包(最新v1.1.0)
 
-[http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
+[http://124.221.148.247/downloads/](http://124.221.148.247/downloads/)
 
 解压tar包 
 
@@ -69,7 +69,7 @@ http://localhost:8121/
 
 部署用于测试&体验地址(仅app=1有真实部署的client)
 
-[http://eg.waitmoon.com](http://eg.waitmoon.com)
+[http://124.221.148.247:8121](http://124.221.148.247:8121)
 
 ## Client接入(Spring)
 
