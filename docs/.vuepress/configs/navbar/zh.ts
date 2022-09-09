@@ -28,6 +28,10 @@ export const navbarZh: NavbarConfig = [
     ]
   },
   {
+    text: '动画',
+    link: 'http://124.221.148.247/ice-logic/zh/'
+  },
+  {
     text: '体验',
     link: 'http://124.221.148.247:8121/config/list/1'
   },

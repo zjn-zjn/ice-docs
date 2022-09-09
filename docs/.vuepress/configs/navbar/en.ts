@@ -28,6 +28,10 @@ export const navbarEn: NavbarConfig = [
     ]
   },
   {
+    text: 'Animation',
+    link: 'http://124.221.148.247/ice-logic/en/'
+  },
+  {
     text: 'Experience',
     link: 'http://124.221.148.247:8121/config/list/1'
   },
