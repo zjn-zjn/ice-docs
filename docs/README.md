@@ -16,7 +16,7 @@ features:
      details: It consumes almost no performance, just focus on the performance of the business itself.
    - title: Access cost
      details: Low cost to learn to understand, develop configuration and abstraction.
-footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
+footer: Apache-2.0 Licensed | Copyright © 2022-present WaitMoon
 ---
 
 ### Latest version

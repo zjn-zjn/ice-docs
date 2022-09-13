@@ -80,7 +80,7 @@ export const navbarEn: NavbarConfig = [
     ]
   },
   {
-    text: 'Github',
+    text: 'GitHub',
     link: 'https://github.com/zjn-zjn/ice'    
   },
   {
