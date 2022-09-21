@@ -33,7 +33,7 @@ export const navbarEn: NavbarConfig = [
   },
   {
     text: 'Experience',
-    link: 'http://124.221.148.247:8121/config/list/1'
+    link: 'http://124.221.148.247:8121/config/list?id=1'
   },
   {
     text: 'More',
