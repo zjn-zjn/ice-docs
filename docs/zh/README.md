@@ -16,7 +16,6 @@ features:
     details: 几乎不消耗任何性能，只需关注业务自身性能。
   - title: 接入简单
     details: 简单的学习成本，几分钟就能上手编排，开发配置与抽象成本低。
-footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ---
 
 ### 最新版本
@@ -45,3 +44,7 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present Waitmoon
 ```
   </CodeGroupItem>
 </CodeGroup> -->
+
+<div class="footer">
+  <p>Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a></p>
+</div>

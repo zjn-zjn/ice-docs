@@ -29,11 +29,11 @@ export const navbarEn: NavbarConfig = [
   },
   {
     text: 'Animation',
-    link: 'http://124.221.148.247/ice-logic/en/'
+    link: 'http://waitmoon.com/ice-logic/en/'
   },
   {
     text: 'Experience',
-    link: 'http://124.221.148.247:8121/config/list?id=1'
+    link: 'http://eg.waitmoon.com/config/list?id=1'
   },
   {
     text: 'More',

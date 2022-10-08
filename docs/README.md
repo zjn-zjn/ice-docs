@@ -16,7 +16,6 @@ features:
      details: It consumes almost no performance, just focus on the performance of the business itself.
    - title: Access cost
      details: Low cost to learn to understand, develop configuration and abstraction.
-footer: Apache-2.0 Licensed | Copyright © 2022-present WaitMoon
 ---
 
 ### Latest version
@@ -46,3 +45,7 @@ footer: Apache-2.0 Licensed | Copyright © 2022-present WaitMoon
 ````
    </CodeGroupItem>
 </CodeGroup> -->
+
+<div class="footer">
+  <p>Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a></p>
+</div>

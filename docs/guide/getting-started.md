@@ -18,7 +18,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ### Download the installation package(latest v1.1.0)
 
-[http://124.221.148.247/downloads/](http://124.221.148.247/downloads/)
+[http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
 Unzip the tar package
 
@@ -65,7 +65,7 @@ http://localhost:8121/
 
 Deploy for testing & experience address (only app=1 has real deployed client)
 
-[http://124.221.148.247:8121](http://124.221.148.247:8121)
+[http://eg.waitmoon.com](http://eg.waitmoon.com)
 
 ## Client access
 
