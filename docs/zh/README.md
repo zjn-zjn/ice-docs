@@ -6,6 +6,9 @@ actions:
   - text: 快速上手
     link: /zh/guide/getting-started.html
     type: primary
+  - text: 编排逻辑
+    link: http://waitmoon.com/ice-logic/zh/
+    type: secondary
   - text: 项目简介
     link: /zh/guide/
     type: secondary
@@ -45,6 +48,9 @@ features:
   </CodeGroupItem>
 </CodeGroup> -->
 
-<div class="footer">
-  <p>Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a></p>
+<div class="footer" style="font-size:12px">
+  <p>
+  Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502007222" style="display:inline-block;text-decoration:none;height:12px;line-height:12px;">
+  <img src="/images/icons/beian.png" style="float:left;height:12px"/>浙公网安备 33010502007222号</a>
+  </p>
 </div>

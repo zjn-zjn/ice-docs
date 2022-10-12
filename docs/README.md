@@ -3,9 +3,12 @@ home: true
 title: Home
 heroImage: /images/hero.svg
 actions:
-   - text: Get started
+   - text: Get Started
      link: /guide/getting-started.html
      type: primary
+   - text: Orchestration Logic
+     link: http://waitmoon.com/ice-logic/en/
+     type: secondary
    - text: Introduction
      link: /guide/
      type: secondary
@@ -46,6 +49,10 @@ features:
    </CodeGroupItem>
 </CodeGroup> -->
 
-<div class="footer">
-  <p>Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a></p>
+<div class="footer" style="font-size:12px">
+  <p>
+  Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">浙ICP备2022028606号-1</a><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502007222" style="display:inline-block;text-decoration:none;height:12px;line-height:12px;">
+  <img src="/images/icons/beian.png" style="float:left;height:12px"/>浙公网安备 33010502007222号</a>
+  </p>
 </div>
+		 

@@ -28,10 +28,6 @@ export const navbarZh: NavbarConfig = [
     ]
   },
   {
-    text: '动画',
-    link: 'http://waitmoon.com/ice-logic/zh/'
-  },
-  {
     text: '体验',
     link: 'http://eg.waitmoon.com/config/list?id=1'
   },

@@ -28,10 +28,6 @@ export const navbarEn: NavbarConfig = [
     ]
   },
   {
-    text: 'Animation',
-    link: 'http://waitmoon.com/ice-logic/en/'
-  },
-  {
     text: 'Experience',
     link: 'http://eg.waitmoon.com/config/list?id=1'
   },
