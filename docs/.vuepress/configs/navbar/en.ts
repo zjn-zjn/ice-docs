@@ -29,7 +29,7 @@ export const navbarEn: NavbarConfig = [
   },
   {
     text: 'Experience',
-    link: 'http://eg.waitmoon.com/config/list?id=1'
+    link: 'http://eg.waitmoon.com/config/list/1'
   },
   {
     text: 'More',
