@@ -73,6 +73,13 @@ features:
     </a>
 </span>
 </div>
+<div class="row">
+<span class="link">
+    <a href="https://www.iflytek.com/" target="_blank">
+        <img :src="$withBase('/images/user/iflytek.png')" class="no-zoom">
+    </a>
+</span>
+</div>
 <br><br>
 
 <!-- <CodeGroup>
