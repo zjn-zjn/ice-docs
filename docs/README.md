@@ -79,6 +79,11 @@ features:
         <img :src="$withBase('/images/user/iflytek.png')" class="no-zoom">
     </a>
 </span>
+<span class="link">
+    <a href="https://www.princesky.com/" target="_blank">
+        <img :src="$withBase('/images/user/lampo.png')" class="no-zoom">
+    </a>
+</span>
 </div>
 <br><br>
 
