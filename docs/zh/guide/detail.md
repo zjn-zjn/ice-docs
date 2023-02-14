@@ -173,7 +173,7 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
 - **统一处理：IceErrorHandle** 
 
-设置IceErrorHandle的handle实例(继承IceErrorHandle并实现handle方法)，```IceErrorHanele.setHandle(IceErrorHandle customHandle)```改变所有的节点统一error处理；默认实现为DefaultIceErrorHandle：直接返回NodeRunStateEnum.SHUT_DOWN，不处理并终止整个流程。
+设置IceErrorHandle的handle实例(继承IceErrorHandle并实现handle方法)，```IceErrorHandle.setHandle(IceErrorHandle customHandle)```改变所有的节点统一error处理；默认实现为DefaultIceErrorHandle：直接返回NodeRunStateEnum.SHUT_DOWN，不处理并终止整个流程。
 
 - **叶子节点重写errorHandle方法**
 

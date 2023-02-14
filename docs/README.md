@@ -1,6 +1,6 @@
 ---
 home: true
-title: Home
+title: 开源框架学习与分享
 heroImage: /images/hero.svg
 actions:
    - text: Get Started

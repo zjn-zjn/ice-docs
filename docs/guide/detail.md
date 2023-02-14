@@ -169,7 +169,7 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
 - **Uniform processing: IceErrorHandle**
 
-Set the handle instance of IceErrorHandle (inherit IceErrorHandle and implement the handle method), ```IceErrorHanele.setHandle(IceErrorHandle customHandle)``` to change the unified error handling of all nodes; the default implementation is DefaultIceErrorHandle: directly return NodeRunStateEnum.SHUT_DOWN, do not process and terminate the entire process.
+Set the handle instance of IceErrorHandle (inherit IceErrorHandle and implement the handle method), ```IceErrorHandle.setHandle(IceErrorHandle customHandle)``` to change the unified error handling of all nodes; the default implementation is DefaultIceErrorHandle: directly return NodeRunStateEnum.SHUT_DOWN, do not process and terminate the entire process.
 
 - **The leaf node overrides the errorHandle method**
 
