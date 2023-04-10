@@ -128,8 +128,8 @@ app用于区分不同的应用，如app=1的ice-test，在ice-test启动时，�
 **其他配置：** 
 - **confName** 叶子节点的类名，第一次添加的叶子节点需要手动输入全类名，并会有校验该类是否在client中真实存在，添加叶子节点时需要有一个运行中的client用于校验
 - **节点ID** 通过节点ID的方式添加子节点即为对象级别复用性的体现，ID相同的节点在内存中只会有一份，更改其中之一其余的都会一起变化
-- **debug** 节点的debug仅用于在processInfo中是否展现
-- **invers** 反转节点，如节点本该返回false，反转后会返回true，如此ContainsFlow等节点类就不需要再额外开发一个NotContainsFlow 
+- **记录** 节点的debug仅用于在processInfo中是否展现
+- **反转** 反转节点，如节点本该返回false，反转后会返回true，如此ContainsFlow等节点类就不需要再额外开发一个NotContainsFlow 
 
 ### 发布、清除、导入、导出
 

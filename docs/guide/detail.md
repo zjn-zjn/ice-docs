@@ -124,8 +124,8 @@ Click a node to pop up related operations
 **Other configuration:**
 - **confName** is the class name of the leaf node. When adding a leaf node for the first time, you need to manually enter the full class name, and there will be a check to see if the class actually exists in the client. When adding a leaf node, a running client for verification
 - **Node ID** Adding child nodes by node ID is the embodiment of object-level reusability. Nodes with the same ID will only have one copy in memory, and if you change one of them, the rest will change together.
-- **debug** node's debug is only used to display in processInfo
-- **invers** inverts the node, if the node should return false, it will return true after inversion, so node classes such as ContainsFlow do not need to develop an additional NotContainsFlow
+- **record** node's debug is only used to display in processInfo
+- **inverse** inverts the node, if the node should return false, it will return true after inversion, so node classes such as ContainsFlow do not need to develop an additional NotContainsFlow
 
 ### publish, clear, import, export
 

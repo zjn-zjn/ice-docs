@@ -1,3 +1,8 @@
+# [1.2.0](https://github.com/zjn-zjn/ice/compare/1.1.0...1.2.0) (2023-04-10)
+
+#### Feature
+* **New configuration page:** New configuration page, support configuration description, drag node arrangement, etc. (close [#16](https://github.com/zjn-zjn/ice/issues/16))
+
 # [1.1.0](https://github.com/zjn-zjn/ice/compare/1.0.4...1.1.0) (2022-07-30)
 
 #### Feature
