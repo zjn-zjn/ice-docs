@@ -164,7 +164,7 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
     public void setExp(String exp) { //为了更好的性能，设置/更新表达式时重新编译
         this.exp = exp;
-        this.compiledExpression = AviatorEvaluator.compile(exp);
+        this.compiledExpression = AviatorEvaluator.compile(exp, true);
     }
 }
 ```

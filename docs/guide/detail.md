@@ -160,7 +160,7 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
     public void setExp(String exp) { //For better performance, recompile when setting/updating exp
         this.exp = exp;
-        this.compiledExpression = AviatorEvaluator.compile(exp);
+        this.compiledExpression = AviatorEvaluator.compile(exp, true);
     }
 }
 ````
