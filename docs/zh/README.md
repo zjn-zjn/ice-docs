@@ -84,6 +84,11 @@ features:
         <img :src="$withBase('/images/user/lampo.png')" class="no-zoom">
     </a>
 </span>
+<span class="link">
+    <a href="http://www.xibaoda.com/" target="_blank">
+        <img :src="$withBase('/images/user/xibaoda.png')" class="no-zoom">
+    </a>
+</span>
 </div>
 <br><br>
 
