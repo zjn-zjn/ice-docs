@@ -89,6 +89,11 @@ features:
         <img :src="$withBase('/images/user/xibaoda.png')" class="no-zoom">
     </a>
 </span>
+<span class="link">
+    <a href="https://www.zfire.top/" target="_blank">
+        <img :src="$withBase('/images/user/zfire.png')" class="no-zoom">
+    </a>
+</span>
 </div>
 <br><br>
 
