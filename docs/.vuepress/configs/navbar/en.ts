@@ -3,11 +3,11 @@ import { version } from '../meta'
 
 export const navbarEn: NavbarConfig = [
   {
-    text: 'Home',
-    link: '/',
+    text: '💒Home',
+    link: '/'
   },
   {
-    text: 'Guide',
+    text: '📚Guide',
     children: [
       {
         text: 'Get started',
@@ -24,15 +24,28 @@ export const navbarEn: NavbarConfig = [
       {
         text: 'Common problem',
         link: '/guide/qa.html'
-      },
+      }
     ]
   },
   {
-    text: 'Experience',
-    link: 'http://eg.waitmoon.com/config/list/1'
+    text: '🧩Experience',
+    link: 'http://eg.waitmoon.com/config/list?id=1'
   },
   {
-    text: 'More',
+    text: `🔥v${version}`,
+    children: [
+      {
+        text: 'Changelog',
+        link: '/CHANGELOG.html'
+      },
+      {
+        text: 'Upgrade Guide',
+        link: '/upgrade/upgrade_guide.html'
+      }
+    ]
+  },
+  {
+    text: '❓More',
     children: [
       {
         text: 'Advanced',
@@ -44,43 +57,26 @@ export const navbarEn: NavbarConfig = [
           {
             text: 'Source Code',
             link: '/advanced/source-code.html'
-          },
+          }
         ]
-      }
-    ],
-  },
-  {
-    text: `v${version}`,
-    children: [
-      {
-        text: 'Changelog',
-        link: '/CHANGELOG.html',
       },
       {
-        text: 'Upgrade Guide',
-        link: '/upgrade/upgrade_guide.html',
-      },
-    ],
-  },
-  {
-    text: `Communicate`,
-    link: '/community/community.html'
-  },
-  {
-    "text":`Recommend`,
-    children:[
-      {
-        text:"Process Orchestration Framework-Kstry",
-        link:"http://kstry.cn"
+        text: 'Friendship Link',
+        children: [
+          {
+            text: 'Process Orchestration Framework-Kstry',
+            link: 'http://kstry.cn'
+          }
+        ]
       }
     ]
   },
   {
-    text: 'GitHub',
-    link: 'https://github.com/zjn-zjn/ice'    
+    text: '👥Communicate',
+    link: '/community/community.html'
   },
   {
-    text: 'Gitee',
-    link: 'https://gitee.com/waitmoon/ice'
+    text: '🛖GitHub',
+    link: 'https://github.com/zjn-zjn/ice'    
   }
 ]

@@ -3,11 +3,11 @@ import { version } from '../meta'
 
 export const navbarZh: NavbarConfig = [
   {
-    text: '首页',
-    link: '/zh/',
+    text: '💒首页',
+    link: '/zh/'
   },
   {
-    text: '指南',
+    text: '📚指南',
     children: [
       {
         text: '快速上手',
@@ -24,15 +24,32 @@ export const navbarZh: NavbarConfig = [
       {
         text: '常见问题',
         link: '/zh/guide/qa.html'
-      },
+      }
     ]
   },
   {
-    text: '体验',
-    link: 'http://eg.waitmoon.com/config/list/1'
+    text: '🧩体验',
+    link: 'http://eg.waitmoon.com/config/list?id=1'
   },
   {
-    text: '更多',
+    text: '💖赞助',
+    link: '/zh/sponsor/sponsor.html'
+  },
+  {
+    text: `🔥v${version}`,
+    children: [
+      {
+        text: '更新日志',
+        link: '/zh/CHANGELOG.html'
+      },
+      {
+        text: '升级指南',
+        link: '/zh/upgrade/upgrade_guide.html'
+      }
+    ]
+  },
+  {
+    text: '❓更多',
     children: [
       {
         text: '深入',
@@ -44,43 +61,35 @@ export const navbarZh: NavbarConfig = [
           {
             text: '源码解读',
             link: '/zh/advanced/source-code.html'
-          },
+          }
         ]
-      }
-    ],
-  },
-  {
-    text: `v${version}`,
-    children: [
-      {
-        text: '更新日志',
-        link: '/zh/CHANGELOG.html',
       },
       {
-        text: '升级指南',
-        link: '/zh/upgrade/upgrade_guide.html',
-      }
-    ],
-  },
-  {
-    text: `加入群聊`,
-    link: '/zh/community/community.html'
-  },
-  {
-    "text":`推荐`,
-    children:[
-      {
-        text:"流程编排框架-Kstry",
-        link:"http://kstry.cn"
+        text: '友情链接',
+        children: [
+          {
+            text: '流程编排框架-Kstry',
+            link: 'http://kstry.cn'
+          }
+        ]
       }
     ]
   },
   {
-    text: 'GitHub',
-    link: 'https://github.com/zjn-zjn/ice'    
+    text: '👥加入群聊',
+    link: '/zh/community/community.html'
   },
   {
-    text: 'Gitee',
-    link: 'https://gitee.com/waitmoon/ice'
+    text: '🛖源码',
+    children: [
+      {
+        text: 'GitHub',
+        link: 'https://github.com/zjn-zjn/ice',
+      },
+      {
+        text: 'Gitee',
+        link: 'https://gitee.com/waitmoon/ice',
+      }
+    ]
   }
 ]

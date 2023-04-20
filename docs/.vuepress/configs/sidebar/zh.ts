@@ -26,5 +26,5 @@ export const sidebarZh: SidebarConfig = {
         '/zh/advanced/source-code.html',
       ],
     }
-  ]
+  ],
 }
