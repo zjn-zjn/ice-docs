@@ -55,7 +55,7 @@ export const navbarEn: NavbarConfig = [
             link: '/advanced/architecture.html'
           },
           {
-            text: 'Source Code',
+            text: 'Project Structure',
             link: '/advanced/source-code.html'
           }
         ]

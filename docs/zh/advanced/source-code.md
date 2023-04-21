@@ -1,2 +1,48 @@
-# 源码解读
-更新中...
+# 项目结构
+
+- **ice-common**  一些common的类，工具类，枚举等
+- **ice-core** 核心包，提供了client的所有核心功能，推荐看
+  - annotation 一些注解
+  - base 节点类的核心基类
+    - BaseNode 所有节点类的基类，提供了一些节点的基础处理
+    - BaseLeaf 所有叶子节点的基类
+    - BaseRelation 所有关系节点的基类
+  - builder 手动构建ice的方式，不推荐使用(有可视化的谁用这玩意？)，后续可能会被删掉
+  - cache client核心，所有的节点和handler缓存在这里初始化&更新
+    - IceConfCache 节点缓存在这里初始化&构建树&更新
+    - IceHandlerCache 可触发的handler缓存在这里组建
+  - client 和server沟通，拉取server配置&接收server变更
+    - ha 高可用相关
+  - context 上下文环境类
+    - IceContext 上下文环境的最外层
+    - IcePack 包裹，触发时传入的结构
+    - IceParallelContext 并发的上下文，暂未使用(还没想好)
+    - IceRoam 用户自定义信息&执行过程中产生的数据存放的地方(其实就是个map)
+  - handler 可执行的handler
+  - leaf 叶子节点
+    - base 基础叶子，context作为直接入参
+    - pack 剥开context，留个pack入参的叶子
+    - roam 剥开pack，留个roam入参的叶子
+  - relation 关系节点
+    - parallel 并发的关系节点
+  - utils 工具类
+  - Ice 执行入口，`要看源码的从这里开始~`
+  - IceDispatcher 分发器
+- **ice-server** server端，一些crud等操作，乱七八糟的很多，不好看也不用看
+  - config server配置类
+  - constant server 基础转换/操作
+  - controller 
+    - common 通用controller处理，如包装resp，封装err
+    - IceAppController app相关操作
+    - IceBaseController 列表页相关操作
+    - IceConfController 树配置相关操作
+    - IceMockController mock相关操作
+  - dao 数据库操作
+  - enums 枚举
+  - exception 错误处理
+  - nio 和client通信相关处理
+  - service 一些操作的处理，crud...
+- **ice-test** 小demo，官网例子，直接上手使用族可看
+- **ice-client** spring client的一些初始化操作
+- **ice-client-spring-boot-autoconfigure** 为了stater准备的，不用看
+- **ice-client-spring-boot-starter** stater，方便spring-boot项目直接引入使用的，不用看

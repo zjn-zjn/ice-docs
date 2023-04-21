@@ -59,7 +59,7 @@ export const navbarZh: NavbarConfig = [
             link: '/zh/advanced/architecture.html'
           },
           {
-            text: '源码解读',
+            text: '项目结构',
             link: '/zh/advanced/source-code.html'
           }
         ]
