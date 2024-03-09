@@ -1,3 +1,8 @@
+# [1.3.0](https://github.com/zjn-zjn/ice/compare/1.2.0...1.3.0) (2023-06-02)
+
+#### 功能
+* 一些改进和修复，年代久远不太记得了...
+
 # [1.2.0](https://github.com/zjn-zjn/ice/compare/1.1.0...1.2.0) (2023-04-10)
 
 #### 功能

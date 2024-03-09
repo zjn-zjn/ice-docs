@@ -16,7 +16,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## Install server
 
-### Download the installation package(latest v1.2.0)
+### Download the installation package(latest v1.3.0)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -77,7 +77,7 @@ Refer to github ice-test module
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ```
 
@@ -111,7 +111,7 @@ ice: #ice client configuration
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ```
 #### High availability additional dependencies

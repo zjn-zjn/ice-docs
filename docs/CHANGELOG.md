@@ -1,3 +1,8 @@
+# [1.3.0](https://github.com/zjn-zjn/ice/compare/1.2.0...1.3.0) (2023-06-02)
+
+#### Feature
+* some improve and fix
+
 # [1.2.0](https://github.com/zjn-zjn/ice/compare/1.1.0...1.2.0) (2023-04-10)
 
 #### Feature
