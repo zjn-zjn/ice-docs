@@ -31,12 +31,12 @@ export default defineUserConfig({
 
   // site-level locales config
   locales: {
-    '/': {
+    '/en/': {
       lang: 'en-US',
       title: 'ice',
       description: 'Committed to solving flexible and complex hard-coded problems',
     },
-    '/zh/': {
+    '/': {
       lang: 'zh-CN',
       title: 'ice',
       description: '致力于解决灵活繁复的硬编码问题',
@@ -63,7 +63,7 @@ export default defineUserConfig({
        * As the default locale of @vuepress/theme-default is English,
        * we don't need to set all of the locale fields
        */
-      '/': {
+      '/en/': {
         // navbar
         navbar: navbarEn,
         // sidebar
@@ -78,7 +78,7 @@ export default defineUserConfig({
       /**
        * Chinese locale config
        */
-      '/zh/': {
+      '/': {
         // navbar
         navbar: navbarZh,
         selectLanguageName: '简体中文',

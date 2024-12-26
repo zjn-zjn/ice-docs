@@ -1,21 +1,21 @@
-# Architecture
+# 架构设计
 
-## Architecture diagram
+## 架构图
 
-![Architecture](/images/advanced/architecture-dark.png#dark)
-![Architecture](/images/advanced/architecture-light.png#light)
+![架构图](/images/advanced/architecture-dark.png#dark)
+![架构图](/images/advanced/architecture-light.png#light)
 
-**IceServer:** Provides storage and management of page operations and configurations.
+**IceServer：** 提供页面操作及配置的存储和管理。
 
-**IceCore:** Pulls & updates configuration information from the server, caches it in the business memory, and provides an execution interface.
+**IceCore：** 从server拉取&更新配置信息，缓存在Business内存中，提供执行接口。
 
-## Node class diagram
+## 节点类图
 
-![class](/images/advanced/class-dark.png#dark)
-![class](/images/advanced/class-light.png#light)
+![类图](/images/advanced/class-dark.png#dark)
+![类图](/images/advanced/class-light.png#light)
 
-**BaseNode:** The base class of all ice nodes, providing common node operations, such as node valid time, etc.
+**BaseNode：** 所有ice节点的基类，提供通用节点操作，如节点生效时间等。
 
-**BaseRelation:** The base class of all relation nodes, used for business flow control.
+**BaseRelation：** 所有关系节点基类，关系节点用于控制业务流转。
 
-**BaseLeaf:** The base class of all leaf nodes, the leaf nodes are the nodes that actually execute the business.
+**BaseLeaf：** 所有叶子节点基类，叶子节点为真正执行业务的节点。

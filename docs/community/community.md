@@ -1,15 +1,15 @@
-## Exchange discussion
+## 交流探讨
 
-ice is a lightweight, high-performance, and stable component-based process/rule engine that provides visual orchestration. Since it was open sourced, it has received feedback from many people and listened to these feedbacks for iteration and new feature development.
+ice是轻量，高性能，稳定，提供可视化编排的组件式流程/规则引擎，自从开源以来，收到了很多人的使用反馈，听取这些反馈进行迭代和新特性开发。
 
-If you have questions in use, or want to consult and understand, you can join the group chat, and I will answer everyone's questions carefully.
+如果你在使用中有问题，或者想咨询了解，可以加入群聊，我会细心答复每一个人的疑问。
 
-Since the community group has increased to more than 200 people, **You can follow my WeChat official account, click <span style="color:red">personal WeChat</span>, and note <span style="color:red">ice</span> when adding friends, and I will add you to the group.**
+由于社区群已经增加到200人以上，**你可以关注我的微信公众号，点击<span style="color:red">个人微信</span>，加好友时备注<span style="color:red">ice</span>，我会拉你入群。**
 
 ![](/images/wechat-dark.jpg#dark)
 ![](/images/wechat-light.jpg#light)
 
 
-At the same time, there is also a QQ group. Students who are used to QQ groups can add group questions and feedback (mainly WeChat groups, QQ groups may reply slightly slower)
+同时也有QQ群，习惯QQ群的同学可以加群提问和反馈(主要以微信群为主，QQ群回复可能会稍慢)
 
-QQ group: 587368939
+QQ群：587368939

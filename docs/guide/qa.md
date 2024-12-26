@@ -1,54 +1,58 @@
-# Common problem
+# 常见问题
 
 ## Ice
 
-- **Can ice be used directly for workflow?**
+- **ice可以直接用来做工作流吗？**
 
-Ice itself is stateless. If you need to be a workflow engine, you need to develop and encapsulate it twice.
-Ice is an abstract arrangement, similar to abstracting a method. In theory, whatever code can be written, ice can do.
+ice本身是无状态的，如果需要做工作流引擎，还需要二次开发封装。
+ice是一种抽象编排方式，类似于抽象一个方法，理论上代码能写的，ice都可以做。
 
 ## Client
 
-- **Will the network failure of the client and server cause the configuration to fail to be updated hotly?**
+- **client与server网络故障会导致配置无法热更新吗？**
 
-The client sends a heartbeat to the server by default in 5s. The server will close the connection if it does not receive the client's heartbeat within 20s. When the client network recovers and re-establishes a connection with the server, it will pull the full amount of configuration data and update it once. Therefore, there is no need to worry about the configuration not being updated due to network problems, but it is still necessary to pay attention to the inconsistent configuration during the disconnection period.
+client默认5s向server发送一个心跳，server在20s内没有收到client心跳会关闭连接，当client网络恢复重新与server建立连接成功后，会全量的拉取配置数据更新一次。因此不必担心网络问题导致的配置不更新问题，但仍需要注意断网这段时间内的配置不统一。
 
-### Log information
+### 日志信息
 
-- **Startup error**
+- **启动报错**
 
-````
+```
 Caused by: java.lang.RuntimeException: ice connect server error server:127.0.0.1:18121
-    at com.ice.core.client.IceNioClient.connect(IceNioClient.java:95)
-    at com.ice.client.config.IceNioClientApplication.run(IceNioClientApplication.java:24)
-    at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:782)
-    ... 5 common frames omitted
+	at com.ice.core.client.IceNioClient.connect(IceNioClient.java:95)
+	at com.ice.client.config.IceNioClientApplication.run(IceNioClientApplication.java:24)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:782)
+	... 5 common frames omitted
 Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /127.0.0.1:18121
 Caused by: java.net.ConnectException: Connection refused
-````
+```
 
-If the connection to the server fails, you need to check whether the configuration of the server is correct and whether the communication port of the server is connected.
+连接server失败，需要检查server的配置是否正确，和server的通信端口是否互通。
 
-- **Configuration update error**
+- **配置更新报错**
 
-Generally, it is a node initialization failure error. Such an error will not stop the client from starting.
+一般为节点初始化失败错误，此类报错不会终止client启动
 
-````
+```
 ERROR (IceConfCache.java:62)- class not found conf:{"id":118,"type":6,"confName":"*.*.*Flow"}
-````
+```
 
-Node initialization error, the corresponding node class is not found in the client, please check whether the node class is normal or the app configuration is normal.
+节点初始化error，在该client中未找到对应的节点类，请检查节点类是否正常或app配置是否正常。
 
-````
+```
 ERROR (IceConfCache.java:91)- sonId:73 not exist please check! conf:{"id":70,"sonIds":"73,74","type":1}
-````
+```
 
-Node initialization error, the child node corresponding to the id is not found, generally caused by the failure of child node initialization.
+节点初始化error，未找到对应id的子节点，一般为子节点初始化失败导致。
 
-If the node with the above error is not used in the business, it can be ignored. If it is used, please check it. (Subsequent garbage nodes will be recycled, and nodes that are no longer used can be directly recycled)
+以上报错的节点如果未在业务中使用，可以忽略，如果使用了请检查。(后续会出垃圾节点回收，可直接回收不再使用的节点)
 
 
 ## Server
-- **Will the server hang up affect the client?**
+- *****server挂了会影响client吗？*****
 
-The server is only responsible for the operation, storage and hot update of the configuration. The clinet does not depend on the server during operation. After the server is down, the new client will not be able to start (the configuration cannot be initialized because it cannot be connected to the server) and the configuration background cannot be operated.
+server仅负责配置的操作、存储与热更新，clinet在运行时不依赖server，server宕机后，会导致新的client无法启动(无法与server连通也就无法初始化配置)以及无法操作配置后台。
+
+- **server支持集群吗？**
+
+目前server仅支持单机部署，即将支持主备做HA。

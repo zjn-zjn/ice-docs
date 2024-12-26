@@ -1,77 +1,81 @@
-# Get started
+# 快速上手
 
->Try to access and use it~
+>快来接入使用吧~
 
-## Install dependencies
+## 安装依赖
 
-Install mysql, **new ice database** to store configuration
+安装mysql，**新建ice数据库**用于存储配置
 
 ```sql
 CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 ```
 
-**Remarks:** If the ice-related table cannot be found during startup, you need to manually create the ice-related table structure. The sql address of the table structure:
+**备注：** 如果启动时报找不到ice相关的表，则需手动创建ice相关表结构，表结构sql地址：
 
+[https://gitee.com/waitmoon/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://gitee.com/waitmoon/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
+或
 [https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
-## Install server
+## 安装server
 
-### Download the installation package(latest v1.3.0)
+### 下载安装包(最新v1.3.0)
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
-Unzip the tar package
+解压tar包 
 
 tar -xzvf ice-server-*.tar.gz
 
-### Edit configuration file
+### 编辑配置文件
+
+application-prod.yml
 
 ```yml
 server:
-  port: 8121 #Port
+  port: 8121 #端口
 spring:
-  datasource: #Database configuration
+  datasource: #数据库配置
     url: jdbc:mysql://127.0.0.1:3306/ice?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
     username: username
     password: password
     initialization-mode: always
 ice:
-  port: 18121 #port for client
-#  ha: #ha config, now default zk
+  port: 18121 #与客户端通信端口
+#  ha: #高可用配置，当前默认支持zookeeper
 #    address: localhost:2181,localhost:2182,localhost:2183
-  pool: #Thread pool configuration (used to update the client)
+  pool: #线程池配置(用于更新client)
     core-size: 4
     max-size: 4
     keep-alive-seconds: 60
     queue-capacity: 60000
 ```
 
-### start/stop/restart server
+### 启动/停止/重启server
 
-start up
+启动
 **sh ice.sh start**
 
-stop
+停止
 **sh ice.sh stop**
 
-reboot
+重启
 **sh ice.sh restart**
 
-### Open configuration backend
+### 打开配置后台
 
 http://localhost:8121/
 
-### Example backend reference
+### 示例后台参考
 
-Deploy for testing & experience address (only app=1 has real deployed client)
+部署用于测试&体验地址(仅app=1有真实部署的client)
 
 [http://eg.waitmoon.com](http://eg.waitmoon.com)
 
-## Client access
+## Client接入(Spring)
 
-Refer to github ice-test module
+参考github ice-test模块
 
-### Add pom dependency
+### 增加pom依赖
 
 ```xml
 <dependency>
@@ -81,31 +85,31 @@ Refer to github ice-test module
 </dependency>
 ```
 
-#### High availability additional dependencies
+#### 高可用额外依赖
 
-````xml
+```xml
 <dependency>
     <groupId>org.apache.curator</groupId>
     <artifactId>curator-recipes</artifactId>
     <version>5.2.1</version>
 </dependency>
-````
-
-### Add ice configuration
-
-```yml
-ice: #ice client configuration
-  app: 1 #corresponds to the background configuration app
-#  server: zookeeper:localhost:2181,localhost:2182,localhost:2183 #server high availability configuration
-  server: 127.0.0.1:18121 #server address (serverHost:serverPort)
-  scan: com.ice.test #used to scan leaf nodes, multiple packages are separated by ',' (scan all by default, scanning all will slow down the application startup speed)
-  pool: #Thread pool configuration (for concurrent relation nodes)
-    parallelism: -1 #default-1,≤0 means the default configuration
 ```
 
-## Client access (non-Spring)
+### 增加ice配置
 
-### Add pom dependency
+```yml
+ice: #ice client配置
+  app: 1 #与后台配置app对应
+#  server: zookeeper:localhost:2181,localhost:2182,localhost:2183 #server高可用配置
+  server: 127.0.0.1:18121 #server 地址(serverHost:serverPort)
+  scan: com.ice.test #用于扫描叶子节点，多个包用','分隔(默认扫描全部，扫描全部会拖慢应用启动速度)
+  pool: #线程池配置(用于并发关系节点)
+    parallelism: -1 #默认-1,≤0表示采用默认配置
+```
+
+## Client接入(非Spring)
+
+### 增加pom依赖
 
 ```xml
 <dependency>
@@ -114,24 +118,29 @@ ice: #ice client configuration
   <version>1.3.0</version>
 </dependency>
 ```
-#### High availability additional dependencies
 
-````xml
+#### 高可用额外依赖
+
+```xml
 <dependency>
     <groupId>org.apache.curator</groupId>
     <artifactId>curator-recipes</artifactId>
     <version>5.2.1</version>
 </dependency>
-````
-
-### Run Client
-
-```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //Incoming app, server address and leaf node scan path
-iceNioClient.start(); //Connect to the remote server and initialize the ice configuration
-iceNioClient.destroy(); //It is best to clean up after the application is closed~
 ```
 
-## Development & Configuration
+### 运行Client
 
->Refer to github ice-test module
+```java
+IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
+iceNioClient.start(); //连接远程server，初始化ice配置
+iceNioClient.destroy(); //应用关停后最好清理一下~ 
+```
+
+## 开发&配置
+
+>参考github ice-test模块
+
+视频地址：[https://www.bilibili.com/video/BV1Q34y1R7KF](https://www.bilibili.com/video/BV1Q34y1R7KF)
+
+<iframe src="//player.bilibili.com/player.html?aid=807134055&bvid=BV1Q34y1R7KF&cid=456033283&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

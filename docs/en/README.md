@@ -3,26 +3,25 @@ home: true
 title: 开源框架学习与分享
 heroImage: /images/hero.svg
 actions:
-  - text: 快速上手
-    link: /zh/guide/getting-started.html
-    type: primary
-  - text: 编排逻辑
-    link: http://waitmoon.com/ice-logic/zh/
-    type: secondary
-  - text: 项目简介
-    link: /zh/guide/
-    type: secondary
+   - text: Get Started
+     link: /guide/getting-started.html
+     type: primary
+   - text: Orchestration Logic
+     link: http://waitmoon.com/ice-logic/en/
+     type: secondary
+   - text: Introduction
+     link: /guide/
+     type: secondary
 features:
-  - title: 编排思想
-    details: 全新的编排思想，在保障解耦和复用的同时，提供了更大的配置自由度，极大的降低了规则维护成本。
-  - title: 性能卓越
-    details: 几乎不消耗任何性能，只需关注业务自身性能。
-  - title: 接入简单
-    details: 简单的学习成本，几分钟就能上手编排，开发配置与抽象成本低。
+   - title: Orchestration Ideas
+     details: The new orchestration idea provides greater freedom of configuration while ensuring decoupling and reuse, which greatly reduces the cost of rule maintenance.
+   - title: High performance
+     details: It consumes almost no performance, just focus on the performance of the business itself.
+   - title: Access cost
+     details: Low cost to learn to understand, develop configuration and abstraction.
 ---
 
-### 最新版本
-
+### Latest version
 > v1.3.0~
 
 ```xml
@@ -33,8 +32,9 @@ features:
 </dependency>
 ```
 
-### 用户列表
-> 谁在使用ice?
+
+### User list
+> Who is using ice?
 
 <div class="row">
 <span class="link">
@@ -97,20 +97,21 @@ features:
 </div>
 <br><br>
 
-<!-- <CodeGroup>
-  <CodeGroupItem title="1" active>
+<!-- ### test
+<CodeGroup>
+   <CodeGroupItem title="1" active>
 
 ```bash
-```
+````
 
-  </CodeGroupItem>
+   </CodeGroupItem>
 
-  <CodeGroupItem title="2">
+   <CodeGroupItem title="2">
 
 ```bash
 
-```
-  </CodeGroupItem>
+````
+   </CodeGroupItem>
 </CodeGroup> -->
 
 <div class="footer" style="font-size:12px">
@@ -163,3 +164,4 @@ features:
   }
 
 </style>
+		 
