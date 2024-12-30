@@ -4,26 +4,26 @@ import { version } from '../meta'
 export const navbarEn: NavbarConfig = [
   {
     text: '💒Home',
-    link: '/'
+    link: '/en/'
   },
   {
     text: '📚Guide',
     children: [
       {
         text: 'Get started',
-        link: '/guide/getting-started.html'
+        link: '/en/guide/getting-started.html'
       },
       {
         text: 'Detailed guide',
-        link: '/guide/detail.html'
+        link: '/en/guide/detail.html'
       },
       {
         text: 'Introduction',
-        link: '/guide/README.md'
+        link: '/en/guide/README.md'
       },
       {
         text: 'Common problem',
-        link: '/guide/qa.html'
+        link: '/en/guide/qa.html'
       }
     ]
   },
@@ -36,11 +36,11 @@ export const navbarEn: NavbarConfig = [
     children: [
       {
         text: 'Changelog',
-        link: '/CHANGELOG.html'
+        link: '/en/CHANGELOG.html'
       },
       {
         text: 'Upgrade Guide',
-        link: '/upgrade/upgrade_guide.html'
+        link: '/en/upgrade/upgrade_guide.html'
       }
     ]
   },
@@ -52,11 +52,11 @@ export const navbarEn: NavbarConfig = [
         children: [
           {
             text: 'Architecture',
-            link: '/advanced/architecture.html'
+            link: '/en/advanced/architecture.html'
           },
           {
             text: 'Project Structure',
-            link: '/advanced/source-code.html'
+            link: '/en/advanced/source-code.html'
           }
         ]
       },
@@ -73,7 +73,7 @@ export const navbarEn: NavbarConfig = [
   },
   {
     text: '👥Communicate',
-    link: '/community/community.html'
+    link: '/en/community/community.html'
   },
   {
     text: '🛖GitHub',

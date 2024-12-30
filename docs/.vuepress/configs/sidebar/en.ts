@@ -1,29 +1,29 @@
 import type { SidebarConfig } from '@vuepress/theme-default'
 
 export const sidebarEn: SidebarConfig = {
-  '/guide/': [
+  '/en/guide/': [
     {
       text: 'Guide',
       children: [
-        '/guide/getting-started.html',
-        '/guide/detail.html',
-        '/guide/README.md',
-        '/guide/qa.html'
+        '/en/guide/getting-started.html',
+        '/en/guide/detail.html',
+        '/en/guide/README.md',
+        '/en/guide/qa.html'
       ],
     },
   ],
-  '/upgrade/': [
+  '/en/upgrade/': [
     {
       text: 'Upgrade',
       link: '/upgrade/upgrade_guide.html'
     },
   ],
-  '/advanced/': [
+  '/en/advanced/': [
     {
       text: 'Advanced',
       children: [
-        '/advanced/architecture.html',
-        '/advanced/source-code.html',
+        '/en/advanced/architecture.html',
+        '/en/advanced/source-code.html',
       ],
     },
   ],

@@ -132,10 +132,10 @@ export default defineUserConfig({
   plugins: [
     searchPlugin({
       locales: {
-        '/': {
+        '/en/': {
           placeholder: 'Search',
         },
-        '/zh/': {
+        '/': {
           placeholder: '搜索',
         },
       },
