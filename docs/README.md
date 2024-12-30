@@ -4,13 +4,13 @@ title: 开源框架学习与分享
 heroImage: /images/hero.svg
 actions:
   - text: 快速上手
-    link: /zh/guide/getting-started.html
+    link: /guide/getting-started.html
     type: primary
   - text: 编排逻辑
     link: http://waitmoon.com/ice-logic/zh/
     type: secondary
   - text: 项目简介
-    link: /zh/guide/
+    link: /guide/
     type: secondary
 features:
   - title: 编排思想

@@ -4,13 +4,13 @@ title: 开源框架学习与分享
 heroImage: /images/hero.svg
 actions:
    - text: Get Started
-     link: /guide/getting-started.html
+     link: /en/guide/getting-started.html
      type: primary
    - text: Orchestration Logic
      link: http://waitmoon.com/ice-logic/en/
      type: secondary
    - text: Introduction
-     link: /guide/
+     link: /en/guide/
      type: secondary
 features:
    - title: Orchestration Ideas
