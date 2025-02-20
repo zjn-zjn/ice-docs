@@ -1,6 +1,16 @@
 # 升级指南
 > 先升server，再升client
 
+## v1.3.0-v1.5.0
+
+* **配置**
+* * 服务端
+* * * 全新的树图结构
+
+* * 客户端
+* * * 本次升级兼容老的Client SDK，可不改
+* * * 修改依赖名称，ice-client-spring-boot-starter -> ice-spring-boot-starter-2x/3x 对应支持不同的SpringBoot版本
+
 ## v1.2.0-v1.3.0
 * 一些改进与修复，年代久远不太记得了...
 

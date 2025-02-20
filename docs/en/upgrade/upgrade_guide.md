@@ -1,6 +1,16 @@
 # Upgrade guide
 > Upgrade the server first, then upgrade the client
 
+## v1.3.0-v1.5.0
+
+* **Configuration**
+* * Server
+* * * New tree structure implementation
+
+* * Client
+* * * This upgrade is compatible with the old Client SDK, no changes required
+* * * Dependency name changed from ice-client-spring-boot-starter to ice-spring-boot-starter-2x/3x to support different SpringBoot versions
+
 ## v1.2.0-v1.3.0
 * some improve and fix
 

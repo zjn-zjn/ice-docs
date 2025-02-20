@@ -22,13 +22,28 @@ features:
 ---
 
 ### Latest version
-> v1.3.0~
+> v1.5.0
 
 ```xml
+<!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.3.0</version>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- Non-SpringBoot -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>1.5.0</version>
 </dependency>
 ```
 

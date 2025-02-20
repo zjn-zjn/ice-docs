@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/zjn-zjn/ice/compare/1.3.1...1.5.0) (2025-02-20)
+
+#### 功能
+* 改变老旧的树图结构
+* 支持SpringBoot 3.x 和 JDK 17+
+* 项目结构改动
+
+# [1.3.1](https://github.com/zjn-zjn/ice/compare/1.3.0...1.3.1) (2023-06-02)
+
+#### 功能
+* 增加节点回收功能
+* #17 兼容spring-boot-devtools
+
 # [1.3.0](https://github.com/zjn-zjn/ice/compare/1.2.0...1.3.0) (2023-06-02)
 
 #### 功能

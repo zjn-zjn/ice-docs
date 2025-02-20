@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/zjn-zjn/ice/compare/1.3.1...1.5.0) (2025-02-20)
+
+#### Feature
+* Change the legacy tree structure
+* Support SpringBoot 3.x and JDK 17+
+* Project structure improvements
+
+# [1.3.1](https://github.com/zjn-zjn/ice/compare/1.3.0...1.3.1) (2023-06-02)
+
+#### Feature
+* Add node recycling functionality
+* #17 Compatible with spring-boot-devtools
+
 # [1.3.0](https://github.com/zjn-zjn/ice/compare/1.2.0...1.3.0) (2023-06-02)
 
 #### Feature

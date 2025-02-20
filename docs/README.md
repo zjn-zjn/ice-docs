@@ -23,13 +23,28 @@ features:
 
 ### 最新版本
 
-> v1.3.0~
+> v1.5.0
 
 ```xml
+<!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-client-spring-boot-starter</artifactId>
-  <version>1.3.0</version>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- 非SpringBoot -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>1.5.0</version>
 </dependency>
 ```
 
@@ -115,7 +130,7 @@ features:
 
 <div class="footer" style="font-size:12px">
   <p>
-    Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
+    Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
   </p>
 </div>
 
