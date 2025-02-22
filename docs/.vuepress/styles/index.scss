@@ -4,6 +4,28 @@
   --c-brand-light: #4abf8a;
 }
 
+// Logo animation
+.theme-container .home .hero img {
+  filter: drop-shadow(0 0 15px rgba(84, 84, 84, 0.6)) !important;
+  transform-origin: center !important;
+  animation: float 3s ease-in-out infinite !important;
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    filter: drop-shadow(0 0 25px rgba(84, 84, 84, 0.8)) !important;
+    transform: scale(1.05) !important;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 @media (min-width: 751px) {
   #docsearch-container:lang(zh-CN) {
     min-width: 184.66px;
