@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 2267.717 2267.717" width="2267.717pt" height="2267.717pt">
+    <defs>
+        <clipPath id="_clipPath_TBXIvTr5gm6EoQrIjhuUmW5wnvDIxA7I">
+            <rect width="2267.717" height="2267.717"/>
+        </clipPath>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#D2D3D3"/>
+            <stop offset="55%" style="stop-color:#D2D3D3"/>
+            <stop offset="55%" style="stop-color:#545454"/>
+            <stop offset="100%" style="stop-color:#545454"/>
+        </linearGradient>
+        <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#545454"/>
+            <stop offset="60%" style="stop-color:#545454"/>
+            <stop offset="60%" style="stop-color:#BD9354"/>
+            <stop offset="100%" style="stop-color:#BD9354"/>
+        </linearGradient>
+        <linearGradient id="gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#D2D3D3"/>
+            <stop offset="60%" style="stop-color:#D2D3D3"/>
+            <stop offset="60%" style="stop-color:#BD9354"/>
+            <stop offset="100%" style="stop-color:#BD9354"/>
+        </linearGradient>
+    </defs>
+    <g clip-path="url(#_clipPath_TBXIvTr5gm6EoQrIjhuUmW5wnvDIxA7I)">
+        <!-- 左上金色方块 -->
+        <path d="M 143.561 943.779 L 419.07 693.962 C 516.888 605.267 668.313 612.673 757.009 710.49 L 1006.825 985.999 C 1095.521 1083.817 1088.115 1235.242 990.297 1323.938 L 714.788 1573.754 C 616.97 1662.45 465.545 1655.044 376.85 1557.226 L 127.033 1281.717 C 38.337 1183.899 45.743 1032.474 143.561 943.779 Z" style="stroke:none;fill:#BD9354;stroke-miterlimit:10;"/>
+        <text x="460" y="1330" transform="rotate(-42.2, 800, 1100)" style="font-family: 'Baloo 2', 'Comic Sans MS', cursive; font-size: 1000px; font-weight: 800; fill: url(#gradient1);">i</text>
+
+        <!-- 右上浅灰色方块 -->
+        <path d="M 1608.889 112.039 L 1972.395 190.631 C 2101.456 218.535 2183.582 345.97 2155.678 475.031 L 2077.085 838.537 C 2049.181 967.597 1921.746 1049.724 1792.686 1021.82 L 1429.18 943.227 C 1300.119 915.323 1217.993 787.888 1245.897 658.828 L 1324.49 295.321 C 1352.394 166.261 1479.829 84.135 1608.889 112.039 Z" style="stroke:none;fill:#D2D3D3;stroke-miterlimit:10;"/>
+        <text x="1650" y="560" transform="rotate(12.2, 600, -480)" style="font-family: 'Baloo 2', 'Comic Sans MS', cursive; font-size: 1000px; font-weight: 800; fill: url(#gradient2);">c</text>
+
+        <!-- 右下深灰色方块 -->
+        <path d="M 1237.377 1675.863 L 1404.481 1343.614 C 1463.81 1225.651 1607.749 1178.047 1725.712 1237.377 L 2057.961 1404.481 C 2175.924 1463.81 2223.527 1607.749 2164.198 1725.712 L 1997.094 2057.961 C 1937.765 2175.924 1793.826 2223.527 1675.863 2164.198 L 1343.614 1997.094 C 1225.651 1937.765 1178.047 1793.826 1237.377 1675.863 Z" style="stroke:none;fill:#545454;stroke-miterlimit:10;"/>
+        <text x="1610" y="1780" transform="rotate(26.7, 1460, 1230)" style="font-family: 'Baloo 2', 'Comic Sans MS', cursive; font-size: 1000px; font-weight: 800; fill: url(#gradient3);">e</text>
+    </g>
+</svg>
