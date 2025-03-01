@@ -74,9 +74,17 @@ Refer to github ice-test module
 ### Add pom dependency
 
 ```xml
+<!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
   <version>1.5.0</version>
 </dependency>
 ```
@@ -108,6 +116,7 @@ ice: #ice client configuration
 ### Add pom dependency
 
 ```xml
+<!-- Non-SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>

@@ -78,9 +78,17 @@ http://localhost:8121/
 ### 增加pom依赖
 
 ```xml
+<!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
   <version>1.5.0</version>
 </dependency>
 ```
@@ -112,6 +120,7 @@ ice: #ice client配置
 ### 增加pom依赖
 
 ```xml
+<!-- 非SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
