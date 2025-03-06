@@ -7,7 +7,7 @@ actions:
     link: /guide/getting-started.html
     type: primary
   - text: 编排逻辑
-    link: http://waitmoon.com/ice-logic/zh/
+    link: https://waitmoon.com/ice-logic/zh/
     type: secondary
   - text: 项目简介
     link: /guide/
@@ -23,28 +23,28 @@ features:
 
 ### 最新版本
 
-> v{{ $version }}
+> v${version}
 
 ```xml
 <!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 
 <!-- SpringBoot 2.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 
 <!-- 非SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 ```
 

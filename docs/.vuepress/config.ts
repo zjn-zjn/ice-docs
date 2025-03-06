@@ -11,11 +11,19 @@ import { head, navbarEn, navbarZh, sidebarEn, sidebarZh } from './configs'
 import { version } from './configs/meta'
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
+// 引入版本插件
+const versionPlugin = require('./plugins/version-plugin')
+
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineUserConfig({
   // set site base to default value
   base: '/',
+
+  // 定义全局变量
+  define: {
+    ICE_VERSION: JSON.stringify(version),
+  },
 
   // extra tags in `<head>`
   head:[[
@@ -133,28 +141,33 @@ export default defineUserConfig({
   plugins: [
     searchPlugin({
       locales: {
-        '/en/': {
-          placeholder: 'Search',
-        },
         '/': {
           placeholder: '搜索',
         },
+        '/en/': {
+          placeholder: 'Search',
+        },
       },
+      maxSuggestions: 10
+    }),
+    shikiPlugin({
+      theme: 'dark-plus',
     }),
     googleAnalyticsPlugin({
-      // we have multiple deployments, which would use different id
-      id: 'G-MRT75P8006',
+      id: 'G-JKM5Y8Q9DX',
     }),
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './components'),
     }),
-    // only enable shiki plugin in production mode
-    isProd ? shikiPlugin({ theme: 'dark-plus' }) : [],
     mdEnhancePlugin({
-      // 启用图片标记
-      imageMark: true,
-      // 启用图片大小
+      tabs: true,
+      align: true,
+      sub: true,
+      sup: true,
+      footnote: true,
+      mark: true,
       imageSize: true,
     }),
+    versionPlugin(),
   ],
 })

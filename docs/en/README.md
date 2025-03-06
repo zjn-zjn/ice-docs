@@ -7,7 +7,7 @@ actions:
      link: /en/guide/getting-started.html
      type: primary
    - text: Orchestration Logic
-     link: http://waitmoon.com/ice-logic/en/
+     link: https://waitmoon.com/ice-logic/en/
      type: secondary
    - text: Introduction
      link: /en/guide/
@@ -22,28 +22,28 @@ features:
 ---
 
 ### Latest version
-> v{{ $version }}
+> v${version}
 
 ```xml
 <!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 
 <!-- SpringBoot 2.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 
 <!-- Non-SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>{{ $version }}</version>
+  <version>${version}</version>
 </dependency>
 ```
 
