@@ -16,7 +16,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## Install server
 
-### Download the installation package(latest v1.5.0)
+### Download the installation package(latest v{{ $version }})
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -78,26 +78,26 @@ Refer to github ice-test module
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 
 <!-- SpringBoot 2.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 ```
 
 #### High availability additional dependencies
 
-````xml
+```xml
 <dependency>
     <groupId>org.apache.curator</groupId>
     <artifactId>curator-recipes</artifactId>
     <version>5.2.1</version>
 </dependency>
-````
+```
 
 ### Add ice configuration
 
@@ -120,18 +120,18 @@ ice: #ice client configuration
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 ```
 #### High availability additional dependencies
 
-````xml
+```xml
 <dependency>
     <groupId>org.apache.curator</groupId>
     <artifactId>curator-recipes</artifactId>
     <version>5.2.1</version>
 </dependency>
-````
+```
 
 ### Run Client
 

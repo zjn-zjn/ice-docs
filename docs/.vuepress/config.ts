@@ -8,6 +8,7 @@ import { shikiPlugin } from '@vuepress/plugin-shiki'
 import { defaultTheme } from '@vuepress/theme-default'
 import { path } from '@vuepress/utils'
 import { head, navbarEn, navbarZh, sidebarEn, sidebarZh } from './configs'
+import { version } from './configs/meta'
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
 const isProd = process.env.NODE_ENV === 'production'

@@ -22,28 +22,28 @@ features:
 ---
 
 ### Latest version
-> v1.5.0
+> v{{ $version }}
 
 ```xml
 <!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 
 <!-- SpringBoot 2.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 
 <!-- Non-SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 ```
 
@@ -131,7 +131,7 @@ features:
 
 <div class="footer" style="font-size:12px">
   <p>
-    Apache-2.0 Licensed | Copyright © 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
+    Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
   </p>
 </div>
 
@@ -178,4 +178,3 @@ features:
   }
 
 </style>
-		 

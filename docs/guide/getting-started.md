@@ -18,7 +18,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ## 安装server
 
-### 下载安装包(最新v1.5.0)
+### 下载安装包(最新v{{ $version }})
 
 [http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
 
@@ -82,14 +82,14 @@ http://localhost:8121/
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 
 <!-- SpringBoot 2.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 ```
 
@@ -124,7 +124,7 @@ ice: #ice client配置
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>1.5.0</version>
+  <version>{{ $version }}</version>
 </dependency>
 ```
 
