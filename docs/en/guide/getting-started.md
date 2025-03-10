@@ -18,7 +18,7 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 
 ### Download the installation package(latest v{{ $version }})
 
-[http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
+[https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
 
 Unzip the tar package
 

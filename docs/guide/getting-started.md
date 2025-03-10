@@ -16,11 +16,13 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 或
 [https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
+另：达梦对应的sql在1.5.0-server-dm分支上
+
 ## 安装server
 
-### 下载安装包(最新v${version})
+### 下载安装包(最新v1.5.0，其中-dm是达梦数据库版)
 
-[http://waitmoon.com/downloads/](http://waitmoon.com/downloads/)
+[https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
 
 解压tar包 
 
