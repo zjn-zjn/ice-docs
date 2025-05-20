@@ -154,7 +154,7 @@ export default defineUserConfig({
       theme: 'dark-plus',
     }),
     googleAnalyticsPlugin({
-      id: 'G-JKM5Y8Q9DX',
+      id: 'G-YPEG0RN3LC',
     }),
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './components'),

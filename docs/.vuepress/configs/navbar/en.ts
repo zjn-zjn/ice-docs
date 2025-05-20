@@ -32,6 +32,10 @@ export const navbarEn: NavbarConfig = [
     link: 'http://eg.waitmoon.com/config/list?app=1'
   },
   {
+    text: '💖Donate',
+    link: '/en/sponsor/sponsor.html'
+  },
+  {
     text: `🔥v${version}`,
     children: [
       {
