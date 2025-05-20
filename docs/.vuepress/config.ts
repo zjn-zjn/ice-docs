@@ -26,7 +26,8 @@ export default defineUserConfig({
   },
 
   // extra tags in `<head>`
-  head:[[
+  head:[
+    [
     'script', {}, `
     var _hmt = _hmt || [];
 (function() {
@@ -36,7 +37,16 @@ export default defineUserConfig({
   s.parentNode.insertBefore(hm, s);
 })();
     `
-  ]],
+    ],
+    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-MRT75P8006' }],
+    ['script', {}, `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRT75P8006');
+    `]
+  ],
 
   // site-level locales config
   locales: {
