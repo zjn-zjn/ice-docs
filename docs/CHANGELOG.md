@@ -1,9 +1,28 @@
-# [1.5.0](https://github.com/zjn-zjn/ice/compare/1.3.1...1.5.0) (2025-02-20)
+---
+title: Ice 规则引擎更新日志 - 版本历史记录
+description: Ice规则引擎的版本更新历史，包括新功能、性能优化、Bug修复等详细变更记录。了解Ice规则引擎的每个版本改进。
+keywords: 更新日志,版本历史,CHANGELOG,Ice版本,规则引擎更新,新功能
+head:
+  - - meta
+    - property: og:title
+      content: Ice 规则引擎更新日志 - 版本历史记录
+  - - meta
+    - property: og:description
+      content: Ice规则引擎的完整版本更新历史，了解每个版本的新功能和改进。
+---
 
-#### 功能
-* 改变老旧的树图结构
-* 支持SpringBoot 3.x 和 JDK 17+
-* 项目结构改动
+# Ice 规则引擎更新日志
+
+> 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
+
+## [1.5.0](https://github.com/zjn-zjn/ice/compare/1.3.1...1.5.0) (2025-02-20) 🎉
+
+Ice 规则引擎重大版本更新
+
+#### 新功能
+* ✨ 全新的可视化树图结构，规则编排更直观
+* 🚀 支持 SpringBoot 3.x 和 JDK 17+，拥抱新技术
+* 📦 优化项目结构，提升规则引擎性能和可维护性
 
 # [1.3.1](https://github.com/zjn-zjn/ice/compare/1.3.0...1.3.1) (2023-06-02)
 

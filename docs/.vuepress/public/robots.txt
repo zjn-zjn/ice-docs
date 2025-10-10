@@ -1,0 +1,25 @@
+# robots.txt for waitmoon.com
+# Ice - Java Rules Engine Documentation
+
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Sitemap location
+Sitemap: https://waitmoon.com/sitemap.xml
+
+# Major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+

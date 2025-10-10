@@ -1,10 +1,31 @@
-# 快速上手
+---
+title: Ice 快速上手 - 5分钟快速接入指南
+description: 快速接入Ice规则引擎的完整指南。包含Server部署、Client接入、数据库配置等详细步骤，支持SpringBoot 2.x/3.x和非Spring项目。
+keywords: 规则引擎接入,快速开始,安装教程,配置指南,SpringBoot规则引擎,Ice安装
+head:
+  - - meta
+    - property: og:title
+      content: Ice 快速上手 - 5分钟快速接入指南
+  - - meta
+    - property: og:description
+      content: 快速接入Ice规则引擎的完整指南。包含Server部署、Client接入、数据库配置等详细步骤。
+---
 
->快来接入使用吧~
+# Ice 规则引擎快速上手指南
 
-## 安装依赖
+> 5分钟快速接入 Ice 规则引擎，开启可视化业务编排之旅！
 
-安装mysql，**新建ice数据库**用于存储配置
+本指南将帮助您快速搭建 Ice 规则引擎环境，包括 **Ice Server**（规则管理平台）和 **Ice Client**（业务应用集成）两部分。
+
+## 环境要求
+
+- **JDK**: 1.8+ (SpringBoot 3.x需要JDK 17+)
+- **MySQL**: 5.7+ 或 8.0+
+- **SpringBoot**: 2.x 或 3.x (可选)
+
+## 第一步：安装数据库
+
+Ice规则引擎使用MySQL存储规则配置。请先安装MySQL，然后**新建ice数据库**：
 
 ```sql
 CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
@@ -16,21 +37,28 @@ CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 或
 [https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
-另：达梦对应的sql在1.5.0-server-dm分支上
+另：达梦数据库对应的sql在1.5.0-server-dm分支上
 
-## 安装server
+## 第二步：安装 Ice Server 规则管理平台
 
-### 下载安装包(最新v1.5.0，其中-dm是达梦数据库版)
+Ice Server 是可视化规则配置和管理平台，提供规则编排、实时推送、版本管理等功能。
 
-[https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
+### 下载 Ice Server 安装包
 
-解压tar包 
+最新版本 v1.5.0（其中-dm是达梦数据库版本）
 
+下载地址：[https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
+
+解压安装包：
+
+```bash
 tar -xzvf ice-server-*.tar.gz
+cd ice-server
+```
 
-### 编辑配置文件
+### 配置 Ice Server
 
-application-prod.yml
+编辑 `application-prod.yml` 配置文件：
 
 ```yml
 server:
@@ -67,17 +95,25 @@ ice:
 
 http://localhost:8121/
 
-### 示例后台参考
+### Ice Server 管理后台
 
-部署用于测试&体验地址(仅app=1有真实部署的client)
+启动成功后，访问 Ice 规则引擎管理后台：http://localhost:8121/
 
-[http://eg.waitmoon.com](http://eg.waitmoon.com)
+### 在线体验环境
 
-## Client接入(Spring)
+Ice 规则引擎在线演示环境（仅app=1有真实部署的client）：
 
-参考github ice-test模块
+👉 [http://eg.waitmoon.com](http://eg.waitmoon.com)
 
-### 增加pom依赖
+## 第三步：SpringBoot 项目接入 Ice Client
+
+Ice Client 是规则引擎的执行客户端，集成到您的业务应用中执行规则。
+
+参考完整示例：[ice-test 模块](https://github.com/zjn-zjn/ice)
+
+### 添加 Maven 依赖
+
+根据您的 SpringBoot 版本选择对应的 Ice Starter：
 
 ```xml
 <!-- SpringBoot 3.x -->
@@ -117,12 +153,14 @@ ice: #ice client配置
     parallelism: -1 #默认-1,≤0表示采用默认配置
 ```
 
-## Client接入(非Spring)
+## 第四步：非 SpringBoot 项目接入
 
-### 增加pom依赖
+如果您的项目不是 SpringBoot，可以使用 Ice Core 包直接集成规则引擎。
+
+### 添加 Maven 依赖
 
 ```xml
-<!-- 非SpringBoot -->
+<!-- Ice 核心包 - 适用于非SpringBoot项目 -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
@@ -130,7 +168,9 @@ ice: #ice client配置
 </dependency>
 ```
 
-#### 高可用额外依赖
+### 高可用配置（可选）
+
+如果需要 Ice Server 高可用，需要额外添加 Zookeeper 依赖：
 
 ```xml
 <dependency>
@@ -140,18 +180,29 @@ ice: #ice client配置
 </dependency>
 ```
 
-### 运行Client
+### Java 代码集成
 
 ```java
-IceNioClient iceNioClient = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test"); //传入app、server地址和叶子节点扫描路径
-iceNioClient.start(); //连接远程server，初始化ice配置
-iceNioClient.destroy(); //应用关停后最好清理一下~ 
+// 创建 Ice 客户端实例
+IceNioClient iceNioClient = new IceNioClient(
+    1,                      // app ID，与Server配置对应
+    "127.0.0.1:18121",     // Ice Server地址
+    "com.ice.test"         // 叶子节点扫描包路径
+);
+
+// 启动客户端，连接 Ice Server 并初始化规则配置
+iceNioClient.start();
+
+// 应用关闭时销毁客户端
+iceNioClient.destroy();
 ```
 
-## 开发&配置
+## 第五步：规则开发与配置
 
->参考github ice-test模块
+完整的规则开发教程请参考：[ice-test 示例模块](https://github.com/zjn-zjn/ice)
 
-视频地址：[https://www.bilibili.com/video/BV1Q34y1R7KF](https://www.bilibili.com/video/BV1Q34y1R7KF)
+### 规则引擎开发视频教程
+
+Ice 规则引擎详细开发教程：[https://www.bilibili.com/video/BV1Q34y1R7KF](https://www.bilibili.com/video/BV1Q34y1R7KF)
 
 <iframe src="//player.bilibili.com/player.html?aid=807134055&bvid=BV1Q34y1R7KF&cid=456033283&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

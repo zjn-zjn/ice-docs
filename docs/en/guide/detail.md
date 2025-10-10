@@ -1,19 +1,53 @@
-# Detailed guide
+---
+title: Ice Documentation - Complete Features and Configuration
+description: Detailed documentation for Ice rule engine features, including node types, relationship configuration, error handling, high availability, and other advanced features.
+keywords: rule engine documentation,features,configuration,advanced topics,node types,Ice config
+head:
+  - - meta
+    - property: og:title
+      content: Ice Documentation - Complete Features and Configuration
+  - - meta
+    - property: og:description
+      content: Detailed documentation for Ice rule engine features including node types, configuration, error handling and advanced features.
+---
 
-> Come and use it~
+# Ice Rule Engine Detailed Guide
 
-## Node development
+> Comprehensive guide to mastering visual business orchestration with Ice rule engine
 
-There are three leaf node types in ice, corresponding to three business abstractions
+## Rule Engine Node Development
 
-- *Flow is used for abstractions that can control business flow, such as various judgments or filter conditions, with clear true and false returns
-- *Result is used for the abstraction of some results, such as issuing various rewards, there are relatively clear true and false returns (for example, in the reward distribution, it should return true if it is issued, and it should return false if it is not issued)
-- *None is used for the abstraction of some unrelated business flows, such as query information, no return value
+Ice rule engine uses node-based design where each node represents an independent business logic unit. By combining different node types, you can implement complex business rule orchestration.
 
-In the node development process, you can select the abstract leaf node you need to inherit and implement the corresponding method.
-- BaseLeaf* uses IceContext as method parameter, need to implement do* method
-- BaseLeafPack* uses IcePack as method input, need to implement doPack* method
-- BaseLeafRoam* uses IceRoam as method input, need to implement doRoam* method
+### Three Leaf Node Types
+
+Ice rule engine provides three leaf node types for different business scenarios:
+
+#### 1. Flow Node - Process Control
+- **Purpose**: Control business flow in the rule engine
+- **Scenarios**: Condition judgment, filtering rules, permission validation
+- **Return Value**: Clear true (pass) or false (fail)
+- **Examples**: User level judgment, amount range validation, time condition filtering
+
+#### 2. Result Node - Result Processing
+- **Purpose**: Execute specific business operations in the rule engine
+- **Scenarios**: Reward distribution, inventory deduction, send notifications
+- **Return Value**: true (execution success) or false (execution failure)
+- **Examples**: Coupon distribution, points reward, balance recharge
+
+#### 3. None Node - Auxiliary Operations
+- **Purpose**: Auxiliary nodes that don't affect business flow
+- **Scenarios**: Data query, logging, information assembly
+- **Return Value**: No return value (none)
+- **Examples**: User info query, event tracking, cache warming
+
+### Node Base Class Selection
+
+Ice rule engine provides three base classes for developers to inherit, choose based on parameter type:
+
+- **BaseLeaf\*** - Uses IceContext as method parameter, implement do* method
+- **BaseLeafPack\*** - Uses IcePack as method parameter, implement doPack* method
+- **BaseLeafRoam\*** - Uses IceRoam as method parameter, implement doRoam* method
 
 **eg:**
 ````java

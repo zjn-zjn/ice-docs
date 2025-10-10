@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- 中文首页 -->
+  <url>
+    <loc>https://waitmoon.com/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/" />
+  </url>
+  
+  <!-- 英文首页 -->
+  <url>
+    <loc>https://waitmoon.com/en/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/" />
+  </url>
+  
+  <!-- 中文指南 -->
+  <url>
+    <loc>https://waitmoon.com/guide/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/guide/getting-started.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/getting-started.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/getting-started.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/guide/detail.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/detail.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/detail.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/guide/qa.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/qa.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/qa.html" />
+  </url>
+  
+  <!-- 中文高级 -->
+  <url>
+    <loc>https://waitmoon.com/advanced/architecture.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/advanced/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/advanced/architecture.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/advanced/source-code.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/advanced/source-code.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/advanced/source-code.html" />
+  </url>
+  
+  <!-- 中文其他页面 -->
+  <url>
+    <loc>https://waitmoon.com/CHANGELOG.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/CHANGELOG.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/CHANGELOG.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/community/community.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/community/community.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/community/community.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/sponsor/sponsor.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/sponsor/sponsor.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/sponsor/sponsor.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/upgrade/upgrade_guide.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/upgrade/upgrade_guide.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/upgrade/upgrade_guide.html" />
+  </url>
+  
+  <!-- 英文指南 -->
+  <url>
+    <loc>https://waitmoon.com/en/guide/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/guide/getting-started.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/getting-started.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/getting-started.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/guide/detail.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/detail.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/detail.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/guide/qa.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/qa.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/qa.html" />
+  </url>
+  
+  <!-- 英文高级 -->
+  <url>
+    <loc>https://waitmoon.com/en/advanced/architecture.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/advanced/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/advanced/architecture.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/advanced/source-code.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/advanced/source-code.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/advanced/source-code.html" />
+  </url>
+  
+  <!-- 英文其他页面 -->
+  <url>
+    <loc>https://waitmoon.com/en/CHANGELOG.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/CHANGELOG.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/CHANGELOG.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/community/community.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/community/community.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/community/community.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/sponsor/sponsor.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/sponsor/sponsor.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/sponsor/sponsor.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/upgrade/upgrade_guide.html</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/upgrade/upgrade_guide.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/upgrade/upgrade_guide.html" />
+  </url>
+  
+</urlset>
+

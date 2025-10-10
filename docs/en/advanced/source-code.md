@@ -1,20 +1,64 @@
-# Project structure
+---
+title: Ice Project Structure - Source Code Analysis
+description: Ice rule engine project structure and source code analysis, including core modules, component functions, code organization and detailed explanations to help developers understand Ice source code.
+keywords: project structure,source code analysis,module description,code organization,Ice source code,rule engine code
+head:
+  - - meta
+    - property: og:title
+      content: Ice Project Structure - Source Code Analysis
+  - - meta
+    - property: og:description
+      content: Ice rule engine project structure and source code analysis with core modules, component functions, and code organization.
+---
 
-- **ice-common** Some common classes, tool classes, enumerations, etc.
-- **ice-core** core package, which provides all the core functions of the client, recommended to see
-    - annotation Some annotations
-    - base The core base class of the node class
-        - BaseNode The base class of all node classes, providing basic processing of some nodes
-        - BaseLeaf The base class of all leaf nodes
-        - BaseRelation The base class of all relationship nodes
-    - The builder method of manually building ice is not recommended (who uses this thing with visualization?), and may be deleted in the future
-    - cache client core, all nodes and handler caches are initialized & updated here
-        - IceConfCache node cache is initialized & built tree & updated here
-        - IceHandlerCache The handler cache that can be triggered is set up here
-    - Client communicates with server, pulls server configuration & receives server changes
-        - ha High availability related
-    - context context environment class
-        - The outermost layer of the IceContext context
+# Ice Rule Engine Project Structure
+
+> Source code analysis of Ice rule engine - understanding core modules and code organization
+
+## Ice Rule Engine Module Overview
+
+Ice rule engine adopts modular design with clear module responsibilities, making it easy to understand and extend.
+
+### Core Module Descriptions
+
+#### ice-common - Common Module
+Common component library for Ice rule engine, includes:
+- Utility classes (utility methods, type conversion)
+- Enum definitions (node types, relation types, status enums)
+- Constant definitions (configuration constants, default values)
+- Exception class definitions
+
+#### ice-core - Rule Engine Core Module ⭐
+Core implementation of Ice rule engine, **highly recommended to read**, contains all core rule engine functionalities:
+
+##### 1. annotation Package - Annotation Definitions
+- Node scanning annotations for rule engine
+- Configuration annotations
+- Auto-wiring annotations
+
+##### 2. base Package - Node Base Classes ⭐⭐⭐
+Core base classes of Ice rule engine node system:
+- **BaseNode**: Base class for all rule nodes, provides node lifecycle management, time control and other common features
+- **BaseLeaf**: Base class for all leaf nodes, implementing specific business logic in rule engine
+- **BaseRelation**: Base class for all relation nodes, controls business process orchestration (AND/OR/ALL, etc.)
+
+##### 3. builder Package - Manual Builder
+Provides programmatic way to manually build rules (not recommended, use visual configuration platform instead)
+
+##### 4. cache Package - Rule Engine Cache Core ⭐⭐⭐
+Cache management center of Ice rule engine:
+- **IceConfCache**: Rule node cache, responsible for node initialization, rule tree construction, configuration updates
+- **IceHandlerCache**: Triggerable handler cache, organizes and manages rule entries
+
+##### 5. client Package - Service Communication Module
+Communication implementation between Ice Client and Server in the rule engine:
+- Rule configuration pulling
+- Real-time configuration change monitoring
+- ha subpackage: High availability implementation (Zookeeper integration)
+
+##### 6. context Package - Rule Execution Context
+Execution environment of Ice rule engine:
+- **IceContext**: Outermost layer of rule execution context, running through entire rule execution lifecycle
         - IcePack package, structure passed in when triggering
         - IceParallelContext concurrent context, not used yet (haven't figured it out yet)
         - IceRoam user-defined information & the place where the data generated during execution is stored (in fact, it is a map)

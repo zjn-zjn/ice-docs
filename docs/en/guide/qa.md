@@ -1,17 +1,55 @@
-# Common problem
+---
+title: Ice FAQ - Frequently Asked Questions
+description: Common questions and solutions for Ice rule engine, including performance optimization, troubleshooting, and best practices.
+keywords: FAQ,common questions,troubleshooting,best practices,rule engine FAQ,Ice questions
+head:
+  - - meta
+    - property: og:title
+      content: Ice FAQ - Frequently Asked Questions
+  - - meta
+    - property: og:description
+      content: Common questions and solutions for Ice rule engine including performance optimization, troubleshooting, and best practices.
+---
 
-## Ice
+# Ice Rule Engine FAQ
 
-- **Can ice be used directly for workflow?**
+> Frequently asked questions about Ice rule engine to help you solve problems quickly
 
-Ice itself is stateless. If you need to be a workflow engine, you need to develop and encapsulate it twice.
-Ice is an abstract arrangement, similar to abstracting a method. In theory, whatever code can be written, ice can do.
+## About Ice Rule Engine
 
-## Client
+### Can Ice Rule Engine be used directly as a workflow engine?
 
-- **Will the network failure of the client and server cause the configuration to fail to be updated hotly?**
+Ice rule engine itself is a stateless lightweight rule engine. If you need workflow engine functionality, it's recommended to build on top of Ice rule engine with secondary development.
 
-The client sends a heartbeat to the server by default in 5s. The server will close the connection if it does not receive the client's heartbeat within 20s. When the client network recovers and re-establishes a connection with the server, it will pull the full amount of configuration data and update it once. Therefore, there is no need to worry about the configuration not being updated due to network problems, but it is still necessary to pay attention to the inconsistent configuration during the disconnection period.
+**Ice Rule Engine Positioning**:
+- Ice is an abstract business orchestration framework, similar to abstracting a method
+- In theory, whatever logic code can implement, Ice rule engine can implement
+- Suitable for rule configuration, conditional judgment, business orchestration scenarios
+- For workflow features like state persistence and process approval, additional development is needed
+
+### Differences between Ice Rule Engine and Traditional Rule Engines?
+
+Compared to traditional rule engines like Drools and Activiti, Ice rule engine offers:
+- **More Lightweight**: Zero performance overhead, pure in-memory computation
+- **More Flexible**: Tree-based orchestration structure, independent nodes, modifications don't interfere
+- **Easier to Use**: Visual configuration, low learning curve
+- **Faster**: Millisecond response, suitable for high-concurrency scenarios
+
+## Rule Engine Client Issues
+
+### Will network failure between Client and Server affect rule configuration updates?
+
+**Ice Rule Engine Network Fault Tolerance Mechanism**:
+
+- **Heartbeat Mechanism**: Client sends heartbeat to Server every 5 seconds by default
+- **Timeout Mechanism**: Server closes connection if no Client heartbeat received within 20 seconds
+- **Auto Recovery**: Client automatically reconnects to Server after network recovery
+- **Configuration Sync**: After successful reconnection, full rule configuration is pulled and updated
+
+**Important Notes**:
+- During network failure, Client's rule configuration won't be updated
+- It's recommended to deploy Ice Server in a stable network environment
+- Configure Zookeeper for Ice Server high availability
 
 ### Log information
 

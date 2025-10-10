@@ -1,64 +1,111 @@
-# Upgrade guide
-> Upgrade the server first, then upgrade the client
+---
+title: Ice Rule Engine Upgrade Guide - Version Upgrade Instructions
+description: Ice rule engine version upgrade guide, including upgrade steps, configuration changes, code modifications and detailed instructions for each version. Help you smoothly upgrade rule engine versions.
+keywords: upgrade guide,version upgrade,migration guide,Ice upgrade,rule engine upgrade,version compatibility
+head:
+  - - meta
+    - property: og:title
+      content: Ice Rule Engine Upgrade Guide - Version Upgrade Instructions
+  - - meta
+    - property: og:description
+      content: Detailed version upgrade guide and migration instructions for Ice rule engine.
+---
 
-## v1.3.0-v1.5.0
+# Ice Rule Engine Upgrade Guide
 
-* **Configuration**
-* * Server
-* * * New tree structure implementation
+> ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
-* * Client
-* * * This upgrade is compatible with the old Client SDK, no changes required
-* * * Dependency name changed from ice-client-spring-boot-starter to ice-spring-boot-starter-2x/3x to support different SpringBoot versions
+## v1.3.0 → v1.5.0 Major Version Upgrade
 
-## v1.2.0-v1.3.0
-* some improve and fix
+Ice rule engine 1.5.0 is a major version update bringing a brand new visual interface and SpringBoot 3.x support.
 
-## v1.1.0-v1.2.0
+### Server Upgrade (Ice Server)
+**New Visual Tree Structure**
+- ✨ Added drag-and-drop rule orchestration interface
+- 🎨 Optimized rule configuration page interaction
+- 📊 Enhanced rule visualization display
+
+### Client Upgrade (Ice Client)
+
+**1. SDK Compatibility**
+- ✅ This upgrade is **fully compatible** with the old Client SDK, no upgrade required
+- Upgrade recommended for better performance and new features
+
+**2. Dependency Name Changes**
+
+Ice rule engine client dependency names adjusted to support different SpringBoot versions:
+
+```xml
+<!-- Old version (no longer recommended) -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-client-spring-boot-starter</artifactId>
+  <version>1.3.0</version>
+</dependency>
+
+<!-- New version - SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+
+<!-- New version - SpringBoot 3.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>1.5.0</version>
+</dependency>
+```
+
+## v1.2.0→v1.3.0
+* Various improvements and fixes
+
+## v1.1.0→v1.2.0
 
 * **Configuration**
 * * Server
 * * * Configuration page tweaks
 
 * * Client
-* * * Add @IceNode, @IceField, @IceIgnore annotations to improve the interpretability of configuration
+* * * Add @IceNode, @IceField, @IceIgnore annotations to improve configuration interpretability
 
-## v1.0.4-v1.1.0
+## v1.0.4→v1.1.0
 
 * **Configuration**
 * * Server
-* * * Added ice.ha configuration to support server high availability, no configuration required for stand-alone server
+* * * Added ice.ha configuration for server high availability, no configuration needed for standalone server
 
 * * Client
-* * * ice.server configuration supports server high availability, such as ice.server=zookeeper:localhost:2181, the single-server server is the same as the previous configuration
+* * * ice.server configuration supports server high availability, e.g. ice.server=zookeeper:localhost:2181. Standalone server configuration remains the same
 
-## v1.0.3-v1.0.4
+## v1.0.3→v1.0.4
 
 * **Code**
-* * IceNioClient.connect() rename start(), only non-Spring projects need to be modified
+* * IceNioClient.connect() changed to start(), only non-Spring projects need modification
 
-## v1.0.1-v1.0.2/v1.0.3
+## v1.0.1→v1.0.2/v1.0.3
 
 * **Configuration**
 * * Client
-* * * Added ice.scan configuration for scanning leaf nodes (scan all by default, scanning all will slow down the application startup speed), multiple packages are separated by ','
+* * * Added ice.scan configuration for scanning leaf nodes (default scans all, which slows application startup), multiple packages separated by ','
 
 * **Code**
 * * Ice.processCxt and Ice.processSingleCxt renamed to processCtx and processSingleCtx
-* * IceErrorHandle.handleError() and BaseNode.errorHandle() add error input parameter Throwable t
+* * IceErrorHandle.handleError() and BaseNode.errorHandle() added error parameter Throwable t
 
 ## v1.0.1
-> Don't use 1.0.0! ! ! The 1.0.0 jar package is incomplete due to network problems when packaging and pushing the central warehouse!
+> Don't use 1.0.0!!! Due to network issues when packaging and pushing to central repository, the 1.0.0 jar package is incomplete!
 
 * **Configuration**
 * * Server 
-* * * ice.rmi.port removes rmi and becomes ice.port. It is recommended to replace the original port number when upgrading to avoid dirty data problems
-* * Client
-* * * remove ice.rmi.mode, ice.rmi.port
-* * * ice.rmi.server removes rmi and becomes ice.server
+* * * ice.rmi.port removed rmi becomes ice.port, recommended to replace original port number when upgrading to avoid dirty data issues
+* * Client 
+* * * Removed ice.rmi.mode, ice.rmi.port
+* * * ice.rmi.server removed rmi becomes ice.server
 
 * **Code**
 * * Ice replaces IceClient, process() becomes asyncProcess()
 
-* **Function**
-* * Running out of spring, ```client = new IceNioClient(app, server).connect()```connect() is a blocking method, which can start a new thread to run, ```new Thread(client::connect). start()```, the run ends ```client.destroy()``` can be destroyed
+* **Features**
+* * Run without Spring, ```client = new IceNioClient(app, server).connect()``` connect() is a blocking method, can start new thread to run, ```new Thread(client::connect).start()```, end with ```client.destroy()```

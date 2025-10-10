@@ -1,30 +1,60 @@
-# Get started
+---
+title: Ice Getting Started - 5-Minute Quick Integration Guide
+description: Complete guide to quickly integrate Ice rule engine. Includes Server deployment, Client integration, database configuration and detailed steps. Supports SpringBoot 2.x/3.x and non-Spring projects.
+keywords: rule engine integration,getting started,installation guide,configuration,SpringBoot rule engine,Ice installation
+head:
+  - - meta
+    - property: og:title
+      content: Ice Getting Started - 5-Minute Quick Integration Guide
+  - - meta
+    - property: og:description
+      content: Complete guide to quickly integrate Ice rule engine with Server deployment, Client integration, and database configuration.
+---
 
->Try to access and use it~
+# Ice Rule Engine Getting Started Guide
 
-## Install dependencies
+> Integrate Ice rule engine in 5 minutes and start your visual business orchestration journey!
 
-Install mysql, **new ice database** to store configuration
+This guide will help you quickly set up the Ice rule engine environment, including both **Ice Server** (rule management platform) and **Ice Client** (business application integration).
+
+## System Requirements
+
+- **JDK**: 1.8+ (JDK 17+ required for SpringBoot 3.x)
+- **MySQL**: 5.7+ or 8.0+
+- **SpringBoot**: 2.x or 3.x (optional)
+
+## Step 1: Install Database
+
+Ice rule engine uses MySQL to store rule configurations. First install MySQL, then **create the ice database**:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS ice Character Set utf8mb4;
 ```
 
-**Remarks:** If the ice-related table cannot be found during startup, you need to manually create the ice-related table structure. The sql address of the table structure:
+**Note:** If Ice rule engine tables are not found during startup, manually create the table structure. SQL file location:
 
 [https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql](https://github.com/zjn-zjn/ice/blob/master/ice-server/src/main/resources/sql/ice.sql)
 
-## Install server
+## Step 2: Install Ice Server (Rule Management Platform)
 
-### Download the installation package(latest v{{ $version }})
+Ice Server is the visual rule configuration and management platform for the rule engine, providing rule orchestration, real-time push, and version management features.
 
-[https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
+### Download Ice Server Package
 
-Unzip the tar package
+Latest version v{{ $version }}
 
+Download: [https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
+
+Extract the package:
+
+```bash
 tar -xzvf ice-server-*.tar.gz
+cd ice-server
+```
 
-### Edit configuration file
+### Configure Ice Server
+
+Edit the `application-prod.yml` configuration file:
 
 ```yml
 server:
@@ -61,17 +91,25 @@ reboot
 
 http://localhost:8121/
 
-### Example backend reference
+### Ice Server Management Console
 
-Deploy for testing & experience address (only app=1 has real deployed client)
+After successful startup, access the Ice rule engine management console at: http://localhost:8121/
 
-[http://eg.waitmoon.com](http://eg.waitmoon.com)
+### Online Demo Environment
 
-## Client access
+Ice rule engine online demo environment (only app=1 has deployed client):
 
-Refer to github ice-test module
+👉 [http://eg.waitmoon.com](http://eg.waitmoon.com)
 
-### Add pom dependency
+## Step 3: SpringBoot Project Integration
+
+Ice Client is the rule engine execution client that integrates into your business application to execute rules.
+
+Refer to the complete example: [ice-test module](https://github.com/zjn-zjn/ice)
+
+### Add Maven Dependencies
+
+Choose the appropriate Ice Starter for your SpringBoot version:
 
 ```xml
 <!-- SpringBoot 3.x -->

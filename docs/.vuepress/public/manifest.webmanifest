@@ -1,20 +1,39 @@
 {
-  "name": "ice",
-  "short_name": "ice",
-  "description": "ice-docs",
-  "start_url": "/index.html",
+  "name": "Ice - 轻量级可视化Java规则引擎",
+  "short_name": "Ice",
+  "description": "Ice是一个轻量级、高性能的Java规则引擎和业务编排框架，提供可视化配置界面，支持SpringBoot 2.x/3.x。",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#fff",
   "theme_color": "#3eaf7c",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["development", "productivity", "utilities"],
   "icons": [
     {
       "src": "/images/icons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/images/icons/android-chrome-384x384.png",
       "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/hero.png",
+      "sizes": "1200x630",
       "type": "image/png"
     }
   ]

@@ -1,7 +1,34 @@
 ---
 home: true
-title: 开源框架学习与分享
+title: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
+description: Ice is a lightweight, high-performance Java rule engine and business orchestration framework with visual configuration interface. Supports SpringBoot 2.x/3.x. Innovative orchestration concept that greatly reduces rule maintenance costs and is widely used in enterprise business scenarios.
+keywords: rule engine,visual rule engine,Java rule engine,business orchestration framework,lightweight rule engine,open source rule engine,SpringBoot rule engine,enterprise rule engine,visual business orchestration,Ice rule engine
 heroImage: /images/hero.svg
+head:
+  - - meta
+    - property: og:title
+      content: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
+  - - meta
+    - property: og:description
+      content: Ice is a lightweight, high-performance Java rule engine and business orchestration framework with visual configuration interface. Supports SpringBoot 2.x/3.x.
+  - - meta
+    - property: og:image
+      content: https://waitmoon.com/images/hero.png
+  - - meta
+    - property: og:url
+      content: https://waitmoon.com/en/
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - name: twitter:title
+      content: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
+  - - meta
+    - name: twitter:description
+      content: Ice is a lightweight, high-performance Java rule engine and business orchestration framework
+  - - meta
+    - name: twitter:image
+      content: https://waitmoon.com/images/hero.png
 actions:
    - text: Get Started
      link: /en/guide/getting-started.html
@@ -13,33 +40,56 @@ actions:
      link: /en/guide/
      type: secondary
 features:
-   - title: Orchestration Ideas
-     details: The new orchestration idea provides greater freedom of configuration while ensuring decoupling and reuse, which greatly reduces the cost of rule maintenance.
-   - title: High performance
-     details: It consumes almost no performance, just focus on the performance of the business itself.
-   - title: Access cost
-     details: Low cost to learn to understand, develop configuration and abstraction.
+   - title: 🎯 Visual Rule Orchestration
+     details: Ice rule engine adopts innovative tree-based orchestration with visual configuration interface. Ensures business decoupling and code reuse while providing maximum flexibility for enterprise rule engine configuration and maintenance.
+   - title: ⚡ Lightweight High Performance
+     details: As a lightweight Java rule engine, Ice offers near-zero performance overhead. Pure in-memory computation with millisecond response time, perfectly supporting high-concurrency business scenarios.
+   - title: 🚀 SpringBoot Quick Integration
+     details: Provides ready-to-use SpringBoot Starter supporting SpringBoot 2.x/3.x. Zero-configuration quick integration, minimal learning curve, start building business orchestration in 5 minutes.
 ---
 
-### Latest version
+## What is Ice?
+
+Ice is a **lightweight visual Java rule engine** and **business orchestration framework** designed to solve complex business rules and flexible orchestration requirements. As an open-source rule engine, Ice provides a complete visual rule configuration platform, supporting enterprise-level rule management and dynamic orchestration.
+
+### Core Features
+
+- ✅ **Visual Rule Engine**: Intuitive web management interface with visual configuration and real-time preview
+- ✅ **High Performance Architecture**: Pure in-memory computation, millisecond response, suitable for high-concurrency scenarios
+- ✅ **Flexible Business Orchestration**: Supports multiple orchestration modes (AND/OR/ALL/NONE) for complex business needs
+- ✅ **Deep SpringBoot Integration**: Provides Starter for quick integration, supports SpringBoot 2.x and 3.x
+- ✅ **Enterprise-Grade Rule Engine**: Production-proven by Agora, Ximalaya, H3C and other enterprises
+- ✅ **Zero Learning Curve**: Simple API design, get started in 5 minutes
+
+### Use Cases
+
+Ice rule engine is widely used in:
+- 🎁 **Marketing Campaign Rules**: Coupons, discounts, group buying and complex marketing rule configuration
+- 💰 **Risk Control Systems**: Credit risk control, anti-fraud, real-time decision engine
+- 🔐 **Permission Control**: Dynamic permission management, role configuration, resource access control
+- 📊 **Business Process Orchestration**: Ticket routing, approval workflow, state machine management
+- 🎯 **Personalized Recommendation**: User profiling, content distribution, intelligent recommendation rules
+
+### Latest Version
+
 > v${version}
 
 ```xml
-<!-- SpringBoot 3.x -->
+<!-- SpringBoot 3.x Rule Engine Starter -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
   <version>${version}</version>
 </dependency>
 
-<!-- SpringBoot 2.x -->
+<!-- SpringBoot 2.x Rule Engine Starter -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
   <version>${version}</version>
 </dependency>
 
-<!-- Non-SpringBoot -->
+<!-- Ice Core for Non-SpringBoot Projects -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>

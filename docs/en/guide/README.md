@@ -1,8 +1,48 @@
-# Introduction
+---
+title: Ice Introduction - Innovative Rule Engine Orchestration
+description: Deep dive into the design philosophy and architecture of Ice rule engine. Achieve business decoupling through tree structure, providing maximum orchestration freedom for simple and flexible rule configuration.
+keywords: rule engine principles,business orchestration,design philosophy,Ice introduction,Java rule engine,visual rule engine
+head:
+  - - meta
+    - property: og:title
+      content: Ice Introduction - Innovative Rule Engine Orchestration
+  - - meta
+    - property: og:description
+      content: Deep dive into the design philosophy and architecture of Ice rule engine. Achieve business decoupling through tree structure.
+---
 
-## Background introduction
+# Ice Rule Engine - Introduction
 
-Is there a lot of if-else written in the business? Are you fed up with these if-else changing frequently? Have a lot of abstractions been done in the business, and new business scenarios are still not used? Have you researched various rule engines and found that it is either too heavy or too troublesome to access or maintain, and finally found that it is better to hard code? Next, I will introduce a brand new open source rule engine-ice, with a simple example, from the lowest level of arrangement ideas, to illustrate the difference between ice and other rule engines; to describe how ice uses a new design idea to fit the solution. The properties of coupling and reuse give you the greatest freedom of arrangement.
+## Why Choose Ice Rule Engine?
+
+In actual business development, do you encounter these pain points:
+
+- 🤔 **Code filled with if-else**: Complex business logic, deeply nested conditional judgments, difficult to maintain
+- 🔄 **Frequently changing rules**: Marketing rules and risk control strategies need constant adjustment, requiring code changes and redeployment
+- 🎯 **Difficult rule engine selection**: Drools too heavy, custom rule engine costs high, hard coding not flexible enough
+- 🧩 **Business decoupling challenges**: Despite extensive abstraction, new business scenarios still cannot be reused, poor extensibility
+
+**Ice Rule Engine** is born to solve these problems! As a **lightweight visual Java rule engine** and **business orchestration framework**, Ice adopts innovative tree-based orchestration design and provides a visual rule configuration platform, making rule management simple and efficient.
+
+## Ice vs Traditional Rule Engines
+
+Compared to traditional rule engines like Drools and Activiti, Ice offers these advantages:
+
+### 1. More Flexible Orchestration
+- **Traditional Rule Engines**: Drools uses When-Then pattern, Activiti uses flowchart pattern, rule modification requires careful consideration
+- **Ice Rule Engine**: Tree-based orchestration structure, independent nodes, rule modifications don't affect each other, true decoupling
+
+### 2. Zero Performance Overhead
+- **Traditional Rule Engines**: Drools needs to compile rules, Activiti needs process engine, higher performance overhead
+- **Ice Rule Engine**: Pure in-memory computation, millisecond response, near-zero performance overhead
+
+### 3. Visual Configuration
+- **Traditional Rule Engines**: Complex rule configuration, high learning curve, requires specialized maintenance
+- **Ice Rule Engine**: Provides visual web management platform, business users can configure rules, reduces maintenance costs
+
+## Ice Rule Engine Design Philosophy
+
+Next, through a simple recharge activity example, we'll explain the core design philosophy of Ice rule engine in depth, helping you understand the essential differences between Ice and other rule engines.
 
 
 ## Design ideas
