@@ -1,7 +1,7 @@
 ---
 title: Ice Introduction - Innovative Rule Engine Orchestration
 description: Deep dive into the design philosophy and architecture of Ice rule engine. Achieve business decoupling through tree structure, providing maximum orchestration freedom for simple and flexible rule configuration.
-keywords: rule engine principles,business orchestration,design philosophy,Ice introduction,Java rule engine,visual rule engine
+keywords: rule engine principles,business orchestration,design philosophy,Ice introduction,decision engine,visual rule engine
 head:
   - - meta
     - property: og:title
@@ -22,7 +22,7 @@ In actual business development, do you encounter these pain points:
 - 🎯 **Difficult rule engine selection**: Drools too heavy, custom rule engine costs high, hard coding not flexible enough
 - 🧩 **Business decoupling challenges**: Despite extensive abstraction, new business scenarios still cannot be reused, poor extensibility
 
-**Ice Rule Engine** is born to solve these problems! As a **lightweight visual Java rule engine** and **business orchestration framework**, Ice adopts innovative tree-based orchestration design and provides a visual rule configuration platform, making rule management simple and efficient.
+**Ice Rule Engine** is born to solve these problems! As a **lightweight visual rule engine** and **business orchestration framework**, Ice adopts innovative tree-based orchestration design and provides a visual rule configuration platform, making rule management simple and efficient.
 
 ## Ice vs Traditional Rule Engines
 

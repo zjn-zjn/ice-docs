@@ -1,16 +1,16 @@
 ---
 home: true
-title: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
-description: Ice is a lightweight, high-performance Java rule engine and business orchestration framework with visual configuration interface. Supports SpringBoot 2.x/3.x. Innovative orchestration concept that greatly reduces rule maintenance costs and is widely used in enterprise business scenarios.
-keywords: rule engine,visual rule engine,Java rule engine,business orchestration framework,lightweight rule engine,open source rule engine,SpringBoot rule engine,enterprise rule engine,visual business orchestration,Ice rule engine
+title: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
+description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework. Features web-based visual configuration with innovative tree-based orchestration that greatly reduces rule maintenance costs.
+keywords: rule engine,visual rule engine,business rule engine,decision engine,lightweight rule engine,open source rule engine,low-code rule configuration,Ice rule engine
 heroImage: /images/hero.svg
 head:
   - - meta
     - property: og:title
-      content: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
+      content: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
   - - meta
     - property: og:description
-      content: Ice is a lightweight, high-performance Java rule engine and business orchestration framework with visual configuration interface. Supports SpringBoot 2.x/3.x.
+      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework with web-based visual configuration.
   - - meta
     - property: og:image
       content: https://waitmoon.com/images/hero.png
@@ -22,10 +22,10 @@ head:
       content: summary_large_image
   - - meta
     - name: twitter:title
-      content: Ice - Lightweight Visual Java Rule Engine | Business Orchestration Framework
+      content: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
   - - meta
     - name: twitter:description
-      content: Ice is a lightweight, high-performance Java rule engine and business orchestration framework
+      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework
   - - meta
     - name: twitter:image
       content: https://waitmoon.com/images/hero.png
@@ -33,75 +33,115 @@ actions:
    - text: Get Started
      link: /en/guide/getting-started.html
      type: primary
-   - text: Orchestration Logic
-     link: https://waitmoon.com/ice-logic/en/
+   - text: Live Demo
+     link: http://eg.waitmoon.com
      type: secondary
    - text: Introduction
      link: /en/guide/
      type: secondary
 features:
    - title: 🎯 Visual Rule Orchestration
-     details: Ice rule engine adopts innovative tree-based orchestration with visual configuration interface. Ensures business decoupling and code reuse while providing maximum flexibility for enterprise rule engine configuration and maintenance.
-   - title: ⚡ Lightweight High Performance
-     details: As a lightweight Java rule engine, Ice offers near-zero performance overhead. Pure in-memory computation with millisecond response time, perfectly supporting high-concurrency business scenarios.
-   - title: 🐳 Docker One-Click Deploy (2.0 New)
-     details: Zero-dependency architecture, no MySQL or ZooKeeper required. Official Docker image available, deploy in seconds with a single command. File system storage supports version control.
+     details: Innovative tree-based orchestration with web visual configuration interface. Ensures business decoupling and code reuse while providing maximum flexibility for rule configuration.
+   - title: ⚡ Lightweight & High Performance
+     details: Pure in-memory computation with millisecond response time. Near-zero performance overhead, perfectly supporting high-concurrency business scenarios.
+   - title: 🐳 Zero-Dependency Architecture
+     details: No MySQL, ZooKeeper, or other external dependencies required. Docker one-click deployment in 5 seconds. JSON file storage with version control support.
 ---
 
 ## What is Ice?
 
-Ice is a **lightweight visual Java rule engine** and **business orchestration framework** designed to solve complex business rules and flexible orchestration requirements. As an open-source rule engine, Ice provides a complete visual rule configuration platform, supporting enterprise-level rule management and dynamic orchestration.
+Ice is a **lightweight visual rule engine** and **business orchestration framework** designed to solve complex business rules and flexible orchestration requirements.
 
-### Core Features
+<div class="architecture-section">
 
-- ✅ **Visual Rule Engine**: Intuitive web management interface with visual configuration and real-time preview
-- ✅ **High Performance Architecture**: Pure in-memory computation, millisecond response, suitable for high-concurrency scenarios
-- ✅ **Flexible Business Orchestration**: Supports multiple orchestration modes (AND/OR/ALL/NONE) for complex business needs
-- ✅ **Deep SpringBoot Integration**: Provides Starter for quick integration, supports SpringBoot 2.x and 3.x
-- ✅ **Enterprise-Grade Rule Engine**: Production-proven by Agora, Ximalaya, H3C and other enterprises
-- ✅ **Zero Learning Curve**: Simple API design, get started in 5 minutes
-- ✅ **Zero Database Dependency** (2.0 New): Uses file system storage, no MySQL required
-- ✅ **Native Docker Support** (2.0 New): One-click deployment, ready to use
+### 📐 Architecture Overview
 
-### Use Cases
+Ice uses a **Server + Client + Shared Storage** architecture:
 
-Ice rule engine is widely used in:
-- 🎁 **Marketing Campaign Rules**: Coupons, discounts, group buying and complex marketing rule configuration
-- 💰 **Risk Control Systems**: Credit risk control, anti-fraud, real-time decision engine
-- 🔐 **Permission Control**: Dynamic permission management, role configuration, resource access control
-- 📊 **Business Process Orchestration**: Ticket routing, approval workflow, state machine management
-- 🎯 **Personalized Recommendation**: User profiling, content distribution, intelligent recommendation rules
-
-### 🚀 Quick Deploy (2.0 New)
-
-**Docker One-Click Start:**
-
-```bash
-docker run -d --name ice-server -p 8121:8121 -v ./ice-data:/app/ice-data waitmoon/ice-server:2.0.0
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   Shared Storage (ice-data/)                 │
+│       JSON file storage, supports NFS/cloud drive sharing    │
+└─────────────────────────────────────────────────────────────┘
+           ▲ Write config                    ▲ Read config
+           │                                 │
+┌──────────┴──────────┐          ┌──────────┴──────────┐
+│     Ice Server      │          │     Ice Client      │
+│  (Management UI)    │          │  (Execution Engine) │
+│                     │          │                     │
+│ • Web visual config │          │ • Integrates with   │
+│ • Version management│          │   your application  │
+│ • Hot-reload publish│          │ • Polls for updates │
+└─────────────────────┘          └─────────────────────┘
 ```
 
-Visit http://localhost:8121 after startup!
+- **Ice Server**: Visual rule configuration platform for orchestration and version management
+- **Ice Client**: Rule execution SDK integrated into your business applications
+- **Shared Storage**: Server and Client sync configurations through shared file directory
 
-### Latest Version
+</div>
 
-> v${version}
+## 🚀 Get Started in 3 Steps
+
+### Step 1: Deploy Ice Server
+
+<CodeGroup>
+  <CodeGroupItem title="Docker" active>
+
+```bash
+docker run -d --name ice-server -p 8121:8121 \
+  -v ./ice-data:/app/ice-data \
+  waitmoon/ice-server:latest
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Manual">
+
+```bash
+# Download from: https://waitmoon.com/downloads/
+# Extract and start
+tar -xzvf ice-server-*.tar.gz && cd ice-server
+sh ice.sh start
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+Visit http://localhost:8121 to access the visual configuration interface.
+
+### Step 2: Integrate Ice Client SDK
+
+Add dependency to your business application (Java SDK available now, more languages coming soon):
+
+<CodeGroup>
+  <CodeGroupItem title="SpringBoot 3.x" active>
 
 ```xml
-<!-- SpringBoot 3.x Rule Engine Starter -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
   <version>${version}</version>
 </dependency>
+```
 
-<!-- SpringBoot 2.x Rule Engine Starter -->
+  </CodeGroupItem>
+
+  <CodeGroupItem title="SpringBoot 2.x">
+
+```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
   <version>${version}</version>
 </dependency>
+```
 
-<!-- Ice Core for Non-SpringBoot Projects -->
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Non-SpringBoot">
+
+```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
@@ -109,9 +149,107 @@ Visit http://localhost:8121 after startup!
 </dependency>
 ```
 
+  </CodeGroupItem>
+</CodeGroup>
 
-### User list
-> Who is using ice?
+Configure shared storage path (same as Server):
+
+```yaml
+ice:
+  app: 1
+  storage:
+    path: ./ice-data
+```
+
+> 💡 **Key Point**: Client must share the same storage directory (`ice-data`) with Server
+
+### Step 3: Configure Rules and Execute
+
+1. Configure business rules in Server's visual interface
+2. Publish rules, Client auto hot-reloads
+3. Call rule execution in your business code
+
+```java
+// Execute rules
+IcePack pack = new IcePack();
+pack.setIceId(1L);  // Rule ID
+pack.setRoam(new IceRoam().put("uid", 12345));
+Ice.syncProcess(pack);
+```
+
+👉 [View Complete Getting Started Guide](/en/guide/getting-started.html)
+
+## Use Cases
+
+<div class="use-cases">
+
+| Scenario | Description |
+|----------|-------------|
+| 🎁 **Marketing Campaigns** | Flexible configuration for coupons, discounts, group buying rules |
+| 💰 **Risk Control** | Credit risk assessment, anti-fraud, real-time decision engine |
+| 🔐 **Access Control** | Dynamic permission management, role configuration |
+| 📊 **Process Orchestration** | Ticket routing, approval workflows, state machine management |
+
+</div>
+
+## Why Choose Ice?
+
+<div class="comparison">
+
+| Feature | Ice | Traditional Rule Engines |
+|---------|-----|--------------------------|
+| **Learning Curve** | 5 minutes to start | Need to learn DSL |
+| **Deployment** | Docker one-click | Database/middleware required |
+| **Configuration** | Web visual UI | Text/code |
+| **Performance** | In-memory, milliseconds | Compilation overhead |
+| **Rule Changes** | Hot-reload, seconds | Restart/redeploy needed |
+
+</div>
+
+## Latest Version
+
+> v${version}
+
+<CodeGroup>
+  <CodeGroupItem title="Maven" active>
+
+```xml
+<!-- ice-core package -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="SpringBoot 3.x">
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="SpringBoot 2.x">
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Who's Using Ice?
 
 <div class="row">
 <span class="link">
@@ -172,24 +310,8 @@ Visit http://localhost:8121 after startup!
     </a>
 </span>
 </div>
-<br><br>
 
-<!-- ### test
-<CodeGroup>
-   <CodeGroupItem title="1" active>
-
-```bash
-````
-
-   </CodeGroupItem>
-
-   <CodeGroupItem title="2">
-
-```bash
-
-````
-   </CodeGroupItem>
-</CodeGroup> -->
+<br>
 
 <div class="footer" style="font-size:12px">
   <p>
@@ -198,6 +320,21 @@ Visit http://localhost:8121 after startup!
 </div>
 
 <style>
+  .architecture-section {
+    background: var(--c-bg-lighter);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  .architecture-section pre {
+    background: var(--c-bg);
+  }
+  .use-cases table {
+    width: 100%;
+  }
+  .comparison table {
+    width: 100%;
+  }
   .link {
     width: 8.4em;
     text-align: left;
@@ -207,36 +344,8 @@ Visit http://localhost:8121 after startup!
     max-width:180px;
     margin: 14px;
   }
-  .page-wwads{
-    width:100%!important;
-    min-height: 0;
-    margin: 0;
-  }
-  .page-wwads .wwads-img img{
-    width:80px!important;
-  }
-  .page-wwads .wwads-poweredby{
-    width: 40px;
-    position: absolute;
-    right: 25px;
-    bottom: 3px;
-  }
-  .wwads-content .wwads-text, .page-wwads .wwads-text{
-    height: 100%;
-    padding-top: 5px;
-    display: block;
-  }
   .row {
     display: flex;
     flex-direction: row;
   }
-  .col {
-    display: flex;
-    flex-direction: column;
-  }
-  .introContent {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-
 </style>

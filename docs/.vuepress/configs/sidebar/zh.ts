@@ -5,9 +5,11 @@ export const sidebarZh: SidebarConfig = {
     {
       text: '指南',
       children: [
-        '/guide/getting-started.html',
-        '/guide/detail.html',
         '/guide/README.md',
+        '/guide/architecture.html',
+        '/guide/getting-started.html',
+        '/guide/client-integration.html',
+        '/guide/detail.html',
         '/guide/qa.html'
       ],
     },

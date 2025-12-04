@@ -1,5 +1,5 @@
 # robots.txt for waitmoon.com
-# Ice - Java Rules Engine Documentation
+# Ice - Lightweight Visual Rule Engine Documentation
 
 User-agent: *
 Allow: /

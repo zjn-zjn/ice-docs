@@ -5,9 +5,11 @@ export const sidebarEn: SidebarConfig = {
     {
       text: 'Guide',
       children: [
-        '/en/guide/getting-started.html',
-        '/en/guide/detail.html',
         '/en/guide/README.md',
+        '/en/guide/architecture.html',
+        '/en/guide/getting-started.html',
+        '/en/guide/client-integration.html',
+        '/en/guide/detail.html',
         '/en/guide/qa.html'
       ],
     },
