@@ -19,9 +19,6 @@ head:
 
 Ice 2.0 adopts a minimalist architecture design with **zero external dependencies**, using file system for configuration storage and synchronization.
 
-![Ice Rule Engine Architecture](/images/advanced/architecture-dark.png#dark)
-![Ice Rule Engine Architecture](/images/advanced/architecture-light.png#light)
-
 ### Architecture Features
 
 - 🚫 **No Database Dependency**: No MySQL required, configurations stored as JSON files
