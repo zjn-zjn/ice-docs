@@ -48,10 +48,6 @@ features:
     details: 无需 MySQL、ZooKeeper 等外部依赖。Docker 一键部署，5 秒完成。配置以 JSON 文件存储，支持版本控制。
 ---
 
-## Ice 是什么？
-
-Ice 是一个**轻量级可视化规则引擎**和**业务编排框架**，专为解决复杂业务规则和灵活编排需求而设计。
-
 <div class="architecture-section">
 
 ### 📐 架构概览
@@ -86,7 +82,7 @@ Ice 采用 **Server + Client + 共享存储** 的架构模式：
 ### Step 1：部署 Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="Docker 部署" active>
+  <CodeGroupItem title="🐳 Docker 部署" active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -96,7 +92,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="手动部署">
+  <CodeGroupItem title="📦 手动部署">
 
 ```bash
 # 从官网下载：https://waitmoon.com/downloads/
@@ -206,49 +202,6 @@ Ice.syncProcess(pack);
 
 </div>
 
-## 最新版本
-
-> v${version}
-
-<CodeGroup>
-  <CodeGroupItem title="Maven" active>
-
-```xml
-<!-- ice-core 核心包 -->
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-core</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="SpringBoot 3.x">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="SpringBoot 2.x">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-</CodeGroup>
-
 ## 用户列表
 
 > 谁在使用 Ice？
@@ -349,5 +302,28 @@ Ice.syncProcess(pack);
   .row {
     display: flex;
     flex-direction: row;
+  }
+  /* CodeGroup 按钮样式优化 */
+  .code-group__nav {
+    padding: 8px 12px !important;
+    gap: 12px !important;
+  }
+  .code-group__nav button {
+    padding: 8px 16px !important;
+    margin-right: 8px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--c-border) !important;
+    background: var(--c-bg) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+  .code-group__nav button:hover {
+    border-color: var(--c-brand) !important;
+    color: var(--c-brand) !important;
+  }
+  .code-group__nav button.active {
+    background: var(--c-brand) !important;
+    color: white !important;
+    border-color: var(--c-brand) !important;
   }
 </style>

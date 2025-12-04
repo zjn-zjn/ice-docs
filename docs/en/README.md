@@ -48,10 +48,6 @@ features:
      details: No MySQL, ZooKeeper, or other external dependencies required. Docker one-click deployment in 5 seconds. JSON file storage with version control support.
 ---
 
-## What is Ice?
-
-Ice is a **lightweight visual rule engine** and **business orchestration framework** designed to solve complex business rules and flexible orchestration requirements.
-
 <div class="architecture-section">
 
 ### 📐 Architecture Overview
@@ -86,7 +82,7 @@ Ice uses a **Server + Client + Shared Storage** architecture:
 ### Step 1: Deploy Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="Docker" active>
+  <CodeGroupItem title="🐳 Docker" active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -96,7 +92,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="Manual">
+  <CodeGroupItem title="📦 Manual">
 
 ```bash
 # Download from: https://waitmoon.com/downloads/
@@ -205,49 +201,6 @@ Ice.syncProcess(pack);
 | **Rule Changes** | Hot-reload, seconds | Restart/redeploy needed |
 
 </div>
-
-## Latest Version
-
-> v${version}
-
-<CodeGroup>
-  <CodeGroupItem title="Maven" active>
-
-```xml
-<!-- ice-core package -->
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-core</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="SpringBoot 3.x">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="SpringBoot 2.x">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-</CodeGroup>
 
 ## Who's Using Ice?
 
