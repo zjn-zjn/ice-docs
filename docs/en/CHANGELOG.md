@@ -15,6 +15,74 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [2.0.0](https://github.com/zjn-zjn/ice/compare/1.5.0...2.0.0) (2025-12) 🚀
+
+**Ice Rule Engine 2.0 Major Architecture Upgrade - Zero Dependencies, Containerized, Lighter**
+
+### 🎯 Core Changes
+
+Version 2.0.0 brings a revolutionary architecture overhaul to Ice, removing dependencies on MySQL database and NIO communication in favor of a fully file-system-based storage solution with native Docker containerization support.
+
+#### 💾 Storage Architecture Revolution
+* ✨ **File System Storage**: Removed MySQL dependency, using local file system to store all configuration data
+* 📁 **JSON File Format**: All configurations stored as JSON files for easy version control and manual review
+* 🔄 **Incremental Version Updates**: Support for incremental configuration updates, clients poll version files for latest configurations
+* 🗂️ **Clear Directory Structure**:
+  - `apps/` - Application configurations
+  - `{app}/bases/` - Base rule configurations
+  - `{app}/confs/` - Conf node configurations
+  - `{app}/versions/` - Version incremental update files
+  - `clients/` - Client registration information
+
+#### 🔗 Communication Architecture Simplification
+* 🚫 **Removed NIO Communication**: No longer requires Server-Client NIO long connections
+* 🚫 **Removed ZooKeeper HA**: No longer depends on ZooKeeper for high availability
+* 📡 **File Polling Sync**: Clients poll file system for configuration updates
+* 💓 **Heartbeat Mechanism**: Clients periodically write heartbeat files, Server can detect client status
+
+#### 🐳 Native Docker Support
+* 📦 **Official Docker Image**: `waitmoon/ice-server:2.0.0`
+* 🏗️ **Multi-Architecture Support**: Supports linux/amd64 and linux/arm64
+* 📝 **Docker Compose**: Provides ready-to-use docker-compose.yml
+* 🔧 **Environment Variable Configuration**: Supports flexible configuration via environment variables
+* ♻️ **CI/CD Integration**: GitHub Actions auto-build and publish images
+
+### 📋 Detailed Changes
+
+#### Configuration Changes
+* Removed `spring.datasource` database configuration
+* Removed `ice.port` NIO port configuration
+* Removed `ice.ha` high availability configuration
+* Added `ice.storage.path` file storage path configuration
+* Added `ice.client-timeout` client timeout configuration
+* Added `ice.version-retention` version file retention count configuration
+* Client added `ice.poll-interval` polling interval configuration
+* Client added `ice.heartbeat-interval` heartbeat interval configuration
+
+### ⚠️ Upgrade Notes
+
+1. **Data Migration**: Upgrading from 1.x requires manually exporting MySQL configuration data to JSON files
+2. **Configuration Update**: Need to update application.yml, remove database config, add file storage config
+3. **Dependency Changes**: Can remove MySQL driver and MyBatis related dependencies
+4. **Deployment Method**: Docker deployment recommended for simplified operations
+
+### 🚀 Quick Start
+
+**Docker One-Click Deployment:**
+```bash
+docker run -d --name ice-server \
+  -p 8121:8121 \
+  -v ./ice-data:/app/ice-data \
+  waitmoon/ice-server:2.0.0
+```
+
+**Using Docker Compose:**
+```bash
+docker-compose up -d
+```
+
+---
+
 ## [1.5.0](https://github.com/zjn-zjn/ice/compare/1.3.1...1.5.0) (2025-02-20) 🎉
 
 Major Ice rule engine version update

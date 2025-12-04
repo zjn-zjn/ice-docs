@@ -60,6 +60,8 @@ Ice is a **lightweight visual Java rule engine** and **business orchestration fr
 - ✅ **Deep SpringBoot Integration**: Provides Starter for quick integration, supports SpringBoot 2.x and 3.x
 - ✅ **Enterprise-Grade Rule Engine**: Production-proven by Agora, Ximalaya, H3C and other enterprises
 - ✅ **Zero Learning Curve**: Simple API design, get started in 5 minutes
+- ✅ **Zero Database Dependency** (2.0 New): Uses file system storage, no MySQL required
+- ✅ **Native Docker Support** (2.0 New): One-click deployment, ready to use
 
 ### Use Cases
 

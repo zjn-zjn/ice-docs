@@ -1,6 +1,6 @@
 ---
 title: Ice 详细说明 - 完整的功能和配置文档
-description: Ice规则引擎的详细功能说明文档，包括节点类型、关系配置、错误处理、高可用配置等高级特性的完整介绍。
+description: Ice规则引擎的详细功能说明文档，包括节点类型、关系配置、错误处理、存储架构等高级特性的完整介绍。
 keywords: 规则引擎文档,功能说明,配置详解,高级特性,节点类型,Ice配置
 head:
   - - meta
@@ -8,7 +8,7 @@ head:
       content: Ice 详细说明 - 完整的功能和配置文档
   - - meta
     - property: og:description
-      content: Ice规则引擎的详细功能说明文档，包括节点类型、关系配置、错误处理、高可用配置等高级特性。
+      content: Ice规则引擎的详细功能说明文档，包括节点类型、关系配置、错误处理、存储架构等高级特性。
 ---
 
 # Ice 规则引擎详细指南
@@ -41,6 +41,38 @@ Ice 规则引擎提供三种叶子节点类型，对应不同的业务场景：
 - **返回值**：无返回值（none）
 - **示例**：用户信息查询、埋点上报、缓存预热
 
+### 节点注解
+
+Ice 2.0 提供了节点注解来丰富节点的元信息：
+
+```java
+@IceNode(
+    name = "金额发放",
+    desc = "向用户发放指定金额",
+    order = 10  // 排序优先级，值越小越靠前
+)
+public class AmountResult extends BaseLeafRoamResult {
+    // ...
+}
+```
+
+#### 字段注解
+
+```java
+@Data
+public class AmountResult extends BaseLeafRoamResult {
+
+    @IceField(name = "用户Key", desc = "roam中获取用户ID的key")
+    private String key;
+
+    @IceField(name = "发放金额", desc = "发放的金额数值", type = "double")
+    private double value;
+
+    @IceIgnore  // 忽略此字段，不在配置界面展示
+    private String internalField;
+}
+```
+
 ### 节点基类选择
 
 Ice 规则引擎提供三种基类供开发者继承，根据入参类型选择：
@@ -50,6 +82,7 @@ Ice 规则引擎提供三种基类供开发者继承，根据入参类型选择�
 - **BaseLeafRoam\*** - 使用 IceRoam 作为方法入参，需要实现 doRoam* 方法
 
 **例：**
+
 ```java
 /**
  * 发放余额节点
@@ -132,7 +165,7 @@ roam.getUnion("@e");//"a"
 
 ### app
 
-app用于区分不同的应用，如app=1的ice-test，在ice-test启动时，会根据配置去ice-server拉取app为1的所有配置并初始化
+app用于区分不同的应用，如app=1的ice-test，在ice-test启动时，会根据配置从文件系统拉取app为1的所有配置并初始化
 
 ### 新增ice
 
@@ -174,6 +207,123 @@ app用于区分不同的应用，如app=1的ice-test，在ice-test启动时，�
 - **实例选择**
 - - **Server** server配置，目前仅Server模式下支持编辑操作
 - - **Client:host/app/uniqueId** 对应client中真实的配置展现，仅支持查看操作
+
+## 存储架构（2.0新特性）
+
+Ice 2.0 采用文件系统存储，完全移除了对MySQL的依赖。
+
+### 目录结构
+
+```
+ice-data/
+├── apps/                    # 应用配置
+│   ├── _id.txt             # 应用ID生成器
+│   └── {app}.json          # 应用配置文件
+├── clients/                 # 客户端信息
+│   └── {app}/              # 按应用分组
+│       ├── {address}.json  # 客户端心跳文件
+│       └── _latest.json    # 最新客户端信息（O(1)读取）
+└── {app}/                   # 应用规则配置
+    ├── version.txt         # 当前版本号
+    ├── _base_id.txt        # Base ID生成器
+    ├── _conf_id.txt        # Conf ID生成器
+    ├── _push_id.txt        # Push ID生成器
+    ├── bases/              # Base规则配置
+    │   └── {baseId}.json
+    ├── confs/              # Conf节点配置
+    │   └── {confId}.json
+    ├── updates/            # 待发布的变更
+    │   └── {iceId}/
+    │       └── {confId}.json
+    ├── versions/           # 版本增量更新
+    │   └── {version}_upd.json
+    └── history/            # 发布历史
+        └── {pushId}.json
+```
+
+### 版本同步机制
+
+1. **Server 发布配置**：
+   - 更新 `bases/` 和 `confs/` 目录下的配置文件
+   - 生成增量更新文件写入 `versions/{version}_upd.json`
+   - 更新 `version.txt` 版本号
+
+2. **Client 轮询更新**：
+   - 定期检查 `version.txt` 版本号
+   - 发现新版本后读取增量更新文件
+   - 如增量文件缺失则进行全量加载
+
+3. **心跳机制**：
+   - Client 定期写入心跳文件到 `clients/{app}/`
+   - Server 通过心跳文件判断 Client 是否在线
+   - 超时未更新的 Client 被标记为离线
+
+### 配置文件格式
+
+所有配置以 JSON 格式存储，便于版本控制和人工审查。
+
+**Base 配置示例：**
+
+```json
+{
+  "id": 1,
+  "app": 1,
+  "name": "用户等级活动",
+  "scenes": "user_login,user_upgrade",
+  "confId": 1,
+  "status": 1,
+  "debug": 0,
+  "createAt": 1701234567890,
+  "updateAt": 1701234567890
+}
+```
+
+**Conf 配置示例：**
+
+```json
+{
+  "id": 1,
+  "app": 1,
+  "confId": 1,
+  "type": 5,
+  "confName": "com.ice.test.flow.LevelFlow",
+  "confField": "{\"level\": 5}",
+  "sonIds": "2,3",
+  "status": 1,
+  "createAt": 1701234567890,
+  "updateAt": 1701234567890
+}
+```
+
+## 多实例部署
+
+### 共享存储方案
+
+多个 Server/Client 实例需要共享同一个存储目录：
+
+```yaml
+# docker-compose.yml 示例
+services:
+  ice-server-1:
+    image: waitmoon/ice-server:2.0.0
+    ports:
+      - "8121:8121"
+    volumes:
+      - /shared/ice-data:/app/ice-data  # 共享存储
+
+  ice-server-2:
+    image: waitmoon/ice-server:2.0.0
+    ports:
+      - "8122:8121"
+    volumes:
+      - /shared/ice-data:/app/ice-data  # 同一共享存储
+```
+
+### 推荐共享存储方案
+
+- **NFS**：网络文件系统，适合内网环境
+- **云盘**：阿里云NAS、AWS EFS等云存储服务
+- **分布式文件系统**：GlusterFS、CephFS等
 
 ## 与表达式引擎结合
 
@@ -217,6 +367,52 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
 节点提供了iceErrorStateEnum配置，如果该配置非空，它的优先级最高，将首先使用配置作为返回值。配置处理只会影响返回值，依然会执行叶子节点重写的errorHandle方法/统一的handle处理方法。
 
+## Server 配置详解
 
+Ice Server 的完整配置项：
 
+```yml
+server:
+  port: 8121
 
+ice:
+  storage:
+    # 文件存储路径
+    path: ./ice-data
+  
+  # 客户端失活超时时间(秒)
+  # 超过此时间未更新心跳的客户端将被标记为离线
+  client-timeout: 60
+  
+  # 版本文件保留数量
+  # 超过此数量的旧版本增量文件将被清理
+  version-retention: 1000
+```
+
+## Client 配置详解
+
+Ice Client 的完整配置项：
+
+```yml
+ice:
+  # 应用ID（必填）
+  app: 1
+  
+  storage:
+    # 文件存储路径（必填，需与Server共享）
+    path: ./ice-data
+  
+  # 叶子节点扫描包路径
+  # 多个包用逗号分隔，不配置则扫描全部（较慢）
+  scan: com.ice.test
+  
+  # 版本轮询间隔(秒)，默认5秒
+  poll-interval: 5
+  
+  # 心跳更新间隔(秒)，默认10秒
+  heartbeat-interval: 10
+  
+  pool:
+    # 线程池并行度，默认-1使用ForkJoinPool默认配置
+    parallelism: -1
+```
