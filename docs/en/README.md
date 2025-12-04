@@ -44,8 +44,8 @@ features:
      details: Ice rule engine adopts innovative tree-based orchestration with visual configuration interface. Ensures business decoupling and code reuse while providing maximum flexibility for enterprise rule engine configuration and maintenance.
    - title: ⚡ Lightweight High Performance
      details: As a lightweight Java rule engine, Ice offers near-zero performance overhead. Pure in-memory computation with millisecond response time, perfectly supporting high-concurrency business scenarios.
-   - title: 🚀 SpringBoot Quick Integration
-     details: Provides ready-to-use SpringBoot Starter supporting SpringBoot 2.x/3.x. Zero-configuration quick integration, minimal learning curve, start building business orchestration in 5 minutes.
+   - title: 🐳 Docker One-Click Deploy (2.0 New)
+     details: Zero-dependency architecture, no MySQL or ZooKeeper required. Official Docker image available, deploy in seconds with a single command. File system storage supports version control.
 ---
 
 ## What is Ice?
@@ -71,6 +71,16 @@ Ice rule engine is widely used in:
 - 🔐 **Permission Control**: Dynamic permission management, role configuration, resource access control
 - 📊 **Business Process Orchestration**: Ticket routing, approval workflow, state machine management
 - 🎯 **Personalized Recommendation**: User profiling, content distribution, intelligent recommendation rules
+
+### 🚀 Quick Deploy (2.0 New)
+
+**Docker One-Click Start:**
+
+```bash
+docker run -d --name ice-server -p 8121:8121 -v ./ice-data:/app/ice-data waitmoon/ice-server:2.0.0
+```
+
+Visit http://localhost:8121 after startup!
 
 ### Latest Version
 

@@ -37,3 +37,24 @@ html.dark {
   --c-brand: #3aa675;
   --c-brand-light: #349469;
 }
+
+// Dark/Light mode image switching
+// Light mode: show light images, hide dark images
+img[src$="#light"] {
+  display: inline-block;
+}
+
+img[src$="#dark"] {
+  display: none;
+}
+
+// Dark mode: show dark images, hide light images
+html.dark {
+  img[src$="#light"] {
+    display: none;
+  }
+
+  img[src$="#dark"] {
+    display: inline-block;
+  }
+}
