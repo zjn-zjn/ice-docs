@@ -48,41 +48,12 @@ features:
      details: No MySQL, ZooKeeper, or other external dependencies required. Docker one-click deployment in 5 seconds. JSON file storage with version control support.
 ---
 
-<div class="architecture-section">
-
-### 📐 Architecture Overview
-
-Ice uses a **Server + Client + Shared Storage** architecture:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   Shared Storage (ice-data/)                 │
-│       JSON file storage, supports NFS/cloud drive sharing    │
-└─────────────────────────────────────────────────────────────┘
-           ▲ Write config                    ▲ Read config
-           │                                 │
-┌──────────┴──────────┐          ┌──────────┴──────────┐
-│     Ice Server      │          │     Ice Client      │
-│  (Management UI)    │          │  (Execution Engine) │
-│                     │          │                     │
-│ • Web visual config │          │ • Integrates with   │
-│ • Version management│          │   your application  │
-│ • Hot-reload publish│          │ • Polls for updates │
-└─────────────────────┘          └─────────────────────┘
-```
-
-- **Ice Server**: Visual rule configuration platform for orchestration and version management
-- **Ice Client**: Rule execution SDK integrated into your business applications
-- **Shared Storage**: Server and Client sync configurations through shared file directory
-
-</div>
-
 ## 🚀 Get Started in 3 Steps
 
 ### Step 1: Deploy Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="🐳 Docker" active>
+  <CodeGroupItem title="🐳 Docker " active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -92,7 +63,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="📦 Manual">
+  <CodeGroupItem title=" 📦 Manual">
 
 ```bash
 # Download from: https://waitmoon.com/downloads/
@@ -111,7 +82,7 @@ Visit http://localhost:8121 to access the visual configuration interface.
 Add dependency to your business application (Java SDK available now, more languages coming soon):
 
 <CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x" active>
+  <CodeGroupItem title="SpringBoot 3.x " active>
 
 ```xml
 <dependency>
@@ -123,7 +94,7 @@ Add dependency to your business application (Java SDK available now, more langua
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="SpringBoot 2.x">
+  <CodeGroupItem title=" SpringBoot 2.x ">
 
 ```xml
 <dependency>
@@ -135,7 +106,7 @@ Add dependency to your business application (Java SDK available now, more langua
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="Non-SpringBoot">
+  <CodeGroupItem title=" Non-SpringBoot">
 
 ```xml
 <dependency>
@@ -273,15 +244,6 @@ Ice.syncProcess(pack);
 </div>
 
 <style>
-  .architecture-section {
-    background: var(--c-bg-lighter);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-  }
-  .architecture-section pre {
-    background: var(--c-bg);
-  }
   .use-cases table {
     width: 100%;
   }

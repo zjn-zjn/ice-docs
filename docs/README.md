@@ -48,41 +48,12 @@ features:
     details: 无需 MySQL、ZooKeeper 等外部依赖。Docker 一键部署，5 秒完成。配置以 JSON 文件存储，支持版本控制。
 ---
 
-<div class="architecture-section">
-
-### 📐 架构概览
-
-Ice 采用 **Server + Client + 共享存储** 的架构模式：
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      共享存储 (ice-data/)                    │
-│         JSON 文件存储，可使用 NFS/云盘实现分布式共享           │
-└─────────────────────────────────────────────────────────────┘
-           ▲ 写入配置                        ▲ 读取配置
-           │                                 │
-┌──────────┴──────────┐          ┌──────────┴──────────┐
-│     Ice Server      │          │     Ice Client      │
-│   (规则管理平台)     │          │   (规则执行引擎)     │
-│                     │          │                     │
-│ • Web 可视化配置     │          │ • 集成到业务应用     │
-│ • 规则版本管理       │          │ • 轮询加载配置       │
-│ • 发布热更新         │          │ • 内存执行规则       │
-└─────────────────────┘          └─────────────────────┘
-```
-
-- **Ice Server**：可视化规则配置管理平台，负责规则编排、版本管理
-- **Ice Client**：规则执行 SDK，集成到您的业务应用中执行规则
-- **共享存储**：Server 和 Client 通过共享文件目录实现配置同步
-
-</div>
-
 ## 🚀 三步快速开始
 
 ### Step 1：部署 Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="🐳 Docker 部署" active>
+  <CodeGroupItem title="🐳 Docker 部署 " active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -92,7 +63,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="📦 手动部署">
+  <CodeGroupItem title=" 📦 手动部署">
 
 ```bash
 # 从官网下载：https://waitmoon.com/downloads/
@@ -111,7 +82,7 @@ sh ice.sh start
 在您的业务应用中添加依赖（当前提供 Java SDK，更多语言即将支持）：
 
 <CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x" active>
+  <CodeGroupItem title="SpringBoot 3.x " active>
 
 ```xml
 <dependency>
@@ -123,7 +94,7 @@ sh ice.sh start
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="SpringBoot 2.x">
+  <CodeGroupItem title=" SpringBoot 2.x ">
 
 ```xml
 <dependency>
@@ -135,7 +106,7 @@ sh ice.sh start
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="非 SpringBoot">
+  <CodeGroupItem title=" 非 SpringBoot">
 
 ```xml
 <dependency>
@@ -275,15 +246,6 @@ Ice.syncProcess(pack);
 </div>
 
 <style>
-  .architecture-section {
-    background: var(--c-bg-lighter);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-  }
-  .architecture-section pre {
-    background: var(--c-bg);
-  }
   .use-cases table {
     width: 100%;
   }
@@ -302,28 +264,5 @@ Ice.syncProcess(pack);
   .row {
     display: flex;
     flex-direction: row;
-  }
-  /* CodeGroup 按钮样式优化 */
-  .code-group__nav {
-    padding: 8px 12px !important;
-    gap: 12px !important;
-  }
-  .code-group__nav button {
-    padding: 8px 16px !important;
-    margin-right: 8px !important;
-    border-radius: 6px !important;
-    border: 1px solid var(--c-border) !important;
-    background: var(--c-bg) !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-  }
-  .code-group__nav button:hover {
-    border-color: var(--c-brand) !important;
-    color: var(--c-brand) !important;
-  }
-  .code-group__nav button.active {
-    background: var(--c-brand) !important;
-    color: white !important;
-    border-color: var(--c-brand) !important;
   }
 </style>
