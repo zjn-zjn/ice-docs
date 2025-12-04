@@ -53,7 +53,7 @@ features:
 ### Step 1: Deploy Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="🐳 Docker " active>
+  <CodeGroupItem title="🐳 Docker  " active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -63,7 +63,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" 📦 Manual">
+  <CodeGroupItem title="  📦 Manual">
 
 ```bash
 # Download from: https://waitmoon.com/downloads/
@@ -82,7 +82,7 @@ Visit http://localhost:8121 to access the visual configuration interface.
 Add dependency to your business application (Java SDK available now, more languages coming soon):
 
 <CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x " active>
+  <CodeGroupItem title="SpringBoot 3.x  " active>
 
 ```xml
 <dependency>
@@ -94,7 +94,7 @@ Add dependency to your business application (Java SDK available now, more langua
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" SpringBoot 2.x ">
+  <CodeGroupItem title="  SpringBoot 2.x  ">
 
 ```xml
 <dependency>
@@ -106,7 +106,7 @@ Add dependency to your business application (Java SDK available now, more langua
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" Non-SpringBoot">
+  <CodeGroupItem title="  Non-SpringBoot">
 
 ```xml
 <dependency>

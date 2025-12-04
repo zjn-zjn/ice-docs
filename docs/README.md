@@ -53,7 +53,7 @@ features:
 ### Step 1：部署 Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="🐳 Docker 部署 " active>
+  <CodeGroupItem title="🐳 Docker 部署  " active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -63,7 +63,7 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" 📦 手动部署">
+  <CodeGroupItem title="  📦 手动部署">
 
 ```bash
 # 从官网下载：https://waitmoon.com/downloads/
@@ -82,7 +82,7 @@ sh ice.sh start
 在您的业务应用中添加依赖（当前提供 Java SDK，更多语言即将支持）：
 
 <CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x " active>
+  <CodeGroupItem title="SpringBoot 3.x  " active>
 
 ```xml
 <dependency>
@@ -94,7 +94,7 @@ sh ice.sh start
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" SpringBoot 2.x ">
+  <CodeGroupItem title="  SpringBoot 2.x  ">
 
 ```xml
 <dependency>
@@ -106,7 +106,7 @@ sh ice.sh start
 
   </CodeGroupItem>
 
-  <CodeGroupItem title=" 非 SpringBoot">
+  <CodeGroupItem title="  非 SpringBoot">
 
 ```xml
 <dependency>
