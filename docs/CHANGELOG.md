@@ -89,8 +89,8 @@ Ice 规则引擎重大版本更新
 
 #### 新功能
 * ✨ 全新的可视化树图结构，规则编排更直观
-* 🚀 支持 SpringBoot 3.x 和 JDK 17+，拥抱新技术
-* 📦 优化项目结构，提升规则引擎性能和可维护性
+* 🚀 支持 SpringBoot 3.x 和 JDK 17+
+* 📦 Starter 拆分为 2x/3x 版本，分别适配不同 SpringBoot 版本
 
 # [1.3.1](https://github.com/zjn-zjn/ice/compare/1.3.0...1.3.1) (2023-06-02)
 

@@ -17,76 +17,164 @@ head:
 
 ## Ice 规则引擎模块概览
 
-Ice 规则引擎采用模块化设计，各模块职责清晰，便于理解和扩展。
+Ice 2.0 采用模块化设计，各模块职责清晰，便于理解和扩展。
 
-### 核心模块说明
+```
+ice/
+├── ice-common/           # 公共模块
+├── ice-core/             # 规则引擎核心 ⭐
+├── ice-server/           # 配置管理服务端
+├── ice-spring-boot/      # SpringBoot 集成
+│   ├── ice-spring-boot-starter-2x/   # SpringBoot 2.x
+│   └── ice-spring-boot-starter-3x/   # SpringBoot 3.x
+└── ice-test/             # 测试示例
+    ├── ice-test-2x/      # SpringBoot 2.x 示例
+    └── ice-test-3x/      # SpringBoot 3.x 示例
+```
 
-#### ice-common - 公共模块
-Ice 规则引擎的公共组件库，包含：
-- 通用工具类（工具方法、类型转换）
-- 枚举定义（节点类型、关系类型、状态枚举）
-- 常量定义（配置常量、默认值）
-- 异常类定义
+## 核心模块说明
 
-#### ice-core - 规则引擎核心模块 ⭐
-Ice 规则引擎的核心实现，**强烈推荐阅读**，包含规则引擎的所有核心功能：
+### ice-common - 公共模块
 
-##### 1. annotation 包 - 注解定义
-- 节点扫描注解
-- 配置注解
-- 自动装配注解
+Ice 规则引擎的公共组件库：
 
-##### 2. base 包 - 节点基类 ⭐⭐⭐
+- **constant/** - 常量定义
+  - `Constant` - 通用常量
+  - `IceStorageConstants` - 文件存储相关常量（2.0新增）
+- **dto/** - 数据传输对象
+  - `IceBaseDto` / `IceConfDto` - 规则配置 DTO
+  - `IceTransferDto` - 配置传输 DTO
+  - `IceClientInfo` - 客户端信息（2.0新增）
+  - `IceAppDto` / `IcePushHistoryDto` - 应用和发布历史
+- **enums/** - 枚举定义
+- **model/** - 模型类
+
+### ice-core - 规则引擎核心 ⭐
+
+Ice 规则引擎的核心实现，**强烈推荐阅读**：
+
+#### 1. annotation 包 - 注解定义
+
+- `@IceNode` - 节点注解，定义节点名称、描述、排序
+- `@IceField` - 字段注解，定义字段名称、描述、类型
+- `@IceIgnore` - 忽略注解，标记不在配置界面展示的字段
+
+#### 2. base 包 - 节点基类 ⭐⭐⭐
+
 Ice 规则引擎节点体系的核心基类：
-- **BaseNode**：所有规则节点的基类，提供节点生命周期管理、时间控制等通用功能
-- **BaseLeaf**：所有叶子节点的基类，实现具体业务逻辑的节点
-- **BaseRelation**：所有关系节点的基类，控制业务流程编排（AND/OR/ALL等）
 
-##### 3. builder 包 - 手动构建器
-提供手动构建规则的编程方式（不推荐，建议使用可视化配置平台）
+- **BaseNode** - 所有规则节点的基类
+  - 节点生命周期管理
+  - 时间控制（生效时间）
+  - 错误处理
+- **BaseLeaf** - 所有叶子节点的基类
+  - `BaseLeafFlow` - Flow 节点基类
+  - `BaseLeafResult` - Result 节点基类
+  - `BaseLeafNone` - None 节点基类
+- **BaseRelation** - 所有关系节点的基类
+  - AND / ANY / ALL / NONE / TRUE
 
-##### 4. cache 包 - 规则引擎缓存核心 ⭐⭐⭐
-Ice 规则引擎的缓存管理中心：
-- **IceConfCache**：规则节点缓存，负责节点初始化、规则树构建、配置更新
-- **IceHandlerCache**：可触发的 Handler 缓存，组织和管理规则入口
+#### 3. cache 包 - 规则引擎缓存 ⭐⭐⭐
 
-##### 5. client 包 - 服务通信模块
-Ice Client 与 Server 的通信实现：
-- 规则配置拉取
-- 实时配置变更监听
-- ha 子包：高可用相关实现（Zookeeper集成）
+- **IceConfCache** - 规则节点缓存
+  - 节点初始化和实例化
+  - 规则树构建
+  - 配置热更新
+- **IceHandlerCache** - Handler 缓存
+  - 按 iceId 索引
+  - 按 scene 索引
 
-##### 6. context 包 - 规则执行上下文
-Ice 规则引擎的执行环境：
-- **IceContext**：规则执行上下文的最外层，贯穿整个规则执行生命周期
-    - IcePack 包裹，触发时传入的结构
-    - IceParallelContext 并发的上下文，暂未使用(还没想好)
-    - IceRoam 用户自定义信息&执行过程中产生的数据存放的地方(其实就是个map)
-  - handler 可执行的handler
-  - leaf 叶子节点
-    - base 基础叶子，context作为直接入参
-    - pack 剥开context，留个pack入参的叶子
-    - roam 剥开pack，留个roam入参的叶子
-  - relation 关系节点
-    - parallel 并发的关系节点
-  - utils 工具类
-  - Ice 执行入口，`要看源码的从这里开始~`
-  - IceDispatcher 分发器
-- **ice-server** server端，一些crud等操作，乱七八糟的很多，不好看也不用看
-  - config server配置类
-  - constant server 基础转换/操作
-  - controller 
-    - common 通用controller处理，如包装resp，封装err
-    - IceAppController app相关操作
-    - IceBaseController 列表页相关操作
-    - IceConfController 树配置相关操作
-    - IceMockController mock相关操作
-  - dao 数据库操作
-  - enums 枚举
-  - exception 错误处理
-  - nio 和client通信相关处理
-  - service 一些操作的处理，crud...
-- **ice-test** 小demo，官网例子，直接上手使用族可看
-- **ice-client** spring client的一些初始化操作
-- **ice-client-spring-boot-autoconfigure** 为了stater准备的，不用看
-- **ice-client-spring-boot-starter** stater，方便spring-boot项目直接引入使用的，不用看
+#### 4. client 包 - 客户端实现（2.0重构）
+
+- **IceFileClient** - 基于文件系统的客户端 ⭐
+  - 从文件系统加载配置
+  - 版本轮询检测更新
+  - 心跳上报
+  - 增量/全量配置加载
+- **IceLeafScanner** - 叶子节点扫描器
+- **IceUpdate** - 配置更新处理
+
+#### 5. context 包 - 执行上下文
+
+- **IceContext** - 规则执行上下文
+- **IcePack** - 执行包裹，触发时传入
+- **IceRoam** - 数据存储（ConcurrentHashMap 扩展）
+
+#### 6. 执行入口
+
+- **Ice** - 执行入口类 `从这里开始看源码~`
+  - `syncProcess()` - 同步执行
+  - `asyncProcess()` - 异步执行
+- **IceDispatcher** - 规则分发器
+
+### ice-server - 配置管理服务端
+
+Ice 规则引擎的配置管理平台：
+
+#### 核心目录
+
+- **controller/** - 接口层
+  - `IceAppController` - 应用管理
+  - `IceBaseController` - 规则列表
+  - `IceConfController` - 节点配置
+- **service/** - 业务层
+  - `IceAppService` - 应用服务
+  - `IceBaseService` - 规则服务
+  - `IceConfService` - 配置服务
+  - `IceServerService` - 服务端核心逻辑
+- **storage/** - 存储层（2.0新增）⭐
+  - `IceFileStorageService` - 文件存储服务
+  - `IceClientManager` - 客户端管理
+  - `IceIdGenerator` - ID 生成器
+
+#### 2.0 架构变化
+
+- ✅ 新增 `storage/` 包 - 文件存储实现
+- ❌ 移除 `dao/` 包 - 不再需要 MyBatis
+- ❌ 移除 `nio/` 包 - 不再需要 NIO 通信
+
+### ice-spring-boot - SpringBoot 集成
+
+#### ice-spring-boot-starter-2x
+
+适用于 SpringBoot 2.x 的 Starter：
+
+- `IceClientProperties` - 配置属性类
+- `IceFileClientInit` - 客户端初始化（2.0新增）
+
+#### ice-spring-boot-starter-3x
+
+适用于 SpringBoot 3.x 的 Starter，结构与 2x 相同。
+
+### ice-test - 测试示例
+
+提供完整的使用示例，包含：
+
+- 叶子节点示例（Flow/Result/None）
+- 配置文件示例
+- 规则执行示例
+
+## 源码阅读建议
+
+### 入门路线
+
+1. **ice-test** - 先跑通示例，了解基本用法
+2. **Ice.java** - 从执行入口开始
+3. **IceDispatcher** - 了解规则分发逻辑
+4. **BaseNode/BaseRelation/BaseLeaf** - 理解节点体系
+
+### 进阶路线
+
+1. **IceConfCache** - 配置缓存和规则树构建
+2. **IceFileClient** - 客户端实现（2.0）
+3. **IceFileStorageService** - 文件存储实现（2.0）
+
+### 核心类推荐 ⭐
+
+| 类名 | 说明 | 推荐度 |
+|-----|------|--------|
+| `Ice` | 执行入口 | ⭐⭐⭐ |
+| `BaseNode` | 节点基类 | ⭐⭐⭐ |
+| `IceConfCache` | 配置缓存 | ⭐⭐⭐ |
+| `IceFileClient` | 文件客户端 | ⭐⭐ |
+| `IceFileStorageService` | 文件存储 | ⭐⭐ |

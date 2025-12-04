@@ -89,8 +89,8 @@ Major Ice rule engine version update
 
 #### Features
 * ✨ Brand new visual tree structure for more intuitive rule orchestration
-* 🚀 Support for SpringBoot 3.x and JDK 17+, embracing new technologies
-* 📦 Optimized project structure, improved rule engine performance and maintainability
+* 🚀 Support for SpringBoot 3.x and JDK 17+
+* 📦 Starter split into 2x/3x versions for different SpringBoot versions
 
 # [1.3.1](https://github.com/zjn-zjn/ice/compare/1.3.0...1.3.1) (2023-06-02)
 

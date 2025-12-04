@@ -15,6 +15,136 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v1.5.0 → v2.0.0 Major Architecture Upgrade 🚀
+
+Ice rule engine 2.0.0 is an **architecture revolution**, removing MySQL and ZooKeeper dependencies in favor of file system storage with native Docker deployment support.
+
+### ⚠️ Important Changes
+
+| Change | 1.x Version | 2.0.0 Version |
+|--------|-------------|---------------|
+| Storage | MySQL Database | File System (JSON) |
+| Communication | NIO Long Connection | File Polling |
+| High Availability | ZooKeeper | Shared Storage (NFS/Cloud) |
+| Deployment | Manual | Docker One-Click |
+
+### Server Upgrade (Ice Server)
+
+**1. Data Migration**
+
+Export configuration data from MySQL to JSON file format (migration tool will be provided in future versions).
+
+**2. Configuration Changes**
+
+```yaml
+# Old configuration (1.x)
+server:
+  port: 8121
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ice
+    username: root
+    password: password
+ice:
+  port: 18121  # NIO port
+  ha:
+    address: localhost:2181  # ZK address
+
+# New configuration (2.0.0)
+server:
+  port: 8121
+ice:
+  storage:
+    path: ./ice-data  # File storage path
+  client-timeout: 60  # Client timeout (seconds)
+  version-retention: 1000  # Version file retention count
+```
+
+**3. Dependency Changes**
+
+Can remove these dependencies:
+- MySQL driver
+- MyBatis related dependencies
+- ZooKeeper/Curator dependencies
+- Netty dependencies
+
+**4. Recommended Docker Deployment**
+
+```bash
+docker run -d --name ice-server \
+  -p 8121:8121 \
+  -v ./ice-data:/app/ice-data \
+  waitmoon/ice-server:2.0.0
+```
+
+### Client Upgrade (Ice Client)
+
+**1. Dependency Update**
+
+```xml
+<!-- SpringBoot 2.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-2x</artifactId>
+  <version>2.0.0</version>
+</dependency>
+
+<!-- SpringBoot 3.x -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-spring-boot-starter-3x</artifactId>
+  <version>2.0.0</version>
+</dependency>
+
+<!-- Non-SpringBoot -->
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>2.0.0</version>
+</dependency>
+```
+
+**2. Configuration Changes**
+
+```yaml
+# Old configuration (1.x)
+ice:
+  app: 1
+  server: 127.0.0.1:18121  # NIO server address
+  # server: zookeeper:localhost:2181  # ZK HA
+  scan: com.ice.test
+
+# New configuration (2.0.0)
+ice:
+  app: 1
+  storage:
+    path: ./ice-data  # Storage path shared with Server
+  scan: com.ice.test
+  poll-interval: 5  # Version polling interval (seconds)
+  heartbeat-interval: 10  # Heartbeat interval (seconds)
+```
+
+**3. Code Changes (Non-SpringBoot projects)**
+
+```java
+// Old code (1.x)
+IceNioClient client = new IceNioClient(1, "127.0.0.1:18121", "com.ice.test");
+client.start();
+
+// New code (2.0.0)
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.ice.test");
+client.start();
+```
+
+**4. Important: Storage Path Sharing**
+
+Client needs to **share the same storage directory** with Server:
+- Local development: Use the same local path
+- Docker environment: Share via volume mounts
+- Distributed environment: Use NFS or cloud drives
+
+---
+
 ## v1.3.0 → v1.5.0 Major Version Upgrade
 
 Ice rule engine 1.5.0 is a major version update bringing a brand new visual interface and SpringBoot 3.x support.

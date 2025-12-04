@@ -17,75 +17,164 @@ head:
 
 ## Ice Rule Engine Module Overview
 
-Ice rule engine adopts modular design with clear module responsibilities, making it easy to understand and extend.
+Ice 2.0 adopts modular design with clear module responsibilities, making it easy to understand and extend.
 
-### Core Module Descriptions
+```
+ice/
+├── ice-common/           # Common module
+├── ice-core/             # Rule engine core ⭐
+├── ice-server/           # Config management server
+├── ice-spring-boot/      # SpringBoot integration
+│   ├── ice-spring-boot-starter-2x/   # SpringBoot 2.x
+│   └── ice-spring-boot-starter-3x/   # SpringBoot 3.x
+└── ice-test/             # Test examples
+    ├── ice-test-2x/      # SpringBoot 2.x example
+    └── ice-test-3x/      # SpringBoot 3.x example
+```
 
-#### ice-common - Common Module
-Common component library for Ice rule engine, includes:
-- Utility classes (utility methods, type conversion)
-- Enum definitions (node types, relation types, status enums)
-- Constant definitions (configuration constants, default values)
-- Exception class definitions
+## Core Module Descriptions
 
-#### ice-core - Rule Engine Core Module ⭐
-Core implementation of Ice rule engine, **highly recommended to read**, contains all core rule engine functionalities:
+### ice-common - Common Module
 
-##### 1. annotation Package - Annotation Definitions
-- Node scanning annotations for rule engine
-- Configuration annotations
-- Auto-wiring annotations
+Common component library for Ice rule engine:
 
-##### 2. base Package - Node Base Classes ⭐⭐⭐
+- **constant/** - Constant definitions
+  - `Constant` - General constants
+  - `IceStorageConstants` - File storage constants (2.0 new)
+- **dto/** - Data transfer objects
+  - `IceBaseDto` / `IceConfDto` - Rule config DTOs
+  - `IceTransferDto` - Config transfer DTO
+  - `IceClientInfo` - Client information (2.0 new)
+  - `IceAppDto` / `IcePushHistoryDto` - App and publish history
+- **enums/** - Enum definitions
+- **model/** - Model classes
+
+### ice-core - Rule Engine Core ⭐
+
+Core implementation of Ice rule engine, **highly recommended to read**:
+
+#### 1. annotation Package - Annotation Definitions
+
+- `@IceNode` - Node annotation, defines node name, description, order
+- `@IceField` - Field annotation, defines field name, description, type
+- `@IceIgnore` - Ignore annotation, marks fields not shown in config UI
+
+#### 2. base Package - Node Base Classes ⭐⭐⭐
+
 Core base classes of Ice rule engine node system:
-- **BaseNode**: Base class for all rule nodes, provides node lifecycle management, time control and other common features
-- **BaseLeaf**: Base class for all leaf nodes, implementing specific business logic in rule engine
-- **BaseRelation**: Base class for all relation nodes, controls business process orchestration (AND/OR/ALL, etc.)
 
-##### 3. builder Package - Manual Builder
-Provides programmatic way to manually build rules (not recommended, use visual configuration platform instead)
+- **BaseNode** - Base class for all rule nodes
+  - Node lifecycle management
+  - Time control (effective time)
+  - Error handling
+- **BaseLeaf** - Base class for all leaf nodes
+  - `BaseLeafFlow` - Flow node base class
+  - `BaseLeafResult` - Result node base class
+  - `BaseLeafNone` - None node base class
+- **BaseRelation** - Base class for all relation nodes
+  - AND / ANY / ALL / NONE / TRUE
 
-##### 4. cache Package - Rule Engine Cache Core ⭐⭐⭐
-Cache management center of Ice rule engine:
-- **IceConfCache**: Rule node cache, responsible for node initialization, rule tree construction, configuration updates
-- **IceHandlerCache**: Triggerable handler cache, organizes and manages rule entries
+#### 3. cache Package - Rule Engine Cache ⭐⭐⭐
 
-##### 5. client Package - Service Communication Module
-Communication implementation between Ice Client and Server in the rule engine:
-- Rule configuration pulling
-- Real-time configuration change monitoring
-- ha subpackage: High availability implementation (Zookeeper integration)
+- **IceConfCache** - Rule node cache
+  - Node initialization and instantiation
+  - Rule tree construction
+  - Config hot update
+- **IceHandlerCache** - Handler cache
+  - Index by iceId
+  - Index by scene
 
-##### 6. context Package - Rule Execution Context
-Execution environment of Ice rule engine:
-- **IceContext**: Outermost layer of rule execution context, running through entire rule execution lifecycle
-        - IcePack package, structure passed in when triggering
-        - IceParallelContext concurrent context, not used yet (haven't figured it out yet)
-        - IceRoam user-defined information & the place where the data generated during execution is stored (in fact, it is a map)
-    - handler executable handler
-    - leaf leaf node
-        - base The basic leaf, context as a direct input parameter
-        - pack peels off the context, leaving a leaf of the pack input parameter
-        - Roam peel off the pack, leaving a leaf for roaming ginseng
-    - relation relation node
-        - parallel Concurrent relationship nodes
-    - utils tool class
-    - Ice execution entry, `If you want to see the source code, start here~`
-    - IceDispatcher Dispatcher
-- **ice-server** server side, some crud and other operations, a lot of mess, don't look good and don't need to look at it
-    - config server configuration class
-    - constant server base transformations/operations
-    - controller
-        - common general controller processing, such as packaging resp, packaging err
-        - IceAppController app-related operations
-        - IceBaseController list page related operations
-        - IceConfController tree configuration related operations
-        - IceMockController mock related operations
-    - dao database operation
-    - enums enumeration
-    - exception error handling
-    - Nio and client communication related processing
-    - service processing of some operations, crud...
-- **ice-test** small demo, official website example, you can see it directly when you use it ,some initialization operations of ice-client spring client
-- **ice-client-spring-boot-autoconfigure** prepared for stater, don't look at it
-- **ice-client-spring-boot-starter** stater, which is convenient for direct introduction and use of spring-boot projects, no need to look at it
+#### 4. client Package - Client Implementation (2.0 Refactored)
+
+- **IceFileClient** - File system based client ⭐
+  - Load config from file system
+  - Version polling for updates
+  - Heartbeat reporting
+  - Incremental/full config loading
+- **IceLeafScanner** - Leaf node scanner
+- **IceUpdate** - Config update handler
+
+#### 5. context Package - Execution Context
+
+- **IceContext** - Rule execution context
+- **IcePack** - Execution pack, passed when triggering
+- **IceRoam** - Data storage (ConcurrentHashMap extension)
+
+#### 6. Execution Entry
+
+- **Ice** - Entry class `Start reading source code from here~`
+  - `syncProcess()` - Synchronous execution
+  - `asyncProcess()` - Asynchronous execution
+- **IceDispatcher** - Rule dispatcher
+
+### ice-server - Config Management Server
+
+Configuration management platform for Ice rule engine:
+
+#### Core Directories
+
+- **controller/** - Interface layer
+  - `IceAppController` - App management
+  - `IceBaseController` - Rule list
+  - `IceConfController` - Node configuration
+- **service/** - Business layer
+  - `IceAppService` - App service
+  - `IceBaseService` - Rule service
+  - `IceConfService` - Config service
+  - `IceServerService` - Server core logic
+- **storage/** - Storage layer (2.0 new) ⭐
+  - `IceFileStorageService` - File storage service
+  - `IceClientManager` - Client manager
+  - `IceIdGenerator` - ID generator
+
+#### 2.0 Architecture Changes
+
+- ✅ Added `storage/` package - File storage implementation
+- ❌ Removed `dao/` package - MyBatis no longer needed
+- ❌ Removed `nio/` package - NIO communication no longer needed
+
+### ice-spring-boot - SpringBoot Integration
+
+#### ice-spring-boot-starter-2x
+
+Starter for SpringBoot 2.x:
+
+- `IceClientProperties` - Configuration properties
+- `IceFileClientInit` - Client initialization (2.0 new)
+
+#### ice-spring-boot-starter-3x
+
+Starter for SpringBoot 3.x, same structure as 2x.
+
+### ice-test - Test Examples
+
+Provides complete usage examples, including:
+
+- Leaf node examples (Flow/Result/None)
+- Configuration file examples
+- Rule execution examples
+
+## Source Code Reading Suggestions
+
+### Beginner Path
+
+1. **ice-test** - Run examples first, understand basic usage
+2. **Ice.java** - Start from execution entry
+3. **IceDispatcher** - Understand rule dispatching logic
+4. **BaseNode/BaseRelation/BaseLeaf** - Understand node system
+
+### Advanced Path
+
+1. **IceConfCache** - Config cache and rule tree construction
+2. **IceFileClient** - Client implementation (2.0)
+3. **IceFileStorageService** - File storage implementation (2.0)
+
+### Recommended Core Classes ⭐
+
+| Class | Description | Rating |
+|-------|-------------|--------|
+| `Ice` | Execution entry | ⭐⭐⭐ |
+| `BaseNode` | Node base class | ⭐⭐⭐ |
+| `IceConfCache` | Config cache | ⭐⭐⭐ |
+| `IceFileClient` | File client | ⭐⭐ |
+| `IceFileStorageService` | File storage | ⭐⭐ |
