@@ -15,6 +15,38 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.0.0 → v2.0.1
+
+### 变更内容
+
+- **仓库路径变更**：GitHub 仓库路径统一为 `github.com/zjn-zjn/ice`
+- **Go SDK**：模块路径更新为 `github.com/zjn-zjn/ice/sdks/go`，版本号 v1.0.1
+- **代码规范**：Java SDK 注释统一为英文
+
+### 升级步骤
+
+**Java SDK**
+
+无代码变更，直接更新版本号即可：
+
+```xml
+<version>2.0.1</version>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.1
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+---
+
 ## v1.5.0 → v2.0.0 重大架构升级 🚀
 
 Ice 规则引擎 2.0.0 是一次**架构革新**，移除了 MySQL 和 ZooKeeper 依赖，改用文件系统存储，并原生支持 Docker 部署。

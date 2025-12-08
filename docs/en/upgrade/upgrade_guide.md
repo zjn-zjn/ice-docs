@@ -15,6 +15,38 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.0.0 → v2.0.1
+
+### Changes
+
+- **Repository Path**: GitHub repository unified to `github.com/zjn-zjn/ice`
+- **Go SDK**: Module path updated to `github.com/zjn-zjn/ice/sdks/go`, version v1.0.1
+- **Code Standards**: Java SDK comments unified to English
+
+### Upgrade Steps
+
+**Java SDK**
+
+No code changes required, simply update version:
+
+```xml
+<version>2.0.1</version>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.1
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+---
+
 ## v1.5.0 → v2.0.0 Major Architecture Upgrade 🚀
 
 Ice rule engine 2.0.0 is an **architecture revolution**, removing MySQL and ZooKeeper dependencies in favor of file system storage with native Docker deployment support.

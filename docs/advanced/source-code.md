@@ -17,19 +17,31 @@ head:
 
 ## Ice 规则引擎模块概览
 
-Ice 2.0 采用模块化设计，各模块职责清晰，便于理解和扩展。
+Ice 2.0 采用 Monorepo 架构，统一管理多语言 SDK，各模块职责清晰，便于理解和扩展。
 
 ```
-ice/
-├── ice-common/           # 公共模块
-├── ice-core/             # 规则引擎核心 ⭐
-├── ice-server/           # 配置管理服务端
-├── ice-spring-boot/      # SpringBoot 集成
-│   ├── ice-spring-boot-starter-2x/   # SpringBoot 2.x
-│   └── ice-spring-boot-starter-3x/   # SpringBoot 3.x
-└── ice-test/             # 测试示例
-    ├── ice-test-2x/      # SpringBoot 2.x 示例
-    └── ice-test-3x/      # SpringBoot 3.x 示例
+ice/                              # GitHub: github.com/zjn-zjn/ice
+├── sdks/                         # 多语言 SDK
+│   ├── java/                     # Java SDK
+│   │   ├── ice-common/           # 公共模块
+│   │   ├── ice-core/             # 规则引擎核心 ⭐
+│   │   └── ice-spring-boot/      # SpringBoot 集成
+│   │       ├── ice-spring-boot-starter-2x/
+│   │       └── ice-spring-boot-starter-3x/
+│   ├── go/                       # Go SDK (v1.0.1)
+│   │   ├── cache/                # 配置缓存
+│   │   ├── client/               # 文件客户端
+│   │   ├── context/              # 执行上下文
+│   │   ├── node/                 # 节点实现
+│   │   └── relation/             # 关系节点
+│   └── python/                   # Python SDK
+│       └── src/ice/              # 核心实现
+├── server/                       # 配置管理服务端
+│   └── ice-server/
+└── tests/                        # 测试示例
+    ├── java/                     # Java 测试
+    ├── go/                       # Go 测试
+    └── python/                   # Python 测试
 ```
 
 ## 核心模块说明

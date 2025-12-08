@@ -17,19 +17,31 @@ head:
 
 ## Ice Rule Engine Module Overview
 
-Ice 2.0 adopts modular design with clear module responsibilities, making it easy to understand and extend.
+Ice 2.0 adopts a Monorepo architecture, managing multi-language SDKs uniformly with clear module responsibilities, making it easy to understand and extend.
 
 ```
-ice/
-├── ice-common/           # Common module
-├── ice-core/             # Rule engine core ⭐
-├── ice-server/           # Config management server
-├── ice-spring-boot/      # SpringBoot integration
-│   ├── ice-spring-boot-starter-2x/   # SpringBoot 2.x
-│   └── ice-spring-boot-starter-3x/   # SpringBoot 3.x
-└── ice-test/             # Test examples
-    ├── ice-test-2x/      # SpringBoot 2.x example
-    └── ice-test-3x/      # SpringBoot 3.x example
+ice/                              # GitHub: github.com/zjn-zjn/ice
+├── sdks/                         # Multi-language SDKs
+│   ├── java/                     # Java SDK
+│   │   ├── ice-common/           # Common module
+│   │   ├── ice-core/             # Rule engine core ⭐
+│   │   └── ice-spring-boot/      # SpringBoot integration
+│   │       ├── ice-spring-boot-starter-2x/
+│   │       └── ice-spring-boot-starter-3x/
+│   ├── go/                       # Go SDK (v1.0.1)
+│   │   ├── cache/                # Config cache
+│   │   ├── client/               # File client
+│   │   ├── context/              # Execution context
+│   │   ├── node/                 # Node implementation
+│   │   └── relation/             # Relation nodes
+│   └── python/                   # Python SDK
+│       └── src/ice/              # Core implementation
+├── server/                       # Config management server
+│   └── ice-server/
+└── tests/                        # Test examples
+    ├── java/                     # Java tests
+    ├── go/                       # Go tests
+    └── python/                   # Python tests
 ```
 
 ## Core Module Descriptions
