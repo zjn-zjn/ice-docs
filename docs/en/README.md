@@ -109,7 +109,7 @@ Add dependency to your business application:
   <CodeGroupItem title="  Go  ">
 
 ```bash
-go get github.com/waitmoon/ice/sdks/go
+go get github.com/zjn-zjn/ice/sdks/go
 ```
 
   </CodeGroupItem>

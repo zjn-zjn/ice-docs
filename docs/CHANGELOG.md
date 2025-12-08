@@ -25,7 +25,7 @@ head:
 
 ```bash
 # Go
-go get github.com/waitmoon/ice/sdks/go
+go get github.com/zjn-zjn/ice/sdks/go
 
 # Python
 pip install ice-rules
@@ -87,7 +87,7 @@ class ScoreFlow: ...
 | 组件 | 版本 |
 |------|------|
 | Java SDK | 2.0.1 |
-| Go SDK | v2.0.1 |
+| Go SDK | v1.0.1 |
 | Python SDK | 2.0.1 |
 | ice-server | 2.0.1 |
 

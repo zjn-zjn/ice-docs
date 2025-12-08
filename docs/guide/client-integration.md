@@ -23,7 +23,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 |------|--------|----------|
 | **Java (SpringBoot)** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot 项目（推荐） |
 | **Java (Core)** | `ice-core` | 非 SpringBoot Java 项目 |
-| **Go** | `github.com/waitmoon/ice/sdks/go` | Go 项目 |
+| **Go** | `github.com/zjn-zjn/ice/sdks/go` | Go 项目 |
 | **Python** | `ice-rules` | Python 项目 |
 
 ::: tip 其他语言 SDK

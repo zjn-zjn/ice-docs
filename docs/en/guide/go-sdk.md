@@ -54,13 +54,13 @@ Ice Go SDK provides the same core features as the Java SDK:
 ### Add Dependency
 
 ```bash
-go get github.com/waitmoon/ice/sdks/go
+go get github.com/zjn-zjn/ice/sdks/go
 ```
 
 Or add to `go.mod`:
 
 ```go
-require github.com/waitmoon/ice/sdks/go v2.0.1
+require github.com/zjn-zjn/ice/sdks/go v1.0.1
 ```
 
 ## Quick Start
@@ -73,8 +73,8 @@ package main
 import (
     "context"
     
-    ice "github.com/waitmoon/ice/sdks/go"
-    icecontext "github.com/waitmoon/ice/sdks/go/context"
+    ice "github.com/zjn-zjn/ice/sdks/go"
+    icecontext "github.com/zjn-zjn/ice/sdks/go/context"
 )
 
 // Define leaf node (use ice tag for field descriptions)
@@ -406,7 +406,7 @@ ice.SyncProcess(ctx, pack)
 ```go
 import (
     "context"
-    icelog "github.com/waitmoon/ice/sdks/go/log"
+    icelog "github.com/zjn-zjn/ice/sdks/go/log"
 )
 
 // Implement Logger interface (Note: first parameter is context.Context)
@@ -479,8 +479,8 @@ import (
     "log"
     "time"
 
-    ice "github.com/waitmoon/ice/sdks/go"
-    icecontext "github.com/waitmoon/ice/sdks/go/context"
+    ice "github.com/zjn-zjn/ice/sdks/go"
+    icecontext "github.com/zjn-zjn/ice/sdks/go/context"
 )
 
 // Point grant node

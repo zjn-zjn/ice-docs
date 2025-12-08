@@ -23,7 +23,7 @@ Ice Client is the rule execution engine that needs to be integrated into your bu
 |----------|---------|----------|
 | **Java (SpringBoot)** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot projects (Recommended) |
 | **Java (Core)** | `ice-core` | Non-SpringBoot Java projects |
-| **Go** | `github.com/waitmoon/ice/sdks/go` | Go projects |
+| **Go** | `github.com/zjn-zjn/ice/sdks/go` | Go projects |
 | **Python** | `ice-rules` | Python projects |
 
 ::: tip Other Language SDKs

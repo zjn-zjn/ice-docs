@@ -54,13 +54,13 @@ Ice Go SDK 提供与 Java SDK 相同的核心功能：
 ### 添加依赖
 
 ```bash
-go get github.com/waitmoon/ice/sdks/go
+go get github.com/zjn-zjn/ice/sdks/go
 ```
 
 或在 `go.mod` 中添加：
 
 ```go
-require github.com/waitmoon/ice/sdks/go v2.0.1
+require github.com/zjn-zjn/ice/sdks/go v1.0.1
 ```
 
 ## 快速开始
@@ -73,8 +73,8 @@ package main
 import (
     "context"
     
-    ice "github.com/waitmoon/ice/sdks/go"
-    icecontext "github.com/waitmoon/ice/sdks/go/context"
+    ice "github.com/zjn-zjn/ice/sdks/go"
+    icecontext "github.com/zjn-zjn/ice/sdks/go/context"
 )
 
 // 定义叶子节点（使用 ice tag 添加字段描述）
@@ -406,7 +406,7 @@ ice.SyncProcess(ctx, pack)
 ```go
 import (
     "context"
-    icelog "github.com/waitmoon/ice/sdks/go/log"
+    icelog "github.com/zjn-zjn/ice/sdks/go/log"
 )
 
 // 实现 Logger 接口（注意：第一个参数是 context.Context）
@@ -479,8 +479,8 @@ import (
     "log"
     "time"
 
-    ice "github.com/waitmoon/ice/sdks/go"
-    icecontext "github.com/waitmoon/ice/sdks/go/context"
+    ice "github.com/zjn-zjn/ice/sdks/go"
+    icecontext "github.com/zjn-zjn/ice/sdks/go/context"
 )
 
 // 积分发放节点
