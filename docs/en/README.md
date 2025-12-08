@@ -79,7 +79,7 @@ Visit http://localhost:8121 to access the visual configuration interface.
 
 ### Step 2: Integrate Ice Client SDK
 
-Add dependency to your business application (Java SDK available now, more languages coming soon):
+Add dependency to your business application:
 
 <CodeGroup>
   <CodeGroupItem title="SpringBoot 3.x  " active>
@@ -106,6 +106,22 @@ Add dependency to your business application (Java SDK available now, more langua
 
   </CodeGroupItem>
 
+  <CodeGroupItem title="  Go  ">
+
+```bash
+go get github.com/waitmoon/ice/sdks/go
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="  Python  ">
+
+```bash
+pip install ice-rules
+```
+
+  </CodeGroupItem>
+
   <CodeGroupItem title="  Non-SpringBoot">
 
 ```xml
@@ -121,12 +137,36 @@ Add dependency to your business application (Java SDK available now, more langua
 
 Configure shared storage path (same as Server):
 
+<CodeGroup>
+  <CodeGroupItem title="Java (application.yml)" active>
+
 ```yaml
 ice:
   app: 1
   storage:
     path: ./ice-data
 ```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+client, _ := ice.NewClient(1, "./ice-data")
+client.Start()
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data")
+client.start()
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 > 💡 **Key Point**: Client must share the same storage directory (`ice-data`) with Server
 
@@ -136,15 +176,40 @@ ice:
 2. Publish rules, Client auto hot-reloads
 3. Call rule execution in your business code
 
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
 ```java
-// Execute rules
 IcePack pack = new IcePack();
 pack.setIceId(1L);  // Rule ID
 pack.setRoam(new IceRoam().put("uid", 12345));
 Ice.syncProcess(pack);
 ```
 
-👉 [View Complete Getting Started Guide](/en/guide/getting-started.html)
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+pack := ice.NewPack().SetIceId(1)
+pack.Roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), pack)
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+pack = ice.Pack(ice_id=1)
+pack.roam.put("uid", 12345)
+ice.sync_process(pack)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+👉 [View Complete Getting Started Guide](/en/guide/getting-started.html) | [Go SDK Guide](/en/guide/go-sdk.html) | [Python SDK Guide](/en/guide/python-sdk.html)
 
 ## Use Cases
 

@@ -9,6 +9,8 @@ export const sidebarEn: SidebarConfig = {
         '/en/guide/architecture.html',
         '/en/guide/getting-started.html',
         '/en/guide/client-integration.html',
+        '/en/guide/go-sdk.html',
+        '/en/guide/python-sdk.html',
         '/en/guide/detail.html',
         '/en/guide/qa.html'
       ],

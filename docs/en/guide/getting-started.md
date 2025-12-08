@@ -79,7 +79,7 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 
 ## Step 2: Integrate Ice Client SDK
 
-### Add Maven Dependency
+### Add Dependency
 
 <CodeGroup>
   <CodeGroupItem title="SpringBoot 3.x" active>
@@ -88,7 +88,7 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -100,8 +100,24 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```bash
+go get github.com/waitmoon/ice/sdks/go
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```bash
+pip install ice-rules
 ```
 
   </CodeGroupItem>
@@ -112,7 +128,7 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -253,6 +269,8 @@ Use NFS or cloud drives (AWS EFS, Azure Files, etc.) as shared storage.
 ## Next Steps
 
 - 📖 [Detailed Documentation](/en/guide/detail.html) - Deep dive into node types and configuration
+- 🐹 [Go SDK Guide](/en/guide/go-sdk.html) - Go language integration guide
+- 🐍 [Python SDK Guide](/en/guide/python-sdk.html) - Python language integration guide
 - 🏗️ [Architecture Design](/en/advanced/architecture.html) - Understand Ice architecture
 - 🎥 [Video Tutorial](https://www.bilibili.com/video/BV1Q34y1R7KF) - Configuration and development demo
 

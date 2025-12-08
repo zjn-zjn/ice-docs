@@ -79,7 +79,7 @@ sh ice.sh start
 
 ### Step 2：集成 Ice Client SDK
 
-在您的业务应用中添加依赖（当前提供 Java SDK，更多语言即将支持）：
+在您的业务应用中添加依赖：
 
 <CodeGroup>
   <CodeGroupItem title="SpringBoot 3.x  " active>
@@ -106,6 +106,22 @@ sh ice.sh start
 
   </CodeGroupItem>
 
+  <CodeGroupItem title="  Go  ">
+
+```bash
+go get github.com/waitmoon/ice/sdks/go
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="  Python  ">
+
+```bash
+pip install ice-rules
+```
+
+  </CodeGroupItem>
+
   <CodeGroupItem title="  非 SpringBoot">
 
 ```xml
@@ -121,12 +137,36 @@ sh ice.sh start
 
 配置共享存储路径（与 Server 相同）：
 
+<CodeGroup>
+  <CodeGroupItem title="Java (application.yml)" active>
+
 ```yaml
 ice:
   app: 1
   storage:
     path: ./ice-data
 ```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+client, _ := ice.NewClient(1, "./ice-data")
+client.Start()
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data")
+client.start()
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 > 💡 **关键点**：Client 需要与 Server 共享同一个存储目录（`ice-data`）
 
@@ -136,15 +176,40 @@ ice:
 2. 发布规则，Client 自动热加载
 3. 在业务代码中调用规则执行
 
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
 ```java
-// 执行规则
 IcePack pack = new IcePack();
 pack.setIceId(1L);  // 规则 ID
 pack.setRoam(new IceRoam().put("uid", 12345));
 Ice.syncProcess(pack);
 ```
 
-👉 [查看完整快速上手指南](/guide/getting-started.html)
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+pack := ice.NewPack().SetIceId(1)
+pack.Roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), pack)
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+pack = ice.Pack(ice_id=1)
+pack.roam.put("uid", 12345)
+ice.sync_process(pack)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+👉 [查看完整快速上手指南](/guide/getting-started.html) | [Go SDK 指南](/guide/go-sdk.html) | [Python SDK 指南](/guide/python-sdk.html)
 
 ## 适用场景
 

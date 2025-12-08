@@ -9,6 +9,8 @@ export const sidebarZh: SidebarConfig = {
         '/guide/architecture.html',
         '/guide/getting-started.html',
         '/guide/client-integration.html',
+        '/guide/go-sdk.html',
+        '/guide/python-sdk.html',
         '/guide/detail.html',
         '/guide/qa.html'
       ],

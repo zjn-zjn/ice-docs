@@ -15,6 +15,84 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [2.0.1](https://github.com/zjn-zjn/ice/compare/2.0.0...2.0.1) (2025-12) ✨
+
+**Ice Rule Engine 2.0.1 - Multi-language SDK Official Release**
+
+### 🌐 Multi-language SDK
+
+This version officially releases Go and Python SDKs with full feature parity to Java SDK:
+
+```bash
+# Go
+go get github.com/waitmoon/ice/sdks/go
+
+# Python
+pip install ice-rules
+```
+
+### ✨ New Features
+
+#### 📝 Field Description Enhancement
+
+All three languages support field descriptions for friendly UI display:
+
+| Language | Method | Example |
+|----------|--------|---------|
+| **Java** | `@IceField` annotation | `@IceField(name="Score", desc="Threshold") double score;` |
+| **Go** | `ice` struct tag | `Score float64 \`ice:"name:Score,desc:Threshold"\`` |
+| **Python** | `Annotated` + `IceField` | `score: Annotated[float, IceField(name="Score")]` |
+
+#### 🏷️ Leaf Node Alias
+
+Support multi-language compatible configuration with class name mapping:
+
+```java
+// Java
+@IceNode(alias = {"score_flow"})
+public class ScoreFlow extends BaseLeafRoamFlow { }
+```
+
+```go
+// Go
+ice.RegisterLeaf("com.example.ScoreFlow",
+    &ice.LeafMeta{Alias: []string{"score_flow"}},
+    func() any { return &ScoreFlow{} })
+```
+
+```python
+# Python
+@ice.leaf("com.example.ScoreFlow", alias=["score_flow"])
+class ScoreFlow: ...
+```
+
+#### 🚫 Field Ignore
+
+Fields that should not be configurable can be ignored:
+
+| Language | Method |
+|----------|--------|
+| **Java** | `@IceIgnore` |
+| **Go** | `json:"-"` or `ice:"-"` |
+| **Python** | `_` prefix or `Annotated[..., IceIgnore()]` |
+
+### 🔧 Optimizations
+
+* 📦 **Monorepo Project Structure**: Unified management of Java/Go/Python SDKs
+* ⚡ **Hot-reload Optimization**: More stable incremental updates
+* 🐛 **Bug Fixes**: Fixed multiple edge cases
+
+### 📋 Version Info
+
+| Component | Version |
+|-----------|---------|
+| Java SDK | 2.0.1 |
+| Go SDK | v2.0.1 |
+| Python SDK | 2.0.1 |
+| ice-server | 2.0.1 |
+
+---
+
 ## [2.0.0](https://github.com/zjn-zjn/ice/compare/1.5.0...2.0.0) (2025-12) 🚀
 
 **Ice Rule Engine 2.0 Major Architecture Upgrade - Zero Dependencies, Containerized, Lighter**

@@ -17,12 +17,19 @@ head:
 
 ## 概述
 
-Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前提供 Java SDK，支持两种接入方式：
+Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前提供 Java、Go 和 Python 三种 SDK：
 
-| 方式 | 依赖包 | 适用场景 |
+| 语言 | 依赖包 | 适用场景 |
 |------|--------|----------|
-| **SpringBoot Starter** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot 项目（推荐） |
-| **Core 包** | `ice-core` | 非 SpringBoot 项目 |
+| **Java (SpringBoot)** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot 项目（推荐） |
+| **Java (Core)** | `ice-core` | 非 SpringBoot Java 项目 |
+| **Go** | `github.com/waitmoon/ice/sdks/go` | Go 项目 |
+| **Python** | `ice-rules` | Python 项目 |
+
+::: tip 其他语言 SDK
+- Go 用户请查看 [Go SDK 集成指南](/guide/go-sdk.html)
+- Python 用户请查看 [Python SDK 集成指南](/guide/python-sdk.html)
+:::
 
 ## SpringBoot 项目集成
 
@@ -37,7 +44,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -49,7 +56,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -144,7 +151,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -290,5 +297,6 @@ services:
 
 - 📖 [叶子节点开发](/guide/detail.html#节点开发) - 了解 Flow/Result/None 节点
 - 🏗️ [架构概览](/guide/architecture.html) - 理解 Server/Client 架构
+- 🐹 [Go SDK 指南](/guide/go-sdk.html) - Go 语言集成指南
 - ❓ [常见问题](/guide/qa.html) - 解决集成问题
 

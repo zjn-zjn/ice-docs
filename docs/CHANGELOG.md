@@ -15,6 +15,84 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [2.0.1](https://github.com/zjn-zjn/ice/compare/2.0.0...2.0.1) (2025-12) ✨
+
+**Ice 规则引擎 2.0.1 - 多语言 SDK 正式发布**
+
+### 🌐 多语言 SDK
+
+本版本正式发布 Go 和 Python SDK，与 Java SDK 功能完全对等：
+
+```bash
+# Go
+go get github.com/waitmoon/ice/sdks/go
+
+# Python
+pip install ice-rules
+```
+
+### ✨ 新特性
+
+#### 📝 字段描述增强
+
+三种语言统一支持字段描述，在 Server UI 中友好展示：
+
+| 语言 | 方式 | 示例 |
+|------|------|------|
+| **Java** | `@IceField` 注解 | `@IceField(name="分数", desc="阈值") double score;` |
+| **Go** | `ice` struct tag | `Score float64 \`ice:"name:分数,desc:阈值"\`` |
+| **Python** | `Annotated` + `IceField` | `score: Annotated[float, IceField(name="分数")]` |
+
+#### 🏷️ 叶子节点别名 (Alias)
+
+支持多语言兼容配置，不同语言的类名可相互映射：
+
+```java
+// Java
+@IceNode(alias = {"score_flow"})
+public class ScoreFlow extends BaseLeafRoamFlow { }
+```
+
+```go
+// Go
+ice.RegisterLeaf("com.example.ScoreFlow",
+    &ice.LeafMeta{Alias: []string{"score_flow"}},
+    func() any { return &ScoreFlow{} })
+```
+
+```python
+# Python
+@ice.leaf("com.example.ScoreFlow", alias=["score_flow"])
+class ScoreFlow: ...
+```
+
+#### 🚫 字段忽略
+
+不想被配置的字段可以忽略：
+
+| 语言 | 方式 |
+|------|------|
+| **Java** | `@IceIgnore` |
+| **Go** | `json:"-"` 或 `ice:"-"` |
+| **Python** | `_` 前缀 或 `Annotated[..., IceIgnore()]` |
+
+### 🔧 优化
+
+* 📦 **Monorepo 项目结构**：统一管理 Java/Go/Python SDK
+* ⚡ **配置热更新优化**：增量更新更稳定
+* 🐛 **Bug 修复**：修复多个边界情况
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| Java SDK | 2.0.1 |
+| Go SDK | v2.0.1 |
+| Python SDK | 2.0.1 |
+| ice-server | 2.0.1 |
+
+---
+
 ## [2.0.0](https://github.com/zjn-zjn/ice/compare/1.5.0...2.0.0) (2025-12) 🚀
 
 **Ice 规则引擎 2.0 重大架构升级 - 零依赖、容器化、更轻量**

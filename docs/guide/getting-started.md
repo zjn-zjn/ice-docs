@@ -79,7 +79,7 @@ sh ice.sh start
 
 ## 第二步：集成 Ice Client SDK
 
-### 添加 Maven 依赖
+### 添加依赖
 
 <CodeGroup>
   <CodeGroupItem title="SpringBoot 3.x" active>
@@ -88,7 +88,7 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -100,8 +100,24 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```bash
+go get github.com/waitmoon/ice/sdks/go
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```bash
+pip install ice-rules
 ```
 
   </CodeGroupItem>
@@ -112,7 +128,7 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -253,6 +269,8 @@ services:
 ## 下一步
 
 - 📖 [详细说明](/guide/detail.html) - 深入了解节点类型和配置
+- 🐹 [Go SDK 指南](/guide/go-sdk.html) - Go 语言集成指南
+- 🐍 [Python SDK 指南](/guide/python-sdk.html) - Python 语言集成指南
 - 🏗️ [架构设计](/advanced/architecture.html) - 理解 Ice 技术架构
 - 🎥 [视频教程](https://www.bilibili.com/video/BV1Q34y1R7KF) - 配置开发实战
 

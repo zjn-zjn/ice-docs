@@ -74,7 +74,7 @@ Can remove these dependencies:
 docker run -d --name ice-server \
   -p 8121:8121 \
   -v ./ice-data:/app/ice-data \
-  waitmoon/ice-server:2.0.0
+  waitmoon/ice-server:2.0.1
 ```
 
 ### Client Upgrade (Ice Client)
@@ -86,21 +86,21 @@ docker run -d --name ice-server \
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 
 <!-- SpringBoot 3.x -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 
 <!-- Non-SpringBoot -->
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 

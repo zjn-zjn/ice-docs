@@ -49,7 +49,8 @@ Ice 2.0 提供了节点注解来丰富节点的元信息：
 @IceNode(
     name = "金额发放",
     desc = "向用户发放指定金额",
-    order = 10  // 排序优先级，值越小越靠前
+    order = 10,  // 排序优先级，值越小越靠前
+    alias = {"amount_result"}  // 别名，用于多语言兼容
 )
 public class AmountResult extends BaseLeafRoamResult {
     // ...
@@ -70,6 +71,18 @@ public class AmountResult extends BaseLeafRoamResult {
 
     @IceIgnore  // 忽略此字段，不在配置界面展示
     private String internalField;
+}
+```
+
+#### 别名 (Alias) - 多语言兼容
+
+当使用 Go/Python SDK 配置的规则需要被 Java SDK 执行时，可以通过 `alias` 实现类名映射：
+
+```java
+// Java 类可以响应 confName 为 "score_flow" 的配置
+@IceNode(alias = {"score_flow", "ScoreFlow"})
+public class ScoreFlow extends BaseLeafRoamFlow {
+    // ...
 }
 ```
 

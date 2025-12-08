@@ -17,12 +17,19 @@ head:
 
 ## Overview
 
-Ice Client is the rule execution engine that needs to be integrated into your business applications. Java SDK is currently available with two integration methods:
+Ice Client is the rule execution engine that needs to be integrated into your business applications. Java, Go and Python SDKs are available:
 
-| Method | Package | Use Case |
-|--------|---------|----------|
-| **SpringBoot Starter** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot projects (Recommended) |
-| **Core Package** | `ice-core` | Non-SpringBoot projects |
+| Language | Package | Use Case |
+|----------|---------|----------|
+| **Java (SpringBoot)** | `ice-spring-boot-starter-3x` / `ice-spring-boot-starter-2x` | SpringBoot projects (Recommended) |
+| **Java (Core)** | `ice-core` | Non-SpringBoot Java projects |
+| **Go** | `github.com/waitmoon/ice/sdks/go` | Go projects |
+| **Python** | `ice-rules` | Python projects |
+
+::: tip Other Language SDKs
+- For Go users, please check the [Go SDK Integration Guide](/en/guide/go-sdk.html)
+- For Python users, please check the [Python SDK Integration Guide](/en/guide/python-sdk.html)
+:::
 
 ## SpringBoot Project Integration
 
@@ -37,7 +44,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -49,7 +56,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -144,7 +151,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -290,5 +297,6 @@ services:
 
 - 📖 [Leaf Node Development](/en/guide/detail.html#node-development) - Learn about Flow/Result/None nodes
 - 🏗️ [Architecture Overview](/en/guide/architecture.html) - Understand Server/Client architecture
+- 🐹 [Go SDK Guide](/en/guide/go-sdk.html) - Go language integration guide
 - ❓ [FAQ](/en/guide/qa.html) - Solve integration issues
 
