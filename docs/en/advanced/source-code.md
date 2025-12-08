@@ -24,7 +24,16 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 ├── sdks/                         # Multi-language SDKs
 │   ├── java/                     # Java SDK
 │   │   ├── ice-common/           # Common module
+│   │   │   ├── constant/         # Constant definitions
+│   │   │   ├── dto/              # Data transfer objects
+│   │   │   ├── enums/            # Enum definitions
+│   │   │   └── model/            # Model classes
 │   │   ├── ice-core/             # Rule engine core ⭐
+│   │   │   ├── annotation/       # Annotation definitions
+│   │   │   ├── base/             # Node base classes
+│   │   │   ├── cache/            # Config cache
+│   │   │   ├── client/           # File client
+│   │   │   └── context/          # Execution context
 │   │   └── ice-spring-boot/      # SpringBoot integration
 │   │       ├── ice-spring-boot-starter-2x/
 │   │       └── ice-spring-boot-starter-3x/
@@ -35,9 +44,17 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   ├── node/                 # Node implementation
 │   │   └── relation/             # Relation nodes
 │   └── python/                   # Python SDK
-│       └── src/ice/              # Core implementation
+│       └── src/ice/
+│           ├── cache/            # Config cache
+│           ├── client/           # File client
+│           ├── context/          # Execution context
+│           ├── node/             # Node implementation
+│           └── relation/         # Relation nodes
 ├── server/                       # Config management server
 │   └── ice-server/
+│       ├── controller/           # Interface layer
+│       ├── service/              # Business layer
+│       └── storage/              # Storage layer
 └── tests/                        # Test examples
     ├── java/                     # Java tests
     ├── go/                       # Go tests

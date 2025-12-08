@@ -24,7 +24,16 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 ├── sdks/                         # 多语言 SDK
 │   ├── java/                     # Java SDK
 │   │   ├── ice-common/           # 公共模块
+│   │   │   ├── constant/         # 常量定义
+│   │   │   ├── dto/              # 数据传输对象
+│   │   │   ├── enums/            # 枚举定义
+│   │   │   └── model/            # 模型类
 │   │   ├── ice-core/             # 规则引擎核心 ⭐
+│   │   │   ├── annotation/       # 注解定义
+│   │   │   ├── base/             # 节点基类
+│   │   │   ├── cache/            # 配置缓存
+│   │   │   ├── client/           # 文件客户端
+│   │   │   └── context/          # 执行上下文
 │   │   └── ice-spring-boot/      # SpringBoot 集成
 │   │       ├── ice-spring-boot-starter-2x/
 │   │       └── ice-spring-boot-starter-3x/
@@ -35,9 +44,17 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   ├── node/                 # 节点实现
 │   │   └── relation/             # 关系节点
 │   └── python/                   # Python SDK
-│       └── src/ice/              # 核心实现
+│       └── src/ice/
+│           ├── cache/            # 配置缓存
+│           ├── client/           # 文件客户端
+│           ├── context/          # 执行上下文
+│           ├── node/             # 节点实现
+│           └── relation/         # 关系节点
 ├── server/                       # 配置管理服务端
 │   └── ice-server/
+│       ├── controller/           # 接口层
+│       ├── service/              # 业务层
+│       └── storage/              # 存储层
 └── tests/                        # 测试示例
     ├── java/                     # Java 测试
     ├── go/                       # Go 测试
