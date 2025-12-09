@@ -19,7 +19,7 @@ export const sidebarEn: SidebarConfig = {
   '/en/upgrade/': [
     {
       text: 'Upgrade',
-      link: '/upgrade/upgrade_guide.html'
+      link: '/en/upgrade/upgrade_guide.html'
     },
   ],
   '/en/advanced/': [

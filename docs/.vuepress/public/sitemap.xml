@@ -60,6 +60,24 @@
   </url>
   
   <url>
+    <loc>https://waitmoon.com/guide/go-sdk.html</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/go-sdk.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/go-sdk.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/guide/python-sdk.html</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/python-sdk.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/python-sdk.html" />
+  </url>
+  
+  <url>
     <loc>https://waitmoon.com/guide/detail.html</loc>
     <lastmod>2025-12-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -168,6 +186,24 @@
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/client-integration.html" />
     <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/client-integration.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/guide/go-sdk.html</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/go-sdk.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/go-sdk.html" />
+  </url>
+  
+  <url>
+    <loc>https://waitmoon.com/en/guide/python-sdk.html</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://waitmoon.com/guide/python-sdk.html" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://waitmoon.com/en/guide/python-sdk.html" />
   </url>
   
   <url>
