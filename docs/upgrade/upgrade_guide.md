@@ -20,7 +20,7 @@ head:
 ### 变更内容
 
 - **仓库路径变更**：GitHub 仓库路径统一为 `github.com/zjn-zjn/ice`
-- **Go SDK**：模块路径更新为 `github.com/zjn-zjn/ice/sdks/go`，版本号 v1.0.1
+- **Go SDK**：模块路径更新为 `github.com/zjn-zjn/ice/sdks/go`，版本号 v1.0.2
 - **代码规范**：Java SDK 注释统一为英文
 
 ### 升级步骤
@@ -36,7 +36,7 @@ head:
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.0.1
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.2
 ```
 
 **Python SDK**

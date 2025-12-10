@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 Or add to `go.mod`:
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.1
+require github.com/zjn-zjn/ice/sdks/go v1.0.2
 ```
 
 ## Quick Start

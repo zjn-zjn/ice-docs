@@ -20,7 +20,7 @@ head:
 ### Changes
 
 - **Repository Path**: GitHub repository unified to `github.com/zjn-zjn/ice`
-- **Go SDK**: Module path updated to `github.com/zjn-zjn/ice/sdks/go`, version v1.0.1
+- **Go SDK**: Module path updated to `github.com/zjn-zjn/ice/sdks/go`, version v1.0.2
 - **Code Standards**: Java SDK comments unified to English
 
 ### Upgrade Steps
@@ -36,7 +36,7 @@ No code changes required, simply update version:
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.0.1
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.2
 ```
 
 **Python SDK**
