@@ -37,7 +37,7 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   └── ice-spring-boot/      # SpringBoot integration
 │   │       ├── ice-spring-boot-starter-2x/
 │   │       └── ice-spring-boot-starter-3x/
-│   ├── go/                       # Go SDK (v1.0.2)
+│   ├── go/                       # Go SDK (v1.0.3)
 │   │   ├── cache/                # Config cache
 │   │   ├── client/               # File client
 │   │   ├── context/              # Execution context

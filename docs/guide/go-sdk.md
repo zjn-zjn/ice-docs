@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 或在 `go.mod` 中添加：
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.2
+require github.com/zjn-zjn/ice/sdks/go v1.0.3
 ```
 
 ## 快速开始

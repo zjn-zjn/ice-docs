@@ -20,7 +20,7 @@ head:
 ### Changes
 
 - **Repository Path**: GitHub repository unified to `github.com/zjn-zjn/ice`
-- **Go SDK**: Module path updated to `github.com/zjn-zjn/ice/sdks/go`, version v1.0.2
+- **Go SDK**: Module path updated to `github.com/zjn-zjn/ice/sdks/go`, version v1.0.3
 - **Code Standards**: Java SDK comments unified to English
 
 ### Upgrade Steps
@@ -36,7 +36,7 @@ No code changes required, simply update version:
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.0.2
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.3
 ```
 
 **Python SDK**
@@ -246,7 +246,7 @@ Ice rule engine client dependency names adjusted to support different SpringBoot
 * **Code**
 * * IceNioClient.connect() changed to start(), only non-Spring projects need modification
 
-## v1.0.1→v1.0.2/v1.0.3
+## v1.0.1→v1.0.3/v1.0.3
 
 * **Configuration**
 * * Client

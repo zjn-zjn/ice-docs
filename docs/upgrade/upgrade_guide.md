@@ -20,7 +20,7 @@ head:
 ### 变更内容
 
 - **仓库路径变更**：GitHub 仓库路径统一为 `github.com/zjn-zjn/ice`
-- **Go SDK**：模块路径更新为 `github.com/zjn-zjn/ice/sdks/go`，版本号 v1.0.2
+- **Go SDK**：模块路径更新为 `github.com/zjn-zjn/ice/sdks/go`，版本号 v1.0.3
 - **代码规范**：Java SDK 注释统一为英文
 
 ### 升级步骤
@@ -36,7 +36,7 @@ head:
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.0.2
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.3
 ```
 
 **Python SDK**
@@ -246,7 +246,7 @@ Ice 规则引擎客户端依赖名称调整，以支持不同的 SpringBoot 版�
 * **代码**
 * * IceNioClient.connect()变成start()，仅非Spring项目使用需修改
 
-## v1.0.1-v1.0.2/v1.0.3
+## v1.0.1-v1.0.3/v1.0.3
 
 * **配置**
 * * 客户端

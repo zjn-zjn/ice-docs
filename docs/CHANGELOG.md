@@ -87,7 +87,7 @@ class ScoreFlow: ...
 | 组件 | 版本 |
 |------|------|
 | Java SDK | 2.0.1 |
-| Go SDK | v1.0.2 |
+| Go SDK | v1.0.3 |
 | Python SDK | 2.0.1 |
 | ice-server | 2.0.1 |
 
