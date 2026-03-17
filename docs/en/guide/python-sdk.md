@@ -237,6 +237,14 @@ client = ice.FileClient(
     parallelism=-1,             # Parallelism (-1 = CPU count)
     poll_interval=5.0,          # Poll interval (seconds)
     heartbeat_interval=30.0,    # Heartbeat interval (seconds)
+    lane="",                    # Lane name (empty for main trunk)
+)
+
+# With swimlane isolation (for dev branch isolation)
+client = ice.FileClient(
+    app=1,
+    storage_path="./ice-data",
+    lane="feature-xxx",         # Lane name
 )
 ```
 

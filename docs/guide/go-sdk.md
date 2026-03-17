@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 或在 `go.mod` 中添加：
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.3
+require github.com/zjn-zjn/ice/sdks/go v1.0.6
 ```
 
 ## 快速开始
@@ -350,6 +350,14 @@ client, err := ice.NewClientWithOptions(
     -1,                     // 并行度（-1 使用默认）
     5*time.Second,          // 轮询间隔
     10*time.Second,         // 心跳间隔
+    "",                     // 泳道名称（空字符串表示主干）
+)
+
+// 使用泳道隔离（开发环境分支隔离）
+client, err := ice.NewClientWithOptions(
+    1, "./ice-data", -1,
+    5*time.Second, 10*time.Second,
+    "feature-xxx",          // 泳道名称
 )
 ```
 
@@ -527,7 +535,7 @@ func main() {
     // 创建并启动客户端
     client, err := ice.NewClientWithOptions(
         1, "./ice-data", -1,
-        5*time.Second, 10*time.Second,
+        5*time.Second, 10*time.Second, "",
     )
     if err != nil {
         log.Fatal(err)

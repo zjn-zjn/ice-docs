@@ -237,6 +237,14 @@ client = ice.FileClient(
     parallelism=-1,             # 并行度（-1 使用 CPU 核数）
     poll_interval=5.0,          # 轮询间隔（秒）
     heartbeat_interval=30.0,    # 心跳间隔（秒）
+    lane="",                    # 泳道名称（空字符串表示主干）
+)
+
+# 使用泳道隔离（开发环境分支隔离）
+client = ice.FileClient(
+    app=1,
+    storage_path="./ice-data",
+    lane="feature-xxx",         # 泳道名称
 )
 ```
 

@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 Or add to `go.mod`:
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.3
+require github.com/zjn-zjn/ice/sdks/go v1.0.6
 ```
 
 ## Quick Start
@@ -350,6 +350,14 @@ client, err := ice.NewClientWithOptions(
     -1,                     // parallelism (-1 for default)
     5*time.Second,          // poll interval
     10*time.Second,         // heartbeat interval
+    "",                     // lane name (empty for main trunk)
+)
+
+// With swimlane isolation (for dev branch isolation)
+client, err := ice.NewClientWithOptions(
+    1, "./ice-data", -1,
+    5*time.Second, 10*time.Second,
+    "feature-xxx",          // lane name
 )
 ```
 
@@ -527,7 +535,7 @@ func main() {
     // Create and start client
     client, err := ice.NewClientWithOptions(
         1, "./ice-data", -1,
-        5*time.Second, 10*time.Second,
+        5*time.Second, 10*time.Second, "",
     )
     if err != nil {
         log.Fatal(err)

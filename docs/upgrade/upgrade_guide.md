@@ -15,6 +15,65 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.0.1 → v2.0.6
+
+### 变更内容
+
+- **新增泳道（Swimlane）支持**：客户端可按泳道注册，不同泳道的节点信息互相隔离
+- **Server UI**：配置页面顶部新增泳道选择器
+- **节点搜索修复**：修复前端叶子节点选择下拉框搜索不生效的问题
+
+### 升级步骤
+
+**Java SDK**
+
+更新版本号：
+
+```xml
+<version>2.0.6</version>
+```
+
+如需使用泳道功能，在 `application.yml` 中添加：
+
+```yaml
+ice:
+  lane: feature-xxx  # 泳道名称，不配置则为主干
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.6
+```
+
+泳道配置：
+
+```go
+client, err := ice.NewClientWithOptions(
+    1, "./ice-data", -1,
+    5*time.Second, 10*time.Second,
+    "feature-xxx",  // 泳道名称，空字符串表示主干
+)
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+泳道配置：
+
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data", lane="feature-xxx")
+```
+
+**Ice Server**
+
+下载最新版本 [ice-server-2.0.6.tar.gz](https://waitmoon.com/downloads/ice-server-2.0.6.tar.gz)，替换 jar 后重启即可。
+
+---
+
 ## v2.0.0 → v2.0.1
 
 ### 变更内容

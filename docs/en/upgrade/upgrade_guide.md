@@ -15,6 +15,65 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.0.1 → v2.0.6
+
+### Changes
+
+- **Swimlane (Lane) support**: Clients can register under a named lane for isolated node metadata
+- **Server UI**: Lane selector added to the configuration detail page toolbar
+- **Search fix**: Fixed leaf node class search not working in the dropdown
+
+### Upgrade Steps
+
+**Java SDK**
+
+Update version:
+
+```xml
+<version>2.0.6</version>
+```
+
+To use swimlane, add to `application.yml`:
+
+```yaml
+ice:
+  lane: feature-xxx  # Lane name, omit for main trunk
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.0.6
+```
+
+With lane:
+
+```go
+client, err := ice.NewClientWithOptions(
+    1, "./ice-data", -1,
+    5*time.Second, 10*time.Second,
+    "feature-xxx",  // lane name, "" for main trunk
+)
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+With lane:
+
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data", lane="feature-xxx")
+```
+
+**Ice Server**
+
+Download latest [ice-server-2.0.6.tar.gz](https://waitmoon.com/downloads/ice-server-2.0.6.tar.gz), replace jar and restart.
+
+---
+
 ## v2.0.0 → v2.0.1
 
 ### Changes
