@@ -15,6 +15,51 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [2.0.6](https://github.com/zjn-zjn/ice/compare/2.0.1...2.0.6) (2026-03) 🏊
+
+**Ice Rule Engine 2.0.6 - Swimlane Support**
+
+### ✨ New Features
+
+#### 🏊 Swimlane Isolation
+
+Clients can now register under a swimlane. Different swimlanes have isolated node info, preventing node metadata conflicts across development branches.
+
+**Client configuration:**
+```yaml
+ice:
+  app: 1
+  storage:
+    path: ./ice-data
+  lane: feature-xxx  # Swimlane name, omit for main trunk
+```
+
+**Directory structure:**
+```
+clients/{app}/              ← Main trunk clients (unchanged)
+clients/{app}/lane/{name}/  ← Swimlane clients (new)
+```
+
+**Server UI:** A swimlane selector in the detail page toolbar lets you view leaf nodes from the main trunk or a specific swimlane (merged, swimlane overrides main trunk).
+
+**All SDKs:** Java, Go, and Python SDKs all support the swimlane parameter.
+
+### 🔧 Improvements
+
+* 🔍 **Node search fix** - Fixed leaf node search not working in the dropdown
+* 🧹 **Auto-cleanup** - Empty swimlane directories are automatically removed when all clients expire
+
+### 📋 Version Info
+
+| Component | Version |
+|-----------|---------|
+| Java SDK | 2.0.6 |
+| Go SDK | v1.0.6 |
+| Python SDK | 2.0.6 |
+| ice-server | 2.0.6 |
+
+---
+
 ## [2.0.1](https://github.com/zjn-zjn/ice/compare/2.0.0...2.0.1) (2025-12) ✨
 
 **Ice Rule Engine 2.0.1 - Multi-language SDK Official Release**

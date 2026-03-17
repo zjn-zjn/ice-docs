@@ -17,8 +17,13 @@ export const keywords = {
     '决策引擎',
     '轻量级规则引擎',
     '开源规则引擎',
+    'Java规则引擎',
+    'Go规则引擎',
+    'Python规则引擎',
+    '微服务编排',
+    '风控引擎',
+    '营销规则引擎',
     '企业级规则引擎',
-    '可视化业务编排',
     '低代码规则配置',
     'Ice规则引擎',
   ],
@@ -30,6 +35,11 @@ export const keywords = {
     'business orchestration framework',
     'lightweight rule engine',
     'open source rule engine',
+    'java rule engine',
+    'go rule engine',
+    'python rule engine',
+    'microservices orchestration',
+    'risk control engine',
     'enterprise rule engine',
     'low-code rule configuration',
     'Ice rule engine',
@@ -41,28 +51,28 @@ export const seoMeta = {
   zh: {
     home: {
       title: 'Ice - 轻量级可视化规则引擎 | 业务编排框架',
-      description: 'Ice 是一个轻量级、高性能的可视化规则引擎和业务编排框架。提供 Web 可视化配置界面，采用创新的树形编排思想，极大降低规则维护成本。当前提供 Java SDK，更多语言即将支持。',
+      description: 'Ice 是一款专为解耦设计的轻量级、高性能可视化规则引擎和业务编排框架。提供 Web 可视化配置界面，支持 Java、Go、Python 多语言 SDK，帮助开发者实现低代码规则配置和毫秒级业务决策。',
       keywords: keywords.zh.join(','),
     },
     guide: {
       title: 'Ice 项目简介 - 全新的规则引擎编排思想',
       description: '深入了解 Ice 规则引擎的设计理念和架构思想。通过树形结构实现业务解耦，提供最大的编排自由度，让规则配置更简单、更灵活。',
-      keywords: '规则引擎原理,业务编排,设计思想,Ice介绍,决策引擎',
+      keywords: '规则引擎原理,业务编排,设计思想,Ice介绍,决策引擎,Java规则引擎',
     },
     gettingStarted: {
       title: 'Ice 快速上手 - 5分钟快速接入指南',
-      description: '快速接入 Ice 规则引擎的完整指南。包含 Server 部署、Client SDK 集成等详细步骤，支持 Docker 一键部署。',
-      keywords: '规则引擎接入,快速开始,安装教程,配置指南,Docker部署',
+      description: '快速接入 Ice 规则引擎的完整指南。包含 Server 部署、Client SDK (Java/Go/Python) 集成等详细步骤，支持 Docker 一键部署。',
+      keywords: '规则引擎接入,快速开始,安装教程,配置指南,Docker部署,Java SDK,Go SDK,Python SDK',
     },
     detail: {
       title: 'Ice 详细说明 - 完整的功能和配置文档',
-      description: 'Ice 规则引擎的详细功能说明文档，包括节点类型、关系配置、错误处理等高级特性的完整介绍。',
+      description: 'Ice 规则引擎的详细功能说明文档，包括节点类型（Flow, Result, None）、关系配置、错误处理等高级特性的完整介绍。',
       keywords: '规则引擎文档,功能说明,配置详解,高级特性,节点类型',
     },
     qa: {
       title: 'Ice 常见问题 - FAQ答疑解惑',
       description: 'Ice 规则引擎使用过程中的常见问题和解决方案，包括性能优化、故障排查、最佳实践等内容。',
-      keywords: '常见问题,FAQ,问题解决,使用技巧',
+      keywords: '常见问题,FAQ,问题解决,使用技巧,性能优化',
     },
     architecture: {
       title: 'Ice 架构设计 - 技术架构和实现原理',
@@ -73,7 +83,7 @@ export const seoMeta = {
   en: {
     home: {
       title: 'Ice - Lightweight Visual Rule Engine | Business Orchestration Framework',
-      description: 'Ice is a lightweight, high-performance visual rule engine and business orchestration framework. Features web-based visual configuration with innovative tree-based orchestration. Java SDK available now, more languages coming soon.',
+      description: 'Ice is a lightweight, high-performance visual rule engine and business orchestration framework designed for decoupling. Features web-based visual configuration and supports Java, Go, and Python SDKs for low-code rule management.',
       keywords: keywords.en.join(','),
     },
     guide: {

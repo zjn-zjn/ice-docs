@@ -1,8 +1,8 @@
 ---
 home: true
 title: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
-description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework. Features web-based visual configuration with innovative tree-based orchestration that greatly reduces rule maintenance costs.
-keywords: rule engine,visual rule engine,business rule engine,decision engine,lightweight rule engine,open source rule engine,low-code rule configuration,Ice rule engine
+description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework designed for decoupling. Features web-based visual configuration and supports Java, Go, and Python SDKs for low-code rule management.
+keywords: rule engine,visual rule engine,business rule engine,java rule engine,go rule engine,python rule engine,decision engine,lightweight rule engine,open source rule engine,low-code,Ice rule engine,risk control engine
 heroImage: /images/hero.svg
 head:
   - - meta

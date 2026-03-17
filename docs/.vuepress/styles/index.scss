@@ -32,12 +32,6 @@
   }
 }
 
-html.dark {
-  // brand colors
-  --c-brand: #3aa675;
-  --c-brand-light: #349469;
-}
-
 // Dark/Light mode image switching
 // Light mode: show light images, hide dark images
 img[src$="#light"] {
@@ -49,12 +43,32 @@ img[src$="#dark"] {
 }
 
 // Dark mode: show dark images, hide light images
-html.dark {
+// Compatible with both class="dark" and data-theme="dark"
+html.dark, html[data-theme="dark"] {
+  // Update brand colors for dark mode
+  --c-brand: #3aa675;
+  --c-brand-light: #349469;
+
   img[src$="#light"] {
     display: none;
   }
 
   img[src$="#dark"] {
     display: inline-block;
+  }
+}
+
+// Ensure code blocks have a visible background in light mode
+html:not(.dark):not([data-theme="dark"]) {
+  div[class*="language-"] {
+    background-color: #f6f8fa; // GitHub-like light gray background
+    border-radius: 6px;
+  }
+  
+  // Ensure the inner pre/code blocks inherit or have transparent background
+  // so the wrapper background shows through
+  div[class*="language-"] pre,
+  div[class*="language-"] code {
+    background-color: transparent !important;
   }
 }

@@ -6,8 +6,10 @@ import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { shikiPlugin } from '@vuepress/plugin-shiki'
 import { defaultTheme } from '@vuepress/theme-default'
+import { seoPlugin } from '@vuepress/plugin-seo'
+import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { path } from '@vuepress/utils'
-import { head, navbarEn, navbarZh, sidebarEn, sidebarZh } from './configs'
+import { head, navbarEn, navbarZh, sidebarEn, sidebarZh, siteConfig } from './configs'
 import { version } from './configs/meta'
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
@@ -26,25 +28,26 @@ export default defineUserConfig({
   },
 
   // extra tags in `<head>`
-  head:[
+  head: [
+    ...head,
     [
-    'script', {}, `
-    var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?c57dc88e320872392bdc6a8501dfe40c";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-    `
+      'script', {}, `
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c57dc88e320872392bdc6a8501dfe40c";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `
     ],
     ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-MRT75P8006' }],
     ['script', {}, `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-MRT75P8006');
+      gtag('config', 'G-MRT75P8006');
     `]
   ],
 
@@ -161,7 +164,10 @@ export default defineUserConfig({
       maxSuggestions: 10
     }),
     shikiPlugin({
-      theme: 'dark-plus',
+      themes: {
+        light: 'github-light',
+        dark: 'one-dark-pro',
+      },
     }),
     googleAnalyticsPlugin({
       id: 'G-MRT75P8006',
@@ -170,14 +176,63 @@ export default defineUserConfig({
       componentsDir: path.resolve(__dirname, './components'),
     }),
     mdEnhancePlugin({
-      tabs: true,
-      align: true,
-      sub: true,
-      sup: true,
-      footnote: true,
-      mark: true,
-      imageSize: true,
+      // tabs: true,
+      // align: true,
+      // sub: true,
+      // sup: true,
+      // footnote: true,
+      // mark: true,
+      // imageSize: true,
     }),
     versionPlugin(),
+    seoPlugin({
+      hostname: siteConfig.hostname,
+      author: siteConfig.author,
+      autoDescription: true,
+      canonical: siteConfig.hostname,
+      jsonLd: (jsonLd, page) => {
+        if (page.path === '/') {
+          return {
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Organization',
+                name: 'Ice',
+                url: siteConfig.hostname,
+                logo: `${siteConfig.hostname}/images/hero.png`,
+                description: 'Ice - 轻量级可视化Java规则引擎和业务编排框架',
+                founder: {
+                  '@type': 'Person',
+                  name: 'WaitMoon',
+                },
+                sameAs: [
+                  'https://github.com/zjn-zjn/ice',
+                  'https://gitee.com/waitmoon/ice',
+                ],
+              },
+              {
+                '@type': 'SoftwareApplication',
+                name: 'Ice',
+                applicationCategory: 'DeveloperApplication',
+                operatingSystem: 'Cross-platform',
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD',
+                },
+                softwareVersion: version,
+                description: 'Ice is a lightweight, high-performance Java rule engine and business orchestration framework',
+                programmingLanguage: 'Java',
+                license: 'https://www.apache.org/licenses/LICENSE-2.0',
+              }
+            ]
+          }
+        }
+        return jsonLd
+      },
+    }),
+    sitemapPlugin({
+      hostname: siteConfig.hostname,
+    }),
   ],
 })

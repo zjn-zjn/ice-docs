@@ -44,7 +44,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -87,6 +87,11 @@ ice:
   # Thread pool configuration (for concurrent relation nodes)
   pool:
     parallelism: -1  # Default -1, ≤0 uses ForkJoinPool default
+  
+  # Swimlane name (optional)
+  # Clients in different lanes have isolated node info; Server UI supports lane selection
+  # Leave empty or omit for main trunk
+  # lane: feature-xxx
 ```
 
 ### 3. Develop Leaf Nodes
@@ -151,7 +156,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -292,6 +297,7 @@ services:
 | `poll-interval` | int | 5 | Version polling interval (seconds) |
 | `heartbeat-interval` | int | 10 | Heartbeat report interval (seconds) |
 | `pool.parallelism` | int | -1 | Thread pool parallelism, ≤0 uses default |
+| `lane` | string | empty | Swimlane name, empty means main trunk |
 
 ## Next Steps
 

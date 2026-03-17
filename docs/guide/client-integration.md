@@ -44,7 +44,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -87,6 +87,11 @@ ice:
   # 线程池配置（用于并发关系节点）
   pool:
     parallelism: -1  # 默认 -1，≤0 使用 ForkJoinPool 默认配置
+  
+  # 泳道名称（可选）
+  # 不同泳道的客户端节点信息互相隔离，Server 后台可按泳道查看
+  # 不配置或留空表示主干
+  # lane: feature-xxx
 ```
 
 ### 3. 开发叶子节点
@@ -151,7 +156,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.6</version>
 </dependency>
 ```
 
@@ -292,6 +297,7 @@ services:
 | `poll-interval` | int | 5 | 版本轮询间隔（秒） |
 | `heartbeat-interval` | int | 10 | 心跳上报间隔（秒） |
 | `pool.parallelism` | int | -1 | 线程池并行度，≤0 使用默认 |
+| `lane` | string | 空 | 泳道名称，空表示主干 |
 
 ## 下一步
 
