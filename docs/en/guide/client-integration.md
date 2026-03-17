@@ -44,7 +44,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -156,7 +156,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -186,6 +186,11 @@ public class IceClientInit {
             Set.of("com.your.package"),     // scan packages set
             5,                              // poll interval (seconds)
             10                              // heartbeat interval (seconds)
+        );
+
+        // Method 3: With swimlane (convenience)
+        iceFileClient = IceFileClient.newWithLane(
+            1, "./ice-data", "com.your.package", "feature-xxx"
         );
 
         // Start client

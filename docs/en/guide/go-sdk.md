@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 Or add to `go.mod`:
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.6
+require github.com/zjn-zjn/ice/sdks/go v1.0.7
 ```
 
 ## Quick Start
@@ -337,6 +337,9 @@ fmt.Println(roam.String())  // {"name":"Alice","age":25,...}
 ```go
 // Simplest way (recommended)
 client, err := ice.NewClient(1, "./ice-data")
+
+// With swimlane (convenience method)
+client, err := ice.NewWithLane(1, "./ice-data", "feature-xxx")
 ```
 
 ### Full Configuration

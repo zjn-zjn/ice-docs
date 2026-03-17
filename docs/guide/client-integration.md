@@ -44,7 +44,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ Ice Client 是规则执行引擎，需要集成到您的业务应用中。当前
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -156,7 +156,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.7</version>
 </dependency>
 ```
 
@@ -186,6 +186,11 @@ public class IceClientInit {
             Set.of("com.your.package"),     // 扫描包集合
             5,                              // 轮询间隔（秒）
             10                              // 心跳间隔（秒）
+        );
+
+        // 方式三：带泳道（便捷方式）
+        iceFileClient = IceFileClient.newWithLane(
+            1, "./ice-data", "com.your.package", "feature-xxx"
         );
 
         // 启动客户端

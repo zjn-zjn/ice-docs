@@ -60,7 +60,7 @@ go get github.com/zjn-zjn/ice/sdks/go
 或在 `go.mod` 中添加：
 
 ```go
-require github.com/zjn-zjn/ice/sdks/go v1.0.6
+require github.com/zjn-zjn/ice/sdks/go v1.0.7
 ```
 
 ## 快速开始
@@ -337,6 +337,9 @@ fmt.Println(roam.String())  // {"name":"Alice","age":25,...}
 ```go
 // 最简方式（推荐）
 client, err := ice.NewClient(1, "./ice-data")
+
+// 带泳道（便捷方式）
+client, err := ice.NewWithLane(1, "./ice-data", "feature-xxx")
 ```
 
 ### 完整配置
