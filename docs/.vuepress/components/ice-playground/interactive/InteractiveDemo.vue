@@ -40,10 +40,7 @@
 
     <!-- Tree -->
     <div class="demo-main">
-      <div v-if="loading" class="tree-area loading-area">
-        <div class="loading-state">Loading...</div>
-      </div>
-      <div v-show="!loading" ref="treeContainer" class="tree-area"></div>
+      <div ref="treeContainer" class="tree-area"></div>
     </div>
 
     <!-- Results -->
@@ -87,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import NodeEditor from './NodeEditor.vue'
 import type { IceNode, ExecutionResult } from '../shared/types'
 import type { I18nMessages } from '../shared/i18n'
@@ -106,7 +103,6 @@ const props = defineProps<{
 }>()
 
 const treeContainer = ref<HTMLElement | null>(null)
-const loading = ref(true)
 const cost = ref(70)
 const requestDate = ref('2026-01-05')
 const activePreset = ref('any')
@@ -143,7 +139,6 @@ function runExecution() {
   const result = executeTree(currentTree, roam, requestDate.value)
   execResult.value = result
 
-  loading.value = false
   const containerWidth = treeContainer.value.clientWidth || 900
   renderTree(treeContainer.value, currentTree, result.steps, {
     width: containerWidth,
@@ -156,9 +151,7 @@ function runExecution() {
 }
 
 onMounted(() => {
-  nextTick(() => {
-    selectPreset('any')
-  })
+  selectPreset('any')
 })
 
 watch([cost, requestDate], () => {
@@ -264,17 +257,6 @@ watch([cost, requestDate], () => {
   border-radius: 8px;
   background: var(--ice-tree-bg);
   overflow: hidden;
-}
-
-.loading-area {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loading-state {
-  color: var(--ice-sub-text);
-  font-size: 15px;
 }
 
 .results-bar {
