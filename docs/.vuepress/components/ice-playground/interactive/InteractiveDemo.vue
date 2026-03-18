@@ -8,7 +8,8 @@
           type="range"
           min="0"
           max="200"
-          v-model.number="cost"
+          :value="cost"
+          @input="cost = Number(($event.target as HTMLInputElement).value)"
           class="slider"
         />
         <span class="slider-val">{{ cost }}</span>
@@ -17,7 +18,9 @@
         <label>{{ texts.interactive.date }}</label>
         <input
           type="date"
-          v-model="requestDate"
+          :value="requestDate"
+          @input="requestDate = ($event.target as HTMLInputElement).value"
+          @change="requestDate = ($event.target as HTMLInputElement).value"
           class="date-input"
         />
       </div>
