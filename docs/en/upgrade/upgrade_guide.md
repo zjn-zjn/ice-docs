@@ -15,6 +15,22 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.0.7 → v2.0.8
+
+### Changes
+
+- **Fix lane `_latest.json` deletion**: Cleanup task no longer unconditionally deletes `_latest.json` in lane directories. Only cleans when no client files remain.
+
+### Upgrade Steps
+
+Replace ice-server jar or Docker image. No client SDK changes needed.
+
+```bash
+docker pull waitmoon/ice-server:2.0.8
+```
+
+---
+
 ## v2.0.1 → v2.0.6
 
 ### Changes

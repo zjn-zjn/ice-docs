@@ -15,6 +15,22 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.0.7 → v2.0.8
+
+### 变更内容
+
+- **修复泳道 `_latest.json` 被误删**：清理任务不再无条件删除泳道下的 `_latest.json`，只在泳道无客户端文件时才清理
+
+### 升级步骤
+
+替换 ice-server jar 或 Docker 镜像即可，客户端 SDK 无需变更。
+
+```bash
+docker pull waitmoon/ice-server:2.0.8
+```
+
+---
+
 ## v2.0.1 → v2.0.6
 
 ### 变更内容
