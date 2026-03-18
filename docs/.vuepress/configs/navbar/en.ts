@@ -36,7 +36,7 @@ export const navbarEn: NavbarConfig = [
     link: '/en/sponsor/sponsor.html'
   },
   {
-    text: `🔥v${version}`,
+    text: '📋Versions',
     children: [
       {
         text: 'Changelog',

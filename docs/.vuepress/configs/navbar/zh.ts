@@ -36,7 +36,7 @@ export const navbarZh: NavbarConfig = [
     link: '/sponsor/sponsor.html'
   },
   {
-    text: `🔥v${version}`,
+    text: '📋版本',
     children: [
       {
         text: '更新日志',
