@@ -107,7 +107,7 @@ export function renderTree(
     .attr('id', 'arrow-forward')
     .attr('viewBox', '0 0 10 10')
     .attr('refX', 8).attr('refY', 5)
-    .attr('markerWidth', 24).attr('markerHeight', 24)
+    .attr('markerWidth', 14).attr('markerHeight', 14)
     .attr('markerUnits', 'userSpaceOnUse')
     .attr('orient', 'auto')
     .append('path')
