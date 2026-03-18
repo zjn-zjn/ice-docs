@@ -141,7 +141,7 @@ function runExecution() {
   const containerWidth = treeContainer.value.clientWidth || 900
   renderTree(treeContainer.value, currentTree, result.steps, {
     width: containerWidth,
-    height: 450,
+    height: 520,
     onNodeClick: (node) => {
       editingNode.value = node
       editorVisible.value = true
@@ -251,7 +251,7 @@ watch([cost, requestDate], () => {
 
 .tree-area {
   width: 100%;
-  min-height: 450px;
+  min-height: 520px;
   border: 1px solid var(--ice-border);
   border-radius: 8px;
   background: var(--ice-tree-bg);
@@ -325,7 +325,7 @@ watch([cost, requestDate], () => {
   text-align: center;
   font-size: 13px;
   color: var(--ice-faint-text);
-  padding: 4px;
+  padding: 4px 0 20px;
 }
 
 @media (max-width: 768px) {

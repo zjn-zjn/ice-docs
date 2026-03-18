@@ -8,12 +8,12 @@ import type { NodeType, RunState } from './types'
 
 // Node dimensions
 export const NODE = {
-  RELATION_RADIUS: 30,
-  LEAF_WIDTH: 160,
-  LEAF_HEIGHT: 52,
-  LEAF_RX: 8,
-  FONT_SIZE: 13,
-  LABEL_FONT_SIZE: 11,
+  RELATION_RADIUS: 32,
+  LEAF_WIDTH: 170,
+  LEAF_HEIGHT: 55,
+  LEAF_RX: 9,
+  FONT_SIZE: 14,
+  LABEL_FONT_SIZE: 12,
   LINK_STROKE_WIDTH: 2,
   FORWARD_STROKE_WIDTH: 2,
 } as const
