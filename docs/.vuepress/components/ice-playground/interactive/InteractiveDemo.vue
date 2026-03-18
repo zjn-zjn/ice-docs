@@ -156,7 +156,9 @@ function runExecution() {
 }
 
 onMounted(() => {
-  selectPreset('any')
+  nextTick(() => {
+    selectPreset('any')
+  })
 })
 
 watch([cost, requestDate], () => {
