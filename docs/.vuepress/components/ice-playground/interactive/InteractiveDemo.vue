@@ -140,8 +140,8 @@ function runExecution() {
 
   // Re-create tree for clean render (execution may mutate roam but tree itself is reused)
   renderTree(treeContainer.value, currentTree, result.steps, {
-    width: 750,
-    height: 350,
+    width: 1000,
+    height: 500,
     onNodeClick: (node) => {
       editingNode.value = node
       editorVisible.value = true
@@ -251,7 +251,7 @@ watch([cost, requestDate], () => {
 
 .tree-area {
   width: 100%;
-  min-height: 350px;
+  min-height: 500px;
   border: 1px solid var(--ice-border);
   border-radius: 8px;
   background: var(--ice-tree-bg);

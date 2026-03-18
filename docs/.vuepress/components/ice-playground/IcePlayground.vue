@@ -24,7 +24,7 @@ const texts = computed(() => useI18n(locale.value))
 
 <style scoped>
 .ice-playground {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 12px 0;
 }
