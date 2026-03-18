@@ -49,7 +49,7 @@ function computeLayout(root: IceNode, width: number, height: number): LayoutNode
 
   const hierRoot = d3.hierarchy(toHier(root))
   const treeLayout = d3.tree<HierNode>()
-    .size([height - 100, width - 200])
+    .size([height - 100, width - 180])
     .separation((a, b) => a.parent === b.parent ? 1 : 1.2)
 
   treeLayout(hierRoot)
