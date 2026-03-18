@@ -40,9 +40,10 @@
 
     <!-- Tree -->
     <div class="demo-main">
-      <div ref="treeContainer" class="tree-area">
-        <div v-if="loading" class="loading-state">Loading...</div>
+      <div v-if="loading" class="tree-area loading-area">
+        <div class="loading-state">Loading...</div>
       </div>
+      <div v-show="!loading" ref="treeContainer" class="tree-area"></div>
     </div>
 
     <!-- Results -->
@@ -261,14 +262,15 @@ watch([cost, requestDate], () => {
   border-radius: 8px;
   background: var(--ice-tree-bg);
   overflow: hidden;
-  position: relative;
+}
+
+.loading-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loading-state {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: var(--ice-sub-text);
   font-size: 15px;
 }
