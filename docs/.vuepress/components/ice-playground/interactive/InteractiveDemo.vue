@@ -194,7 +194,7 @@ watch([cost, requestDate], () => {
 
 .hint {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ice-faint-text);
   padding: 4px;
 }
@@ -214,7 +214,7 @@ watch([cost, requestDate], () => {
 }
 
 .panel-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ice-sub-text);
   margin-bottom: 8px;
@@ -227,12 +227,12 @@ watch([cost, requestDate], () => {
 }
 
 .preset-btn {
-  padding: 6px 14px;
+  padding: 6px 16px;
   border: 1px solid var(--ice-border);
   border-radius: 6px;
   background: var(--ice-tree-bg);
   color: var(--ice-leaf-text);
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.15s;
   text-align: left;
@@ -259,7 +259,7 @@ watch([cost, requestDate], () => {
 
 .control-group label {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ice-leaf-text);
   margin-bottom: 4px;
@@ -287,10 +287,10 @@ watch([cost, requestDate], () => {
 
 .date-input {
   width: 100%;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border: 1px solid var(--ice-border);
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 15px;
   background: var(--ice-tree-bg);
   color: var(--ice-leaf-text);
   box-sizing: border-box;
@@ -308,10 +308,10 @@ watch([cost, requestDate], () => {
 
 .result-badge {
   display: inline-block;
-  padding: 3px 12px;
+  padding: 4px 14px;
   border-radius: 4px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .result-badge.true { background: var(--ice-exec-true-fill); color: var(--ice-exec-true-text); }
@@ -320,7 +320,7 @@ watch([cost, requestDate], () => {
 
 .roam-output {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ice-leaf-text);
   white-space: pre;
   line-height: 1.5;
@@ -328,14 +328,14 @@ watch([cost, requestDate], () => {
 
 .trace-list {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-wrap: wrap;
   font-family: var(--font-family-code, monospace);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .trace-item {
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: 3px;
 }
 
