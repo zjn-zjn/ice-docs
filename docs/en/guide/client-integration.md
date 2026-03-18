@@ -156,7 +156,7 @@ public class YourService {
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.0.8</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 
