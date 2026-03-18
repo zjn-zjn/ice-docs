@@ -60,7 +60,7 @@ const zh = {
     delete_node: '删除节点',
     change_type: '切换类型',
     edit_conf: '编辑配置',
-    toggle_inverse: '切换 Inverse',
+    toggle_inverse: 'Inverse',
     effective_time: '生效时间',
   },
   nodes: {
