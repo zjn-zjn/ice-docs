@@ -206,9 +206,9 @@ export function renderTree(
       if (ln.node.timeRange) {
         nodeG.append('text')
           .attr('text-anchor', 'middle')
-          .attr('dy', r + 14)
+          .attr('dy', r + 16)
           .attr('fill', 'var(--ice-sub-text)')
-          .attr('font-size', 10)
+          .attr('font-size', 12)
           .text(`${ln.node.timeRange.start.slice(5)}~${ln.node.timeRange.end.slice(5)}`)
       }
     } else {
@@ -252,7 +252,7 @@ export function renderTree(
         nodeG.append('text')
           .attr('x', -w / 2 + 10).attr('y', -h / 2 + 5)
           .attr('fill', 'var(--ice-relation-fill)')
-          .attr('font-size', 10)
+          .attr('font-size', 12)
           .attr('font-weight', 'bold')
           .text('INV')
       }
@@ -263,7 +263,7 @@ export function renderTree(
           .attr('text-anchor', 'middle')
           .attr('dy', h / 2 + 14)
           .attr('fill', 'var(--ice-sub-text)')
-          .attr('font-size', 10)
+          .attr('font-size', 12)
           .text(`${ln.node.timeRange.start.slice(5)}~${ln.node.timeRange.end.slice(5)}`)
       }
     }
@@ -277,14 +277,14 @@ export function renderTree(
 
       nodeG.append('circle')
         .attr('cx', bx).attr('cy', by)
-        .attr('r', 10)
+        .attr('r', 12)
         .attr('fill', badgeColor)
       nodeG.append('text')
         .attr('x', bx).attr('y', by)
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
         .attr('fill', 'var(--ice-badge-text)')
-        .attr('font-size', 11)
+        .attr('font-size', 13)
         .attr('font-weight', 'bold')
         .text(badge)
     }

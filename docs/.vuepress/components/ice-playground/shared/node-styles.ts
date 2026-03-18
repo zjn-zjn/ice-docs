@@ -8,14 +8,14 @@ import type { NodeType, RunState } from './types'
 
 // Node dimensions
 export const NODE = {
-  RELATION_RADIUS: 28,
-  LEAF_WIDTH: 150,
-  LEAF_HEIGHT: 50,
-  LEAF_RX: 8,
-  FONT_SIZE: 13,
-  LABEL_FONT_SIZE: 11,
-  LINK_STROKE_WIDTH: 2,
-  FORWARD_STROKE_WIDTH: 2,
+  RELATION_RADIUS: 34,
+  LEAF_WIDTH: 180,
+  LEAF_HEIGHT: 58,
+  LEAF_RX: 10,
+  FONT_SIZE: 15,
+  LABEL_FONT_SIZE: 13,
+  LINK_STROKE_WIDTH: 2.5,
+  FORWARD_STROKE_WIDTH: 2.5,
 } as const
 
 // Colors by node type — use CSS variables for theme support

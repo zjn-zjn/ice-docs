@@ -140,8 +140,8 @@ function runExecution() {
 
   // Re-create tree for clean render (execution may mutate roam but tree itself is reused)
   renderTree(treeContainer.value, currentTree, result.steps, {
-    width: 1000,
-    height: 500,
+    width: 1200,
+    height: 600,
     onNodeClick: (node) => {
       editingNode.value = node
       editorVisible.value = true
@@ -181,20 +181,20 @@ watch([cost, requestDate], () => {
 }
 
 .control-group label {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ice-leaf-text);
   white-space: nowrap;
 }
 
 .slider {
-  width: 120px;
+  width: 160px;
   accent-color: var(--ice-relation-fill);
 }
 
 .slider-val {
   font-family: var(--font-family-code, monospace);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: var(--ice-relation-fill);
   min-width: 32px;
@@ -202,10 +202,10 @@ watch([cost, requestDate], () => {
 }
 
 .date-input {
-  padding: 4px 8px;
+  padding: 6px 10px;
   border: 1px solid var(--ice-border);
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 15px;
   background: var(--ice-tree-bg);
   color: var(--ice-leaf-text);
 }
@@ -219,17 +219,17 @@ watch([cost, requestDate], () => {
 }
 
 .presets-label {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--ice-sub-text);
 }
 
 .preset-btn {
-  padding: 4px 14px;
+  padding: 6px 16px;
   border: 1px solid var(--ice-border);
   border-radius: 16px;
   background: var(--ice-tree-bg);
   color: var(--ice-leaf-text);
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -251,7 +251,7 @@ watch([cost, requestDate], () => {
 
 .tree-area {
   width: 100%;
-  min-height: 500px;
+  min-height: 600px;
   border: 1px solid var(--ice-border);
   border-radius: 8px;
   background: var(--ice-tree-bg);
@@ -276,7 +276,7 @@ watch([cost, requestDate], () => {
 }
 
 .result-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ice-sub-text);
   margin-bottom: 4px;
@@ -284,10 +284,10 @@ watch([cost, requestDate], () => {
 
 .result-badge {
   display: inline-block;
-  padding: 2px 12px;
+  padding: 4px 14px;
   border-radius: 4px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .result-badge.true { background: var(--ice-exec-true-fill); color: var(--ice-exec-true-text); }
@@ -296,7 +296,7 @@ watch([cost, requestDate], () => {
 
 .roam-output {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ice-leaf-text);
   white-space: pre;
   line-height: 1.5;
@@ -304,14 +304,14 @@ watch([cost, requestDate], () => {
 
 .trace-list {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-wrap: wrap;
   font-family: var(--font-family-code, monospace);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .trace-item {
-  padding: 1px 6px;
+  padding: 2px 8px;
   border-radius: 3px;
 }
 
@@ -323,7 +323,7 @@ watch([cost, requestDate], () => {
 
 .hint {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ice-faint-text);
   padding: 4px;
 }
