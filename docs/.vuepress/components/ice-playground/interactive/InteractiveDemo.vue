@@ -39,7 +39,9 @@
 
     <!-- Tree -->
     <div class="demo-main">
-      <div ref="treeContainer" class="tree-area"></div>
+      <div ref="treeContainer" class="tree-area">
+        <div v-if="loading" class="loading-state">Loading...</div>
+      </div>
     </div>
 
     <!-- Results -->
@@ -102,6 +104,7 @@ const props = defineProps<{
 }>()
 
 const treeContainer = ref<HTMLElement | null>(null)
+const loading = ref(true)
 const cost = ref(70)
 const requestDate = ref('2026-01-05')
 const activePreset = ref('any')
@@ -138,6 +141,7 @@ function runExecution() {
   const result = executeTree(currentTree, roam, requestDate.value)
   execResult.value = result
 
+  loading.value = false
   const containerWidth = treeContainer.value.clientWidth || 900
   renderTree(treeContainer.value, currentTree, result.steps, {
     width: containerWidth,
@@ -256,6 +260,16 @@ watch([cost, requestDate], () => {
   border-radius: 8px;
   background: var(--ice-tree-bg);
   overflow: hidden;
+  position: relative;
+}
+
+.loading-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--ice-sub-text);
+  font-size: 15px;
 }
 
 .results-bar {
