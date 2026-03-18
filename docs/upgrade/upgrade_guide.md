@@ -15,6 +15,24 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.1.0 → v2.1.2
+
+### 变更内容
+
+- **优化 node-meta 接口响应数据**：移除 `ClientInfo` 中冗余的 `classes` 字段，减少切换泳道/地址时的网络传输和服务端开销
+
+### 升级步骤
+
+替换 ice-server jar 或 Docker 镜像即可，客户端 SDK 无需变更。
+
+```bash
+docker pull waitmoon/ice-server:2.1.2
+```
+
+手动部署可下载：`https://waitmoon.com/downloads/ice-server-2.1.2.tar.gz`
+
+---
+
 ## v2.0.8 → v2.1.0
 
 ### 变更内容

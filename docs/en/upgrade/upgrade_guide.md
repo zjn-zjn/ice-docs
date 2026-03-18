@@ -15,6 +15,24 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.1.0 → v2.1.2
+
+### Changes
+
+- **Optimize node-meta API response**: Remove redundant `classes` field from `ClientInfo`, reducing network payload and server overhead when switching lanes/addresses
+
+### Upgrade Steps
+
+Replace ice-server jar or Docker image. No client SDK changes needed.
+
+```bash
+docker pull waitmoon/ice-server:2.1.2
+```
+
+Manual package: `https://waitmoon.com/downloads/ice-server-2.1.2.tar.gz`
+
+---
+
 ## v2.0.8 → v2.1.0
 
 ### Changes
