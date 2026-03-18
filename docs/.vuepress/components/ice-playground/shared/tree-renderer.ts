@@ -49,7 +49,7 @@ function computeLayout(root: IceNode, width: number, height: number): LayoutNode
 
   const hierRoot = d3.hierarchy(toHier(root))
   const treeLayout = d3.tree<HierNode>()
-    .size([height - 80, width - 200])
+    .size([height - 100, width - 160])
     .separation((a, b) => a.parent === b.parent ? 1 : 1.2)
 
   treeLayout(hierRoot)
@@ -60,8 +60,8 @@ function computeLayout(root: IceNode, width: number, height: number): LayoutNode
     allNodes.push({
       id: d.data.id,
       node: d.data.node,
-      x: (d.y ?? 0) + 100,   // horizontal position (depth) - offset from left
-      y: (d.x ?? 0) + 40,    // vertical position (breadth)
+      x: (d.y ?? 0) + 80,    // horizontal position (depth) - offset from left
+      y: (d.x ?? 0) + 50,    // vertical position (breadth)
       children: [],
       depth: d.depth,
     })

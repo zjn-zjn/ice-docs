@@ -139,8 +139,9 @@ function runExecution() {
   execResult.value = result
 
   // Re-create tree for clean render (execution may mutate roam but tree itself is reused)
+  const containerWidth = treeContainer.value.clientWidth || 1200
   renderTree(treeContainer.value, currentTree, result.steps, {
-    width: 1200,
+    width: containerWidth,
     height: 600,
     onNodeClick: (node) => {
       editingNode.value = node
