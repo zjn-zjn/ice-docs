@@ -19,7 +19,7 @@
         <input
           type="date"
           :value="requestDate"
-          @input="requestDate = ($event.target as HTMLInputElement).value"
+          @change="requestDate = ($event.target as HTMLInputElement).value"
           class="date-input"
         />
       </div>
