@@ -44,7 +44,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.0.8</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ Choose the appropriate Starter based on your SpringBoot version:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.0.8</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 

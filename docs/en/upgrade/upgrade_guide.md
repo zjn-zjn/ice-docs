@@ -15,6 +15,26 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.0.8 → v2.1.0
+
+### Changes
+
+- **Server UI / editor UX**: more accurate change detection in node editor (A→B→A is treated as no-op), and clearer “unregistered node” styling when switching trunk/lane/client address
+- **Node metadata**: new `node-meta` API for lane/client discovery and leaf class metadata (field definitions, etc.)
+- **Batch export & base utilities**: batch export and base creation improvements
+
+### Upgrade Steps
+
+Upgrade Server first, then Client SDK (if needed).
+
+```bash
+docker pull waitmoon/ice-server:2.1.0
+```
+
+Manual package: `https://waitmoon.com/downloads/ice-server-2.1.0.tar.gz`
+
+---
+
 ## v2.0.7 → v2.0.8
 
 ### Changes

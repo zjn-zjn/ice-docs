@@ -15,6 +15,22 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [2.1.0](https://github.com/zjn-zjn/ice/compare/v2.0.8...v2.1.0) (2026-03)
+
+**Ice Rule Engine 2.1.0 - Editor UX and Node Metadata Enhancements**
+
+### ✨ New Features
+
+- **Node metadata**: new `node-meta` API for trunk/lane/client discovery and leaf class metadata
+- **Editing experience**: more accurate change detection (A→B→A treated as no-op) and clearer unregistered-node styling
+- **Batch utilities**: batch export and base creation improvements
+
+### 🐞 Fixes
+
+- Fix lane `_latest.json` accidental deletion
+
+---
+
 ## [2.0.6](https://github.com/zjn-zjn/ice/compare/2.0.1...2.0.6) (2026-03) 🏊
 
 **Ice Rule Engine 2.0.6 - Swimlane Support**
