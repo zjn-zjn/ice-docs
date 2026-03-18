@@ -174,6 +174,9 @@ export default defineUserConfig({
     }),
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './components'),
+      components: {
+        IcePlayground: path.resolve(__dirname, './components/ice-playground/IcePlayground.vue'),
+      },
     }),
     mdEnhancePlugin({
       // tabs: true,

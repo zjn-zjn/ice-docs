@@ -33,8 +33,8 @@ actions:
   - text: 快速上手
     link: /guide/getting-started.html
     type: primary
-  - text: 在线体验
-    link: http://eg.waitmoon.com
+  - text: 在线演示
+    link: /playground/
     type: secondary
   - text: 项目简介
     link: /guide/

@@ -34,7 +34,7 @@ actions:
      link: /en/guide/getting-started.html
      type: primary
    - text: Live Demo
-     link: http://eg.waitmoon.com
+     link: /en/playground/
      type: secondary
    - text: Introduction
      link: /en/guide/

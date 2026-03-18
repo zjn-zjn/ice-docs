@@ -58,6 +58,90 @@ html.dark, html[data-theme="dark"] {
   }
 }
 
+// ========== ice-playground theme colors ==========
+// Light mode: tree-bg=#fff
+:root {
+  // Node colors
+  --ice-relation-fill: #e8913a;
+  --ice-relation-stroke: #d07a28;
+  --ice-flow-stroke: #4a90d9;
+  --ice-flow-badge: #4a90d9;
+  --ice-result-stroke: #52a85a;
+  --ice-result-badge: #52a85a;
+  --ice-none-stroke: #8b7ec8;
+  --ice-none-badge: #8b7ec8;
+  --ice-none-fill: #f3f0ff;
+  --ice-none-text: #6b5ba8;
+  --ice-true-fill: #52a85a;
+  --ice-true-stroke: #3d8c44;
+  // Execution overlay colors
+  --ice-exec-true-fill: #e6f5e8;
+  --ice-exec-true-stroke: #3d9944;
+  --ice-exec-true-text: #2d7a33;
+  --ice-exec-false-fill: #fde8e8;
+  --ice-exec-false-stroke: #cc3333;
+  --ice-exec-false-text: #b02a2a;
+  --ice-exec-none-fill: #f0f0f0;
+  --ice-exec-none-text: #777;
+  --ice-exec-skipped-fill: #e8e8e8;
+  --ice-exec-skipped-stroke: #555;
+  --ice-exec-skipped-text: #555;
+  // Links
+  --ice-link-color: #666;
+  --ice-link-skipped: #555;
+  // Leaf text and backgrounds
+  --ice-leaf-fill: #fff;
+  --ice-leaf-text: #2c3e50;
+  --ice-sub-text: #777;
+  --ice-faint-text: #aaa;
+  // Badge text (on colored circles)
+  --ice-badge-text: #fff;
+  // Error/danger
+  --ice-error-color: #cc3333;
+  // Panel backgrounds
+  --ice-panel-bg: #f9f9f9;
+  --ice-tree-bg: #fff;
+  --ice-border: #e0e0e0;
+}
+
+// Dark mode: tree-bg=#1e1e1e
+html.dark, html[data-theme="dark"] {
+  --ice-relation-fill: #d4862e;
+  --ice-relation-stroke: #e8913a;
+  --ice-flow-stroke: #6aadf5;
+  --ice-flow-badge: #5a9fe8;
+  --ice-result-stroke: #6bcf74;
+  --ice-result-badge: #5dbe66;
+  --ice-none-stroke: #a694e0;
+  --ice-none-badge: #a694e0;
+  --ice-none-fill: #2a2640;
+  --ice-none-text: #c4b5f0;
+  --ice-true-fill: #3d8c44;
+  --ice-true-stroke: #6bcf74;
+  --ice-exec-true-fill: #1e3a22;
+  --ice-exec-true-stroke: #6bcf74;
+  --ice-exec-true-text: #6bcf74;
+  --ice-exec-false-fill: #3a1e1e;
+  --ice-exec-false-stroke: #f06060;
+  --ice-exec-false-text: #f06060;
+  --ice-exec-none-fill: #2e2e2e;
+  --ice-exec-none-text: #999;
+  --ice-exec-skipped-fill: #363636;
+  --ice-exec-skipped-stroke: #aaa;
+  --ice-exec-skipped-text: #aaa;
+  --ice-link-color: #999;
+  --ice-link-skipped: #aaa;
+  --ice-leaf-fill: #2a2a2a;
+  --ice-leaf-text: #ddd;
+  --ice-sub-text: #999;
+  --ice-faint-text: #666;
+  --ice-badge-text: #fff;
+  --ice-error-color: #f06060;
+  --ice-panel-bg: #242424;
+  --ice-tree-bg: #1e1e1e;
+  --ice-border: #3a3a3a;
+}
+
 // Ensure code blocks have a visible background in light mode
 html:not(.dark):not([data-theme="dark"]) {
   div[class*="language-"] {
