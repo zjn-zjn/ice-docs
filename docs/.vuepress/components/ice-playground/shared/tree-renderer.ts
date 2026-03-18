@@ -60,7 +60,7 @@ function computeLayout(root: IceNode, width: number, height: number): LayoutNode
     allNodes.push({
       id: d.data.id,
       node: d.data.node,
-      x: (d.y ?? 0) + 100,   // horizontal position (depth) - offset from left
+      x: (d.y ?? 0) + 60,    // horizontal position (depth) - offset from left
       y: (d.x ?? 0) + 50,    // vertical position (breadth)
       children: [],
       depth: d.depth,
