@@ -1,83 +1,74 @@
 <template>
   <div class="interactive-demo">
-    <div class="demo-layout">
-      <!-- Left: Tree -->
-      <div class="tree-side">
-        <div ref="treeContainer" class="tree-area"></div>
-        <div class="hint">{{ texts.interactive.click_to_edit }}</div>
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="control-group">
+        <label>{{ texts.interactive.cost }}</label>
+        <input
+          type="range"
+          min="0"
+          max="200"
+          :value="cost"
+          @input="cost = Number(($event.target as HTMLInputElement).value)"
+          class="slider"
+        />
+        <span class="slider-val">{{ cost }}</span>
       </div>
+      <div class="control-group">
+        <label>{{ texts.interactive.date }}</label>
+        <input
+          type="date"
+          :value="requestDate"
+          @input="requestDate = ($event.target as HTMLInputElement).value"
+          class="date-input"
+        />
+      </div>
+    </div>
 
-      <!-- Right: Controls + Results -->
-      <div class="panel-side">
-        <!-- Presets -->
-        <div class="panel-section">
-          <div class="panel-title">{{ texts.interactive.preset }}</div>
-          <div class="presets-list">
-            <button
-              v-for="p in presets"
-              :key="p.key"
-              class="preset-btn"
-              :class="{ active: activePreset === p.key }"
-              @click="selectPreset(p.key)"
-            >{{ p.label }}</button>
-          </div>
-        </div>
+    <!-- Presets -->
+    <div class="presets-bar">
+      <span class="presets-label">{{ texts.interactive.preset }}:</span>
+      <button
+        v-for="p in presets"
+        :key="p.key"
+        class="preset-btn"
+        :class="{ active: activePreset === p.key }"
+        @click="selectPreset(p.key)"
+      >{{ p.label }}</button>
+    </div>
 
-        <!-- Controls -->
-        <div class="panel-section">
-          <div class="control-group">
-            <label>{{ texts.interactive.cost }}</label>
-            <div class="slider-row">
-              <input
-                type="range"
-                min="0"
-                max="200"
-                :value="cost"
-                @input="cost = Number(($event.target as HTMLInputElement).value)"
-                class="slider"
-              />
-              <span class="slider-val">{{ cost }}</span>
-            </div>
-          </div>
-          <div class="control-group">
-            <label>{{ texts.interactive.date }}</label>
-            <input
-              type="date"
-              :value="requestDate"
-              @input="requestDate = ($event.target as HTMLInputElement).value"
-              class="date-input"
-            />
-          </div>
-        </div>
+    <!-- Tree -->
+    <div class="demo-main">
+      <div ref="treeContainer" class="tree-area"></div>
+    </div>
 
-        <!-- Results -->
-        <div v-if="execResult" class="panel-section">
-          <div class="result-row">
-            <div class="panel-title">{{ texts.interactive.result }}</div>
-            <span class="result-badge" :class="execResult.finalResult.toLowerCase()">
-              {{ execResult.finalResult }}
-            </span>
-          </div>
-        </div>
-
-        <div v-if="execResult" class="panel-section">
-          <div class="panel-title">{{ texts.interactive.roam }}</div>
-          <code class="roam-output">{{ JSON.stringify(execResult.roamAfter, null, 2) }}</code>
-        </div>
-
-        <div v-if="execResult" class="panel-section">
-          <div class="panel-title">{{ texts.interactive.trace }}</div>
-          <div class="trace-list">
-            <span
-              v-for="(step, i) in execResult.steps.filter(s => !s.skipped)"
-              :key="i"
-              class="trace-item"
-              :class="step.result.toLowerCase()"
-            >[{{ step.nodeName }}:{{ step.result.charAt(0) }}]</span>
-          </div>
+    <!-- Results -->
+    <div v-if="execResult" class="results-bar">
+      <div class="result-panel">
+        <div class="result-label">{{ texts.interactive.result }}</div>
+        <span class="result-badge" :class="execResult.finalResult.toLowerCase()">
+          {{ execResult.finalResult }}
+        </span>
+      </div>
+      <div class="result-panel">
+        <div class="result-label">{{ texts.interactive.roam }}</div>
+        <code class="roam-output">{{ JSON.stringify(execResult.roamAfter, null, 2) }}</code>
+      </div>
+      <div class="result-panel trace-panel">
+        <div class="result-label">{{ texts.interactive.trace }}</div>
+        <div class="trace-list">
+          <span
+            v-for="(step, i) in execResult.steps.filter(s => !s.skipped)"
+            :key="i"
+            class="trace-item"
+            :class="step.result.toLowerCase()"
+          >[{{ step.nodeName }}:{{ step.result.charAt(0) }}]</span>
         </div>
       </div>
     </div>
+
+    <!-- Hint -->
+    <div class="hint">{{ texts.interactive.click_to_edit }}</div>
 
     <!-- Node editor -->
     <NodeEditor
@@ -150,7 +141,7 @@ function runExecution() {
   const containerWidth = treeContainer.value.clientWidth || 900
   renderTree(treeContainer.value, currentTree, result.steps, {
     width: containerWidth,
-    height: 600,
+    height: 450,
     onNodeClick: (node) => {
       editingNode.value = node
       editorVisible.value = true
@@ -172,107 +163,32 @@ watch([cost, requestDate], () => {
   padding: 8px 0;
 }
 
-.demo-layout {
+.controls-bar {
   display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.tree-side {
-  flex: 1;
-  min-width: 0;
-}
-
-.tree-area {
-  width: 100%;
-  min-height: 600px;
-  border: 1px solid var(--ice-border);
-  border-radius: 8px;
-  background: var(--ice-tree-bg);
-  overflow: hidden;
-}
-
-.hint {
-  text-align: center;
-  font-size: 14px;
-  color: var(--ice-faint-text);
-  padding: 4px;
-}
-
-.panel-side {
-  width: 280px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.panel-section {
+  align-items: center;
+  gap: 20px;
+  padding: 10px 14px;
   background: var(--ice-panel-bg);
   border-radius: 8px;
-  padding: 12px 14px;
-}
-
-.panel-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ice-sub-text);
-  margin-bottom: 8px;
-}
-
-.presets-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.preset-btn {
-  padding: 6px 16px;
-  border: 1px solid var(--ice-border);
-  border-radius: 6px;
-  background: var(--ice-tree-bg);
-  color: var(--ice-leaf-text);
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-  text-align: left;
-}
-
-.preset-btn.active {
-  background: var(--ice-relation-fill);
-  color: var(--ice-badge-text);
-  border-color: var(--ice-relation-fill);
-}
-
-.preset-btn:hover:not(.active) {
-  border-color: var(--ice-relation-fill);
-  color: var(--ice-relation-fill);
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .control-group {
-  margin-bottom: 10px;
-}
-
-.control-group:last-child {
-  margin-bottom: 0;
-}
-
-.control-group label {
-  display: block;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ice-leaf-text);
-  margin-bottom: 4px;
-}
-
-.slider-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+.control-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ice-leaf-text);
+  white-space: nowrap;
+}
+
 .slider {
-  flex: 1;
+  width: 140px;
   accent-color: var(--ice-relation-fill);
 }
 
@@ -286,32 +202,92 @@ watch([cost, requestDate], () => {
 }
 
 .date-input {
-  width: 100%;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border: 1px solid var(--ice-border);
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 14px;
   background: var(--ice-tree-bg);
   color: var(--ice-leaf-text);
-  box-sizing: border-box;
 }
 
-.result-row {
+.presets-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
-.result-row .panel-title {
-  margin-bottom: 0;
+.presets-label {
+  font-size: 14px;
+  color: var(--ice-sub-text);
+}
+
+.preset-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--ice-border);
+  border-radius: 16px;
+  background: var(--ice-tree-bg);
+  color: var(--ice-leaf-text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.preset-btn.active {
+  background: var(--ice-relation-fill);
+  color: var(--ice-badge-text);
+  border-color: var(--ice-relation-fill);
+}
+
+.preset-btn:hover:not(.active) {
+  border-color: var(--ice-relation-fill);
+  color: var(--ice-relation-fill);
+}
+
+.demo-main {
+  margin-bottom: 10px;
+}
+
+.tree-area {
+  width: 100%;
+  min-height: 450px;
+  border: 1px solid var(--ice-border);
+  border-radius: 8px;
+  background: var(--ice-tree-bg);
+  overflow: hidden;
+}
+
+.results-bar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.result-panel {
+  background: var(--ice-panel-bg);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.trace-panel {
+  grid-column: 1 / -1;
+}
+
+.result-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ice-sub-text);
+  margin-bottom: 4px;
 }
 
 .result-badge {
   display: inline-block;
-  padding: 4px 14px;
+  padding: 3px 12px;
   border-radius: 4px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .result-badge.true { background: var(--ice-exec-true-fill); color: var(--ice-exec-true-text); }
@@ -320,7 +296,7 @@ watch([cost, requestDate], () => {
 
 .roam-output {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--ice-leaf-text);
   white-space: pre;
   line-height: 1.5;
@@ -328,14 +304,14 @@ watch([cost, requestDate], () => {
 
 .trace-list {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   flex-wrap: wrap;
   font-family: var(--font-family-code, monospace);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .trace-item {
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 3px;
 }
 
@@ -345,12 +321,20 @@ watch([cost, requestDate], () => {
 .trace-item.rejected { background: var(--ice-exec-false-fill); color: var(--ice-exec-false-text); }
 .trace-item.out_of_time { background: var(--ice-exec-skipped-fill); color: var(--ice-exec-skipped-text); }
 
-@media (max-width: 900px) {
-  .demo-layout {
+.hint {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ice-faint-text);
+  padding: 4px;
+}
+
+@media (max-width: 768px) {
+  .controls-bar {
     flex-direction: column;
+    align-items: flex-start;
   }
-  .panel-side {
-    width: 100%;
+  .results-bar {
+    grid-template-columns: 1fr;
   }
 }
 </style>
