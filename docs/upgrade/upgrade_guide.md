@@ -15,6 +15,25 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.1.2 → v2.1.3
+
+### 变更内容
+
+- **前置节点展示优化**：前置节点使用紫色 + ◀ 箭头前缀，与编辑中节点（橙色虚线边框）明确区分
+- **配色方案统一**：前置节点紫色、编辑中节点橙色虚线、未注册节点灰色
+
+### 升级步骤
+
+替换 ice-server jar 或 Docker 镜像即可，客户端 SDK 无需变更。
+
+```bash
+docker pull waitmoon/ice-server:2.1.3
+```
+
+手动部署可下载：`https://waitmoon.com/downloads/ice-server-2.1.3.tar.gz`
+
+---
+
 ## v2.1.0 → v2.1.2
 
 ### 变更内容

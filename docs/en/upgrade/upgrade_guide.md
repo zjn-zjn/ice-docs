@@ -15,6 +15,25 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.1.2 → v2.1.3
+
+### Changes
+
+- **Forward node display enhancement**: Forward nodes now use purple with ◀ arrow prefix, clearly distinguished from editing nodes (orange dashed border)
+- **Color scheme optimization**: Unified node status colors — forward purple, editing orange dashed, unregistered gray
+
+### Upgrade Steps
+
+Replace ice-server jar or Docker image. No client SDK changes needed.
+
+```bash
+docker pull waitmoon/ice-server:2.1.3
+```
+
+Manual package: `https://waitmoon.com/downloads/ice-server-2.1.3.tar.gz`
+
+---
+
 ## v2.1.0 → v2.1.2
 
 ### Changes

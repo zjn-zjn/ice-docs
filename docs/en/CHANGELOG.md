@@ -15,6 +15,17 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [2.1.3](https://github.com/zjn-zjn/ice/compare/v2.1.2...v2.1.3) (2026-03)
+
+**Ice Rule Engine 2.1.3 - Forward Node Display Enhancement**
+
+### 🎨 Enhancement
+
+- **Forward node visual improvement**: Forward nodes now use purple (#722ed1) with ◀ arrow prefix, clearly distinguished from editing nodes (orange dashed border)
+- **Color scheme optimization**: Unified node status colors — forward nodes purple, editing nodes orange dashed, unregistered nodes gray
+
+---
+
 ## [2.1.2](https://github.com/zjn-zjn/ice/compare/v2.1.0...v2.1.2) (2026-03)
 
 **Ice Rule Engine 2.1.2 - node-meta API optimization**
