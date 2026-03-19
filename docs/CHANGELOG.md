@@ -15,6 +15,17 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [3.0.2](https://github.com/zjn-zjn/ice/compare/v3.0.1...v3.0.2) (2026-03)
+
+**Ice 规则引擎 3.0.2 - Client Address 优化**
+
+### 🔧 优化
+
+- **Client Address 精简**：地址格式从 `IP/app/xxxxxxxxxxx` 缩短为 `IP_xxxxx`
+- **IP 获取统一**：Java/Python/Go SDK 统一使用网卡遍历获取非回环 IPv4
+
+---
+
 ## [3.0.1](https://github.com/zjn-zjn/ice/compare/v3.0.0...v3.0.1) (2026-03)
 
 **Ice 规则引擎 3.0.1 - Server 优化**
