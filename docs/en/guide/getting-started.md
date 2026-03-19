@@ -62,11 +62,19 @@ docker-compose up -d
 
 ### Option 2: Manual Deployment
 
-Download latest version: [https://waitmoon.com/downloads/](https://waitmoon.com/downloads/)
+Download the latest version for your platform: [https://waitmoon.com/downloads/3.0.0/](https://waitmoon.com/downloads/3.0.0/)
+
+| Platform | Package |
+|----------|---------|
+| Linux x86_64 | `ice-server-3.0.0-linux-amd64.tar.gz` |
+| Linux ARM64 | `ice-server-3.0.0-linux-arm64.tar.gz` |
+| macOS x86_64 | `ice-server-3.0.0-darwin-amd64.tar.gz` |
+| macOS ARM64 (Apple Silicon) | `ice-server-3.0.0-darwin-arm64.tar.gz` |
+| Windows x86_64 | `ice-server-3.0.0-windows-amd64.zip` |
 
 ```bash
-# Extract and start
-tar -xzvf ice-server-*.tar.gz
+# Extract and start (Linux/macOS)
+tar -xzvf ice-server-3.0.0-linux-amd64.tar.gz
 cd ice-server
 sh ice.sh start
 ```
@@ -88,7 +96,7 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>2.1.0</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
@@ -100,7 +108,7 @@ Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>2.1.0</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
@@ -128,7 +136,7 @@ pip install ice-rules
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>2.1.0</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 

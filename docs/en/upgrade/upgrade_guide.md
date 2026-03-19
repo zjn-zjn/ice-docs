@@ -15,6 +15,59 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v2.1.x → v3.0.0 Server Rewritten in Go 🚀
+
+### Changes
+
+- **Server rewritten from Java to Go**: Single binary deployment, no JDK required
+- **Multi-platform pre-built binaries**: Linux/macOS/Windows (amd64/arm64)
+- **SDK version bump**: No functional changes, version numbers unified to 3.0.0
+- **Full data compatibility**: File storage format unchanged, no migration needed
+
+### Upgrade Steps
+
+**Docker Users (No Changes Needed)**
+
+```bash
+docker pull waitmoon/ice-server:3.0.0
+```
+
+**Manual Deployment Users**
+
+Download the appropriate platform package from [https://waitmoon.com/downloads/3.0.0/](https://waitmoon.com/downloads/3.0.0/):
+
+```bash
+# Linux amd64
+tar -xzvf ice-server-3.0.0-linux-amd64.tar.gz
+cd ice-server
+sh ice.sh start
+
+# macOS arm64 (Apple Silicon)
+tar -xzvf ice-server-3.0.0-darwin-arm64.tar.gz
+cd ice-server
+sh ice.sh start
+```
+
+**Java SDK**
+
+```xml
+<version>3.0.0</version>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.1.0
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+---
+
 ## v2.1.2 → v2.1.3
 
 ### Changes

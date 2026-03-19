@@ -17,7 +17,7 @@ head:
 
 ## Ice 规则引擎模块概览
 
-Ice 2.0 采用 Monorepo 架构，统一管理多语言 SDK，各模块职责清晰，便于理解和扩展。
+Ice 采用 Monorepo 架构，统一管理多语言 SDK，各模块职责清晰，便于理解和扩展。
 
 ```
 ice/                              # GitHub: github.com/zjn-zjn/ice
@@ -37,7 +37,7 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   └── ice-spring-boot/      # SpringBoot 集成
 │   │       ├── ice-spring-boot-starter-2x/
 │   │       └── ice-spring-boot-starter-3x/
-│   ├── go/                       # Go SDK (v1.0.8)
+│   ├── go/                       # Go SDK (v1.1.0)
 │   │   ├── cache/                # 配置缓存
 │   │   ├── client/               # 文件客户端
 │   │   ├── context/              # 执行上下文
@@ -50,11 +50,19 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │           ├── context/          # 执行上下文
 │           ├── node/             # 节点实现
 │           └── relation/         # 关系节点
-├── server/                       # 配置管理服务端
+├── server/                       # 配置管理服务端（Go）
 │   └── ice-server/
-│       ├── controller/           # 接口层
-│       ├── service/              # 业务层
-│       └── storage/              # 存储层
+│       ├── main.go               # 入口
+│       ├── config.go             # 配置加载
+│       ├── handler_*.go          # HTTP 接口层
+│       ├── service_*.go          # 业务层
+│       ├── storage.go            # 文件存储
+│       ├── model.go              # 数据模型
+│       ├── middleware.go         # 中间件（CORS 等）
+│       ├── scheduler.go          # 定时任务
+│       ├── client_manager.go     # 客户端管理
+│       ├── embed.go              # 前端静态资源嵌入
+│       └── web/                  # 前端编译产物（Go embed）
 └── tests/                        # 测试示例
     ├── java/                     # Java 测试
     ├── go/                       # Go 测试
@@ -136,31 +144,34 @@ Ice 规则引擎节点体系的核心基类：
   - `asyncProcess()` - 异步执行
 - **IceDispatcher** - 规则分发器
 
-### ice-server - 配置管理服务端
+### ice-server - 配置管理服务端（Go）
 
-Ice 规则引擎的配置管理平台：
+Ice 规则引擎的配置管理平台，3.0.0 起使用 Go 重写：
 
-#### 核心目录
+#### 核心文件
 
-- **controller/** - 接口层
-  - `IceAppController` - 应用管理
-  - `IceBaseController` - 规则列表
-  - `IceConfController` - 节点配置
-- **service/** - 业务层
-  - `IceAppService` - 应用服务
-  - `IceBaseService` - 规则服务
-  - `IceConfService` - 配置服务
-  - `IceServerService` - 服务端核心逻辑
-- **storage/** - 存储层（2.0新增）⭐
-  - `IceFileStorageService` - 文件存储服务
-  - `IceClientManager` - 客户端管理
-  - `IceIdGenerator` - ID 生成器
+- **handler_*.go** - HTTP 接口层
+  - `handler_app.go` - 应用管理
+  - `handler_base.go` - 规则列表
+  - `handler_conf.go` - 节点配置
+  - `handler_folder.go` - 文件夹管理
+- **service_*.go** - 业务层
+  - `service_app.go` - 应用服务
+  - `service_base.go` - 规则服务
+  - `service_conf.go` - 配置服务
+  - `service_server.go` - 服务端核心逻辑
+  - `service_folder.go` - 文件夹服务
+- **storage.go** - 文件存储实现 ⭐
+- **client_manager.go** - 客户端管理
+- **id_generator.go** - ID 生成器
+- **embed.go** - 前端静态资源嵌入（Go embed）
 
-#### 2.0 架构变化
+#### 3.0.0 架构变化
 
-- ✅ 新增 `storage/` 包 - 文件存储实现
-- ❌ 移除 `dao/` 包 - 不再需要 MyBatis
-- ❌ 移除 `nio/` 包 - 不再需要 NIO 通信
+- ✅ Server 从 Java (Spring Boot) 重写为 Go
+- ✅ 前端从嵌入 jar 改为 Go embed
+- ✅ 单二进制部署，无需 JDK 环境
+- ✅ 多平台预编译（Linux/macOS/Windows, amd64/arm64）
 
 ### ice-spring-boot - SpringBoot 集成
 

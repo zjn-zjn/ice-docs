@@ -15,6 +15,43 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [3.0.0](https://github.com/zjn-zjn/ice/compare/v2.1.3...v3.0.0) (2026-03) 🚀
+
+**Ice Rule Engine 3.0.0 - Server Rewritten in Go**
+
+### 🎯 Core Changes
+
+Server completely rewritten from Java (Spring Boot) to Go. Single binary deployment, no JDK required.
+
+#### 🔧 Server Rewrite
+- ✅ **Go Rewrite**: Server rewritten in Go for better performance and simpler deployment
+- ✅ **Single Binary**: Frontend embedded via Go embed, no additional web server needed
+- ✅ **Multi-platform Binaries**: Pre-built binaries for Linux/macOS/Windows (amd64/arm64)
+- ✅ **Docker Image Unchanged**: `waitmoon/ice-server:3.0.0`, fully compatible
+
+#### 📦 SDK Version Bump
+- Java SDK: 3.0.0 (no functional changes, version bump only)
+- Go SDK: v1.1.0
+- Python SDK: 3.0.0
+
+### ⚠️ Upgrade Notes
+
+- **No SDK Code Changes**: Version bump only, drop-in replacement
+- **Server Deployment Change**: Manual deployment now uses Go binary instead of jar, with multi-platform downloads
+- **Docker Users**: No changes needed, same image name and usage
+- **Full Data Compatibility**: File storage format unchanged, no data migration needed
+
+### 📋 Version Info
+
+| Component | Version |
+|-----------|---------|
+| Java SDK | 3.0.0 |
+| Go SDK | v1.1.0 |
+| Python SDK | 3.0.0 |
+| ice-server | 3.0.0 |
+
+---
+
 ## [2.1.3](https://github.com/zjn-zjn/ice/compare/v2.1.2...v2.1.3) (2026-03)
 
 **Ice Rule Engine 2.1.3 - Forward Node Display Enhancement**

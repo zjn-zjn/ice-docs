@@ -15,6 +15,43 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [3.0.0](https://github.com/zjn-zjn/ice/compare/v2.1.3...v3.0.0) (2026-03) 🚀
+
+**Ice 规则引擎 3.0.0 - Server Go 重写**
+
+### 🎯 核心变更
+
+Server 从 Java (Spring Boot) 完全重写为 Go，单二进制部署，无需 JDK 环境。
+
+#### 🔧 Server 重写
+- ✅ **Go 重写**：Server 使用 Go 重写，性能更优、部署更简单
+- ✅ **单二进制**：前端通过 Go embed 嵌入，无需额外 Web 服务器
+- ✅ **多平台预编译**：提供 Linux/macOS/Windows (amd64/arm64) 预编译二进制
+- ✅ **Docker 镜像不变**：`waitmoon/ice-server:3.0.0`，使用方式完全兼容
+
+#### 📦 SDK 版本号统一升级
+- Java SDK：3.0.0（功能不变，仅版本号升级）
+- Go SDK：v1.1.0
+- Python SDK：3.0.0
+
+### ⚠️ 升级注意
+
+- **SDK 无代码变更**：仅版本号升级，直接替换即可
+- **Server 部署变更**：手动部署从 jar 改为 Go 二进制，下载多平台包
+- **Docker 用户**：无需任何变更，镜像名和用法完全一致
+- **数据完全兼容**：文件存储格式不变，无需数据迁移
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| Java SDK | 3.0.0 |
+| Go SDK | v1.1.0 |
+| Python SDK | 3.0.0 |
+| ice-server | 3.0.0 |
+
+---
+
 ## [2.1.3](https://github.com/zjn-zjn/ice/compare/v2.1.2...v2.1.3) (2026-03)
 
 **Ice 规则引擎 2.1.3 - 前置节点展示优化**

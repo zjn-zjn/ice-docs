@@ -17,7 +17,7 @@ head:
 
 ## Ice Rule Engine Module Overview
 
-Ice 2.0 adopts a Monorepo architecture, managing multi-language SDKs uniformly with clear module responsibilities, making it easy to understand and extend.
+Ice adopts a Monorepo architecture, managing multi-language SDKs uniformly with clear module responsibilities, making it easy to understand and extend.
 
 ```
 ice/                              # GitHub: github.com/zjn-zjn/ice
@@ -37,7 +37,7 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   └── ice-spring-boot/      # SpringBoot integration
 │   │       ├── ice-spring-boot-starter-2x/
 │   │       └── ice-spring-boot-starter-3x/
-│   ├── go/                       # Go SDK (v1.0.8)
+│   ├── go/                       # Go SDK (v1.1.0)
 │   │   ├── cache/                # Config cache
 │   │   ├── client/               # File client
 │   │   ├── context/              # Execution context
@@ -50,11 +50,19 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │           ├── context/          # Execution context
 │           ├── node/             # Node implementation
 │           └── relation/         # Relation nodes
-├── server/                       # Config management server
+├── server/                       # Config management server (Go)
 │   └── ice-server/
-│       ├── controller/           # Interface layer
-│       ├── service/              # Business layer
-│       └── storage/              # Storage layer
+│       ├── main.go               # Entry point
+│       ├── config.go             # Config loading
+│       ├── handler_*.go          # HTTP interface layer
+│       ├── service_*.go          # Business layer
+│       ├── storage.go            # File storage
+│       ├── model.go              # Data models
+│       ├── middleware.go         # Middleware (CORS, etc.)
+│       ├── scheduler.go          # Scheduled tasks
+│       ├── client_manager.go     # Client management
+│       ├── embed.go              # Frontend static assets (Go embed)
+│       └── web/                  # Frontend build artifacts (Go embed)
 └── tests/                        # Test examples
     ├── java/                     # Java tests
     ├── go/                       # Go tests
@@ -136,31 +144,34 @@ Core base classes of Ice rule engine node system:
   - `asyncProcess()` - Asynchronous execution
 - **IceDispatcher** - Rule dispatcher
 
-### ice-server - Config Management Server
+### ice-server - Config Management Server (Go)
 
-Configuration management platform for Ice rule engine:
+Configuration management platform for Ice rule engine, rewritten in Go since 3.0.0:
 
-#### Core Directories
+#### Core Files
 
-- **controller/** - Interface layer
-  - `IceAppController` - App management
-  - `IceBaseController` - Rule list
-  - `IceConfController` - Node configuration
-- **service/** - Business layer
-  - `IceAppService` - App service
-  - `IceBaseService` - Rule service
-  - `IceConfService` - Config service
-  - `IceServerService` - Server core logic
-- **storage/** - Storage layer (2.0 new) ⭐
-  - `IceFileStorageService` - File storage service
-  - `IceClientManager` - Client manager
-  - `IceIdGenerator` - ID generator
+- **handler_*.go** - HTTP interface layer
+  - `handler_app.go` - App management
+  - `handler_base.go` - Rule list
+  - `handler_conf.go` - Node configuration
+  - `handler_folder.go` - Folder management
+- **service_*.go** - Business layer
+  - `service_app.go` - App service
+  - `service_base.go` - Rule service
+  - `service_conf.go` - Config service
+  - `service_server.go` - Server core logic
+  - `service_folder.go` - Folder service
+- **storage.go** - File storage implementation ⭐
+- **client_manager.go** - Client manager
+- **id_generator.go** - ID generator
+- **embed.go** - Frontend static assets embedding (Go embed)
 
-#### 2.0 Architecture Changes
+#### 3.0.0 Architecture Changes
 
-- ✅ Added `storage/` package - File storage implementation
-- ❌ Removed `dao/` package - MyBatis no longer needed
-- ❌ Removed `nio/` package - NIO communication no longer needed
+- ✅ Server rewritten from Java (Spring Boot) to Go
+- ✅ Frontend embedded via Go embed instead of jar
+- ✅ Single binary deployment, no JDK required
+- ✅ Multi-platform pre-built binaries (Linux/macOS/Windows, amd64/arm64)
 
 ### ice-spring-boot - SpringBoot Integration
 

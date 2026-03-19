@@ -15,6 +15,59 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v2.1.x → v3.0.0 Server Go 重写 🚀
+
+### 变更内容
+
+- **Server 从 Java 重写为 Go**：单二进制部署，无需 JDK
+- **多平台预编译包**：Linux/macOS/Windows (amd64/arm64)
+- **SDK 版本号升级**：功能不变，仅版本号统一升级至 3.0.0
+- **数据完全兼容**：文件存储格式不变，无需迁移
+
+### 升级步骤
+
+**Docker 用户（无需任何改动）**
+
+```bash
+docker pull waitmoon/ice-server:3.0.0
+```
+
+**手动部署用户**
+
+从 [https://waitmoon.com/downloads/3.0.0/](https://waitmoon.com/downloads/3.0.0/) 下载对应平台包：
+
+```bash
+# Linux amd64
+tar -xzvf ice-server-3.0.0-linux-amd64.tar.gz
+cd ice-server
+sh ice.sh start
+
+# macOS arm64 (Apple Silicon)
+tar -xzvf ice-server-3.0.0-darwin-arm64.tar.gz
+cd ice-server
+sh ice.sh start
+```
+
+**Java SDK**
+
+```xml
+<version>3.0.0</version>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.1.0
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+---
+
 ## v2.1.2 → v2.1.3
 
 ### 变更内容
