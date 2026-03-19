@@ -15,6 +15,47 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v3.0.0 → v3.0.1 Server 优化 🔧
+
+### 变更内容
+
+- **Server 代码重构**：重构 Server 端代码结构，提升可维护性
+- **文件夹操作**：支持文件夹操作能力
+- **脏检查**：新增脏检查机制
+- **UI 优化**：多项界面交互优化
+
+### 升级步骤
+
+**Docker 用户（无需任何改动）**
+
+```bash
+docker pull waitmoon/ice-server:3.0.1
+```
+
+**手动部署用户**
+
+从 [https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/) 下载对应平台包：
+
+```bash
+# Linux amd64
+tar -xzvf ice-server-3.0.1-linux-amd64.tar.gz
+cd ice-server
+sh ice.sh start
+
+# macOS arm64 (Apple Silicon)
+tar -xzvf ice-server-3.0.1-darwin-arm64.tar.gz
+cd ice-server
+sh ice.sh start
+```
+
+**Java SDK**
+
+```xml
+<version>3.0.1</version>
+```
+
+---
+
 ## v2.1.x → v3.0.0 Server Go 重写 🚀
 
 ### 变更内容
