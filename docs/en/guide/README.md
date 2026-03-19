@@ -51,15 +51,15 @@ In order to facilitate understanding, the design idea will be accompanied by a s
 
 ### Example
 
-Company X will carry out a seven-day recharge activity. The contents of the activity are as follows:
+Company X will carry out a seven-day recharge activity during the New Year's Day holiday. The contents of the activity are as follows:
 
-**Event time:**(10.1-10.7)
+**Event time:**(1.01-1.07)
 
 **Activities:**
 
-Recharge 100  dollar, get 5  dollar balance (10.1-10.7)
+Recharge 100  dollar, get 5  dollar balance (1.01-1.07)
 
-Recharge 50  dollar and get 10 points (10.5-10.7)
+Recharge 50  dollar and get 10 points (1.05-1.07)
 
 **Event Remarks:** Not superimposed to send (recharge 100  dollar can only get 5  dollar balance, will not be superimposed to give 10 points)
 
@@ -171,7 +171,7 @@ As shown in the figure, using the tree structure (the traditional tree is mirror
 
 ```[ScoreFlow-100:false]→[AND:false]→[ScoreFlow-50:true]→[PointResult:true]→[AND:true]→[ANY:true]```
 
-At this time, it can be seen that the time that needs to be stripped out before can be integrated into each node, and the time configuration is returned to the node. If the execution time is not reached, such as the node that issued the points will take effect after 10.5 days, then before 10.5 , it can be understood that this node does not exist.
+At this time, it can be seen that the time that needs to be stripped out before can be integrated into each node, and the time configuration is returned to the node. If the execution time is not reached, such as the node that issued the points will take effect after 1.05 days, then before 1.05 , it can be understood that this node does not exist.
 
 #### Change Resolution
 
@@ -183,7 +183,7 @@ For ③ due to insufficient inventory, it is equivalent to not issuing to the us
 
 One more thorny question, when the timeline is complex, what to do with test work and test concurrency?
 
-An event that started in 10.1 must be developed and launched before 10.1. For example, how can I test an event that started in 10.1 in 9.15? In ice, it just needs to be modified slightly:
+An event that started in 1.01 must be developed and launched before 1.01. For example, how can I test an event that started in 1.01 in 12.15? In ice, it just needs to be modified slightly:
 
 ![](/images/introduction/8-dark.png#dark)
 ![](/images/introduction/8-light.png#light)
