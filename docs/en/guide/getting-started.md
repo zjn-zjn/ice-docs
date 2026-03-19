@@ -21,186 +21,122 @@ Ice uses a **Server + Client + Shared Storage** architecture:
 
 - **Ice Server**: Visual rule configuration management platform
 - **Ice Client**: Rule execution SDK integrated into your business applications
-- **Shared Storage**: Server and Client sync configurations through shared file directory
-
-## Requirements
-
-- **Docker**: Recommended for Server deployment
-- **JDK**: 1.8+ (JDK 17+ for SpringBoot 3.x)
+- **Shared Storage**: Server and Client sync configurations through a shared file directory
 
 ## Step 1: Deploy Ice Server
 
-### Option 1: Docker Deployment (Recommended)
+### Docker Deployment (Recommended)
 
 ```bash
-# Pull and run
 docker run -d --name ice-server \
   -p 8121:8121 \
   -v ./ice-data:/app/ice-data \
   waitmoon/ice-server:latest
 ```
 
-Or use Docker Compose:
-
-```yaml
-# docker-compose.yml
-version: '3.8'
-services:
-  ice-server:
-    image: waitmoon/ice-server:latest
-    container_name: ice-server
-    ports:
-      - "8121:8121"
-    volumes:
-      - ./ice-data:/app/ice-data
-    restart: unless-stopped
-```
-
-```bash
-docker-compose up -d
-```
-
-### Option 2: Manual Deployment
-
-Download the latest version for your platform: [https://waitmoon.com/downloads/3.0.0/](https://waitmoon.com/downloads/3.0.0/)
-
-| Platform | Package |
-|----------|---------|
-| Linux x86_64 | `ice-server-3.0.0-linux-amd64.tar.gz` |
-| Linux ARM64 | `ice-server-3.0.0-linux-arm64.tar.gz` |
-| macOS x86_64 | `ice-server-3.0.0-darwin-amd64.tar.gz` |
-| macOS ARM64 (Apple Silicon) | `ice-server-3.0.0-darwin-arm64.tar.gz` |
-| Windows x86_64 | `ice-server-3.0.0-windows-amd64.zip` |
-
-```bash
-# Extract and start (Linux/macOS)
-tar -xzvf ice-server-3.0.0-linux-amd64.tar.gz
-cd ice-server
-sh ice.sh start
-```
-
-### Access Management UI
-
-After startup, visit: **http://localhost:8121**
+After startup, visit **http://localhost:8121** to access the management UI.
 
 Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
 
+### Manual Deployment
+
+Download the package for your platform from [https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/), extract and run:
+
+```bash
+tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
+sh ice.sh start
+```
+
 ## Step 2: Integrate Ice Client SDK
 
-### Add Dependency
+### Java
 
-<CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x" active>
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>3.0.0</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="SpringBoot 2.x">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>3.0.0</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Go">
-
-```bash
-go get github.com/zjn-zjn/ice/sdks/go
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Python">
-
-```bash
-pip install ice-rules
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Non-SpringBoot">
+**Add Dependency**
 
 ```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.2</version>
 </dependency>
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
-
-### Configure Client
-
-```yaml
-# application.yml
-ice:
-  app: 1                        # App ID, corresponds to Server config
-  storage:
-    path: ./ice-data            # Shared storage path (same as Server)
-  scan: com.your.package        # Leaf node scan package
-```
-
-::: warning Critical Configuration
-**`ice.storage.path` must share the same directory with Server**
-
-- Local development: Use the same local path
-- Docker environment: Share through volume mounts
-- Distributed environment: Use NFS or cloud drives
-:::
-
-### Non-SpringBoot Projects
+**Start Client**
 
 ```java
-import com.ice.core.client.IceFileClient;
-
-// Create client
 IceFileClient client = new IceFileClient(
-    1,                    // app ID
-    "./ice-data",         // shared storage path
-    "com.your.package"    // leaf node scan package
+    1,                    // app ID (matches the App created in Server)
+    "./ice-data",         // shared storage path (must point to the same directory as Server)
+    "com.your.package"    // package path where leaf nodes are located
 );
-
-// Start
 client.start();
-client.waitStarted();
-
-// Destroy when done
-client.destroy();
 ```
 
-## Step 3: Develop Leaf Nodes
+**Spring Project Integration**
 
-Ice provides three types of leaf nodes:
+For Spring/SpringBoot projects, add a configuration class to enable automatic Spring Bean injection in leaf nodes:
+
+```java
+@Configuration
+public class IceConfig implements ApplicationContextAware {
+
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) {
+        AutowireCapableBeanFactory bf = ctx.getAutowireCapableBeanFactory();
+        IceBeanUtils.setFactory(new IceBeanUtils.IceBeanFactory() {
+            @Override
+            public void autowireBean(Object bean) { bf.autowireBean(bean); }
+            @Override
+            public boolean containsBean(String name) { return ctx.containsBean(name); }
+            @Override
+            public Object getBean(String name) { return ctx.getBean(name); }
+        });
+    }
+
+    @Bean(destroyMethod = "destroy")
+    public IceFileClient iceFileClient() throws Exception {
+        IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+        client.start();
+        return client;
+    }
+}
+```
+
+> For more constructor parameters (parallelism, poll interval, swimlane, etc.) see [Client SDK Guide](/en/guide/client-integration.html)
+
+### Go
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go
+```
+
+See [Go SDK Guide](/en/guide/go-sdk.html) for details.
+
+### Python
+
+```bash
+pip install ice-rules
+```
+
+See [Python SDK Guide](/en/guide/python-sdk.html) for details.
+
+## Step 3: Develop Leaf Nodes (Java Example)
+
+Leaf nodes are where business logic actually executes. Extend the corresponding base class and place them under the scan package:
 
 | Type | Base Class | Return | Purpose |
 |------|------------|--------|---------|
-| **Flow** | `BaseLeafRoamFlow` | true/false | Condition checks, filtering |
-| **Result** | `BaseLeafRoamResult` | true/false | Business operations, rewards |
-| **None** | `BaseLeafRoamNone` | none | Data queries, logging |
-
-### Example: Amount Reward Node
+| **Flow** | `BaseLeafRoamFlow` | true/false | Condition checks |
+| **Result** | `BaseLeafRoamResult` | true/false | Business execution |
+| **None** | `BaseLeafRoamNone` | none | Helper operations (logging, queries, etc.) |
 
 ```java
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AmountResult extends BaseLeafRoamResult {
 
-    private String key;      // Configurable: user ID key
-    private double value;    // Configurable: amount to send
+    private String key;      // Configurable in Server UI
+    private double value;    // Configurable in Server UI
 
     @Override
     protected boolean doRoamResult(IceRoam roam) {
@@ -208,90 +144,58 @@ public class AmountResult extends BaseLeafRoamResult {
         if (uid == null || value <= 0) {
             return false;
         }
-        // Call business service to send amount
         return sendService.sendAmount(uid, value);
     }
 }
 ```
 
+> Fields in the class (like `key`, `value`) automatically appear in the Server configuration UI - operators can modify them without code changes.
+
 ## Step 4: Configure and Execute Rules
 
-### 1. Configure Rules in Server
+### Configure in Server
 
-Visit http://localhost:8121 to access the management UI:
+Visit http://localhost:8121:
 
 1. Create an Application (App)
 2. Create a new Rule (Ice)
-3. Configure the node tree
-4. **Publish** to make configuration effective
+3. Drag leaf nodes into the rule tree and configure parameters
+4. Click **Publish**
 
-### 2. Execute in Business Code
+### Trigger in Code
 
 ```java
-// Create execution pack
 IcePack pack = new IcePack();
-pack.setIceId(1L);  // Rule ID
+pack.setIceId(1L);
 
-// Set business parameters
 IceRoam roam = new IceRoam();
 roam.put("uid", 12345);
-roam.put("amount", 100.0);
 pack.setRoam(roam);
 
-// Execute rule
 Ice.syncProcess(pack);
-
-// Get execution result
-Object result = roam.get("SEND_AMOUNT");
 ```
 
-## Storage Sharing Solutions
+## Shared Storage
 
-### Local Development
+Server and Client must access the same `ice-data` directory:
 
-```yaml
-# Server and Client use same path
-ice:
-  storage:
-    path: ./ice-data
-```
-
-### Docker Environment
-
-```yaml
-# docker-compose.yml
-services:
-  ice-server:
-    volumes:
-      - ./ice-data:/app/ice-data
-
-  your-app:
-    volumes:
-      - ./ice-data:/app/ice-data  # Same mount
-```
-
-### Distributed Environment
-
-Use NFS or cloud drives (AWS EFS, Azure Files, etc.) as shared storage.
+| Scenario | Solution |
+|----------|----------|
+| Local development | Same local path |
+| Docker | Mount the same host directory via `-v` |
+| Distributed | NFS / AWS EFS / Azure Files |
 
 ## Next Steps
 
+- 📖 [Client SDK Guide](/en/guide/client-integration.html) - Full constructor parameters
 - 📖 [Detailed Documentation](/en/guide/detail.html) - Deep dive into node types and configuration
-- 🐹 [Go SDK Guide](/en/guide/go-sdk.html) - Go language integration guide
-- 🐍 [Python SDK Guide](/en/guide/python-sdk.html) - Python language integration guide
-- 🏗️ [Architecture Design](/en/advanced/architecture.html) - Understand Ice architecture
-- 🎥 [Video Tutorial](https://www.bilibili.com/video/BV1Q34y1R7KF) - Configuration and development demo
+- 🐹 [Go SDK Guide](/en/guide/go-sdk.html) · 🐍 [Python SDK Guide](/en/guide/python-sdk.html)
+- 🏗️ [Architecture Design](/en/advanced/architecture.html) · 🎥 [Video Tutorial](https://www.bilibili.com/video/BV1Q34y1R7KF)
 
 ## FAQ
 
-### Client not loading configuration?
+**Client not loading configuration?** Check if storagePath points to the same directory as Server.
 
-Check if `ice.storage.path` points to the same directory as Server.
+**Rule changes not taking effect?** Make sure you clicked "Publish" in Server.
 
-### Rule changes not taking effect?
-
-Make sure you clicked "Publish" in Server. Configuration syncs to Client only after publishing.
-
-### More Questions
-
-👉 [FAQ](/en/guide/qa.html)
+👉 [More Questions](/en/guide/qa.html)

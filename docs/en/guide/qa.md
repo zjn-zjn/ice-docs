@@ -98,8 +98,8 @@ services:
 
 **Checklist**:
 
-1. **Check storage path**: Confirm `ice.storage.path` shares the same directory with Server
-2. **Check App ID**: Confirm `ice.app` is configured correctly
+1. **Check storage path**: Confirm the storagePath in IceFileClient constructor shares the same directory with Server
+2. **Check App ID**: Confirm the app parameter in IceFileClient constructor is correct
 3. **Check directory permissions**: Confirm application has read permission for storage directory
 4. **Check version file**: Confirm `{app}/version.txt` file exists in storage directory
 
@@ -123,7 +123,7 @@ ERROR (IceConfCache.java:62)- class not found conf:{"id":118,"type":6,"confName"
 **Cause**: Corresponding node class not found in Client
 
 **Solutions**:
-1. Check if node class exists in package path configured in `ice.scan`
+1. Check if node class exists in the scan package path configured in IceFileClient constructor
 2. Check if node class full name is correct
 3. Confirm node class is properly compiled and packaged
 
@@ -183,11 +183,10 @@ rsync -avz ./ice-data/ /backup/ice-data/
 
 ### How to optimize Client startup speed?
 
-1. **Configure scan path**: Specify leaf node scan packages to avoid full scan
+1. **Configure scan path**: Specify leaf node scan packages in IceFileClient constructor to avoid full scan
 
-```yaml
-ice:
-  scan: com.your.package.nodes  # Only scan specified package
+```java
+new IceFileClient(1, "./ice-data", "com.your.package.nodes");
 ```
 
 2. **Reduce node count**: Clean up unused node configurations

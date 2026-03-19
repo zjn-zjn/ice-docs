@@ -79,51 +79,9 @@ Visit http://localhost:8121 to access the visual configuration interface.
 
 ### Step 2: Integrate Ice Client SDK
 
-Add dependency to your business application:
+Add dependency and start Client (must share the same `ice-data` directory with Server):
 
-<CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x  " active>
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  SpringBoot 2.x  ">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  Go  ">
-
-```bash
-go get github.com/zjn-zjn/ice/sdks/go
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  Python  ">
-
-```bash
-pip install ice-rules
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  Non-SpringBoot">
-
+**Java**
 ```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
@@ -132,43 +90,35 @@ pip install ice-rules
 </dependency>
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
-
-Configure shared storage path (same as Server):
-
-<CodeGroup>
-  <CodeGroupItem title="Java (application.yml)" active>
-
-```yaml
-ice:
-  app: 1
-  storage:
-    path: ./ice-data
+**Go**
+```bash
+go get github.com/zjn-zjn/ice/sdks/go
 ```
 
-  </CodeGroupItem>
+**Python**
+```bash
+pip install ice-rules
+```
 
-  <CodeGroupItem title="Go">
+Start Client:
 
+**Java**
+```java
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+```
+
+**Go**
 ```go
 client, _ := ice.NewClient(1, "./ice-data")
 client.Start()
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Python">
-
+**Python**
 ```python
 client = ice.FileClient(app=1, storage_path="./ice-data")
 client.start()
 ```
-
-  </CodeGroupItem>
-</CodeGroup>
-
-> 💡 **Key Point**: Client must share the same storage directory (`ice-data`) with Server
 
 ### Step 3: Configure Rules and Execute
 
@@ -176,40 +126,29 @@ client.start()
 2. Publish rules, Client auto hot-reloads
 3. Call rule execution in your business code
 
-<CodeGroup>
-  <CodeGroupItem title="Java" active>
-
+**Java**
 ```java
 IcePack pack = new IcePack();
-pack.setIceId(1L);  // Rule ID
+pack.setIceId(1L);
 pack.setRoam(new IceRoam().put("uid", 12345));
 Ice.syncProcess(pack);
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Go">
-
+**Go**
 ```go
 pack := ice.NewPack().SetIceId(1)
 pack.Roam.Put("uid", 12345)
 ice.SyncProcess(context.Background(), pack)
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Python">
-
+**Python**
 ```python
 pack = ice.Pack(ice_id=1)
 pack.roam.put("uid", 12345)
 ice.sync_process(pack)
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
-
-👉 [View Complete Getting Started Guide](/en/guide/getting-started.html) | [Go SDK Guide](/en/guide/go-sdk.html) | [Python SDK Guide](/en/guide/python-sdk.html)
+👉 [Getting Started Guide](/en/guide/getting-started.html) | [Go SDK Guide](/en/guide/go-sdk.html) | [Python SDK Guide](/en/guide/python-sdk.html)
 
 ## Use Cases
 

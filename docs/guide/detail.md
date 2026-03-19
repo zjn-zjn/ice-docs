@@ -382,50 +382,47 @@ public class AviatorFlow extends BaseLeafRoamFlow {
 
 ## Server 配置详解
 
-Ice Server 的完整配置项：
+Ice Server 通过**命令行参数**或**环境变量**配置（环境变量优先）：
 
-```yml
-server:
-  port: 8121
+| 参数 | 环境变量 | 默认值 | 说明 |
+|------|----------|--------|------|
+| `--port` | `ICE_PORT` | 8121 | 服务端口 |
+| `--storage-path` | `ICE_STORAGE_PATH` | ./ice-data | 文件存储路径 |
+| `--client-timeout` | `ICE_CLIENT_TIMEOUT` | 60 | 客户端失活超时（秒） |
+| `--version-retention` | `ICE_VERSION_RETENTION` | 1000 | 版本文件保留数量 |
+| `--recycle-cron` | `ICE_RECYCLE_CRON` | 0 3 * * * | 回收定时任务 cron |
+| `--recycle-way` | `ICE_RECYCLE_WAY` | hard | 回收方式（soft/hard） |
+| `--recycle-protect-days` | `ICE_RECYCLE_PROTECT_DAYS` | 1 | 回收保护天数 |
 
-ice:
-  storage:
-    # 文件存储路径
-    path: ./ice-data
-  
-  # 客户端失活超时时间(秒)
-  # 超过此时间未更新心跳的客户端将被标记为离线
-  client-timeout: 60
-  
-  # 版本文件保留数量
-  # 超过此数量的旧版本增量文件将被清理
-  version-retention: 1000
+```bash
+# 命令行参数方式
+./ice-server --port 8121 --storage-path ./ice-data
+
+# 环境变量方式（Docker 推荐）
+docker run -e ICE_PORT=8121 -e ICE_STORAGE_PATH=/app/ice-data waitmoon/ice-server:latest
 ```
 
 ## Client 配置详解
 
-Ice Client 的完整配置项：
+Ice Client 通过 `IceFileClient` 构造函数配置：
 
-```yml
-ice:
-  # 应用ID（必填）
-  app: 1
-  
-  storage:
-    # 文件存储路径（必填，需与Server共享）
-    path: ./ice-data
-  
-  # 叶子节点扫描包路径
-  # 多个包用逗号分隔，不配置则扫描全部（较慢）
-  scan: com.ice.test
-  
-  # 版本轮询间隔(秒)，默认5秒
-  poll-interval: 5
-  
-  # 心跳更新间隔(秒)，默认10秒
-  heartbeat-interval: 10
-  
-  pool:
-    # 线程池并行度，默认-1使用ForkJoinPool默认配置
-    parallelism: -1
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| `app` | int | 是 | - | 应用 ID，对应 Server 中创建的 App |
+| `storagePath` | String | 是 | - | 共享存储路径，必须和 Server 同一目录 |
+| `scan` | String | 是 | - | 叶子节点扫描包，多个用逗号分隔 |
+| `parallelism` | int | 否 | -1 | 线程池并行度，≤0 使用 ForkJoinPool 默认配置 |
+| `pollIntervalSeconds` | int | 否 | 5 | 版本轮询间隔（秒） |
+| `heartbeatIntervalSeconds` | int | 否 | 10 | 心跳上报间隔（秒） |
+| `lane` | String | 否 | 空 | 泳道名称，空表示主干 |
+
+```java
+// 基本用法
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+
+// 完整参数
+IceFileClient client = new IceFileClient(1, "./ice-data", -1, Set.of("com.your.package"), 5, 10);
+
+// 带泳道
+IceFileClient client = IceFileClient.newWithLane(1, "./ice-data", "com.your.package", "feature-xxx");
 ```

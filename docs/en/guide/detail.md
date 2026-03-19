@@ -365,50 +365,47 @@ Node provides iceErrorStateEnum configuration. If not empty, it has highest prio
 
 ## Server Configuration Details
 
-Complete Ice Server configuration options:
+Ice Server is configured via **command-line flags** or **environment variables** (env vars take priority):
 
-```yml
-server:
-  port: 8121
+| Flag | Env Var | Default | Description |
+|------|---------|---------|-------------|
+| `--port` | `ICE_PORT` | 8121 | Server port |
+| `--storage-path` | `ICE_STORAGE_PATH` | ./ice-data | File storage path |
+| `--client-timeout` | `ICE_CLIENT_TIMEOUT` | 60 | Client inactive timeout (seconds) |
+| `--version-retention` | `ICE_VERSION_RETENTION` | 1000 | Version file retention count |
+| `--recycle-cron` | `ICE_RECYCLE_CRON` | 0 3 * * * | Recycle cron expression |
+| `--recycle-way` | `ICE_RECYCLE_WAY` | hard | Recycle method (soft/hard) |
+| `--recycle-protect-days` | `ICE_RECYCLE_PROTECT_DAYS` | 1 | Recycle protection days |
 
-ice:
-  storage:
-    # File storage path
-    path: ./ice-data
-  
-  # Client inactive timeout (seconds)
-  # Clients without heartbeat updates beyond this time will be marked offline
-  client-timeout: 60
-  
-  # Version file retention count
-  # Old version incremental files exceeding this count will be cleaned up
-  version-retention: 1000
+```bash
+# Command-line flags
+./ice-server --port 8121 --storage-path ./ice-data
+
+# Environment variables (recommended for Docker)
+docker run -e ICE_PORT=8121 -e ICE_STORAGE_PATH=/app/ice-data waitmoon/ice-server:latest
 ```
 
 ## Client Configuration Details
 
-Complete Ice Client configuration options:
+Ice Client is configured via `IceFileClient` constructor parameters:
 
-```yml
-ice:
-  # Application ID (required)
-  app: 1
-  
-  storage:
-    # File storage path (required, needs to be shared with Server)
-    path: ./ice-data
-  
-  # Leaf node scan package paths
-  # Multiple packages separated by comma, not configured scans all (slower)
-  scan: com.ice.test
-  
-  # Version polling interval (seconds), default 5 seconds
-  poll-interval: 5
-  
-  # Heartbeat update interval (seconds), default 10 seconds
-  heartbeat-interval: 10
-  
-  pool:
-    # Thread pool parallelism, default -1 uses ForkJoinPool default configuration
-    parallelism: -1
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `app` | int | Yes | - | Application ID, matches the App created in Server |
+| `storagePath` | String | Yes | - | Shared storage path, must be same directory as Server |
+| `scan` | String | Yes | - | Leaf node scan packages, comma-separated |
+| `parallelism` | int | No | -1 | Thread pool parallelism, ≤0 uses ForkJoinPool default |
+| `pollIntervalSeconds` | int | No | 5 | Version polling interval (seconds) |
+| `heartbeatIntervalSeconds` | int | No | 10 | Heartbeat report interval (seconds) |
+| `lane` | String | No | empty | Swimlane name, empty means main trunk |
+
+```java
+// Basic usage
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+
+// Full parameters
+IceFileClient client = new IceFileClient(1, "./ice-data", -1, Set.of("com.your.package"), 5, 10);
+
+// With swimlane
+IceFileClient client = IceFileClient.newWithLane(1, "./ice-data", "com.your.package", "feature-xxx");
 ```

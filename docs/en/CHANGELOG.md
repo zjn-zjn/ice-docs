@@ -15,6 +15,35 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [3.0.2](https://github.com/zjn-zjn/ice/compare/v3.0.1...v3.0.2) (2026-03)
+
+**Ice Rule Engine 3.0.2 - Client Address Optimization & Starter Removal**
+
+### 🔧 Optimization
+
+- **Client Address Simplified**: Address format shortened from `IP/app/xxxxxxxxxxx` to `IP_xxxxx`
+- **IP Detection Unified**: Java/Python/Go SDK unified to use network interface iteration for non-loopback IPv4
+
+### 📦 Starter Removed
+
+- **Removed `ice-spring-boot-starter-2x` and `ice-spring-boot-starter-3x`**: Use `ice-core` directly for all Java projects
+- **Spring Integration**: For Spring/SpringBoot projects, use `IceBeanUtils.setFactory()` to enable bean injection
+
+---
+
+## [3.0.1](https://github.com/zjn-zjn/ice/compare/v3.0.0...v3.0.1) (2026-03)
+
+**Ice Rule Engine 3.0.1 - Server Optimization**
+
+### 🔧 Optimization
+
+- **Server Code Restructured**: Reorganized server code into sub-packages for better maintainability
+- **Folder Operations**: Added folder operation support
+- **Dirty Checking**: Added dirty checking mechanism with unsaved changes prompt
+- **UI Optimization**: Multiple interface interaction and display improvements
+
+---
+
 ## [3.0.0](https://github.com/zjn-zjn/ice/compare/v2.1.3...v3.0.0) (2026-03) 🚀
 
 **Ice Rule Engine 3.0.0 - Server Rewritten in Go**

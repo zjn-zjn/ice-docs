@@ -15,6 +15,107 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v3.0.1 → v3.0.2 Client Optimization 🔧
+
+### Changes
+
+- **Client Address Simplified**: Address format shortened from `IP/app/xxxxxxxxxxx` to `IP_xxxxx`
+- **IP Detection Unified**: Java/Python/Go SDK unified to use network interface iteration for non-loopback IPv4
+- **Spring Boot Starter Removed**: Removed `ice-spring-boot-starter-2x` and `ice-spring-boot-starter-3x`, all Java projects now use `ice-core` directly
+
+### Upgrade Steps
+
+Server does not need updating, only upgrade Client SDK.
+
+**Java SDK**
+
+Replace `ice-spring-boot-starter-2x` / `ice-spring-boot-starter-3x` with `ice-core`:
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>3.0.2</version>
+</dependency>
+```
+
+Remove `ice.*` configuration from `application.yml`, initialize Client in code instead:
+
+```java
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+```
+
+For Spring projects, set up `IceBeanUtils` to enable bean injection in leaf nodes:
+
+```java
+@Configuration
+public class IceConfig implements ApplicationContextAware {
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) {
+        AutowireCapableBeanFactory bf = ctx.getAutowireCapableBeanFactory();
+        IceBeanUtils.setFactory(new IceBeanUtils.IceBeanFactory() {
+            @Override
+            public void autowireBean(Object bean) { bf.autowireBean(bean); }
+            @Override
+            public boolean containsBean(String name) { return ctx.containsBean(name); }
+            @Override
+            public Object getBean(String name) { return ctx.getBean(name); }
+        });
+    }
+
+    @Bean(destroyMethod = "destroy")
+    public IceFileClient iceFileClient() throws Exception {
+        IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+        client.start();
+        return client;
+    }
+}
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.1.1
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+---
+
+## v3.0.0 → v3.0.1 Server Optimization 🔧
+
+### Changes
+
+- **Server Code Restructured**: Reorganized server code into sub-packages for better maintainability
+- **Folder Operations**: Added folder operation support
+- **Dirty Checking**: Added dirty checking mechanism with unsaved changes prompt
+- **UI Optimization**: Multiple interface interaction and display improvements
+
+### Upgrade Steps
+
+**Docker Users (No Changes Needed)**
+
+```bash
+docker pull waitmoon/ice-server:3.0.1
+```
+
+**Manual Deployment Users**
+
+Download from [https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/)
+
+**Java SDK**
+
+```xml
+<version>3.0.1</version>
+```
+
+---
+
 ## v2.1.x → v3.0.0 Server Rewritten in Go 🚀
 
 ### Changes

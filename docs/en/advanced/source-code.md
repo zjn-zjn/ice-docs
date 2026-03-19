@@ -34,10 +34,7 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 │   │   │   ├── cache/            # Config cache
 │   │   │   ├── client/           # File client
 │   │   │   └── context/          # Execution context
-│   │   └── ice-spring-boot/      # SpringBoot integration
-│   │       ├── ice-spring-boot-starter-2x/
-│   │       └── ice-spring-boot-starter-3x/
-│   ├── go/                       # Go SDK (v1.1.0)
+│   ├── go/                       # Go SDK (v1.1.1)
 │   │   ├── cache/                # Config cache
 │   │   ├── client/               # File client
 │   │   ├── context/              # Execution context
@@ -53,15 +50,12 @@ ice/                              # GitHub: github.com/zjn-zjn/ice
 ├── server/                       # Config management server (Go)
 │   └── ice-server/
 │       ├── main.go               # Entry point
-│       ├── config.go             # Config loading
-│       ├── handler_*.go          # HTTP interface layer
-│       ├── service_*.go          # Business layer
-│       ├── storage.go            # File storage
-│       ├── model.go              # Data models
-│       ├── middleware.go         # Middleware (CORS, etc.)
-│       ├── scheduler.go          # Scheduled tasks
-│       ├── client_manager.go     # Client management
 │       ├── embed.go              # Frontend static assets (Go embed)
+│       ├── config/               # Config loading
+│       ├── model/                # Data models
+│       ├── storage/              # File storage
+│       ├── service/              # Business layer
+│       ├── handler/              # HTTP interface layer + middleware
 │       └── web/                  # Frontend build artifacts (Go embed)
 └── tests/                        # Test examples
     ├── java/                     # Java tests
@@ -148,22 +142,20 @@ Core base classes of Ice rule engine node system:
 
 Configuration management platform for Ice rule engine, rewritten in Go since 3.0.0:
 
-#### Core Files
+#### Core Modules
 
-- **handler_*.go** - HTTP interface layer
-  - `handler_app.go` - App management
-  - `handler_base.go` - Rule list
-  - `handler_conf.go` - Node configuration
-  - `handler_folder.go` - Folder management
-- **service_*.go** - Business layer
-  - `service_app.go` - App service
-  - `service_base.go` - Rule service
-  - `service_conf.go` - Config service
-  - `service_server.go` - Server core logic
-  - `service_folder.go` - Folder service
-- **storage.go** - File storage implementation ⭐
-- **client_manager.go** - Client manager
-- **id_generator.go** - ID generator
+- **config/** - Config loading
+- **model/** - Data models, error codes, response structures
+- **storage/** - File storage implementation ⭐, ID generator
+- **service/** - Business layer
+  - `app.go` - App service
+  - `base.go` - Rule service
+  - `conf.go` - Config service
+  - `server.go` - Server core logic
+  - `folder.go` - Folder service
+  - `client_manager.go` - Client manager
+  - `scheduler.go` - Scheduled tasks
+- **handler/** - HTTP interface layer + middleware
 - **embed.go** - Frontend static assets embedding (Go embed)
 
 #### 3.0.0 Architecture Changes
@@ -172,19 +164,6 @@ Configuration management platform for Ice rule engine, rewritten in Go since 3.0
 - ✅ Frontend embedded via Go embed instead of jar
 - ✅ Single binary deployment, no JDK required
 - ✅ Multi-platform pre-built binaries (Linux/macOS/Windows, amd64/arm64)
-
-### ice-spring-boot - SpringBoot Integration
-
-#### ice-spring-boot-starter-2x
-
-Starter for SpringBoot 2.x:
-
-- `IceClientProperties` - Configuration properties
-- `IceFileClientInit` - Client initialization (2.0 new)
-
-#### ice-spring-boot-starter-3x
-
-Starter for SpringBoot 3.x, same structure as 2x.
 
 ### ice-test - Test Examples
 

@@ -15,12 +15,13 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
-## v3.0.1 → v3.0.2 Client Address 优化 🔧
+## v3.0.1 → v3.0.2 Client 优化 🔧
 
 ### 变更内容
 
 - **Client Address 精简**：地址格式从 `IP/app/xxxxxxxxxxx` 缩短为 `IP_xxxxx`，更简洁易读
 - **IP 获取统一**：Java/Python/Go SDK 统一使用网卡遍历获取非回环 IPv4
+- **移除 Spring Boot Starter**：移除 `ice-spring-boot-starter-2x` 和 `ice-spring-boot-starter-3x`，所有 Java 项目统一使用 `ice-core`
 
 ### 升级步骤
 
@@ -28,8 +29,48 @@ Server 无需更新，仅需升级 Client SDK。
 
 **Java SDK**
 
+将依赖从 `ice-spring-boot-starter-2x` / `ice-spring-boot-starter-3x` 替换为 `ice-core`：
+
 ```xml
-<version>3.0.2</version>
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>3.0.2</version>
+</dependency>
+```
+
+删除 `application.yml` 中的 `ice.*` 配置，改为代码方式初始化 Client：
+
+```java
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+```
+
+如果是 Spring 项目，需要设置 `IceBeanUtils` 以支持叶子节点注入 Spring Bean：
+
+```java
+@Configuration
+public class IceConfig implements ApplicationContextAware {
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) {
+        AutowireCapableBeanFactory bf = ctx.getAutowireCapableBeanFactory();
+        IceBeanUtils.setFactory(new IceBeanUtils.IceBeanFactory() {
+            @Override
+            public void autowireBean(Object bean) { bf.autowireBean(bean); }
+            @Override
+            public boolean containsBean(String name) { return ctx.containsBean(name); }
+            @Override
+            public Object getBean(String name) { return ctx.getBean(name); }
+        });
+    }
+
+    @Bean(destroyMethod = "destroy")
+    public IceFileClient iceFileClient() throws Exception {
+        IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+        client.start();
+        return client;
+    }
+}
 ```
 
 **Go SDK**

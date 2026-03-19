@@ -24,6 +24,11 @@ head:
 - **Client Address 精简**：地址格式从 `IP/app/xxxxxxxxxxx` 缩短为 `IP_xxxxx`
 - **IP 获取统一**：Java/Python/Go SDK 统一使用网卡遍历获取非回环 IPv4
 
+### 📦 Starter 移除
+
+- **移除 `ice-spring-boot-starter-2x` 和 `ice-spring-boot-starter-3x`**：所有 Java 项目统一使用 `ice-core`
+- **Spring 集成**：Spring/SpringBoot 项目通过 `IceBeanUtils.setFactory()` 实现 Bean 注入
+
 ---
 
 ## [3.0.1](https://github.com/zjn-zjn/ice/compare/v3.0.0...v3.0.1) (2026-03)

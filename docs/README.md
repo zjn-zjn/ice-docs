@@ -79,51 +79,9 @@ sh ice.sh start
 
 ### Step 2：集成 Ice Client SDK
 
-在您的业务应用中添加依赖：
+在业务应用中添加依赖并启动 Client（需与 Server 共享同一个 `ice-data` 目录）：
 
-<CodeGroup>
-  <CodeGroupItem title="SpringBoot 3.x  " active>
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-3x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  SpringBoot 2.x  ">
-
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-spring-boot-starter-2x</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  Go  ">
-
-```bash
-go get github.com/zjn-zjn/ice/sdks/go
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  Python  ">
-
-```bash
-pip install ice-rules
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="  非 SpringBoot">
-
+**Java**
 ```xml
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
@@ -132,43 +90,35 @@ pip install ice-rules
 </dependency>
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
-
-配置共享存储路径（与 Server 相同）：
-
-<CodeGroup>
-  <CodeGroupItem title="Java (application.yml)" active>
-
-```yaml
-ice:
-  app: 1
-  storage:
-    path: ./ice-data
+**Go**
+```bash
+go get github.com/zjn-zjn/ice/sdks/go
 ```
 
-  </CodeGroupItem>
+**Python**
+```bash
+pip install ice-rules
+```
 
-  <CodeGroupItem title="Go">
+启动 Client：
 
+**Java**
+```java
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+```
+
+**Go**
 ```go
 client, _ := ice.NewClient(1, "./ice-data")
 client.Start()
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Python">
-
+**Python**
 ```python
 client = ice.FileClient(app=1, storage_path="./ice-data")
 client.start()
 ```
-
-  </CodeGroupItem>
-</CodeGroup>
-
-> 💡 **关键点**：Client 需要与 Server 共享同一个存储目录（`ice-data`）
 
 ### Step 3：配置规则并执行
 
@@ -176,38 +126,27 @@ client.start()
 2. 发布规则，Client 自动热加载
 3. 在业务代码中调用规则执行
 
-<CodeGroup>
-  <CodeGroupItem title="Java" active>
-
+**Java**
 ```java
 IcePack pack = new IcePack();
-pack.setIceId(1L);  // 规则 ID
+pack.setIceId(1L);
 pack.setRoam(new IceRoam().put("uid", 12345));
 Ice.syncProcess(pack);
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Go">
-
+**Go**
 ```go
 pack := ice.NewPack().SetIceId(1)
 pack.Roam.Put("uid", 12345)
 ice.SyncProcess(context.Background(), pack)
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="Python">
-
+**Python**
 ```python
 pack = ice.Pack(ice_id=1)
 pack.roam.put("uid", 12345)
 ice.sync_process(pack)
 ```
-
-  </CodeGroupItem>
-</CodeGroup>
 
 👉 [查看完整快速上手指南](/guide/getting-started.html) | [Go SDK 指南](/guide/go-sdk.html) | [Python SDK 指南](/guide/python-sdk.html)
 

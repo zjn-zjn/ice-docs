@@ -1,7 +1,7 @@
 {
   "name": "Ice - 轻量级可视化Java规则引擎",
   "short_name": "Ice",
-  "description": "Ice是一个轻量级、高性能的Java规则引擎和业务编排框架，提供可视化配置界面，支持SpringBoot 2.x/3.x。",
+  "description": "Ice是一个轻量级、高性能的规则引擎和业务编排框架，提供可视化配置界面，支持 Java/Go/Python 多语言 SDK。",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

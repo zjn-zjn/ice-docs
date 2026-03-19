@@ -98,8 +98,8 @@ services:
 
 **检查清单**：
 
-1. **检查存储路径**：确认 `ice.storage.path` 与 Server 共享同一目录
-2. **检查 App ID**：确认 `ice.app` 配置正确
+1. **检查存储路径**：确认 IceFileClient 构造函数中的 storagePath 与 Server 共享同一目录
+2. **检查 App ID**：确认 IceFileClient 构造函数中的 app 参数正确
 3. **检查目录权限**：确认应用有读取存储目录的权限
 4. **检查版本文件**：确认存储目录中存在 `{app}/version.txt` 文件
 
@@ -123,7 +123,7 @@ ERROR (IceConfCache.java:62)- class not found conf:{"id":118,"type":6,"confName"
 **原因**：Client 中未找到对应的节点类
 
 **解决方案**：
-1. 检查节点类是否存在于 `ice.scan` 配置的包路径下
+1. 检查节点类是否存在于 IceFileClient 构造函数中配置的扫描包路径下
 2. 检查节点类的全类名是否正确
 3. 确认节点类已正确编译并打包
 
@@ -183,11 +183,10 @@ rsync -avz ./ice-data/ /backup/ice-data/
 
 ### 如何优化 Client 启动速度？
 
-1. **配置 scan 路径**：指定叶子节点扫描包，避免全量扫描
+1. **配置 scan 路径**：在 IceFileClient 构造函数中指定叶子节点扫描包，避免全量扫描
 
-```yaml
-ice:
-  scan: com.your.package.nodes  # 只扫描指定包
+```java
+new IceFileClient(1, "./ice-data", "com.your.package.nodes");
 ```
 
 2. **减少节点数量**：清理不再使用的节点配置
