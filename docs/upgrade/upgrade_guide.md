@@ -24,15 +24,7 @@ head:
 
 ### 升级步骤
 
-**Docker 用户（无需任何改动）**
-
-```bash
-docker pull waitmoon/ice-server:3.0.2
-```
-
-**手动部署用户**
-
-从 [https://waitmoon.com/downloads/3.0.2/](https://waitmoon.com/downloads/3.0.2/) 下载对应平台包
+Server 无需更新，仅需升级 Client SDK。
 
 **Java SDK**
 

@@ -62,7 +62,7 @@ docker-compose up -d
 
 ### 方式二：手动部署
 
-下载对应平台的最新版本：[https://waitmoon.com/downloads/3.0.2/](https://waitmoon.com/downloads/3.0.2/)
+下载对应平台的最新版本：[https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/)
 
 | 平台 | 下载包 |
 |------|--------|
