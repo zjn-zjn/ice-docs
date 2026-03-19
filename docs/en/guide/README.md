@@ -110,7 +110,7 @@ The advantage of the above two solutions is that some scattered configurations c
 
 #### Reality
 
-①Recharge 100  dollar and change it to 80, 10 points to 20 points, and the time to change to 10.8 and end it (*smile*, after all, I spent so much effort on the rules engine, and finally realized the value!)
+①Recharge 100  dollar and change it to 80, 10 points to 20 points, and the time to change to 1.08 and end it (*smile*, after all, I spent so much effort on the rules engine, and finally realized the value!)
 
 ②Users are not very motivated to participate, so let’s get rid of the non-overlay and send them all.
 
