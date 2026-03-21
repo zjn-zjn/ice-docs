@@ -268,5 +268,5 @@ docker run -d --name ice-server -p 8121:8121 \
 - GitHub: https://github.com/zjn-zjn/ice
 - Gitee: https://gitee.com/waitmoon/ice
 - Website: https://waitmoon.com
-- Playground: https://eg.waitmoon.com
+- Playground: https://eg.waitmoon.com/app/1/base/%E6%B5%8B%E8%AF%95/1
 - License: Apache-2.0

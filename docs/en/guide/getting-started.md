@@ -40,7 +40,7 @@ docker run -d --name ice-server \
 
 After startup, visit **http://localhost:8121** to access the management interface.
 
-Online demo: [eg.waitmoon.com](https://eg.waitmoon.com)
+Online demo: [eg.waitmoon.com](https://eg.waitmoon.com/app/1/base/%E6%B5%8B%E8%AF%95/1)
 
 ### Manual Deployment
 
