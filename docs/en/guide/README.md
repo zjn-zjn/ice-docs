@@ -68,7 +68,7 @@ Simply dismantling, to complete this activity, we need to develop the following 
 ![](/images/introduction/2-dark.png#dark)
 ![](/images/introduction/2-light.png#light)
 
-As shown in the figure, when the user recharges successfully, a parameter package Pack (like Activiti/Drools Fact) corresponding to the recharge scenario will be generated. The package will contain the recharge user's uid, recharge amount cost, recharge time requestTime and other information. We can get the value in the package through the defined key (similar to map.get(key)).
+As shown in the figure, when the user recharges successfully, a data container Roam corresponding to the recharge scenario will be created. The Roam will contain the recharge user's uid, recharge amount cost, recharge time requestTime and other information, along with execution metadata (IceMeta). We can get the value in the Roam through the defined key (similar to map.get(key)).
 
 There is nothing wrong with how the module is designed. The key point is how to arrange the following to achieve freedom of configuration. Next, through the existing nodes above, we will explain the advantages and disadvantages of different rule engines in the core arrangement, and compare how ice does it.
 
@@ -203,7 +203,7 @@ Because the execution process after executing it is no longer under its control,
 
 As shown in the figure, TimeChangeNone is used in the participation activity. If there is still an H5 page that needs to be presented, and different presentations are also related to time, what should I do? Just use the same instance in the render activity, change one, and the other will be updated, avoiding the problem of changing the time everywhere.
 
-Similarly, if there is a problem on the line, such as the sendAmount interface hangs, because the error will not return false to continue execution, but provide optional strategies, such as the Pack and the node to which it is executed, and wait until the interface is repaired. , and then continue to throw it into ice and run it again (since the placement time is the time when the problem occurs, there is no need to worry about the problem that the repair after the event ends will not take effect). Similarly, if it is a non-critical business such as the avatar service, it still hangs. I hope to run, but there is no avatar, so you can choose to skip the error and continue to execute. The rules for placing orders here are not described in detail. The same principle can also be used for mocks. Just add the data that needs to be mocked in the Pack, and you can run it.
+Similarly, if there is a problem on the line, such as the sendAmount interface hangs, because the error will not return false to continue execution, but provide optional strategies, such as the Roam and the node to which it is executed, and wait until the interface is repaired. , and then continue to throw it into ice and run it again (since the placement time is the time when the problem occurs, there is no need to worry about the problem that the repair after the event ends will not take effect). Similarly, if it is a non-critical business such as the avatar service, it still hangs. I hope to run, but there is no avatar, so you can choose to skip the error and continue to execute. The rules for placing orders here are not described in detail. The same principle can also be used for mocks. Just add the data that needs to be mocked in the Roam, and you can run it.
 
 #### Introduce forward node
 

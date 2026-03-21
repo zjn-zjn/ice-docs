@@ -1,8 +1,8 @@
 ---
 home: true
 title: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
-description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework designed for decoupling. Features web-based visual configuration and supports Java, Go, and Python SDKs for low-code rule management.
-keywords: rule engine,visual rule engine,business rule engine,java rule engine,go rule engine,python rule engine,decision engine,lightweight rule engine,open source rule engine,low-code,Ice rule engine,risk control engine
+description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework. Zero external dependencies, multi-language SDKs for Java, Go, and Python, millisecond-level execution, one-click Docker deployment.
+keywords: rule engine,visual rule engine,Java rule engine,Go rule engine,business orchestration framework,decision engine,lightweight rule engine,open source rule engine,low code,Ice rule engine,risk control engine
 heroImage: /images/hero.svg
 head:
   - - meta
@@ -10,7 +10,7 @@ head:
       content: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
   - - meta
     - property: og:description
-      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework with web-based visual configuration.
+      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework with zero external dependencies and multi-language SDK support.
   - - meta
     - property: og:image
       content: https://waitmoon.com/images/hero.png
@@ -30,30 +30,30 @@ head:
     - name: twitter:image
       content: https://waitmoon.com/images/hero.png
 actions:
-   - text: Get Started
-     link: /en/guide/getting-started.html
-     type: primary
-   - text: Live Demo
-     link: /en/playground/
-     type: secondary
-   - text: Introduction
-     link: /en/guide/
-     type: secondary
+  - text: Getting Started
+    link: /en/guide/getting-started.html
+    type: primary
+  - text: Online Demo
+    link: /en/playground/
+    type: secondary
+  - text: Core Concepts
+    link: /en/guide/concepts.html
+    type: secondary
 features:
-   - title: 🎯 Visual Rule Orchestration
-     details: Innovative tree-based orchestration with web visual configuration interface. Ensures business decoupling and code reuse while providing maximum flexibility for rule configuration.
-   - title: ⚡ Lightweight & High Performance
-     details: Pure in-memory computation with millisecond response time. Near-zero performance overhead, perfectly supporting high-concurrency business scenarios.
-   - title: 🐳 Zero-Dependency Architecture
-     details: No MySQL, ZooKeeper, or other external dependencies required. Docker one-click deployment in 5 seconds. JSON file storage with version control support.
+  - title: Visual Rule Orchestration
+    details: Tree-based orchestration with a Web visual configuration interface. Nodes are independent and isolated, achieving true business decoupling and configuration flexibility.
+  - title: Lightweight and High Performance
+    details: Pure in-memory computation with millisecond-level response and near-zero performance overhead. No database or middleware dependencies required. One-click Docker deployment.
+  - title: Multi-Language SDKs
+    details: Feature-equivalent Java, Go, and Python SDKs. Hot reload rules that take effect in seconds without application restart.
 ---
 
-## 🚀 Get Started in 3 Steps
+## Get Started in Three Steps
 
-### Step 1: Deploy Ice Server
+### 1. Deploy Ice Server
 
 <CodeGroup>
-  <CodeGroupItem title="🐳 Docker  " active>
+  <CodeGroupItem title="Docker" active>
 
 ```bash
 docker run -d --name ice-server -p 8121:8121 \
@@ -63,11 +63,9 @@ docker run -d --name ice-server -p 8121:8121 \
 
   </CodeGroupItem>
 
-  <CodeGroupItem title="  📦 Manual">
+  <CodeGroupItem title="Manual Deployment">
 
 ```bash
-# Download from: https://waitmoon.com/downloads/
-# Extract and start
 tar -xzvf ice-server-*.tar.gz && cd ice-server
 sh ice.sh start
 ```
@@ -77,194 +75,156 @@ sh ice.sh start
 
 Visit http://localhost:8121 to access the visual configuration interface.
 
-### Step 2: Integrate Ice Client SDK
+### 2. Integrate Client SDK
 
-Add dependency and start Client (must share the same `ice-data` directory with Server):
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
 
-**Java**
-```xml
-<dependency>
-  <groupId>com.waitmoon.ice</groupId>
-  <artifactId>ice-core</artifactId>
-  <version>${version}</version>
-</dependency>
-```
-
-**Go**
-```bash
-go get github.com/zjn-zjn/ice/sdks/go
-```
-
-**Python**
-```bash
-pip install ice-rules
-```
-
-Start Client:
-
-**Java**
 ```java
 IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
 client.start();
 ```
 
-**Go**
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
 ```go
 client, _ := ice.NewClient(1, "./ice-data")
 client.Start()
 ```
 
-**Python**
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
 ```python
 client = ice.FileClient(app=1, storage_path="./ice-data")
 client.start()
 ```
 
-### Step 3: Configure Rules and Execute
+  </CodeGroupItem>
+</CodeGroup>
 
-1. Configure business rules in Server's visual interface
-2. Publish rules, Client auto hot-reloads
-3. Call rule execution in your business code
+::: tip Shared Storage
+Server and Client synchronize configurations by sharing the same `ice-data` directory, with no network communication required.
+:::
 
-**Java**
+### 3. Configure Rules and Execute
+
+Configure a rule tree in the Server interface -> click Publish -> Client automatically hot-loads the rules. Call execution in your code:
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
 ```java
-IcePack pack = new IcePack();
-pack.setIceId(1L);
-pack.setRoam(new IceRoam().put("uid", 12345));
-Ice.syncProcess(pack);
+IceRoam roam = IceRoam.create();
+roam.getIceMeta().setId(1L);
+roam.put("uid", 12345);
+Ice.syncProcess(roam);
 ```
 
-**Go**
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
 ```go
-pack := ice.NewPack().SetIceId(1)
-pack.Roam.Put("uid", 12345)
-ice.SyncProcess(context.Background(), pack)
+roam := ice.NewRoamWithMeta()
+roam.GetMeta().Id = 1
+roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), roam)
 ```
 
-**Python**
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
 ```python
-pack = ice.Pack(ice_id=1)
-pack.roam.put("uid", 12345)
-ice.sync_process(pack)
+roam = ice.Roam.create(id=1)
+roam.put("uid", 12345)
+ice.sync_process(roam)
 ```
 
-👉 [Getting Started Guide](/en/guide/getting-started.html) | [Go SDK Guide](/en/guide/go-sdk.html) | [Python SDK Guide](/en/guide/python-sdk.html)
+  </CodeGroupItem>
+</CodeGroup>
+
+[View the full Getting Started guide](/en/guide/getting-started.html) | [Java SDK](/en/sdk/java.html) | [Go SDK](/en/sdk/go.html) | [Python SDK](/en/sdk/python.html)
 
 ## Use Cases
 
-<div class="use-cases">
-
 | Scenario | Description |
 |----------|-------------|
-| 🎁 **Marketing Campaigns** | Flexible configuration for coupons, discounts, group buying rules |
-| 💰 **Risk Control** | Credit risk assessment, anti-fraud, real-time decision engine |
-| 🔐 **Access Control** | Dynamic permission management, role configuration |
-| 📊 **Process Orchestration** | Ticket routing, approval workflows, state machine management |
+| **Marketing Campaigns** | Flexible configuration of complex marketing rules like coupons, discount thresholds, and group deals |
+| **Risk Control** | Credit risk assessment, anti-fraud, and real-time risk evaluation engines |
+| **Access Control** | Dynamic permission management, role configuration, and resource access control |
+| **Process Orchestration** | Ticket routing, approval workflows, and state machine management |
 
+## Why Choose Ice
+
+| Feature | Ice | Traditional Rule Engines (Drools, etc.) |
+|---------|-----|----------------------------------------|
+| **Learning Curve** | Get started in 5 minutes | Requires learning a DSL |
+| **Deployment Complexity** | One-click Docker deployment, zero dependencies | Requires database and middleware |
+| **Configuration Method** | Web visual tree-based orchestration | Text or code |
+| **Performance** | Pure in-memory, millisecond-level | Compiled execution with overhead |
+| **Rule Modification** | Hot reload, takes effect in seconds | Requires restart or redeployment |
+| **Change Impact** | Nodes are independent, no ripple effects | Changes cascade across the system |
+
+## Users
+
+<div class="user-logos">
+<div class="logo-row">
+  <a href="https://www.agora.io" target="_blank" rel="noopener"><img :src="$withBase('/images/user/agora.png')" alt="Agora"></a>
+  <a href="https://www.ximalaya.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/xima.png')" alt="Ximalaya"></a>
+  <a href="https://www.h3c.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/h3c.png')" alt="H3C"></a>
+  <a href="https://www.tuhu.cn" target="_blank" rel="noopener"><img :src="$withBase('/images/user/tuhu.png')" alt="Tuhu"></a>
+  <a href="https://www.iflytek.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/iflytek.png')" alt="iFLYTEK"></a>
+  <a href="https://www.htwins.com.cn" target="_blank" rel="noopener"><img :src="$withBase('/images/user/huatai.png')" alt="Huatai"></a>
+</div>
+<div class="logo-row">
+  <a href="https://www.lizhi.fm" target="_blank" rel="noopener"><img :src="$withBase('/images/user/lizhi.png')" alt="Lizhi FM"></a>
+  <a href="http://www.china-hushan.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/hushan.png')" alt="Hushan"></a>
+  <a href="https://www.princesky.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/lampo.png')" alt="Lampo"></a>
+  <a href="http://www.xibaoda.com" target="_blank" rel="noopener"><img :src="$withBase('/images/user/xibaoda.png')" alt="Xibaoda"></a>
+  <a href="https://www.zfire.top" target="_blank" rel="noopener"><img :src="$withBase('/images/user/zfire.png')" alt="ZFire"></a>
+</div>
 </div>
 
-## Why Choose Ice?
-
-<div class="comparison">
-
-| Feature | Ice | Traditional Rule Engines |
-|---------|-----|--------------------------|
-| **Learning Curve** | 5 minutes to start | Need to learn DSL |
-| **Deployment** | Docker one-click | Database/middleware required |
-| **Configuration** | Web visual UI | Text/code |
-| **Performance** | In-memory, milliseconds | Compilation overhead |
-| **Rule Changes** | Hot-reload, seconds | Restart/redeploy needed |
-
-</div>
-
-## Who's Using Ice?
-
-<div class="row">
-<span class="link">
-    <a href="https://www.agora.io" target="_blank">
-        <img :src="$withBase('/images/user/agora.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.ximalaya.com" target="_blank">
-        <img :src="$withBase('/images/user/xima.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.h3c.com" target="_blank">
-        <img :src="$withBase('/images/user/h3c.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.tuhu.cn" target="_blank">
-        <img :src="$withBase('/images/user/tuhu.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.htwins.com.cn" target="_blank">
-        <img :src="$withBase('/images/user/huatai.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.lizhi.fm" target="_blank">
-        <img :src="$withBase('/images/user/lizhi.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="http://www.china-hushan.com" target="_blank">
-        <img :src="$withBase('/images/user/hushan.png')" class="no-zoom">
-    </a>
-</span>
-</div>
-<div class="row">
-<span class="link">
-    <a href="https://www.iflytek.com/" target="_blank">
-        <img :src="$withBase('/images/user/iflytek.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.princesky.com/" target="_blank">
-        <img :src="$withBase('/images/user/lampo.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="http://www.xibaoda.com/" target="_blank">
-        <img :src="$withBase('/images/user/xibaoda.png')" class="no-zoom">
-    </a>
-</span>
-<span class="link">
-    <a href="https://www.zfire.top/" target="_blank">
-        <img :src="$withBase('/images/user/zfire.png')" class="no-zoom">
-    </a>
-</span>
-</div>
-
-<br>
-
-<div class="footer" style="font-size:12px">
-  <p>
-    Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
-  </p>
+<div class="site-footer">
+  Apache-2.0 Licensed | Copyright 2022-present WaitMoon
 </div>
 
 <style>
-  .use-cases table {
-    width: 100%;
-  }
-  .comparison table {
-    width: 100%;
-  }
-  .link {
-    width: 8.4em;
-    text-align: left;
-  }
-  .link img {
-    height:1.5em;
-    max-width:180px;
-    margin: 14px;
-  }
-  .row {
-    display: flex;
-    flex-direction: row;
-  }
+.user-logos {
+  margin: 24px 0;
+}
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.logo-row a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.logo-row a:hover {
+  background-color: var(--c-bg-light);
+}
+.logo-row img {
+  height: 1.5em;
+  max-width: 160px;
+  object-fit: contain;
+}
+.site-footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-border);
+  font-size: 12px;
+  color: var(--c-text-lightest);
+  text-align: center;
+}
 </style>

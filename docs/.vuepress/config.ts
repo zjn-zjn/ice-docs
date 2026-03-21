@@ -1,5 +1,4 @@
 import { viteBundler } from '@vuepress/bundler-vite'
-import { webpackBundler } from '@vuepress/bundler-webpack'
 import { defineUserConfig } from '@vuepress/cli'
 import { searchPlugin } from '@vuepress/plugin-search'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
@@ -11,112 +10,77 @@ import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { path } from '@vuepress/utils'
 import { head, navbarEn, navbarZh, sidebarEn, sidebarZh, siteConfig } from './configs'
 import { version } from './configs/meta'
-import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
-// 引入版本插件
 const versionPlugin = require('./plugins/version-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineUserConfig({
-  // set site base to default value
   base: '/',
 
-  // 定义全局变量
   define: {
     ICE_VERSION: JSON.stringify(version),
   },
 
-  // extra tags in `<head>`
   head: [
     ...head,
+    // 百度统计
     [
       'script', {}, `
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?c57dc88e320872392bdc6a8501dfe40c";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
       `
     ],
-    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-MRT75P8006' }],
-    ['script', {}, `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-MRT75P8006');
-    `]
+    // Google Analytics 只保留插件方式，不重复添加 script 标签
   ],
 
-  // site-level locales config
   locales: {
     '/en/': {
       lang: 'en-US',
-      title: 'ice',
-      description: 'Committed to solving flexible and complex hard-coded problems',
+      title: 'Ice',
+      description: 'Lightweight visual rule engine and business orchestration framework',
     },
     '/': {
       lang: 'zh-CN',
-      title: 'ice',
-      description: '致力于解决灵活繁复的硬编码问题',
+      title: 'Ice',
+      description: '轻量级可视化规则引擎和业务编排框架',
     },
   },
 
-  // specify bundler via environment variable
-  bundler:
-    process.env.DOCS_BUNDLER === 'webpack' ? webpackBundler() : viteBundler(),
+  bundler: viteBundler(),
 
-  // configure default theme
   theme: defaultTheme({
     logo: '/images/hero.svg',
     docsRepo: 'zjn-zjn/ice-docs',
-    // repo: 'zjn-zjn/ice',
-    // repo: 'https://gitee.com/waitmoon/ice',
     docsDir: 'docs',
 
-    // theme-level locales config
     locales: {
-      /**
-       * English locale config
-       *
-       * As the default locale of @vuepress/theme-default is English,
-       * we don't need to set all of the locale fields
-       */
       '/en/': {
-        // navbar
         navbar: navbarEn,
-        // sidebar
         sidebar: sidebarEn,
-        // page meta
         editLinkText: 'Edit this page on GitHub',
         selectLanguageName: 'English',
-        selectLanguageText: '选择语言',
-        selectLanguageAriaLabel: '选择语言',
+        selectLanguageText: 'Language',
+        selectLanguageAriaLabel: 'Language',
       },
 
-      /**
-       * Chinese locale config
-       */
       '/': {
-        // navbar
         navbar: navbarZh,
         selectLanguageName: '简体中文',
         selectLanguageText: 'Language',
         selectLanguageAriaLabel: 'Language',
-        // sidebar
         sidebar: sidebarZh,
-        // page meta
         editLinkText: '在 GitHub 上编辑此页',
         lastUpdatedText: '上次更新',
         contributorsText: '贡献者',
-        // custom containers
         tip: '提示',
         warning: '注意',
         danger: '警告',
-        // 404 page
         notFound: [
           '这里什么都没有',
           '我们怎么到这来了？',
@@ -124,7 +88,6 @@ export default defineUserConfig({
           '看起来我们进入了错误的链接',
         ],
         backToHome: '返回首页',
-        // a11y
         openInNewWindow: '在新窗口打开',
         toggleDarkMode: '切换夜间模式',
         toggleSidebar: '切换侧边栏',
@@ -132,14 +95,11 @@ export default defineUserConfig({
     },
 
     themePlugins: {
-      // only enable git plugin in production mode
       git: isProd,
-      // use shiki plugin in production mode instead
       prismjs: !isProd,
     },
   }),
 
-  // configure markdown
   markdown: {
     importCode: {
       handleImportPath: (str) =>
@@ -150,18 +110,13 @@ export default defineUserConfig({
     },
   },
 
-  // use plugins
   plugins: [
     searchPlugin({
       locales: {
-        '/': {
-          placeholder: '搜索',
-        },
-        '/en/': {
-          placeholder: 'Search',
-        },
+        '/': { placeholder: '搜索' },
+        '/en/': { placeholder: 'Search' },
       },
-      maxSuggestions: 10
+      maxSuggestions: 10,
     }),
     shikiPlugin({
       themes: {
@@ -178,15 +133,6 @@ export default defineUserConfig({
         IcePlayground: path.resolve(__dirname, './components/ice-playground/IcePlayground.vue'),
       },
     }),
-    mdEnhancePlugin({
-      // tabs: true,
-      // align: true,
-      // sub: true,
-      // sup: true,
-      // footnote: true,
-      // mark: true,
-      // imageSize: true,
-    }),
     versionPlugin(),
     seoPlugin({
       hostname: siteConfig.hostname,
@@ -194,7 +140,7 @@ export default defineUserConfig({
       autoDescription: true,
       canonical: siteConfig.hostname,
       jsonLd: (jsonLd, page) => {
-        if (page.path === '/') {
+        if (page.path === '/' || page.path === '/en/') {
           return {
             '@context': 'https://schema.org',
             '@graph': [
@@ -203,7 +149,7 @@ export default defineUserConfig({
                 name: 'Ice',
                 url: siteConfig.hostname,
                 logo: `${siteConfig.hostname}/images/hero.png`,
-                description: 'Ice - 轻量级可视化Java规则引擎和业务编排框架',
+                description: 'Ice - Lightweight visual rule engine and business orchestration framework',
                 founder: {
                   '@type': 'Person',
                   name: 'WaitMoon',
@@ -224,11 +170,19 @@ export default defineUserConfig({
                   priceCurrency: 'USD',
                 },
                 softwareVersion: version,
-                description: 'Ice is a lightweight, high-performance Java rule engine and business orchestration framework',
-                programmingLanguage: 'Java',
+                description: 'Ice is a lightweight, high-performance visual rule engine and business orchestration framework supporting Java, Go, and Python',
+                programmingLanguage: ['Java', 'Go', 'Python'],
                 license: 'https://www.apache.org/licenses/LICENSE-2.0',
               }
             ]
+          }
+        }
+        // FAQ 页面添加 FAQPage Schema
+        if (page.path === '/guide/faq.html' || page.path === '/en/guide/faq.html') {
+          return {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            name: page.title,
           }
         }
         return jsonLd

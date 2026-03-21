@@ -15,6 +15,148 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.0](https://github.com/zjn-zjn/ice/compare/v3.0.2...v4.0.0) (2026-03) 🚀
+
+**Ice 规则引擎 4.0.0 — Pack/Context 移除、API 统一、Mock 执行**
+
+4.0.0 是 Ice 的一次重大 API 简化。彻底移除了 Pack 和 Context 层，所有数据通过唯一的 `Roam` 传递；叶子节点基类从 9 个收敛为 3 个；多级 key 方法和引用语法方法全部重命名；新增 Mock 执行，支持从 Web UI 远程调试规则引擎。
+
+### ✨ 新特性
+
+#### 🏗️ Pack/Context 彻底移除，Roam 统一数据层
+
+移除 `IcePack`（Java）/ `Pack`（Go）/ `Pack`（Python）和 `IceContext` 层，所有叶子节点方法只接收 `Roam` 作为数据容器。此前 Pack 和 Roam 的双层结构被简化为单一 Roam。
+
+```java
+// 旧代码（3.x）
+public class ScoreFlow extends BaseLeafRoamFlow {
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return roam.get("score") >= threshold;
+    }
+}
+
+// 新代码（4.0.0）
+public class ScoreFlow extends BaseLeafFlow {
+    @Override
+    protected boolean doFlow(IceRoam roam) {
+        return roam.get("score") >= threshold;
+    }
+}
+```
+
+#### 🔄 叶子节点基类简化（9 → 3）
+
+移除 Roam/Pack 层级的基类变体，每种叶子节点类型统一为单一基类，方法签名同步简化：
+
+**基类重命名：**
+
+| 语言 | 旧名称 | 新名称 |
+|------|--------|--------|
+| Java | `BaseLeafRoamFlow` / `BaseLeafPackFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafRoamResult` / `BaseLeafPackResult` | `BaseLeafResult` |
+| Java | `BaseLeafRoamNone` / `BaseLeafPackNone` | `BaseLeafNone` |
+
+**方法重命名：**
+
+| 语言 | 旧方法 | 新方法 |
+|------|--------|--------|
+| Java | `doRoamFlow` / `doPackFlow` | `doFlow` |
+| Java | `doRoamResult` / `doPackResult` | `doResult` |
+| Java | `doRoamNone` / `doPackNone` | `doNone` |
+| Go | `DoRoamFlow` / `DoPackFlow` | `DoFlow` |
+| Go | `DoRoamResult` / `DoPackResult` | `DoResult` |
+| Go | `DoRoamNone` / `DoPackNone` | `DoNone` |
+| Python | `do_roam_flow` / `do_pack_flow` | `do_flow` |
+| Python | `do_roam_result` / `do_pack_result` | `do_result` |
+| Python | `do_roam_none` / `do_pack_none` | `do_none` |
+
+#### 📝 Roam API 重命名
+
+多级 key 和引用语法方法重命名，语义更清晰：
+
+| 语言 | 旧名称 | 新名称 | 说明 |
+|------|--------|--------|------|
+| Java | `getMulti` / `putMulti` | `getDeep` / `putDeep` | 多级 key 读写 |
+| Java | `getUnion` | `resolve` | 引用语法解析 |
+| Go | `GetMulti` / `PutMulti` | `GetDeep` / `PutDeep` | 多级 key 读写 |
+| Go | `GetUnion` | `Resolve` | 引用语法解析 |
+| Go | `ValueMulti` | `ValueDeep` | 多级 key fluent API |
+| Python | `get_multi` / `put_multi` | `get_deep` / `put_deep` | 多级 key 读写 |
+| Python | `get_union` | `resolve` | 引用语法解析 |
+
+#### 🎯 Mock 执行
+
+新增 Mock 执行功能，支持从 Server Web UI 发起 mock 请求，由指定 Client 实际执行规则并返回完整结果。
+
+- **文件系统通信**：与现有 config 同步机制一致，通过共享存储目录通信，无需额外网络连接
+- **三端支持**：Java、Go、Python Client SDK 均内置 mock 轮询，无需额外配置
+- **Web UI**：detail 页面新增 Mock 按钮，支持表单/JSON 两种模式输入 Roam 参数
+- **执行结果可视化**：返回 process 执行流程、roam 结果数据，执行过的节点在树图中用黄色标记
+- **目标选择**：支持指定 client 地址（`address:xxx`）、泳道（`lane:xxx`）或自动选择（`all`）
+
+#### 🔍 Roam Key 静态扫描
+
+多语言静态分析工具，自动提取叶子节点方法中的 roam key 访问元数据，为 Mock 表单自动生成字段：
+
+- **Java**：ASM 字节码分析，编译后自动可用
+- **Go**：`go/ast` 分析，通过 `ice-scan` CLI 工具生成代码
+- **Python**：`ast` 模块分析，运行时自动扫描
+
+#### 📊 IceMeta 执行元数据
+
+执行元数据存储在 Roam 的 `_ice` 保留键下（`_ice` 不可用于业务数据），包含：
+
+| 字段 | 说明 |
+|------|------|
+| `id` | 规则 ID |
+| `scene` | 场景标识 |
+| `confId` | 配置 ID |
+| `ts` | 时间戳 |
+| `trace` | 追踪标识 |
+| `type` | 请求类型 |
+| `debug` | 调试标记 |
+| `process` | 执行流程记录 |
+
+#### 📂 客户端文件格式拆分
+
+单个客户端 JSON 文件拆分为两个独立文件，减少高频心跳对元数据文件的 I/O 竞争：
+
+| 文件 | 内容 | 写入频率 |
+|------|------|---------|
+| `m_{addr}.json` | 元数据（注册类信息、roam key 扫描结果） | 启动时 + 变更时 |
+| `b_{addr}.json` | 心跳（时间戳） | 每 10 秒 |
+
+#### 🔢 getDeep/putDeep 支持列表下标遍历
+
+如 `getDeep("items.0.name")`，支持通过数字下标访问列表元素（只读遍历，putDeep 不会创建列表）。
+
+### 🔧 优化
+
+- **轮询间隔默认值调整**：从 5s 改为 2s，配置变更响应更快
+- **心跳间隔默认值调整**：从 30s 改为 10s，客户端状态感知更及时
+- **客户端超时默认值调整**：从 60s 改为 30s，离线检测更快
+- **导入接口增强**：支持 JSON 数组批量导入多条规则
+
+### ⚠️ 破坏性变更
+
+1. **Pack/Context 移除**：`IcePack`、`IceContext` 及其 Go/Python 对应类已移除。如果你的代码中使用了 Pack（如 `BaseLeafPackFlow`、`doPackFlow`），需要将所有 Pack 相关代码迁移为使用 Roam
+2. **叶子节点基类简化**：`BaseLeafPack*` 和 `BaseLeafRoam*` 层级全部移除，统一为 `BaseLeafFlow` / `BaseLeafResult` / `BaseLeafNone`，方法名同步简化（如 `doRoamFlow` → `doFlow`）
+3. **Roam API 重命名**：`getMulti`→`getDeep`、`putMulti`→`putDeep`、`getUnion`→`resolve`，需全局替换
+4. **`priority` 字段移除**：节点不再支持 `priority` 排序，如有使用请移除
+5. **`_ice` 为 Roam 保留键**：不可用于业务数据存储
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| Java SDK | 4.0.0 |
+| Go SDK | v1.2.0 |
+| Python SDK | 4.0.0 |
+| ice-server | 4.0.0 |
+
+---
+
 ## [3.0.2](https://github.com/zjn-zjn/ice/compare/v3.0.1...v3.0.2) (2026-03)
 
 **Ice 规则引擎 3.0.2 - Client Address 优化**
@@ -198,7 +340,7 @@ pip install ice-rules
 ```java
 // Java
 @IceNode(alias = {"score_flow"})
-public class ScoreFlow extends BaseLeafRoamFlow { }
+public class ScoreFlow extends BaseLeafFlow { }
 ```
 
 ```go

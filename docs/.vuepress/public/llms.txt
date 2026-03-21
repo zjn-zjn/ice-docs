@@ -1,0 +1,60 @@
+# Ice Rule Engine
+
+> Ice is a lightweight, high-performance visual rule engine and business orchestration framework. It uses tree-based orchestration to decouple business rules, supports Java, Go, and Python SDKs, and requires zero external dependencies (no database, no middleware).
+
+## Key Features
+- Visual web-based rule configuration with tree structure
+- Pure in-memory execution with millisecond-level latency
+- Zero dependencies: no MySQL, ZooKeeper, Redis required
+- Docker one-click deployment
+- Hot-reload: rule changes take effect in seconds without restart
+- Multi-language SDKs: Java, Go, Python with feature parity
+
+## Architecture
+- Ice Server: Visual rule configuration platform (Go + React)
+- Ice Client: Rule execution SDK embedded in business applications
+- Shared Storage: Server and Client sync via shared file directory (ice-data/), no network communication needed
+
+## Documentation
+
+### Getting Started
+- [Quick Start](https://waitmoon.com/guide/getting-started.html): Deploy and run your first rule in 5 minutes
+- [Core Concepts](https://waitmoon.com/guide/concepts.html): Tree-based orchestration, relation nodes, leaf nodes, Roam data model
+- [Architecture](https://waitmoon.com/guide/architecture.html): Server + Client + shared storage design
+
+### SDK Guides
+- [Java SDK](https://waitmoon.com/sdk/java.html): ice-core dependency, Spring integration, leaf node development
+- [Go SDK](https://waitmoon.com/sdk/go.html): Native context.Context support, explicit leaf registration
+- [Python SDK](https://waitmoon.com/sdk/python.html): Decorator-based leaf registration, asyncio support
+
+### Reference
+- [Node Types](https://waitmoon.com/reference/node-types.html): 5 relation types (AND/ANY/ALL/NONE/TRUE) × serial/parallel + 3 leaf types (Flow/Result/None)
+- [Roam API](https://waitmoon.com/reference/roam-api.html): Multi-level key access, @ reference syntax
+- [Server Config](https://waitmoon.com/reference/server-config.html): Port, storage path, version retention, recycle settings
+- [Client Config](https://waitmoon.com/reference/client-config.html): App ID, storage path, poll interval, lane
+
+### Other
+- [FAQ](https://waitmoon.com/guide/faq.html): Common questions and troubleshooting
+- [Changelog](https://waitmoon.com/CHANGELOG.html): Version history
+- [Playground](https://waitmoon.com/playground/): Interactive demo
+
+## Quick Example
+
+```java
+// 1. Start Client
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+
+// 2. Execute rule
+IceRoam roam = IceRoam.create();
+roam.getIceMeta().setId(1L);
+roam.put("uid", 12345);
+Ice.syncProcess(roam);
+```
+
+## Source Code
+- GitHub: https://github.com/zjn-zjn/ice
+- Gitee: https://gitee.com/waitmoon/ice
+
+## License
+Apache-2.0

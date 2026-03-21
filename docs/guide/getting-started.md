@@ -1,29 +1,33 @@
 ---
-title: Ice 快速上手 - 5分钟快速接入指南
-description: 快速接入 Ice 规则引擎的完整指南。包含 Server 部署、Client SDK 集成等详细步骤，支持 Docker 一键部署。
-keywords: 规则引擎接入,快速开始,安装教程,配置指南,Docker部署,Client SDK
+title: 快速开始
+description: 快速接入 Ice 规则引擎的完整指南。包含 Server 部署、Client SDK 集成、叶子节点开发和规则执行的全流程。
+keywords: 规则引擎接入,快速开始,安装教程,Docker部署,Client SDK,Java,Go,Python
 head:
   - - meta
     - property: og:title
-      content: Ice 快速上手 - 5分钟快速接入指南
+      content: Ice 快速开始 - 5 分钟部署并运行第一个规则
   - - meta
     - property: og:description
-      content: 快速接入 Ice 规则引擎的完整指南，包含 Server 部署、Client SDK 集成等详细步骤。
+      content: 快速接入 Ice 规则引擎的完整指南，包含 Server 部署、Client SDK 集成等全流程。
 ---
 
-# Ice 快速上手指南
+# 快速开始
 
-> 5 分钟快速接入 Ice 规则引擎，开启可视化业务编排之旅！
+> 5 分钟完成 Ice 规则引擎的部署、集成和第一次规则执行。
 
 ## 前置了解
 
-Ice 采用 **Server + Client + 共享存储** 架构：
+Ice 由三部分组成：
 
-- **Ice Server**：可视化规则配置管理平台
-- **Ice Client**：规则执行 SDK，集成到您的业务应用
-- **共享存储**：Server 和 Client 通过共享文件目录实现配置同步
+- **Ice Server** — 可视化规则配置管理平台，提供 Web 界面
+- **Ice Client** — 规则执行 SDK，集成到你的业务应用中
+- **共享存储** — Server 和 Client 通过共享文件目录（`ice-data/`）实现配置同步，无需网络通信
 
-## 第一步：部署 Ice Server
+```
+Server → 写入配置 → ice-data/ ← 读取配置 ← Client
+```
+
+## 第一步：部署 Server
 
 ### Docker 部署（推荐）
 
@@ -36,20 +40,23 @@ docker run -d --name ice-server \
 
 启动后访问 **http://localhost:8121** 进入管理界面。
 
-在线体验：[http://eg.waitmoon.com](http://eg.waitmoon.com)
+在线体验：[eg.waitmoon.com](https://eg.waitmoon.com)
 
 ### 手动部署
 
-从 [https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/) 下载对应平台包，解压后运行：
+从 [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.0/) 下载对应平台包：
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
 sh ice.sh start
 ```
 
-## 第二步：集成 Ice Client SDK
+## 第二步：集成 Client SDK
 
-### Java
+在业务应用中添加依赖并启动 Client。Server 和 Client 必须共享同一个 `ice-data` 目录。
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
 
 **添加依赖**
 
@@ -57,7 +64,7 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>3.0.2</version>
+  <version>4.0.0</version>
 </dependency>
 ```
 
@@ -66,81 +73,75 @@ sh ice.sh start
 ```java
 IceFileClient client = new IceFileClient(
     1,                    // app ID（对应 Server 中创建的应用）
-    "./ice-data",         // 共享存储路径（必须和 Server 指向同一目录）
+    "./ice-data",         // 共享存储路径
     "com.your.package"    // 叶子节点所在的包路径
 );
 client.start();
 ```
 
-**Spring 项目集成**
+  </CodeGroupItem>
 
-如果是 Spring/SpringBoot 项目，加一个配置类即可，作用是让叶子节点能自动注入 Spring Bean：
+  <CodeGroupItem title="Go">
 
-```java
-@Configuration
-public class IceConfig implements ApplicationContextAware {
-
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        AutowireCapableBeanFactory bf = ctx.getAutowireCapableBeanFactory();
-        IceBeanUtils.setFactory(new IceBeanUtils.IceBeanFactory() {
-            @Override
-            public void autowireBean(Object bean) { bf.autowireBean(bean); }
-            @Override
-            public boolean containsBean(String name) { return ctx.containsBean(name); }
-            @Override
-            public Object getBean(String name) { return ctx.getBean(name); }
-        });
-    }
-
-    @Bean(destroyMethod = "destroy")
-    public IceFileClient iceFileClient() throws Exception {
-        IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
-        client.start();
-        return client;
-    }
-}
-```
-
-> 更多构造参数（并行度、轮询间隔、泳道等）参考 [Client SDK 集成指南](/guide/client-integration.html)
-
-### Go
+**添加依赖**
 
 ```bash
 go get github.com/zjn-zjn/ice/sdks/go
 ```
 
-详细用法见 [Go SDK 指南](/guide/go-sdk.html)
+**启动 Client**
 
-### Python
+```go
+client, err := ice.NewClient(1, "./ice-data")
+if err != nil {
+    log.Fatal(err)
+}
+client.Start()
+defer client.Destroy()
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+**添加依赖**
 
 ```bash
 pip install ice-rules
 ```
 
-详细用法见 [Python SDK 指南](/guide/python-sdk.html)
+**启动 Client**
 
-## 第三步：开发叶子节点（Java 示例）
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data")
+client.start()
+```
 
-叶子节点是实际执行业务逻辑的地方。继承对应基类，放在扫描包下即可：
+  </CodeGroupItem>
+</CodeGroup>
 
-| 类型 | 基类 | 返回值 | 用途 |
-|------|------|--------|------|
-| **Flow** | `BaseLeafRoamFlow` | true/false | 条件判断 |
-| **Result** | `BaseLeafRoamResult` | true/false | 业务执行 |
-| **None** | `BaseLeafRoamNone` | 无 | 辅助操作（日志、查询等） |
+::: tip Spring 项目
+Spring/SpringBoot 项目需要额外配置一个桥接类，让叶子节点能注入 Spring Bean。详见 [Java SDK 指南](/sdk/java.html#spring-集成)。
+:::
+
+## 第三步：开发叶子节点
+
+叶子节点是执行业务逻辑的地方。继承对应基类，类中的字段会自动出现在 Server 配置界面：
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
 
 ```java
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AmountResult extends BaseLeafRoamResult {
+public class AmountResult extends BaseLeafResult {
 
     private String key;      // 可在 Server 界面配置
     private double value;    // 可在 Server 界面配置
 
     @Override
-    protected boolean doRoamResult(IceRoam roam) {
-        Integer uid = roam.getMulti(key);
+    protected boolean doResult(IceRoam roam) {
+        Integer uid = roam.getDeep(key);
         if (uid == null || value <= 0) {
             return false;
         }
@@ -149,53 +150,120 @@ public class AmountResult extends BaseLeafRoamResult {
 }
 ```
 
-> 类中的字段（如 `key`、`value`）会自动出现在 Server 配置界面，运维可以直接修改，无需改代码。
+  </CodeGroupItem>
 
-## 第四步：配置并执行规则
+  <CodeGroupItem title="Go">
 
-### 在 Server 配置
+```go
+type AmountResult struct {
+    Key   string  `json:"key"`
+    Value float64 `json:"value"`
+}
 
-访问 http://localhost:8121：
+func (a *AmountResult) DoResult(ctx context.Context, roam *icecontext.Roam) bool {
+    uid := roam.Value(a.Key).IntOr(0)
+    if uid <= 0 || a.Value <= 0 {
+        return false
+    }
+    return sendService.SendAmount(ctx, uid, a.Value)
+}
 
-1. 创建应用（App）
-2. 新建规则（Ice）
-3. 将叶子节点拖入规则树，配置参数
-4. 点击 **发布**
-
-### 在代码中触发
-
-```java
-IcePack pack = new IcePack();
-pack.setIceId(1L);
-
-IceRoam roam = new IceRoam();
-roam.put("uid", 12345);
-pack.setRoam(roam);
-
-Ice.syncProcess(pack);
+func init() {
+    ice.RegisterLeaf("com.example.AmountResult", nil, func() any {
+        return &AmountResult{}
+    })
+}
 ```
 
-## 共享存储说明
+  </CodeGroupItem>
 
-Server 和 Client 必须能访问同一个 `ice-data` 目录：
+  <CodeGroupItem title="Python">
+
+```python
+@ice.leaf("com.example.AmountResult")
+class AmountResult:
+    key: str = ""
+    value: float = 0.0
+
+    def do_result(self, roam):
+        uid = roam.get(self.key, 0)
+        if uid <= 0 or self.value <= 0:
+            return False
+        return send_service.send_amount(uid, self.value)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## 第四步：配置并执行
+
+### 在 Server 中配置规则
+
+1. 创建应用（App）
+2. 新建规则（Ice），获得 iceId
+3. 添加关系节点和叶子节点，组成规则树
+4. 配置叶子节点参数
+5. 点击**发布**
+
+### 在代码中执行
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
+```java
+IceRoam roam = IceRoam.create();
+roam.getIceMeta().setId(1L);
+roam.put("uid", 12345);
+Ice.syncProcess(roam);
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+roam := ice.NewRoamWithMeta()
+roam.GetMeta().Id = 1
+roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), roam)
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+roam = ice.Roam.create(id=1)
+roam.put("uid", 12345)
+ice.sync_process(roam)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## 共享存储部署方案
 
 | 场景 | 方案 |
 |------|------|
-| 本地开发 | 同一个本地路径 |
+| 本地开发 | Server 和 Client 使用同一个本地路径 |
 | Docker | 通过 `-v` 挂载到相同宿主机目录 |
-| 分布式 | NFS / 阿里云 NAS / AWS EFS |
-
-## 下一步
-
-- 📖 [Client SDK 集成指南](/guide/client-integration.html) - 完整构造参数说明
-- 📖 [详细说明](/guide/detail.html) - 深入了解节点类型和配置
-- 🐹 [Go SDK 指南](/guide/go-sdk.html) · 🐍 [Python SDK 指南](/guide/python-sdk.html)
-- 🏗️ [架构设计](/advanced/architecture.html) · 🎥 [视频教程](https://www.bilibili.com/video/BV1Q34y1R7KF)
+| 分布式部署 | NFS / 阿里云 NAS / AWS EFS |
 
 ## 常见问题
 
-**Client 无法加载配置？** 检查 storagePath 是否和 Server 指向同一目录。
+**Client 无法加载配置？**
+检查 `storagePath` 是否和 Server 指向同一个 `ice-data` 目录。
 
-**规则修改后不生效？** 确保在 Server 点击了「发布」。
+**规则修改后不生效？**
+确保在 Server 界面点击了「发布」。Client 默认每 2 秒轮询一次配置变更。
 
-👉 [更多问题](/guide/qa.html)
+**启动时报节点类找不到？**
+检查叶子节点类是否在 Client 配置的扫描包路径下，且类名是否正确。
+
+更多问题参见 [FAQ](/guide/faq.html)。
+
+## 下一步
+
+- [核心概念](/guide/concepts.html) — 理解树形编排的设计思想
+- [架构设计](/guide/architecture.html) — Server / Client / 共享存储的工作原理
+- [Java SDK](/sdk/java.html) · [Go SDK](/sdk/go.html) · [Python SDK](/sdk/python.html) — 完整 SDK 参考

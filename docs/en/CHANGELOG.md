@@ -15,6 +15,148 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.0](https://github.com/zjn-zjn/ice/compare/v3.0.2...v4.0.0) (2026-03) 🚀
+
+**Ice Rule Engine 4.0.0 — Pack/Context Removal, API Unification, Mock Execution**
+
+4.0.0 is a major API simplification for Ice. The Pack and Context layers have been completely removed — all data flows through a single `Roam`; leaf node base classes are reduced from 9 to 3; multi-level key and reference syntax methods are all renamed; and Mock execution is added for remote rule debugging from the Web UI.
+
+### New Features
+
+#### Pack/Context Fully Removed, Roam Unified Data Layer
+
+Removed `IcePack` (Java) / `Pack` (Go) / `Pack` (Python) and the `IceContext` layer. All leaf node methods now receive only `Roam` as the data container. The previous two-tier Pack+Roam structure has been simplified to a single Roam.
+
+```java
+// Old code (3.x)
+public class ScoreFlow extends BaseLeafRoamFlow {
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return roam.get("score") >= threshold;
+    }
+}
+
+// New code (4.0.0)
+public class ScoreFlow extends BaseLeafFlow {
+    @Override
+    protected boolean doFlow(IceRoam roam) {
+        return roam.get("score") >= threshold;
+    }
+}
+```
+
+#### Leaf Node Base Class Simplification (9 → 3)
+
+Removed Roam/Pack level base class variants, unified to a single base class per leaf node type with simplified method signatures:
+
+**Base class rename:**
+
+| Language | Old Name | New Name |
+|----------|----------|----------|
+| Java | `BaseLeafRoamFlow` / `BaseLeafPackFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafRoamResult` / `BaseLeafPackResult` | `BaseLeafResult` |
+| Java | `BaseLeafRoamNone` / `BaseLeafPackNone` | `BaseLeafNone` |
+
+**Method rename:**
+
+| Language | Old Method | New Method |
+|----------|-----------|-----------|
+| Java | `doRoamFlow` / `doPackFlow` | `doFlow` |
+| Java | `doRoamResult` / `doPackResult` | `doResult` |
+| Java | `doRoamNone` / `doPackNone` | `doNone` |
+| Go | `DoRoamFlow` / `DoPackFlow` | `DoFlow` |
+| Go | `DoRoamResult` / `DoPackResult` | `DoResult` |
+| Go | `DoRoamNone` / `DoPackNone` | `DoNone` |
+| Python | `do_roam_flow` / `do_pack_flow` | `do_flow` |
+| Python | `do_roam_result` / `do_pack_result` | `do_result` |
+| Python | `do_roam_none` / `do_pack_none` | `do_none` |
+
+#### Roam API Rename
+
+Multi-level key and reference syntax methods renamed for clearer semantics:
+
+| Language | Old Name | New Name | Description |
+|----------|----------|----------|-------------|
+| Java | `getMulti` / `putMulti` | `getDeep` / `putDeep` | Multi-level key read/write |
+| Java | `getUnion` | `resolve` | Reference syntax resolution |
+| Go | `GetMulti` / `PutMulti` | `GetDeep` / `PutDeep` | Multi-level key read/write |
+| Go | `GetUnion` | `Resolve` | Reference syntax resolution |
+| Go | `ValueMulti` | `ValueDeep` | Multi-level key fluent API |
+| Python | `get_multi` / `put_multi` | `get_deep` / `put_deep` | Multi-level key read/write |
+| Python | `get_union` | `resolve` | Reference syntax resolution |
+
+#### Mock Execution
+
+New mock execution feature — send mock requests from the Server Web UI, have a designated Client execute the rules locally, and return the full result.
+
+- **File System Communication**: Consistent with existing config sync, communicates via shared storage directory, no additional network connections needed
+- **All SDKs Supported**: Java, Go, Python Client SDKs all have built-in mock polling, no extra configuration needed
+- **Web UI**: New Mock button on detail page, supporting form/JSON input modes for Roam parameters
+- **Execution Result Visualization**: Returns process execution flow and roam result data, executed nodes highlighted in yellow on tree graph
+- **Target Selection**: Supports specifying client address (`address:xxx`), swimlane (`lane:xxx`), or automatic selection (`all`)
+
+#### Roam Key Static Scanning
+
+Multi-language static analysis tools that automatically extract roam key access metadata from leaf node methods, powering the Mock form auto-generation:
+
+- **Java**: ASM bytecode analysis, automatically available after compilation
+- **Go**: `go/ast` analysis, via `ice-scan` CLI tool for code generation
+- **Python**: `ast` module analysis, scans automatically at runtime
+
+#### IceMeta Execution Metadata
+
+Execution metadata stored under the reserved `_ice` key in Roam (`_ice` must not be used for business data):
+
+| Field | Description |
+|-------|-------------|
+| `id` | Rule ID |
+| `scene` | Scene identifier |
+| `confId` | Configuration ID |
+| `ts` | Timestamp |
+| `trace` | Trace identifier |
+| `type` | Request type |
+| `debug` | Debug flag |
+| `process` | Execution process log |
+
+#### Client File Format Split
+
+Single client JSON file split into two independent files, reducing high-frequency heartbeat I/O contention with metadata:
+
+| File | Content | Write Frequency |
+|------|---------|-----------------|
+| `m_{addr}.json` | Metadata (registered classes, roam key scan results) | On startup + on change |
+| `b_{addr}.json` | Heartbeat (timestamp) | Every 10 seconds |
+
+#### getDeep/putDeep List Index Traversal
+
+e.g. `getDeep("items.0.name")`, supports accessing list elements via numeric index (read-only traversal; putDeep does not create lists).
+
+### Optimization
+
+- **Default poll interval changed**: From 5s to 2s, faster config change response
+- **Default heartbeat interval changed**: From 30s to 10s, more responsive client status detection
+- **Default client timeout changed**: From 60s to 30s, faster offline detection
+- **Import API enhanced**: Supports JSON array batch import for multiple rules
+
+### Breaking Changes
+
+1. **Pack/Context removed**: `IcePack`, `IceContext` and their Go/Python counterparts are removed. If your code uses Pack (e.g. `BaseLeafPackFlow`, `doPackFlow`), migrate all Pack-related code to use Roam
+2. **Leaf node base class simplification**: `BaseLeafPack*` and `BaseLeafRoam*` hierarchy fully removed, unified to `BaseLeafFlow` / `BaseLeafResult` / `BaseLeafNone`, method names simplified (e.g. `doRoamFlow` → `doFlow`)
+3. **Roam API renamed**: `getMulti`→`getDeep`, `putMulti`→`putDeep`, `getUnion`→`resolve`, requires global replacement
+4. **`priority` field removed**: Nodes no longer support `priority` ordering, remove if used
+5. **`_ice` is a reserved Roam key**: Must not be used for business data storage
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| Java SDK | 4.0.0 |
+| Go SDK | v1.2.0 |
+| Python SDK | 4.0.0 |
+| ice-server | 4.0.0 |
+
+---
+
 ## [3.0.2](https://github.com/zjn-zjn/ice/compare/v3.0.1...v3.0.2) (2026-03)
 
 **Ice Rule Engine 3.0.2 - Client Address Optimization & Starter Removal**
@@ -198,7 +340,7 @@ Support multi-language compatible configuration with class name mapping:
 ```java
 // Java
 @IceNode(alias = {"score_flow"})
-public class ScoreFlow extends BaseLeafRoamFlow { }
+public class ScoreFlow extends BaseLeafFlow { }
 ```
 
 ```go

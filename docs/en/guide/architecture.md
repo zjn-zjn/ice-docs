@@ -1,159 +1,155 @@
 ---
-title: Ice Architecture Overview - Server/Client Architecture
-description: Understand the overall architecture design of Ice rule engine, including Server, Client, shared storage working principles and deployment methods.
-keywords: Ice architecture,rule engine architecture,Server Client,shared storage,distributed deployment
+title: Architecture
+description: Deep dive into the technical architecture of the Ice rule engine, including file system synchronization, version management, incremental updates, heartbeat mechanism, and multi-instance deployment.
+keywords: Ice architecture,rule engine architecture,Server Client,shared storage,file system sync,distributed deployment,hot reload
 head:
   - - meta
     - property: og:title
-      content: Ice Architecture Overview - Server/Client Architecture
+      content: Ice Architecture - Server + Client + Shared Storage
   - - meta
     - property: og:description
-      content: Understand the overall architecture design of Ice rule engine, including Server, Client, shared storage working principles.
+      content: Deep dive into the technical architecture of the Ice rule engine, including file system synchronization, version management, and deployment options.
 ---
 
-# Ice Architecture Overview
+# Architecture
 
-> Understanding the Server + Client + Shared Storage architecture pattern
+> Ice adopts a minimalist architecture with zero external dependencies, using the file system for configuration storage and synchronization. No database, no message queue, no service registry required.
 
 ## Overall Architecture
 
-Ice adopts a **zero external dependency** minimalist architecture, implementing configuration storage and synchronization through the file system.
-
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                  Shared Storage (ice-data/)                  │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────┐    │
-│  │  apps/  │  │ bases/  │  │ confs/  │  │  versions/  │    │
-│  │  Apps   │  │  Rules  │  │  Nodes  │  │  Increments │    │
-│  └─────────┘  └─────────┘  └─────────┘  └─────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-        ▲ Write config                      ▲ Read config
-        │                                   │
-┌───────┴───────┐                   ┌───────┴───────┐
-│   Ice Server  │                   │   Ice Client  │
-│  (Management) │                   │  (Execution)  │
-│               │                   │               │
-│ • Web UI      │                   │ • Poll version│
-│ • Rule config │                   │ • Load updates│
-│ • Publishing  │                   │ • Execute rules│
-└───────────────┘                   └───────────────┘
++----------------------------------------------------------+
+|              Shared Storage Directory (ice-data/)         |
+|                                                          |
+|  apps/     bases/     confs/     versions/    clients/   |
+|  App cfg   Rule cfg   Node cfg   Version deltas  Client info  |
++----------------------------------------------------------+
+       ^ writes config                      ^ reads config
+       |                                    |
++------+------+                   +---------+----+
+| Ice Server  |                   |  Ice Client  |
+|             |                   |              |
+| Web admin   |                   | Polls version|
+| Rule editor |                   | Loads deltas |
+| Version mgmt|                   | In-memory    |
++-------------+                   +--------------+
 ```
 
-### Architecture Features
+### Design Highlights
 
 | Feature | Description |
 |---------|-------------|
-| 🚫 **No Database** | No MySQL required, configs stored as JSON files |
-| 🚫 **No Middleware** | No ZooKeeper, Redis, etc. |
-| 🚫 **No Long Connections** | No NIO/Netty, Client polls files for updates |
-| ✅ **File System Sync** | Server and Client share the same storage directory |
-| ✅ **Docker Friendly** | Deploy with a single command |
+| **No database** | Configuration stored as JSON files, directly version-controllable |
+| **No middleware** | No ZooKeeper, Redis, or message queue needed |
+| **No persistent connections** | Client polls files for updates; no NIO/Netty required |
+| **File system sync** | Server writes files, Client reads files, communicating through a shared directory |
+| **Docker friendly** | Deploy with a single command, share storage via volume mount |
 
 ## Core Components
 
-### Ice Server - Rule Management Platform
+### Ice Server
 
-**Role**: Visual rule configuration management center
+Visual rule configuration management center, written in Go with an embedded React frontend.
 
-**Core Capabilities**:
-- Web-based visual rule configuration interface
-- Store all rule configurations as JSON files
-- Support rule version management and history rollback
-- Generate incremental updates for Client consumption
-- Multi-application (App) isolation management
+Responsibilities:
+- Provide a Web-based visual rule configuration interface
+- Persist rule configurations as JSON files
+- Manage version history with rollback support
+- Generate incremental update files for Client consumption
+- Monitor Client online status
 
-### Ice Client - Rule Execution Engine
+### Ice Client
 
-**Role**: Rule execution core for business applications
+Rule execution engine integrated into business applications, available as Java, Go, and Python SDKs.
 
-**Core Capabilities**:
-- Load rule configurations from file system to memory
-- Poll version file to detect configuration changes
-- Provide high-performance rule execution interface
-- Support multiple node types and orchestration modes
-- Pure in-memory computation, millisecond response
+Responsibilities:
+- Load all rules from the file system into memory on startup
+- Periodically poll `version.txt` for configuration changes (default: every 2 seconds)
+- Hot-reload rules in memory upon detecting a new version
+- Provide high-performance rule execution interface (pure in-memory, millisecond-level)
+- Periodically report heartbeats (default: every 10 seconds)
 
-### Shared Storage - Configuration Sync Bridge
+### Shared Storage
 
-**Role**: Configuration synchronization medium between Server and Client
-
-**Storage Structure**:
+The synchronization medium between Server and Client.
 
 ```
 ice-data/
-├── apps/                    # Application configs
-│   ├── _id.txt             # ID generator
-│   └── {app}.json          # App information
-├── clients/                 # Client information
-│   └── {app}/
-│       ├── {address}.json  # Heartbeat file
-│       └── _latest.json    # Latest client
-└── {app}/                   # App rules
-    ├── version.txt         # Version number
-    ├── bases/              # Base configs
-    ├── confs/              # Conf configs
-    ├── versions/           # Incremental updates
-    └── history/            # Publish history
++-- apps/                    # App configuration
+|   +-- _id.txt             # App ID generator
+|   +-- {app}.json          # App information
++-- clients/                 # Client information
+|   +-- {app}/
+|       +-- m_{address}.json # Client metadata (leaf node info), written once on register
+|       +-- b_{address}.json # Heartbeat file (lastHeartbeat, loadedVersion), updated frequently
+|       +-- _latest.json     # Latest registered client info cache
++-- mock/                    # Mock execution directory
+|   +-- {app}/{address}/     # Mock execution request/response file directory
++-- {app}/                   # App rules (isolated per app)
+    +-- version.txt         # Current version number
+    +-- bases/              # Rule (Ice) configuration
+    +-- confs/              # Node (Conf) configuration
+    +-- updates/            # Pending changes
+    +-- versions/           # Published incremental updates
+    +-- history/            # Publish history
 ```
 
 ## Configuration Sync Flow
 
-### 1. Server Publishing
+### Publishing
 
 ```
-User modifies rules in Web UI
-        ↓
-Clicks "Publish" button
-        ↓
+User edits rules in Web interface
+        |
+Clicks "Publish"
+        |
 Server updates bases/ and confs/ files
-        ↓
-Generates incremental file to versions/
-        ↓
-Updates version.txt version number
+        |
+Generates incremental update -> versions/{version}_upd.json
+        |
+Increments version.txt
 ```
 
-### 2. Client Polling
+### Hot Reload
 
 ```
-Client periodically checks version.txt (default 5 seconds)
-        ↓
-Detects new version number
-        ↓
-Reads incremental update files from versions/
-        ↓
+Client polls version.txt (default: every 2 seconds)
+        |
+Detects version number change
+        |
+Reads incremental files from versions/ directory
+        |
 Hot-reloads rule configuration in memory
 ```
 
-### 3. Heartbeat Mechanism
+If incremental files are missing (e.g., due to a large version gap), the Client automatically falls back to a full reload.
+
+### Heartbeat
 
 ```
-Client periodically writes heartbeat file to clients/
-        ↓
-Server reads heartbeat files to detect Client status
-        ↓
-Clients that haven't updated are marked as offline
+Client periodically writes heartbeat file to clients/{app}/
+        |
+Server reads heartbeat files to determine Client status
+        |
+Clients that haven't updated within the timeout are marked offline
 ```
 
-## Deployment Methods
+## Deployment Options
 
 ### Single Machine Deployment
 
-Simplest deployment with Server and Client on the same machine:
+Server and Client on the same machine, sharing the same local directory:
 
 ```bash
-# Start Server
 docker run -d --name ice-server \
   -p 8121:8121 \
   -v ./ice-data:/app/ice-data \
   waitmoon/ice-server:latest
-
-# Client configures same path
-ice:
-  storage:
-    path: ./ice-data
 ```
 
-### Docker Compose Deployment
+Configure the Client's `storagePath` to point to the same directory.
+
+### Docker Compose
 
 ```yaml
 version: '3.8'
@@ -168,21 +164,21 @@ services:
   your-app:
     build: .
     volumes:
-      - ./ice-data:/app/ice-data  # Shared storage
+      - ./ice-data:/app/ice-data
     depends_on:
       - ice-server
 ```
 
 ### Distributed Deployment
 
-Multiple Server/Client instances sharing storage:
+Multiple Server and Client instances coordinating through shared storage:
 
 ```yaml
 services:
   ice-server-1:
     image: waitmoon/ice-server:latest
     volumes:
-      - /shared/ice-data:/app/ice-data  # NFS/Cloud
+      - /shared/ice-data:/app/ice-data
 
   ice-server-2:
     image: waitmoon/ice-server:latest
@@ -198,23 +194,33 @@ services:
       - /shared/ice-data:/app/ice-data
 ```
 
-**Recommended Shared Storage Solutions**:
-- **NFS**: Network File System, suitable for intranet
-- **Cloud Drives**: AWS EFS, Azure Files, Google Filestore, etc.
-- **Distributed File Systems**: GlusterFS, CephFS, etc.
+Recommended shared storage solutions:
+
+| Solution | Use Case |
+|----------|----------|
+| NFS | Internal network environments |
+| AWS EFS / GCP Filestore | Cloud environments |
+| GlusterFS / CephFS | Large-scale distributed environments |
+
+## Fault Tolerance
+
+- **Client runs independently**: The Client depends only on the shared storage directory, not on the Server process. Server downtime does not affect running Clients
+- **In-memory cache**: After startup, the Client loads configuration into memory; brief shared storage outages do not impact execution
+- **Incremental fallback**: Automatically performs a full reload when incremental files are missing
+- **Atomic writes**: Server uses `.tmp` temporary files with atomic rename to prevent configuration corruption from interrupted writes
 
 ## Performance Characteristics
 
 | Feature | Description |
 |---------|-------------|
-| **Zero Network Overhead** | Config sync via file system, no network latency |
-| **Pure In-Memory Execution** | Rule execution entirely in memory, millisecond response |
-| **Incremental Updates** | Only load changed configurations, reduce resource usage |
-| **Lock-Free Design** | Node execution independent, naturally supports high concurrency |
+| **Pure in-memory execution** | Rule execution is entirely in-memory with millisecond-level response times |
+| **Zero network overhead** | Configuration sync is file-system-based; no network communication during execution |
+| **Incremental updates** | Only changed configurations are loaded, minimizing I/O overhead |
+| **Concurrency safe** | Roam is based on ConcurrentHashMap, natively supporting parallel nodes |
 
 ## Next Steps
 
-- 📖 [Getting Started](/en/guide/getting-started.html) - Start integrating Ice
-- 🔧 [Detailed Documentation](/en/guide/detail.html) - Deep dive into configuration
-- 🏗️ [Deep Architecture](/en/advanced/architecture.html) - Technical implementation
-
+- [Getting Started](/en/guide/getting-started.html) -- Deploy and run your first rule
+- [Core Concepts](/en/guide/concepts.html) -- Understand the design philosophy of tree-based orchestration
+- [Server Configuration Reference](/en/reference/server-config.html) -- Complete Server configuration options
+- [Client Configuration Reference](/en/reference/client-config.html) -- Complete Client configuration options

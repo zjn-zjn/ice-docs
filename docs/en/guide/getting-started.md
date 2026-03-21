@@ -1,29 +1,33 @@
 ---
-title: Ice Getting Started - 5-Minute Quick Integration Guide
-description: Complete guide to quickly integrate Ice rule engine. Includes Server deployment, Client SDK integration. Supports Docker one-click deployment.
-keywords: rule engine integration,getting started,installation guide,configuration,Docker deployment,Client SDK
+title: Getting Started
+description: Complete guide to getting started with the Ice rule engine. Covers Server deployment, Client SDK integration, leaf node development, and rule execution.
+keywords: rule engine setup,getting started,installation guide,Docker deployment,Client SDK,Java,Go,Python
 head:
   - - meta
     - property: og:title
-      content: Ice Getting Started - 5-Minute Quick Integration Guide
+      content: Ice Getting Started - Deploy and Run Your First Rule in 5 Minutes
   - - meta
     - property: og:description
-      content: Complete guide to quickly integrate Ice rule engine with Server deployment and Client SDK integration.
+      content: Complete guide to getting started with the Ice rule engine, covering Server deployment, Client SDK integration, and more.
 ---
 
-# Ice Getting Started Guide
+# Getting Started
 
-> Integrate Ice rule engine in 5 minutes and start your visual business orchestration journey!
+> Deploy, integrate, and execute your first rule with the Ice rule engine in 5 minutes.
 
 ## Prerequisites
 
-Ice uses a **Server + Client + Shared Storage** architecture:
+Ice consists of three components:
 
-- **Ice Server**: Visual rule configuration management platform
-- **Ice Client**: Rule execution SDK integrated into your business applications
-- **Shared Storage**: Server and Client sync configurations through a shared file directory
+- **Ice Server** -- Visual rule configuration management platform with a Web interface
+- **Ice Client** -- Rule execution SDK integrated into your business application
+- **Shared Storage** -- Server and Client synchronize configurations through a shared file directory (`ice-data/`), with no network communication required
 
-## Step 1: Deploy Ice Server
+```
+Server --> writes config --> ice-data/ <-- reads config <-- Client
+```
+
+## Step 1: Deploy the Server
 
 ### Docker Deployment (Recommended)
 
@@ -34,22 +38,25 @@ docker run -d --name ice-server \
   waitmoon/ice-server:latest
 ```
 
-After startup, visit **http://localhost:8121** to access the management UI.
+After startup, visit **http://localhost:8121** to access the management interface.
 
-Online demo: [http://eg.waitmoon.com](http://eg.waitmoon.com)
+Online demo: [eg.waitmoon.com](https://eg.waitmoon.com)
 
 ### Manual Deployment
 
-Download the package for your platform from [https://waitmoon.com/downloads/3.0.1/](https://waitmoon.com/downloads/3.0.1/), extract and run:
+Download the package for your platform from [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.0/):
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
 sh ice.sh start
 ```
 
-## Step 2: Integrate Ice Client SDK
+## Step 2: Integrate the Client SDK
 
-### Java
+Add the dependency to your business application and start the Client. The Server and Client must share the same `ice-data` directory.
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
 
 **Add Dependency**
 
@@ -57,90 +64,84 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>3.0.2</version>
+  <version>4.0.0</version>
 </dependency>
 ```
 
-**Start Client**
+**Start the Client**
 
 ```java
 IceFileClient client = new IceFileClient(
-    1,                    // app ID (matches the App created in Server)
-    "./ice-data",         // shared storage path (must point to the same directory as Server)
-    "com.your.package"    // package path where leaf nodes are located
+    1,                    // app ID (corresponds to the app created in Server)
+    "./ice-data",         // shared storage path
+    "com.your.package"    // package path for leaf node scanning
 );
 client.start();
 ```
 
-**Spring Project Integration**
+  </CodeGroupItem>
 
-For Spring/SpringBoot projects, add a configuration class to enable automatic Spring Bean injection in leaf nodes:
+  <CodeGroupItem title="Go">
 
-```java
-@Configuration
-public class IceConfig implements ApplicationContextAware {
-
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        AutowireCapableBeanFactory bf = ctx.getAutowireCapableBeanFactory();
-        IceBeanUtils.setFactory(new IceBeanUtils.IceBeanFactory() {
-            @Override
-            public void autowireBean(Object bean) { bf.autowireBean(bean); }
-            @Override
-            public boolean containsBean(String name) { return ctx.containsBean(name); }
-            @Override
-            public Object getBean(String name) { return ctx.getBean(name); }
-        });
-    }
-
-    @Bean(destroyMethod = "destroy")
-    public IceFileClient iceFileClient() throws Exception {
-        IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
-        client.start();
-        return client;
-    }
-}
-```
-
-> For more constructor parameters (parallelism, poll interval, swimlane, etc.) see [Client SDK Guide](/en/guide/client-integration.html)
-
-### Go
+**Add Dependency**
 
 ```bash
 go get github.com/zjn-zjn/ice/sdks/go
 ```
 
-See [Go SDK Guide](/en/guide/go-sdk.html) for details.
+**Start the Client**
 
-### Python
+```go
+client, err := ice.NewClient(1, "./ice-data")
+if err != nil {
+    log.Fatal(err)
+}
+client.Start()
+defer client.Destroy()
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+**Add Dependency**
 
 ```bash
 pip install ice-rules
 ```
 
-See [Python SDK Guide](/en/guide/python-sdk.html) for details.
+**Start the Client**
 
-## Step 3: Develop Leaf Nodes (Java Example)
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data")
+client.start()
+```
 
-Leaf nodes are where business logic actually executes. Extend the corresponding base class and place them under the scan package:
+  </CodeGroupItem>
+</CodeGroup>
 
-| Type | Base Class | Return | Purpose |
-|------|------------|--------|---------|
-| **Flow** | `BaseLeafRoamFlow` | true/false | Condition checks |
-| **Result** | `BaseLeafRoamResult` | true/false | Business execution |
-| **None** | `BaseLeafRoamNone` | none | Helper operations (logging, queries, etc.) |
+::: tip Spring Projects
+Spring/SpringBoot projects require an additional bridge class so that leaf nodes can inject Spring Beans. See [Java SDK Guide](/en/sdk/java.html#spring-integration) for details.
+:::
+
+## Step 3: Develop Leaf Nodes
+
+Leaf nodes are where business logic is executed. Extend the corresponding base class, and fields in the class will automatically appear in the Server configuration interface:
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
 
 ```java
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AmountResult extends BaseLeafRoamResult {
+public class AmountResult extends BaseLeafResult {
 
-    private String key;      // Configurable in Server UI
-    private double value;    // Configurable in Server UI
+    private String key;      // Configurable in Server interface
+    private double value;    // Configurable in Server interface
 
     @Override
-    protected boolean doRoamResult(IceRoam roam) {
-        Integer uid = roam.getMulti(key);
+    protected boolean doResult(IceRoam roam) {
+        Integer uid = roam.getDeep(key);
         if (uid == null || value <= 0) {
             return false;
         }
@@ -149,53 +150,120 @@ public class AmountResult extends BaseLeafRoamResult {
 }
 ```
 
-> Fields in the class (like `key`, `value`) automatically appear in the Server configuration UI - operators can modify them without code changes.
+  </CodeGroupItem>
 
-## Step 4: Configure and Execute Rules
+  <CodeGroupItem title="Go">
 
-### Configure in Server
+```go
+type AmountResult struct {
+    Key   string  `json:"key"`
+    Value float64 `json:"value"`
+}
 
-Visit http://localhost:8121:
+func (a *AmountResult) DoResult(ctx context.Context, roam *icecontext.Roam) bool {
+    uid := roam.Value(a.Key).IntOr(0)
+    if uid <= 0 || a.Value <= 0 {
+        return false
+    }
+    return sendService.SendAmount(ctx, uid, a.Value)
+}
 
-1. Create an Application (App)
-2. Create a new Rule (Ice)
-3. Drag leaf nodes into the rule tree and configure parameters
-4. Click **Publish**
-
-### Trigger in Code
-
-```java
-IcePack pack = new IcePack();
-pack.setIceId(1L);
-
-IceRoam roam = new IceRoam();
-roam.put("uid", 12345);
-pack.setRoam(roam);
-
-Ice.syncProcess(pack);
+func init() {
+    ice.RegisterLeaf("com.example.AmountResult", nil, func() any {
+        return &AmountResult{}
+    })
+}
 ```
 
-## Shared Storage
+  </CodeGroupItem>
 
-Server and Client must access the same `ice-data` directory:
+  <CodeGroupItem title="Python">
+
+```python
+@ice.leaf("com.example.AmountResult")
+class AmountResult:
+    key: str = ""
+    value: float = 0.0
+
+    def do_result(self, roam):
+        uid = roam.get(self.key, 0)
+        if uid <= 0 or self.value <= 0:
+            return False
+        return send_service.send_amount(uid, self.value)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Step 4: Configure and Execute
+
+### Configure Rules in Server
+
+1. Create an App
+2. Create a new Rule (Ice) and obtain its iceId
+3. Add relation nodes and leaf nodes to compose the rule tree
+4. Configure leaf node parameters
+5. Click **Publish**
+
+### Execute in Code
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
+```java
+IceRoam roam = IceRoam.create();
+roam.getIceMeta().setId(1L);
+roam.put("uid", 12345);
+Ice.syncProcess(roam);
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+roam := ice.NewRoamWithMeta()
+roam.GetMeta().Id = 1
+roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), roam)
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+roam = ice.Roam.create(id=1)
+roam.put("uid", 12345)
+ice.sync_process(roam)
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Shared Storage Deployment Options
 
 | Scenario | Solution |
 |----------|----------|
-| Local development | Same local path |
-| Docker | Mount the same host directory via `-v` |
-| Distributed | NFS / AWS EFS / Azure Files |
+| Local development | Server and Client use the same local path |
+| Docker | Mount to the same host directory using `-v` |
+| Distributed deployment | NFS / AWS EFS / GCP Filestore |
+
+## Common Issues
+
+**Client cannot load configuration?**
+Check that `storagePath` points to the same `ice-data` directory as the Server.
+
+**Rule changes not taking effect?**
+Make sure you clicked "Publish" in the Server interface. The Client polls for configuration changes every 2 seconds by default.
+
+**Node class not found on startup?**
+Verify that the leaf node class is under the scan package path configured in the Client, and that the class name is correct.
+
+For more issues, see [FAQ](/en/guide/faq.html).
 
 ## Next Steps
 
-- 📖 [Client SDK Guide](/en/guide/client-integration.html) - Full constructor parameters
-- 📖 [Detailed Documentation](/en/guide/detail.html) - Deep dive into node types and configuration
-- 🐹 [Go SDK Guide](/en/guide/go-sdk.html) · 🐍 [Python SDK Guide](/en/guide/python-sdk.html)
-- 🏗️ [Architecture Design](/en/advanced/architecture.html) · 🎥 [Video Tutorial](https://www.bilibili.com/video/BV1Q34y1R7KF)
-
-## FAQ
-
-**Client not loading configuration?** Check if storagePath points to the same directory as Server.
-
-**Rule changes not taking effect?** Make sure you clicked "Publish" in Server.
-
-👉 [More Questions](/en/guide/qa.html)
+- [Core Concepts](/en/guide/concepts.html) -- Understand the design philosophy of tree-based orchestration
+- [Architecture](/en/guide/architecture.html) -- How Server / Client / shared storage work together
+- [Java SDK](/en/sdk/java.html) | [Go SDK](/en/sdk/go.html) | [Python SDK](/en/sdk/python.html) -- Complete SDK references

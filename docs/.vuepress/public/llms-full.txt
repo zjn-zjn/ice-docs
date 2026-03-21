@@ -1,0 +1,272 @@
+# Ice Rule Engine - Complete Documentation
+
+> Ice is a lightweight, high-performance visual rule engine and business orchestration framework.
+
+---
+
+## 1. Overview
+
+Ice organizes business rules as tree structures. Each node is independent and only responsible for its own logic. Nodes communicate through a shared data container (Roam) rather than direct references. This design ensures that modifying any node only affects that node itself.
+
+### Core Design Principles
+
+1. **Tree-based decoupling**: Unlike flowchart engines (Activiti) where modifying one node requires reconnecting edges, or When-Then engines (Drools) where rules have implicit dependencies, Ice nodes are independent. Changes don't propagate.
+
+2. **Zero external dependencies**: No MySQL, ZooKeeper, Redis, or message queue. Configuration stored as JSON files. Server and Client sync via shared file directory.
+
+3. **Multi-language parity**: Java, Go, and Python SDKs share identical APIs and semantics.
+
+---
+
+## 2. Architecture
+
+```
+Server → writes config → ice-data/ ← reads config ← Client
+```
+
+- **Ice Server**: Go-based REST API with embedded React frontend. Provides visual rule configuration.
+- **Ice Client**: SDK embedded in business applications. Polls file system for config updates.
+- **Shared Storage**: ice-data/ directory. Server writes, Client reads. No network communication needed.
+
+### Configuration Sync Flow
+
+1. User edits rules in Server web UI
+2. User clicks "Publish"
+3. Server writes updated configs to bases/ and confs/
+4. Server generates incremental update file: versions/{version}_upd.json
+5. Server increments version.txt
+6. Client polls version.txt (default: every 2 seconds)
+7. Client detects new version, reads incremental update
+8. Client hot-reloads rules in memory (no restart needed)
+
+### Storage Structure
+
+```
+ice-data/
+├── apps/                    # Application configs
+│   ├── _id.txt             # App ID generator
+│   └── {app}.json          # App metadata
+├── clients/                 # Client registration
+│   └── {app}/
+│       ├── m_{address}.json # Client metadata (registered classes, scan results)
+│       ├── b_{address}.json # Client heartbeat (timestamp)
+│       └── _latest.json     # Latest client info
+└── {app}/                   # Per-app rule configs
+    ├── version.txt         # Current version number
+    ├── bases/              # Rule (Ice) configs
+    ├── confs/              # Node (Conf) configs
+    ├── updates/            # Pending changes
+    ├── versions/           # Published incremental updates
+    └── history/            # Publish history
+```
+
+---
+
+## 3. Relation Nodes (5 types × serial/parallel)
+
+Control child node execution flow.
+
+### Serial
+
+| Type | Execution | Return Logic |
+|------|-----------|-------------|
+| AND | Sequential, stops on first FALSE | All true → true; any false → false (short-circuit) |
+| ANY | Sequential, stops on first TRUE | Any true → true (short-circuit); all false → false |
+| ALL | Execute all children | Has true & no false → true; has false → false |
+| NONE | Execute all children | Always returns none |
+| TRUE | Execute all children | Always returns true (even with no children) |
+
+When all children return none: AND/ANY/ALL return none.
+
+### Parallel
+
+ParallelAnd, ParallelAny, ParallelAll, ParallelNone, ParallelTrue.
+
+- ParallelAnd/Any: Support early termination (return as soon as result is determined)
+- ParallelAll/None/True: Wait for all children to complete
+- Implementation: Java uses ForkJoinPool, Go uses goroutine pool (ants/v2), Python uses concurrent.futures
+
+---
+
+## 4. Leaf Nodes (3 types)
+
+Execute business logic.
+
+| Type | Return | Purpose | Example |
+|------|--------|---------|---------|
+| Flow | true/false | Condition check | Score threshold, time filter, permission check |
+| Result | true/false | Business operation | Grant coupon, deduct inventory, send notification |
+| None | none | Auxiliary operation | Load user info, log event, assemble data |
+
+### Base Classes
+
+Each type has one base class, all taking IceRoam as input:
+
+| Language | Flow | Result | None |
+|----------|------|--------|------|
+| Java | BaseLeafFlow | BaseLeafResult | BaseLeafNone |
+| Go | DoFlow(ctx, roam) | DoResult(ctx, roam) | DoNone(ctx, roam) |
+| Python | do_flow(roam) | do_result(roam) | do_none(roam) |
+
+### Language-specific registration
+
+- Java: Annotation scanning via package path. Classes extend BaseLeafFlow/BaseLeafResult/BaseLeafNone.
+- Go: Explicit registration via ice.RegisterLeaf(). Structs implement DoFlow/DoResult/DoNone interfaces.
+- Python: @ice.leaf() decorator. Classes implement do_flow/do_result/do_none methods.
+
+---
+
+## 5. Data Model
+
+### Roam + IceMeta (Input)
+
+Roam is the unified data container. Execution metadata is stored under the reserved `_ice` key as IceMeta. Create a Roam with `IceRoam.create()` (Java) / `NewRoamWithMeta()` (Go) / `Roam.create()` (Python), then set IceMeta fields and business data.
+
+**IceMeta fields (stored under `_ice`):**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | long | Rule ID to trigger |
+| scene | String | Scene name (all rules subscribed to this scene execute) |
+| confId | long | Execute starting from specific node ID |
+| ts | long | Request timestamp (affects time window checks) |
+| trace | String | Trace ID (auto-generated if not set) |
+| type | int | Request type |
+| debug | byte | Debug log level (bitmask) |
+| process | StringBuilder | Execution process log |
+
+Trigger priority: id > scene > confId.
+
+### Roam (Data Container)
+
+Thread-safe key-value store for passing data between nodes.
+
+```java
+// Basic
+roam.put("uid", 12345);
+roam.get("uid");  // 12345
+
+// Multi-level key (auto-creates nested structure)
+roam.putDeep("user.level", 5);  // {"user": {"level": 5}}
+roam.getDeep("user.level");     // 5
+
+// Reference syntax (@ prefix reads from roam)
+roam.resolve("@uid");    // 12345 (lookup uid in roam)
+roam.resolve("hello");   // "hello" (no @ = return as-is)
+```
+
+Implementation: Java=ConcurrentHashMap, Go=sync.RWMutex+map, Python=threading.RLock+dict.
+
+---
+
+## 6. Node Common Features
+
+Every node supports:
+- **Time window**: Node only executes within configured time range
+- **Inverse**: Flip true↔false result (none unaffected)
+- **Forward node**: Pre-condition check. If forward returns false, main node doesn't execute
+- **Error handling**: SHUT_DOWN (terminate) or return specified state to continue
+- **Node reuse**: Same node ID can appear in multiple trees. Change once, affects all.
+
+### Execution order in process()
+1. Time window check → out of window returns none
+2. Forward node execution → false rejects main node
+3. Main logic execution
+4. Inverse processing
+5. Error handling
+
+---
+
+## 7. SDK Quick Reference
+
+### Java
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>4.0.0</version>
+</dependency>
+```
+
+```java
+IceFileClient client = new IceFileClient(1, "./ice-data", "com.your.package");
+client.start();
+
+IceRoam roam = IceRoam.create();
+roam.getIceMeta().setId(1L);
+roam.put("uid", 12345);
+Ice.syncProcess(roam);
+```
+
+### Go
+```bash
+go get github.com/zjn-zjn/ice/sdks/go
+```
+
+```go
+client, _ := ice.NewClient(1, "./ice-data")
+client.Start()
+
+roam := ice.NewRoamWithMeta()
+roam.GetMeta().Id = 1
+roam.Put("uid", 12345)
+ice.SyncProcess(context.Background(), roam)
+```
+
+### Python
+```bash
+pip install ice-rules
+```
+
+```python
+client = ice.FileClient(app=1, storage_path="./ice-data")
+client.start()
+
+roam = ice.Roam.create(id=1)
+roam.put("uid", 12345)
+ice.sync_process(roam)
+```
+
+---
+
+## 8. Server Configuration
+
+| Param | Env Var | Default | Description |
+|-------|---------|---------|-------------|
+| --port | ICE_PORT | 8121 | Server port |
+| --storage-path | ICE_STORAGE_PATH | ./ice-data | File storage path |
+| --client-timeout | ICE_CLIENT_TIMEOUT | 30 | Client heartbeat timeout (seconds) |
+| --version-retention | ICE_VERSION_RETENTION | 1000 | Number of version files to retain |
+| --recycle-cron | ICE_RECYCLE_CRON | 0 3 * * * | Cleanup cron expression |
+| --recycle-way | ICE_RECYCLE_WAY | hard | Cleanup method (soft/hard) |
+| --recycle-protect-days | ICE_RECYCLE_PROTECT_DAYS | 1 | Days to protect from cleanup |
+
+### Docker deployment
+```bash
+docker run -d --name ice-server -p 8121:8121 \
+  -v ./ice-data:/app/ice-data waitmoon/ice-server:latest
+```
+
+---
+
+## 9. Client Configuration
+
+| Param | Type | Required | Default | Description |
+|-------|------|----------|---------|-------------|
+| app | int | Yes | — | App ID from Server |
+| storagePath | string | Yes | — | Shared storage path |
+| scan | string | Java only | — | Leaf node scan package |
+| parallelism | int | No | -1 | Thread pool size (≤0 = default) |
+| pollInterval | duration | No | 2s | Version polling interval |
+| heartbeatInterval | duration | No | 10s | Heartbeat interval |
+| lane | string | No | "" | Lane name for traffic isolation |
+
+---
+
+## 10. Source Code & Links
+
+- GitHub: https://github.com/zjn-zjn/ice
+- Gitee: https://gitee.com/waitmoon/ice
+- Website: https://waitmoon.com
+- Playground: https://eg.waitmoon.com
+- License: Apache-2.0

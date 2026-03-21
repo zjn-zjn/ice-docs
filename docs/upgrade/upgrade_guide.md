@@ -15,6 +15,206 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v3.0.2 → v4.0.0 Pack 移除 + API 统一 + Mock 执行 🚀
+
+这是一次重大升级，涉及 **5 项破坏性变更**，所有叶子节点代码都需要修改。建议预留充分时间，按照下面的步骤逐项完成迁移。
+
+### 变更概览
+
+| 变更项 | 影响范围 | 操作 |
+|--------|---------|------|
+| Pack/Context 移除 | 所有使用 Pack 的叶子节点 | 迁移为 Roam |
+| 叶子基类简化（9→3） | 所有叶子节点 | 全局替换基类和方法名 |
+| Roam API 重命名 | 使用 getMulti/putMulti/getUnion 的代码 | 全局替换方法名 |
+| priority 字段移除 | 使用了 priority 的配置 | 删除相关逻辑 |
+| `_ice` 保留键 | 业务数据中使用了 `_ice` key | 重命名 |
+
+### 升级步骤
+
+#### ⚠️ 破坏性变更 1：Pack/Context 彻底移除
+
+`IcePack`（Java）、`Pack`（Go/Python）和 `IceContext` 已被移除。所有叶子节点方法现在只接收 `Roam`。如果你此前使用了 `BaseLeafPackFlow` 等 Pack 系列基类，需要将数据访问从 Pack 迁移到 Roam。
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
+```java
+// ❌ 旧代码（3.x）— Pack 基类
+public class ScoreFlow extends BaseLeafPackFlow {
+    @Override
+    protected boolean doPackFlow(IcePack pack) {
+        IceRoam roam = pack.getRoam();
+        return (double) roam.get("score") >= threshold;
+    }
+}
+
+// ❌ 旧代码（3.x）— Roam 基类
+public class ScoreFlow extends BaseLeafRoamFlow {
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return (double) roam.get("score") >= threshold;
+    }
+}
+
+// ✅ 新代码（4.0.0）
+public class ScoreFlow extends BaseLeafFlow {
+    @Override
+    protected boolean doFlow(IceRoam roam) {
+        return (double) roam.get("score") >= threshold;
+    }
+}
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+// ❌ 旧代码（3.x）
+func (s *ScoreFlow) DoRoamFlow(ctx context.Context, roam *icecontext.Roam) bool {
+    value := roam.Value(s.Key).Float64Or(0)
+    return value >= s.Score
+}
+
+// ✅ 新代码（4.0.0）
+func (s *ScoreFlow) DoFlow(ctx context.Context, roam *icecontext.Roam) bool {
+    value := roam.Value(s.Key).Float64Or(0)
+    return value >= s.Score
+}
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+# ❌ 旧代码（3.x）
+def do_roam_flow(self, roam):
+    value = roam.get(self.key, 0.0)
+    return value >= self.score
+
+# ✅ 新代码（4.0.0）
+def do_flow(self, roam):
+    value = roam.get(self.key, 0.0)
+    return value >= self.score
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+#### ⚠️ 破坏性变更 2：叶子节点基类和方法全局替换
+
+所有叶子节点的基类和方法名都需要替换。以下是完整的替换列表，建议使用 IDE 的全局替换功能：
+
+**基类替换：**
+
+| 语言 | 搜索 | 替换为 |
+|------|------|--------|
+| Java | `BaseLeafRoamFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafPackFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafRoamResult` | `BaseLeafResult` |
+| Java | `BaseLeafPackResult` | `BaseLeafResult` |
+| Java | `BaseLeafRoamNone` | `BaseLeafNone` |
+| Java | `BaseLeafPackNone` | `BaseLeafNone` |
+
+**方法替换：**
+
+| 语言 | 搜索 | 替换为 |
+|------|------|--------|
+| Java | `doRoamFlow` | `doFlow` |
+| Java | `doPackFlow` | `doFlow` |
+| Java | `doRoamResult` | `doResult` |
+| Java | `doPackResult` | `doResult` |
+| Java | `doRoamNone` | `doNone` |
+| Java | `doPackNone` | `doNone` |
+| Go | `DoRoamFlow` | `DoFlow` |
+| Go | `DoPackFlow` | `DoFlow` |
+| Go | `DoRoamResult` | `DoResult` |
+| Go | `DoPackResult` | `DoResult` |
+| Go | `DoRoamNone` | `DoNone` |
+| Go | `DoPackNone` | `DoNone` |
+| Python | `do_roam_flow` | `do_flow` |
+| Python | `do_pack_flow` | `do_flow` |
+| Python | `do_roam_result` | `do_result` |
+| Python | `do_pack_result` | `do_result` |
+| Python | `do_roam_none` | `do_none` |
+| Python | `do_pack_none` | `do_none` |
+
+#### ⚠️ 破坏性变更 3：Roam API 方法全局替换
+
+| 语言 | 搜索 | 替换为 |
+|------|------|--------|
+| Java | `getMulti(` | `getDeep(` |
+| Java | `putMulti(` | `putDeep(` |
+| Java | `getUnion(` | `resolve(` |
+| Go | `GetMulti(` | `GetDeep(` |
+| Go | `PutMulti(` | `PutDeep(` |
+| Go | `GetUnion(` | `Resolve(` |
+| Go | `ValueMulti(` | `ValueDeep(` |
+| Python | `get_multi(` | `get_deep(` |
+| Python | `put_multi(` | `put_deep(` |
+| Python | `get_union(` | `resolve(` |
+
+#### ⚠️ 破坏性变更 4：priority 字段已移除
+
+如果你的代码或配置数据中使用了 `priority` 字段，请移除相关逻辑。节点执行顺序由树结构决定。
+
+#### ⚠️ 破坏性变更 5：`_ice` 为 Roam 保留键
+
+`_ice` 键用于存储执行元数据（IceMeta），不可用于业务数据。如果你的 Roam 中使用了 `_ice` 作为业务 key，请重命名为其他名称。
+
+#### 默认值变更
+
+以下默认值已调整，如果你的环境依赖旧默认值，升级后可能需要手动设置：
+
+| 配置项 | 旧默认值 | 新默认值 |
+|--------|---------|---------|
+| 轮询间隔（poll-interval） | 5s | 2s |
+| 心跳间隔（heartbeat-interval） | 30s | 10s |
+| 客户端超时（client-timeout） | 60s | 30s |
+
+#### 新特性（无需迁移）
+
+- **Mock 执行**：Web UI 新增 Mock 按钮，支持远程调试。Client SDK 内置轮询，无需额外配置
+- **Roam Key 扫描**：自动提取叶子节点的 roam key 元数据，为 Mock 表单生成字段
+- **IceMeta**：执行元数据存储在 `_ice` 保留键下
+- **客户端文件拆分**：`m_{addr}.json`（元数据）+ `b_{addr}.json`（心跳）
+- **列表下标遍历**：`getDeep("items.0.name")` 支持列表元素访问
+
+### 版本升级
+
+**Java SDK**
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>4.0.0</version>
+</dependency>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.0
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+**Server**
+
+```bash
+docker pull waitmoon/ice-server:4.0.0
+```
+
+或从 [https://waitmoon.com/downloads/4.0.0/](https://waitmoon.com/downloads/4.0.0/) 下载对应平台包。
+
+---
+
 ## v3.0.1 → v3.0.2 Client 优化 🔧
 
 ### 变更内容

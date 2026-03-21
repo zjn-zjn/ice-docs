@@ -1,0 +1,90 @@
+---
+title: 节点类型
+description: Ice 规则引擎所有节点类型的完整参考，包括 5 种关系节点（串行 + 并行）和 3 种叶子节点的行为定义。
+keywords: 节点类型,关系节点,叶子节点,AND,ANY,ALL,Flow,Result,None,并行节点
+head:
+  - - meta
+    - property: og:title
+      content: 节点类型速查 - Ice 规则引擎参考
+  - - meta
+    - property: og:description
+      content: Ice 规则引擎所有节点类型的完整参考。
+---
+
+# 节点类型速查
+
+## 关系节点（Relation）
+
+关系节点控制子节点的执行方式和返回逻辑。每种都有串行和并行两个版本。
+
+### 串行关系节点
+
+| 类型 | 执行方式 | 子节点返回 true | 子节点返回 false | 无子节点 |
+|------|---------|---------------|-----------------|---------|
+| **AND** | 顺序执行，遇 false **短路停止** | 全 true → true | 有 false → false（立即返回） | none |
+| **ANY** | 顺序执行，遇 true **短路停止** | 有 true → true（立即返回） | 全 false → false | none |
+| **ALL** | **全部执行**，不短路 | 有 true 且无 false → true | 有 false → false | none |
+| **NONE** | **全部执行** | 始终返回 **none** | 始终返回 **none** | none |
+| **TRUE** | **全部执行** | 始终返回 **true** | 始终返回 **true** | true |
+
+::: tip 返回值说明
+- 当所有子节点都返回 none 时，AND / ANY / ALL 都返回 none
+- TRUE 是唯一一个无子节点也返回 true 的关系节点
+- none 表示"不参与判断"，不等同于 true 或 false
+:::
+
+### 并行关系节点
+
+每种串行关系节点都有对应的并行版本，将子节点提交到线程池/协程池并发执行：
+
+| 类型 | 并发策略 |
+|------|---------|
+| **ParallelAnd** | 并发执行所有子节点。任一完成且结果为 false 时**提前返回** |
+| **ParallelAny** | 并发执行所有子节点。任一完成且结果为 true 时**提前返回** |
+| **ParallelAll** | 并发执行所有子节点。**等待全部完成**后返回 |
+| **ParallelNone** | 并发执行所有子节点。等待全部完成，始终返回 none |
+| **ParallelTrue** | 并发执行所有子节点。等待全部完成，始终返回 true |
+
+::: warning 注意
+并行节点的子节点之间不应有数据依赖关系。每个子节点使用 Roam 的浅拷贝，写入同一个 key 可能产生竞争。
+:::
+
+## 叶子节点（Leaf）
+
+叶子节点是执行业务逻辑的终端节点。
+
+| 类型 | 返回值 | 用途 | 典型场景 |
+|------|-------|------|---------|
+| **Flow** | true / false | 条件判断，控制流程走向 | 金额校验、等级判断、时间过滤、权限检查 |
+| **Result** | true / false | 执行业务操作，返回执行结果 | 发放优惠券、扣减库存、发送通知、调用外部接口 |
+| **None** | none（不影响流程） | 辅助操作 | 查询用户信息、记录日志、数据装配、缓存预热 |
+
+### 各语言实现
+
+| 语言 | Flow | Result | None |
+|------|------|--------|------|
+| **Java** | `BaseLeafFlow` | `BaseLeafResult` | `BaseLeafNone` |
+| **Go** | `DoFlow(ctx, roam)` | `DoResult(ctx, roam)` | `DoNone(ctx, roam)` |
+| **Python** | `do_flow(roam)` | `do_result(roam)` | `do_none(roam)` |
+
+## 节点通用配置
+
+所有节点（关系节点和叶子节点）共享以下配置：
+
+| 配置 | 说明 | 默认值 |
+|------|------|--------|
+| **时间窗口** | 节点生效时间范围。不在窗口内的节点返回 none，视为不存在 | 不限制 |
+| **反转（inverse）** | 将 true 结果反转为 false，反之亦然。none 不受影响 | false |
+| **前置节点（forward）** | 前置节点返回 false 时，主节点不执行，直接返回 false。语义等价于 AND 连接 | 无 |
+| **错误处理** | 节点报错时的行为：SHUT_DOWN（终止流程）或返回指定状态继续执行 | SHUT_DOWN |
+| **调试标记** | 是否在 processInfo 中记录该节点的执行信息 | false |
+
+## 执行流程
+
+每个节点的 `process()` 方法按以下顺序执行：
+
+1. **时间窗口检查** → 不在窗口内则返回 none
+2. **前置节点执行** → 前置节点返回 false 则拒绝执行
+3. **自身逻辑执行** → 关系节点遍历子节点 / 叶子节点执行业务
+4. **反转处理** → 如果配置了 inverse，反转 true/false
+5. **错误处理** → 异常时按配置的策略处理

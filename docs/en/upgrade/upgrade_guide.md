@@ -15,6 +15,206 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v3.0.2 → v4.0.0 Pack Removal + API Unification + Mock Execution 🚀
+
+This is a major upgrade involving **5 breaking changes** — all leaf node code requires modification. Plan sufficient time and follow the steps below to migrate systematically.
+
+### Change Overview
+
+| Change | Scope | Action |
+|--------|-------|--------|
+| Pack/Context removed | All leaf nodes using Pack | Migrate to Roam |
+| Leaf base classes simplified (9→3) | All leaf nodes | Global replace base classes and methods |
+| Roam API renamed | Code using getMulti/putMulti/getUnion | Global replace method names |
+| priority field removed | Configs using priority | Remove related logic |
+| `_ice` reserved key | Business data using `_ice` key | Rename the key |
+
+### Upgrade Steps
+
+#### Breaking Change 1: Pack/Context Fully Removed
+
+`IcePack` (Java), `Pack` (Go/Python) and `IceContext` have been removed. All leaf node methods now receive only `Roam`. If you previously used `BaseLeafPackFlow` or other Pack-based base classes, migrate all Pack data access to Roam.
+
+<CodeGroup>
+  <CodeGroupItem title="Java" active>
+
+```java
+// ❌ Old code (3.x) — Pack base class
+public class ScoreFlow extends BaseLeafPackFlow {
+    @Override
+    protected boolean doPackFlow(IcePack pack) {
+        IceRoam roam = pack.getRoam();
+        return (double) roam.get("score") >= threshold;
+    }
+}
+
+// ❌ Old code (3.x) — Roam base class
+public class ScoreFlow extends BaseLeafRoamFlow {
+    @Override
+    protected boolean doRoamFlow(IceRoam roam) {
+        return (double) roam.get("score") >= threshold;
+    }
+}
+
+// ✅ New code (4.0.0)
+public class ScoreFlow extends BaseLeafFlow {
+    @Override
+    protected boolean doFlow(IceRoam roam) {
+        return (double) roam.get("score") >= threshold;
+    }
+}
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Go">
+
+```go
+// ❌ Old code (3.x)
+func (s *ScoreFlow) DoRoamFlow(ctx context.Context, roam *icecontext.Roam) bool {
+    value := roam.Value(s.Key).Float64Or(0)
+    return value >= s.Score
+}
+
+// ✅ New code (4.0.0)
+func (s *ScoreFlow) DoFlow(ctx context.Context, roam *icecontext.Roam) bool {
+    value := roam.Value(s.Key).Float64Or(0)
+    return value >= s.Score
+}
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Python">
+
+```python
+# ❌ Old code (3.x)
+def do_roam_flow(self, roam):
+    value = roam.get(self.key, 0.0)
+    return value >= self.score
+
+# ✅ New code (4.0.0)
+def do_flow(self, roam):
+    value = roam.get(self.key, 0.0)
+    return value >= self.score
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+#### Breaking Change 2: Leaf Node Base Class and Method Global Replace
+
+All leaf node base classes and method names must be replaced. Use your IDE's global find-and-replace:
+
+**Base class replacement:**
+
+| Language | Search | Replace with |
+|----------|--------|-------------|
+| Java | `BaseLeafRoamFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafPackFlow` | `BaseLeafFlow` |
+| Java | `BaseLeafRoamResult` | `BaseLeafResult` |
+| Java | `BaseLeafPackResult` | `BaseLeafResult` |
+| Java | `BaseLeafRoamNone` | `BaseLeafNone` |
+| Java | `BaseLeafPackNone` | `BaseLeafNone` |
+
+**Method replacement:**
+
+| Language | Search | Replace with |
+|----------|--------|-------------|
+| Java | `doRoamFlow` | `doFlow` |
+| Java | `doPackFlow` | `doFlow` |
+| Java | `doRoamResult` | `doResult` |
+| Java | `doPackResult` | `doResult` |
+| Java | `doRoamNone` | `doNone` |
+| Java | `doPackNone` | `doNone` |
+| Go | `DoRoamFlow` | `DoFlow` |
+| Go | `DoPackFlow` | `DoFlow` |
+| Go | `DoRoamResult` | `DoResult` |
+| Go | `DoPackResult` | `DoResult` |
+| Go | `DoRoamNone` | `DoNone` |
+| Go | `DoPackNone` | `DoNone` |
+| Python | `do_roam_flow` | `do_flow` |
+| Python | `do_pack_flow` | `do_flow` |
+| Python | `do_roam_result` | `do_result` |
+| Python | `do_pack_result` | `do_result` |
+| Python | `do_roam_none` | `do_none` |
+| Python | `do_pack_none` | `do_none` |
+
+#### Breaking Change 3: Roam API Method Global Replace
+
+| Language | Search | Replace with |
+|----------|--------|-------------|
+| Java | `getMulti(` | `getDeep(` |
+| Java | `putMulti(` | `putDeep(` |
+| Java | `getUnion(` | `resolve(` |
+| Go | `GetMulti(` | `GetDeep(` |
+| Go | `PutMulti(` | `PutDeep(` |
+| Go | `GetUnion(` | `Resolve(` |
+| Go | `ValueMulti(` | `ValueDeep(` |
+| Python | `get_multi(` | `get_deep(` |
+| Python | `put_multi(` | `put_deep(` |
+| Python | `get_union(` | `resolve(` |
+
+#### Breaking Change 4: `priority` Field Removed
+
+If your code or configuration data uses the `priority` field, remove the related logic. Node execution order is determined by the tree structure.
+
+#### Breaking Change 5: `_ice` is a Reserved Roam Key
+
+The `_ice` key stores execution metadata (IceMeta) and must not be used for business data. If your Roam uses `_ice` as a business key, rename it.
+
+#### Default Value Changes
+
+The following defaults have changed. If your environment relies on old defaults, you may need to set them explicitly after upgrading:
+
+| Configuration | Old Default | New Default |
+|---------------|------------|------------|
+| Poll interval (poll-interval) | 5s | 2s |
+| Heartbeat interval (heartbeat-interval) | 30s | 10s |
+| Client timeout (client-timeout) | 60s | 30s |
+
+#### New Features (No Migration Needed)
+
+- **Mock Execution**: New Mock button in Web UI for remote debugging. Client SDKs have built-in polling, no extra configuration needed
+- **Roam Key Scanning**: Automatically extracts roam key metadata from leaf nodes for Mock form field generation
+- **IceMeta**: Execution metadata stored under the reserved `_ice` key
+- **Client File Split**: `m_{addr}.json` (metadata) + `b_{addr}.json` (heartbeat)
+- **List Index Traversal**: `getDeep("items.0.name")` supports list element access
+
+### Version Upgrade
+
+**Java SDK**
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>4.0.0</version>
+</dependency>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.0
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+**Server**
+
+```bash
+docker pull waitmoon/ice-server:4.0.0
+```
+
+Or download the platform-specific package from [https://waitmoon.com/downloads/4.0.0/](https://waitmoon.com/downloads/4.0.0/).
+
+---
+
 ## v3.0.1 → v3.0.2 Client Optimization 🔧
 
 ### Changes
