@@ -15,6 +15,22 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.1](https://github.com/zjn-zjn/ice/compare/v4.0.0...v4.0.1) (2026-03)
+
+**Go SDK RoamValue Type Conversion Enhancement**
+
+- RoamValue type conversion now uses `spf13/cast` for broader type support (json.Number, uint variants, etc.)
+- Added error-returning variants: `StringE()`, `IntE()`, `Int64E()`, `Float64E()`, `BoolE()`
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| Go SDK | v1.2.1 |
+| ice-server | 4.0.1 |
+
+---
+
 ## [4.0.0](https://github.com/zjn-zjn/ice/compare/v3.0.2...v4.0.0) (2026-03) 🚀
 
 **Ice Rule Engine 4.0.0 — Pack/Context Removal, API Unification, Mock Execution**

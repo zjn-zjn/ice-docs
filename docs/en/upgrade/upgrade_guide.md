@@ -196,7 +196,7 @@ The following defaults have changed. If your environment relies on old defaults,
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.2.0
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.1
 ```
 
 **Python SDK**
@@ -208,10 +208,10 @@ pip install --upgrade ice-rules
 **Server**
 
 ```bash
-docker pull waitmoon/ice-server:4.0.0
+docker pull waitmoon/ice-server:4.0.1
 ```
 
-Or download the platform-specific package from [https://waitmoon.com/downloads/4.0.0/](https://waitmoon.com/downloads/4.0.0/).
+Or download the platform-specific package from [https://waitmoon.com/downloads/4.0.1/](https://waitmoon.com/downloads/4.0.1/).
 
 ---
 

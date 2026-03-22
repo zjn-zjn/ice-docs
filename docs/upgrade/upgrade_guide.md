@@ -196,7 +196,7 @@ def do_flow(self, roam):
 **Go SDK**
 
 ```bash
-go get github.com/zjn-zjn/ice/sdks/go@v1.2.0
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.1
 ```
 
 **Python SDK**
@@ -208,10 +208,10 @@ pip install --upgrade ice-rules
 **Server**
 
 ```bash
-docker pull waitmoon/ice-server:4.0.0
+docker pull waitmoon/ice-server:4.0.1
 ```
 
-或从 [https://waitmoon.com/downloads/4.0.0/](https://waitmoon.com/downloads/4.0.0/) 下载对应平台包。
+或从 [https://waitmoon.com/downloads/4.0.1/](https://waitmoon.com/downloads/4.0.1/) 下载对应平台包。
 
 ---
 

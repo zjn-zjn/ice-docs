@@ -15,6 +15,22 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.1](https://github.com/zjn-zjn/ice/compare/v4.0.0...v4.0.1) (2026-03)
+
+**Go SDK RoamValue 类型转换增强**
+
+- RoamValue 类型转换使用 `spf13/cast`，支持更多类型（json.Number、uint 系列等）
+- 新增 error 变体方法：`StringE()`、`IntE()`、`Int64E()`、`Float64E()`、`BoolE()`
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| Go SDK | v1.2.1 |
+| ice-server | 4.0.1 |
+
+---
+
 ## [4.0.0](https://github.com/zjn-zjn/ice/compare/v3.0.2...v4.0.0) (2026-03) 🚀
 
 **Ice 规则引擎 4.0.0 — Pack/Context 移除、API 统一、Mock 执行**
