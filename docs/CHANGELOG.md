@@ -127,7 +127,7 @@ public class ScoreFlow extends BaseLeafFlow {
 |------|------|
 | `id` | 规则 ID |
 | `scene` | 场景标识 |
-| `confId` | 配置 ID |
+| `nid` | 配置 ID |
 | `ts` | 时间戳 |
 | `trace` | 追踪标识 |
 | `type` | 请求类型 |

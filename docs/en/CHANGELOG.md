@@ -127,7 +127,7 @@ Execution metadata stored under the reserved `_ice` key in Roam (`_ice` must not
 |-------|-------------|
 | `id` | Rule ID |
 | `scene` | Scene identifier |
-| `confId` | Configuration ID |
+| `nid` | Configuration ID |
 | `ts` | Timestamp |
 | `trace` | Trace identifier |
 | `type` | Request type |

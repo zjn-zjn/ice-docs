@@ -208,7 +208,7 @@ roam.resolve(100)       # 100
 
 `"_ice"` 是 Roam 中的保留 key，用于存储执行元数据（IceMeta）。用户无法通过 `put`/`putDeep` 覆盖它。
 
-IceMeta 包含以下字段：`id`、`scene`、`confId`、`ts`、`trace`、`type`、`debug`、`process`。
+IceMeta 包含以下字段：`id`、`scene`、`nid`、`ts`、`trace`、`type`、`debug`、`process`。
 
 各语言提供便捷访问方法：
 

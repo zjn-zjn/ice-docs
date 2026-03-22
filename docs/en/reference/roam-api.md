@@ -208,7 +208,7 @@ In the Server configuration interface, leaf node field values can be set as `@ke
 
 `"_ice"` is a reserved key in Roam that stores execution metadata (IceMeta). Users cannot overwrite it via `put`/`putDeep`.
 
-IceMeta contains the following fields: `id`, `scene`, `confId`, `ts`, `trace`, `type`, `debug`, `process`.
+IceMeta contains the following fields: `id`, `scene`, `nid`, `ts`, `trace`, `type`, `debug`, `process`.
 
 Each language provides convenience accessors:
 
