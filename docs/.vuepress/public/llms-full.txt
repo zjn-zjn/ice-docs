@@ -128,14 +128,14 @@ Roam is the unified data container. Execution metadata is stored under the reser
 |-------|------|-------------|
 | id | long | Rule ID to trigger |
 | scene | String | Scene name (all rules subscribed to this scene execute) |
-| confId | long | Execute starting from specific node ID |
+| nid | long | Execute starting from specific node ID |
 | ts | long | Request timestamp (affects time window checks) |
 | trace | String | Trace ID (auto-generated if not set) |
 | type | int | Request type |
 | debug | byte | Debug log level (bitmask) |
 | process | StringBuilder | Execution process log |
 
-Trigger priority: id > scene > confId.
+Trigger priority: id > scene > nid.
 
 ### Roam (Data Container)
 

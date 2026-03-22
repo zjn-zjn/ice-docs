@@ -132,10 +132,10 @@ roam_list = await ice.async_process(roam)
 ```python
 roam = ice.Roam.create(id=1)              # By iceId
 roam = ice.Roam.create(scene="recharge")  # By scene
-roam = ice.Roam.create(conf_id=123)       # By node ID
+roam = ice.Roam.create(nid=123)           # By node ID
 ```
 
-Priority: `ice_id` > `scene` > `conf_id`.
+Priority: `ice_id` > `scene` > `nid`.
 
 ## Roam Operations
 

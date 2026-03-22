@@ -241,7 +241,7 @@ meta.Ts      // 时间戳
 meta = roam.get_meta()
 meta.id       # 执行 ID
 meta.scene    # 场景
-meta.conf_id  # 配置 ID（注意 Python 使用 snake_case）
+meta.nid      # 配置 ID
 meta.ts       # 时间戳
 ```
 

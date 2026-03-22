@@ -132,10 +132,10 @@ roam_list = await ice.async_process(roam)
 ```python
 roam = ice.Roam.create(id=1)              # 按 iceId
 roam = ice.Roam.create(scene="recharge")  # 按场景
-roam = ice.Roam.create(conf_id=123)       # 按节点 ID
+roam = ice.Roam.create(nid=123)           # 按节点 ID
 ```
 
-优先级：`ice_id` > `scene` > `conf_id`。
+优先级：`ice_id` > `scene` > `nid`。
 
 ## Roam 操作
 

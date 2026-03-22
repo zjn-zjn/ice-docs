@@ -142,14 +142,14 @@ Roam is the sole data carrier for rule execution. It holds both business data an
 |-------|------|-------------|
 | `id` | long | ID of the rule to trigger |
 | `scene` | String | Scene name to trigger; all rules subscribed to this scene will execute |
-| `confId` | long | Execute with the specified node as root |
+| `nid` | long | Execute with the specified node as root |
 | `ts` | long | Request timestamp (affects node time window evaluation) |
 | `trace` | String | Trace ID for distributed tracing, auto-generated |
 | `type` | int | Request type |
 | `debug` | byte | Debug log level (bitmask) |
 | `process` | StringBuilder | Execution process log |
 
-Trigger priority: `id` > `scene` > `confId`.
+Trigger priority: `id` > `scene` > `nid`.
 
 Roam is also the core container for passing data between nodes. It is based on ConcurrentHashMap (thread-safe) and supports multi-level keys and reference syntax:
 

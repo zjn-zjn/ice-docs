@@ -193,13 +193,13 @@ public class AmountResult extends BaseLeafResult {
 IceRoam roam = IceRoam.create();
 roam.getIceMeta().setId(1L);          // Trigger by iceId
 // roam.getIceMeta().setScene("recharge"); // Or trigger by scene
-// roam.getIceMeta().setConfId(123L);      // Or trigger by node ID
+// roam.getIceMeta().setNid(123L);         // Or trigger by node ID
 
 roam.put("uid", 12345);
 roam.put("cost", 100);
 ```
 
-Trigger priority: `iceId` > `scene` > `confId`.
+Trigger priority: `iceId` > `scene` > `nid`.
 
 ### Synchronous Execution
 

@@ -193,13 +193,13 @@ public class AmountResult extends BaseLeafResult {
 IceRoam roam = IceRoam.create();
 roam.getIceMeta().setId(1L);          // 按 iceId 触发
 // roam.getIceMeta().setScene("recharge"); // 或按场景触发
-// roam.getIceMeta().setConfId(123L);      // 或按节点 ID 触发
+// roam.getIceMeta().setNid(123L);         // 或按节点 ID 触发
 
 roam.put("uid", 12345);
 roam.put("cost", 100);
 ```
 
-触发优先级：`iceId` > `scene` > `confId`。
+触发优先级：`iceId` > `scene` > `nid`。
 
 ### 同步执行
 

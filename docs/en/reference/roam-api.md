@@ -241,7 +241,7 @@ meta.Ts      // Timestamp
 meta = roam.get_meta()
 meta.id       # Execution ID
 meta.scene    # Scene
-meta.conf_id  # Config ID (note: Python uses snake_case)
+meta.nid      # Config ID
 meta.ts       # Timestamp
 ```
 

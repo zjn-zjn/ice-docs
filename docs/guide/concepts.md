@@ -142,14 +142,14 @@ Roam 是规则执行的唯一数据载体，既承载业务数据，也通过内
 |------|------|------|
 | `id` | long | 触发的规则 ID |
 | `scene` | String | 触发的场景名，所有订阅该场景的规则都会执行 |
-| `confId` | long | 以指定节点为 root 执行 |
+| `nid` | long | 以指定节点为 root 执行 |
 | `ts` | long | 请求时间戳（影响节点时间窗口判断） |
 | `trace` | String | 链路追踪 ID，自动生成 |
 | `type` | int | 请求类型 |
 | `debug` | byte | 调试日志级别（位掩码） |
 | `process` | StringBuilder | 执行流程记录 |
 
-触发优先级：`id` > `scene` > `confId`。
+触发优先级：`id` > `scene` > `nid`。
 
 Roam 同时是节点间传递数据的核心容器，基于 ConcurrentHashMap（线程安全），支持多级 key 和引用语法：
 
