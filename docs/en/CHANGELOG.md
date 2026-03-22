@@ -15,6 +15,23 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.3](https://github.com/zjn-zjn/ice/compare/v4.0.1...v4.0.3) (2026-03)
+
+**Web UI Fixes & Improvements**
+
+- Fix NONE type child node create button being disabled (JS falsy `0` bug)
+- Fix Mock result selector fallback not persisting
+- Mock result ts/trace tags now support one-click copy
+- Breadcrumb nav Popover properly destroyed on hide
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.3 |
+
+---
+
 ## [4.0.1](https://github.com/zjn-zjn/ice/compare/v4.0.0...v4.0.1) (2026-03)
 
 **Go SDK RoamValue Type Conversion Enhancement**

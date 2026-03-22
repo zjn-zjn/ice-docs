@@ -15,6 +15,23 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.3](https://github.com/zjn-zjn/ice/compare/v4.0.1...v4.0.3) (2026-03)
+
+**Web UI 修复与改进**
+
+- 修复 NONE 类型子节点创建按钮被禁用的问题（JS falsy `0` bug）
+- 修复 Mock 结果 selector fallback 未持久化的问题
+- Mock 结果的 ts/trace 标签支持一键选中复制
+- 面包屑导航 Popover 关闭时正确销毁 DOM
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| ice-server | 4.0.3 |
+
+---
+
 ## [4.0.1](https://github.com/zjn-zjn/ice/compare/v4.0.0...v4.0.1) (2026-03)
 
 **Go SDK RoamValue 类型转换增强**
