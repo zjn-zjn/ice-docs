@@ -33,6 +33,7 @@ export const navbarEn: NavbarConfig = [
       }
     ]
   },
+  { text: 'Download', link: '/en/download/' },
   { text: 'Playground', link: '/en/playground/' },
   { text: 'FAQ', link: '/en/guide/faq.html' },
   {

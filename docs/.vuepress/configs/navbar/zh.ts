@@ -33,6 +33,7 @@ export const navbarZh: NavbarConfig = [
       }
     ]
   },
+  { text: '下载', link: '/download/' },
   { text: '演示', link: '/playground/' },
   { text: '常见问题', link: '/guide/faq.html' },
   {
