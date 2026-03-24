@@ -15,6 +15,24 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## 4.0.5 → 4.0.6
+
+### Logging System Changes
+
+**Go SDK (Breaking Change)**:
+- `ice.SetLogger()` parameter changed from custom `Logger` interface to `*slog.Logger`
+- If you implemented a custom Logger, migrate to implementing `slog.Handler` instead
+- Migration: `ice.SetLogger(slog.New(myHandler))`
+
+**Python SDK (Breaking Change)**:
+- Removed `ice.Logger` class and `ice.set_logger()` function
+- Use standard `logging` module: `logging.getLogger("ice").addHandler(myHandler)`
+
+**Java SDK**:
+- No breaking changes, only log message wording updates
+
+---
+
 ## v4.0.4 → v4.0.5 Roam API Simplification
 
 ### Changes

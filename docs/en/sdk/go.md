@@ -226,20 +226,19 @@ client.Destroy()
 
 ## Logging Configuration
 
-Uses `slog` by default. Custom loggers are supported:
+Ice uses Go's standard `log/slog` as the logging facade. Pass a `*slog.Logger` directly:
 
 ```go
-type MyLogger struct{}
+import "log/slog"
 
-func (l *MyLogger) Debug(ctx context.Context, msg string, args ...any) { /* ... */ }
-func (l *MyLogger) Info(ctx context.Context, msg string, args ...any)  { /* ... */ }
-func (l *MyLogger) Warn(ctx context.Context, msg string, args ...any)  { /* ... */ }
-func (l *MyLogger) Error(ctx context.Context, msg string, args ...any) { /* ... */ }
+// Use JSON format output
+ice.SetLogger(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
 
-ice.SetLogger(&MyLogger{})
+// Or integrate third-party logging (zap, zerolog, etc. all provide slog.Handler adapters)
+ice.SetLogger(slog.New(zapSlogHandler))
 ```
 
-TraceId is automatically extracted from context and appended to logs.
+TraceId is automatically extracted from the context and attached as a structured field.
 
 ## Next Steps
 

@@ -15,6 +15,18 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.6](https://github.com/zjn-zjn/ice/compare/v4.0.5...v4.0.6) (2026-03)
+
+**日志系统重构**
+
+- Go SDK：移除自定义 Logger 接口，改用标准 `*slog.Logger`，用户通过 `ice.SetLogger(slog.New(myHandler))` 一行接入
+- Python SDK：移除自定义 Logger ABC，改用标准 `logging.getLogger("ice")`，用户通过标准 logging 配置即可接入
+- Java SDK：去除日志消息中的 trace 前缀重复拼接，仅保留 MDC
+- Server：全面替换 `log.Printf` 为 `log/slog` 结构化日志，默认 JSON 格式输出
+- 所有组件：TraceId 改为结构化字段，不再拼入消息字符串；统一日志消息风格
+
+---
+
 ## [4.0.5](https://github.com/zjn-zjn/ice/compare/v4.0.4...v4.0.5) (2026-03)
 
 **Roam API 简化**

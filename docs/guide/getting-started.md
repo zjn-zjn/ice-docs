@@ -44,7 +44,7 @@ docker run -d --name ice-server \
 
 ### 手动部署
 
-从 [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.5/) 下载对应平台包：
+从 [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.6/) 下载对应平台包：
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
@@ -64,7 +64,7 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.5</version>
+  <version>4.0.6</version>
 </dependency>
 ```
 

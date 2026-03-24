@@ -15,6 +15,24 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## 4.0.5 → 4.0.6
+
+### 日志系统变更
+
+**Go SDK（Breaking Change）**：
+- `ice.SetLogger()` 参数从自定义 `Logger` 接口改为 `*slog.Logger`
+- 如果你之前实现了自定义 Logger，改为实现 `slog.Handler` 接口
+- 迁移示例：`ice.SetLogger(slog.New(myHandler))`
+
+**Python SDK（Breaking Change）**：
+- 移除了 `ice.Logger` 类和 `ice.set_logger()` 函数
+- 改用标准 `logging` 模块：`logging.getLogger("ice").addHandler(myHandler)`
+
+**Java SDK**：
+- 无 Breaking Change，仅日志消息文案调整
+
+---
+
 ## v4.0.4 → v4.0.5 Roam API 简化
 
 ### 变更内容

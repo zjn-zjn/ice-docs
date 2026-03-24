@@ -44,7 +44,7 @@ Online demo: [eg.waitmoon.com](https://eg.waitmoon.com/app/1/base/%E6%B5%8B%E8%A
 
 ### Manual Deployment
 
-Download the package for your platform from [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.5/):
+Download the package for your platform from [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.6/):
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
@@ -64,7 +64,7 @@ Add the dependency to your business application and start the Client. The Server
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.5</version>
+  <version>4.0.6</version>
 </dependency>
 ```
 

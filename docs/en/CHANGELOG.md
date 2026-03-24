@@ -15,6 +15,18 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.6](https://github.com/zjn-zjn/ice/compare/v4.0.5...v4.0.6) (2026-03)
+
+**Logging System Overhaul**
+
+- Go SDK: Replaced custom Logger interface with standard `*slog.Logger` — users integrate via `ice.SetLogger(slog.New(myHandler))`
+- Python SDK: Replaced custom Logger ABC with standard `logging.getLogger("ice")` — users configure via standard logging API
+- Java SDK: Removed redundant trace prefix from log messages, MDC-only approach
+- Server: Replaced all `log.Printf` with `log/slog` structured logging, JSON output by default
+- All components: TraceId is now a structured field instead of message prefix; unified log message style
+
+---
+
 ## [4.0.5](https://github.com/zjn-zjn/ice/compare/v4.0.4...v4.0.5) (2026-03)
 
 **Roam API Simplification**

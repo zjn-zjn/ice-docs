@@ -226,20 +226,19 @@ client.Destroy()
 
 ## 日志配置
 
-默认使用 `slog`。支持自定义：
+ice 使用 Go 标准库 `log/slog` 作为日志门面，可直接传入 `*slog.Logger`：
 
 ```go
-type MyLogger struct{}
+import "log/slog"
 
-func (l *MyLogger) Debug(ctx context.Context, msg string, args ...any) { /* ... */ }
-func (l *MyLogger) Info(ctx context.Context, msg string, args ...any)  { /* ... */ }
-func (l *MyLogger) Warn(ctx context.Context, msg string, args ...any)  { /* ... */ }
-func (l *MyLogger) Error(ctx context.Context, msg string, args ...any) { /* ... */ }
+// 使用 JSON 格式输出
+ice.SetLogger(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
 
-ice.SetLogger(&MyLogger{})
+// 或接入第三方日志库（zap、zerolog 等均提供 slog.Handler 适配）
+ice.SetLogger(slog.New(zapSlogHandler))
 ```
 
-TraceId 会自动从 context 中提取并附加到日志。
+TraceId 会自动从 context 中提取并作为结构化字段附加到日志。
 
 ## 下一步
 
