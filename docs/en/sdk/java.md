@@ -21,7 +21,7 @@ head:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.5</version>
 </dependency>
 ```
 
@@ -191,9 +191,9 @@ public class AmountResult extends BaseLeafResult {
 
 ```java
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);          // Trigger by iceId
-// roam.getIceMeta().setScene("recharge"); // Or trigger by scene
-// roam.getIceMeta().setNid(123L);         // Or trigger by node ID
+roam.setId(1L);          // Trigger by iceId
+// roam.setScene("recharge"); // Or trigger by scene
+// roam.setNid(123L);         // Or trigger by node ID
 
 roam.put("uid", 12345);
 roam.put("cost", 100);

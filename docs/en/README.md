@@ -119,7 +119,7 @@ Configure a rule tree in the Server interface -> click Publish -> Client automat
 
 ```java
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);
+roam.setId(1L);
 roam.put("uid", 12345);
 Ice.syncProcess(roam);
 ```
@@ -129,8 +129,8 @@ Ice.syncProcess(roam);
   <CodeGroupItem title="Go">
 
 ```go
-roam := ice.NewRoamWithMeta()
-roam.GetMeta().Id = 1
+roam := ice.NewRoam()
+roam.SetId(1)
 roam.Put("uid", 12345)
 ice.SyncProcess(context.Background(), roam)
 ```

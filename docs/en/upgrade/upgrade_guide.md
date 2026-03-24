@@ -15,6 +15,68 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## v4.0.4 → v4.0.5 Roam API Simplification
+
+### Changes
+
+- **Removed `IceMeta` class**: Metadata stored directly under `_ice` key as plain Map/dict, no more `getIceMeta()` intermediate call
+- **Removed `Ice` prefix from Roam meta methods**: All three SDKs updated simultaneously
+
+### Breaking Change: Roam meta method rename
+
+| Language | Search | Replace with |
+|----------|--------|-------------|
+| Java | `getIceMeta().setId(` | `setId(` |
+| Java | `getIceMeta().setScene(` | `setScene(` |
+| Java | `getIceMeta().setNid(` | `setNid(` |
+| Java | `getIceMeta().getId()` | `getId()` |
+| Java | `getIceMeta().getScene()` | `getScene()` |
+| Java | `getIceMeta().getProcess()` | `getProcess()` |
+| Go | `GetIceId()` | `GetId()` |
+| Go | `GetIceScene()` | `GetScene()` |
+| Go | `GetIceProcess()` | `GetProcess()` |
+| Go | `SetIceId(` | `SetId(` |
+| Go | `SetIceScene(` | `SetScene(` |
+| Go | `NewRoam("scene")` | `NewRoam()` + `SetScene("scene")` |
+| Python | `get_ice_id()` | `get_id()` |
+| Python | `get_ice_scene()` | `get_scene()` |
+| Python | `set_ice_id(` | `set_id(` |
+| Python | `set_ice_scene(` | `set_scene(` |
+
+### Version Upgrade
+
+**Java SDK**
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>4.0.5</version>
+</dependency>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.3
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+**Server**
+
+```bash
+docker pull waitmoon/ice-server:4.0.5
+```
+
+Or download from [https://waitmoon.com/downloads/4.0.5/](https://waitmoon.com/downloads/4.0.5/).
+
+---
+
 ## v3.0.2 → v4.0.0 Pack Removal + API Unification + Mock Execution 🚀
 
 This is a major upgrade involving **5 breaking changes** — all leaf node code requires modification. Plan sufficient time and follow the steps below to migrate systematically.
@@ -208,10 +270,10 @@ pip install --upgrade ice-rules
 **Server**
 
 ```bash
-docker pull waitmoon/ice-server:4.0.4
+docker pull waitmoon/ice-server:4.0.5
 ```
 
-Or download the platform-specific package from [https://waitmoon.com/downloads/4.0.4/](https://waitmoon.com/downloads/4.0.4/).
+Or download the platform-specific package from [https://waitmoon.com/downloads/4.0.5/](https://waitmoon.com/downloads/4.0.5/).
 
 ---
 

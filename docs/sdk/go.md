@@ -62,8 +62,8 @@ func main() {
     client.Start()
     defer client.Destroy()
 
-    roam := ice.NewRoamWithMeta()
-    roam.GetMeta().Id = 1
+    roam := ice.NewRoam()
+    roam.SetId(1)
     roam.Put("score", 85.0)
     roams := ice.SyncProcess(context.Background(), roam)
 
@@ -134,14 +134,14 @@ ice.RegisterLeaf("com.example.ScoreFlow",
 ctx := context.Background()
 
 // 按 iceId 执行
-roam := ice.NewRoamWithMeta()
-roam.GetMeta().Id = 1
+roam := ice.NewRoam()
+roam.SetId(1)
 roam.Put("uid", 12345)
 roams := ice.SyncProcess(ctx, roam)
 
 // 按场景执行
-roam2 := ice.NewRoamWithMeta()
-roam2.GetMeta().Scene = "recharge"
+roam2 := ice.NewRoam()
+roam2.SetScene("recharge")
 roams = ice.SyncProcess(ctx, roam2)
 
 // 异步执行
@@ -165,8 +165,8 @@ results := ice.ProcessRoam(ctx, roam)
 func handleRequest(w http.ResponseWriter, r *http.Request) {
     ctx := ice.WithTraceId(r.Context(), r.Header.Get("X-Trace-Id"))
 
-    roam := ice.NewRoamWithMeta()
-    roam.GetMeta().Scene = "api"
+    roam := ice.NewRoam()
+    roam.SetScene("api")
     roam.Put("userId", getUserId(r))
 
     // ctx 会传递到所有叶子节点，日志自动带上 traceId

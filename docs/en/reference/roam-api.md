@@ -206,20 +206,20 @@ In the Server configuration interface, leaf node field values can be set as `@ke
 
 ## `_ice` Reserved Key
 
-`"_ice"` is a reserved key in Roam that stores execution metadata (IceMeta). Users cannot overwrite it via `put`/`putDeep`.
+`"_ice"` is a reserved key in Roam that stores execution metadata (plain Map/dict).
 
-IceMeta contains the following fields: `id`, `scene`, `nid`, `ts`, `trace`, `type`, `debug`, `process`.
+Contains the following fields: `id`, `scene`, `nid`, `ts`, `trace`, `debug`, `process`.
 
-Each language provides convenience accessors:
+Each language provides convenience accessors directly on Roam:
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
 
 ```java
-roam.getIceId();     // Execution ID
-roam.getIceScene();  // Scene
-roam.getIceTs();     // Timestamp
-// Also: getIceConfId(), getIceTrace(), getIceType(), getIceDebug(), getIceProcess()
+roam.getId();       // Execution ID
+roam.getScene();    // Scene
+roam.getTs();       // Timestamp
+// Also: getNid(), getTrace(), getDebug(), getProcess()
 ```
 
   </CodeGroupItem>
@@ -227,10 +227,9 @@ roam.getIceTs();     // Timestamp
   <CodeGroupItem title="Go">
 
 ```go
-meta := roam.GetMeta()
-meta.Id      // Execution ID
-meta.Scene   // Scene
-meta.Ts      // Timestamp
+roam.GetId()      // Execution ID
+roam.GetScene()   // Scene
+roam.GetTs()      // Timestamp
 ```
 
   </CodeGroupItem>
@@ -238,11 +237,10 @@ meta.Ts      // Timestamp
   <CodeGroupItem title="Python">
 
 ```python
-meta = roam.get_meta()
-meta.id       # Execution ID
-meta.scene    # Scene
-meta.nid      # Config ID
-meta.ts       # Timestamp
+roam.get_id()       # Execution ID
+roam.get_scene()    # Scene
+roam.get_nid()      # Config ID
+roam.get_ts()       # Timestamp
 ```
 
   </CodeGroupItem>
@@ -318,9 +316,9 @@ cloned = roam.clone()
 | `putDeep(multiKey, value)` | Write nested structure using `.`-separated key |
 | `getDeep(multiKey)` | Read nested value using `.`-separated key |
 | `resolve(union)` | Reference syntax: `@` prefix fetches from roam |
-| `getIceId()` | Get execution ID |
-| `getIceScene()` | Get scene |
-| `getIceTs()` | Get timestamp |
+| `getId()` | Get execution ID |
+| `getScene()` | Get scene |
+| `getTs()` | Get timestamp |
 | `cloneRoam()` | Shallow copy Roam (used during parallel execution) |
 
 ### Go (Roam)

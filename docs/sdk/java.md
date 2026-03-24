@@ -21,7 +21,7 @@ head:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.5</version>
 </dependency>
 ```
 
@@ -191,9 +191,9 @@ public class AmountResult extends BaseLeafResult {
 
 ```java
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);          // 按 iceId 触发
-// roam.getIceMeta().setScene("recharge"); // 或按场景触发
-// roam.getIceMeta().setNid(123L);         // 或按节点 ID 触发
+roam.setId(1L);          // 按 iceId 触发
+// roam.setScene("recharge"); // 或按场景触发
+// roam.setNid(123L);         // 或按节点 ID 触发
 
 roam.put("uid", 12345);
 roam.put("cost", 100);

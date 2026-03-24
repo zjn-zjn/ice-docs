@@ -62,8 +62,8 @@ func main() {
     client.Start()
     defer client.Destroy()
 
-    roam := ice.NewRoamWithMeta()
-    roam.GetMeta().Id = 1
+    roam := ice.NewRoam()
+    roam.SetId(1)
     roam.Put("score", 85.0)
     roams := ice.SyncProcess(context.Background(), roam)
 
@@ -134,14 +134,14 @@ All execution methods take `context.Context` as their first parameter:
 ctx := context.Background()
 
 // Execute by iceId
-roam := ice.NewRoamWithMeta()
-roam.GetMeta().Id = 1
+roam := ice.NewRoam()
+roam.SetId(1)
 roam.Put("uid", 12345)
 roams := ice.SyncProcess(ctx, roam)
 
 // Execute by scene
-roam2 := ice.NewRoamWithMeta()
-roam2.GetMeta().Scene = "recharge"
+roam2 := ice.NewRoam()
+roam2.SetScene("recharge")
 roams = ice.SyncProcess(ctx, roam2)
 
 // Async execution
@@ -165,8 +165,8 @@ results := ice.ProcessRoam(ctx, roam)
 func handleRequest(w http.ResponseWriter, r *http.Request) {
     ctx := ice.WithTraceId(r.Context(), r.Header.Get("X-Trace-Id"))
 
-    roam := ice.NewRoamWithMeta()
-    roam.GetMeta().Scene = "api"
+    roam := ice.NewRoam()
+    roam.SetScene("api")
     roam.Put("userId", getUserId(r))
 
     // ctx is propagated to all leaf nodes; logs automatically include traceId

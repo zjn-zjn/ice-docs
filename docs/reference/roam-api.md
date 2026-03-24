@@ -206,20 +206,20 @@ roam.resolve(100)       # 100
 
 ## `_ice` 保留 key
 
-`"_ice"` 是 Roam 中的保留 key，用于存储执行元数据（IceMeta）。用户无法通过 `put`/`putDeep` 覆盖它。
+`"_ice"` 是 Roam 中的保留 key，用于存储执行元数据（plain Map/dict）。
 
-IceMeta 包含以下字段：`id`、`scene`、`nid`、`ts`、`trace`、`type`、`debug`、`process`。
+包含以下字段：`id`、`scene`、`nid`、`ts`、`trace`、`debug`、`process`。
 
-各语言提供便捷访问方法：
+各语言通过 Roam 便捷方法直接访问：
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
 
 ```java
-roam.getIceId();     // 执行 ID
-roam.getIceScene();  // 场景
-roam.getIceTs();     // 时间戳
-// 其他：getIceConfId(), getIceTrace(), getIceType(), getIceDebug(), getIceProcess()
+roam.getId();       // 执行 ID
+roam.getScene();    // 场景
+roam.getTs();       // 时间戳
+// 其他：getNid(), getTrace(), getDebug(), getProcess()
 ```
 
   </CodeGroupItem>
@@ -227,10 +227,9 @@ roam.getIceTs();     // 时间戳
   <CodeGroupItem title="Go">
 
 ```go
-meta := roam.GetMeta()
-meta.Id      // 执行 ID
-meta.Scene   // 场景
-meta.Ts      // 时间戳
+roam.GetId()      // 执行 ID
+roam.GetScene()   // 场景
+roam.GetTs()      // 时间戳
 ```
 
   </CodeGroupItem>
@@ -238,11 +237,10 @@ meta.Ts      // 时间戳
   <CodeGroupItem title="Python">
 
 ```python
-meta = roam.get_meta()
-meta.id       # 执行 ID
-meta.scene    # 场景
-meta.nid      # 配置 ID
-meta.ts       # 时间戳
+roam.get_id()       # 执行 ID
+roam.get_scene()    # 场景
+roam.get_nid()      # 配置 ID
+roam.get_ts()       # 时间戳
 ```
 
   </CodeGroupItem>
@@ -318,9 +316,9 @@ cloned = roam.clone()
 | `putDeep(multiKey, value)` | 按 `.` 分隔写入嵌套结构 |
 | `getDeep(multiKey)` | 按 `.` 分隔读取嵌套值 |
 | `resolve(union)` | 引用语法：`@` 前缀从 roam 取值 |
-| `getIceId()` | 获取执行 ID |
-| `getIceScene()` | 获取场景 |
-| `getIceTs()` | 获取时间戳 |
+| `getId()` | 获取执行 ID |
+| `getScene()` | 获取场景 |
+| `getTs()` | 获取时间戳 |
 | `cloneRoam()` | 浅拷贝 Roam（并行执行时使用） |
 
 ### Go (Roam)

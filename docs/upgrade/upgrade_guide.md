@@ -15,6 +15,71 @@ head:
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
 
+## v4.0.4 → v4.0.5 Roam API 简化
+
+### 变更内容
+
+- **移除 `IceMeta` 类**：元数据直接存储在 `_ice` key 下（plain Map/dict），不再需要 `getIceMeta()` 中间调用
+- **Roam meta 方法去掉 `Ice` 前缀**：三语言 SDK 同步更新
+
+### ⚠️ 破坏性变更：Roam meta 方法重命名
+
+| 语言 | 搜索 | 替换为 |
+|------|------|--------|
+| Java | `getIceMeta().setId(` | `setId(` |
+| Java | `getIceMeta().setScene(` | `setScene(` |
+| Java | `getIceMeta().setNid(` | `setNid(` |
+| Java | `getIceMeta().getId()` | `getId()` |
+| Java | `getIceMeta().getScene()` | `getScene()` |
+| Java | `getIceMeta().getProcess()` | `getProcess()` |
+| Java | `getIceMeta().getTs()` | `getTs()` |
+| Java | `getIceMeta().getTrace()` | `getTrace()` |
+| Go | `GetIceId()` | `GetId()` |
+| Go | `GetIceScene()` | `GetScene()` |
+| Go | `GetIceProcess()` | `GetProcess()` |
+| Go | `SetIceId(` | `SetId(` |
+| Go | `SetIceScene(` | `SetScene(` |
+| Go | `NewRoam("scene")` | `NewRoam()` + `SetScene("scene")` |
+| Python | `get_ice_id()` | `get_id()` |
+| Python | `get_ice_scene()` | `get_scene()` |
+| Python | `get_ice_process()` | `get_process()` |
+| Python | `set_ice_id(` | `set_id(` |
+| Python | `set_ice_scene(` | `set_scene(` |
+
+### 版本升级
+
+**Java SDK**
+
+```xml
+<dependency>
+  <groupId>com.waitmoon.ice</groupId>
+  <artifactId>ice-core</artifactId>
+  <version>4.0.5</version>
+</dependency>
+```
+
+**Go SDK**
+
+```bash
+go get github.com/zjn-zjn/ice/sdks/go@v1.2.3
+```
+
+**Python SDK**
+
+```bash
+pip install --upgrade ice-rules
+```
+
+**Server**
+
+```bash
+docker pull waitmoon/ice-server:4.0.5
+```
+
+或从 [https://waitmoon.com/downloads/4.0.5/](https://waitmoon.com/downloads/4.0.5/) 下载对应平台包。
+
+---
+
 ## v3.0.2 → v4.0.0 Pack 移除 + API 统一 + Mock 执行 🚀
 
 这是一次重大升级，涉及 **5 项破坏性变更**，所有叶子节点代码都需要修改。建议预留充分时间，按照下面的步骤逐项完成迁移。
@@ -208,10 +273,10 @@ pip install --upgrade ice-rules
 **Server**
 
 ```bash
-docker pull waitmoon/ice-server:4.0.4
+docker pull waitmoon/ice-server:4.0.5
 ```
 
-或从 [https://waitmoon.com/downloads/4.0.4/](https://waitmoon.com/downloads/4.0.4/) 下载对应平台包。
+或从 [https://waitmoon.com/downloads/4.0.5/](https://waitmoon.com/downloads/4.0.5/) 下载对应平台包。
 
 ---
 

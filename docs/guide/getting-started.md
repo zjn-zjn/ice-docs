@@ -44,7 +44,7 @@ docker run -d --name ice-server \
 
 ### 手动部署
 
-从 [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.4/) 下载对应平台包：
+从 [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.5/) 下载对应平台包：
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
@@ -64,7 +64,7 @@ sh ice.sh start
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.5</version>
 </dependency>
 ```
 
@@ -212,7 +212,7 @@ class AmountResult:
 
 ```java
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);
+roam.setId(1L);
 roam.put("uid", 12345);
 Ice.syncProcess(roam);
 ```
@@ -222,8 +222,8 @@ Ice.syncProcess(roam);
   <CodeGroupItem title="Go">
 
 ```go
-roam := ice.NewRoamWithMeta()
-roam.GetMeta().Id = 1
+roam := ice.NewRoam()
+roam.SetId(1)
 roam.Put("uid", 12345)
 ice.SyncProcess(context.Background(), roam)
 ```

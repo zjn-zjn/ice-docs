@@ -15,6 +15,30 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.5](https://github.com/zjn-zjn/ice/compare/v4.0.4...v4.0.5) (2026-03)
+
+**Roam API Simplification**
+
+- Removed `IceMeta` class, metadata stored directly under `_ice` key as plain Map/dict
+- Removed `Ice` prefix from all Roam meta accessor methods:
+  - `getIceId()` → `getId()` / `GetId()` / `get_id()`
+  - `getIceScene()` → `getScene()` / `GetScene()` / `get_scene()`
+  - `getIceProcess()` → `getProcess()` / `GetProcess()` / `get_process()`
+  - Other methods follow the same pattern
+- Go SDK `NewRoam()` simplified to parameterless constructor
+- All three SDKs (Java/Go/Python) updated simultaneously
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.5 |
+| ice-core (Java) | 4.0.5 |
+| ice SDK (Go) | v1.2.3 |
+| ice-rules (Python) | 4.0.5 |
+
+---
+
 ## [4.0.4](https://github.com/zjn-zjn/ice/compare/v4.0.3...v4.0.4) (2026-03)
 
 **Web UI Export Feature Completion**

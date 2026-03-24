@@ -44,7 +44,7 @@ Online demo: [eg.waitmoon.com](https://eg.waitmoon.com/app/1/base/%E6%B5%8B%E8%A
 
 ### Manual Deployment
 
-Download the package for your platform from [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.4/):
+Download the package for your platform from [waitmoon.com/downloads](https://waitmoon.com/downloads/4.0.5/):
 
 ```bash
 tar -xzvf ice-server-linux-amd64.tar.gz && cd ice-server-linux-amd64
@@ -64,7 +64,7 @@ Add the dependency to your business application and start the Client. The Server
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.5</version>
 </dependency>
 ```
 
@@ -212,7 +212,7 @@ class AmountResult:
 
 ```java
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);
+roam.setId(1L);
 roam.put("uid", 12345);
 Ice.syncProcess(roam);
 ```
@@ -222,8 +222,8 @@ Ice.syncProcess(roam);
   <CodeGroupItem title="Go">
 
 ```go
-roam := ice.NewRoamWithMeta()
-roam.GetMeta().Id = 1
+roam := ice.NewRoam()
+roam.SetId(1)
 roam.Put("uid", 12345)
 ice.SyncProcess(context.Background(), roam)
 ```

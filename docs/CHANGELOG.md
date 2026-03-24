@@ -15,6 +15,30 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.5](https://github.com/zjn-zjn/ice/compare/v4.0.4...v4.0.5) (2026-03)
+
+**Roam API 简化**
+
+- 移除 `IceMeta` 类，元数据直接存储在 `_ice` key 下（plain Map/dict）
+- 移除所有 Roam meta 访问方法的 `Ice` 前缀：
+  - `getIceId()` → `getId()` / `GetId()` / `get_id()`
+  - `getIceScene()` → `getScene()` / `GetScene()` / `get_scene()`
+  - `getIceProcess()` → `getProcess()` / `GetProcess()` / `get_process()`
+  - 其他类似方法同理
+- Go SDK `NewRoam()` 简化为无参构造
+- 三语言 SDK（Java/Go/Python）同步更新
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| ice-server | 4.0.5 |
+| ice-core (Java) | 4.0.5 |
+| ice SDK (Go) | v1.2.3 |
+| ice-rules (Python) | 4.0.5 |
+
+---
+
 ## [4.0.4](https://github.com/zjn-zjn/ice/compare/v4.0.3...v4.0.4) (2026-03)
 
 **Web UI 导出功能补全**
