@@ -15,6 +15,14 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.7](https://github.com/zjn-zjn/ice/compare/v4.0.6...v4.0.7) (2026-03)
+
+**Bug 修复**
+
+- Server：修复导入数据时未更新 `_base_id.txt` / `_conf_id.txt` 的问题，可能导致后续新建节点 ID 冲突
+
+---
+
 ## [4.0.6](https://github.com/zjn-zjn/ice/compare/v4.0.5...v4.0.6) (2026-03)
 
 **日志系统重构**

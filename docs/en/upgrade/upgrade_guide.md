@@ -15,6 +15,15 @@ head:
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## 4.0.6 → 4.0.7
+
+### Server Bug Fix
+
+- Fixed import not updating ID counters, recommend upgrading Server promptly
+- No SDK changes, no code modifications needed
+
+---
+
 ## 4.0.5 → 4.0.6
 
 ### Logging System Changes

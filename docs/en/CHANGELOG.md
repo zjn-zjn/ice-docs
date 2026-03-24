@@ -15,6 +15,14 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.7](https://github.com/zjn-zjn/ice/compare/v4.0.6...v4.0.7) (2026-03)
+
+**Bug Fix**
+
+- Server: Fixed import not updating `_base_id.txt` / `_conf_id.txt`, which could cause ID conflicts when creating new nodes after import
+
+---
+
 ## [4.0.6](https://github.com/zjn-zjn/ice/compare/v4.0.5...v4.0.6) (2026-03)
 
 **Logging System Overhaul**

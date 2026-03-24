@@ -21,7 +21,7 @@ head:
 <dependency>
   <groupId>com.waitmoon.ice</groupId>
   <artifactId>ice-core</artifactId>
-  <version>4.0.6</version>
+  <version>4.0.7</version>
 </dependency>
 ```
 
