@@ -9,9 +9,11 @@
 - Docker one-click deployment
 - Hot-reload: rule changes take effect in seconds without restart
 - Multi-language SDKs: Java, Go, Python with feature parity
+- Controlled mode: lock down production environments, prevent accidental changes
+- Publish to remote: push rules from one server to another directly from the UI
 
 ## Architecture
-- Ice Server: Visual rule configuration platform (Go + React)
+- Ice Server: Visual rule configuration platform (Go + React), single binary
 - Ice Client: Rule execution SDK embedded in business applications
 - Shared Storage: Server and Client sync via shared file directory (ice-data/), no network communication needed
 
@@ -28,12 +30,13 @@
 - [Python SDK](https://waitmoon.com/sdk/python.html): Decorator-based leaf registration, asyncio support
 
 ### Reference
-- [Node Types](https://waitmoon.com/reference/node-types.html): 5 relation types (AND/ANY/ALL/NONE/TRUE) × serial/parallel + 3 leaf types (Flow/Result/None)
-- [Roam API](https://waitmoon.com/reference/roam-api.html): Multi-level key access, @ reference syntax
-- [Server Config](https://waitmoon.com/reference/server-config.html): Port, storage path, version retention, recycle settings
+- [Node Types](https://waitmoon.com/reference/node-types.html): 5 relation types (AND/ANY/ALL/NONE/TRUE) x serial/parallel + 3 leaf types (Flow/Result/None)
+- [Roam API](https://waitmoon.com/reference/roam-api.html): Multi-level key access (getDeep/putDeep), @ reference syntax (resolve)
+- [Server Config](https://waitmoon.com/reference/server-config.html): Port, storage path, version retention, recycle settings, controlled mode, publish targets
 - [Client Config](https://waitmoon.com/reference/client-config.html): App ID, storage path, poll interval, lane
 
 ### Other
+- [Download](https://waitmoon.com/download/): Pre-built binaries for Linux, macOS, Windows + Docker
 - [FAQ](https://waitmoon.com/guide/faq.html): Common questions and troubleshooting
 - [Changelog](https://waitmoon.com/CHANGELOG.html): Version history
 - [Playground](https://waitmoon.com/playground/): Interactive demo
@@ -47,7 +50,7 @@ client.start();
 
 // 2. Execute rule
 IceRoam roam = IceRoam.create();
-roam.getIceMeta().setId(1L);
+roam.setId(1L);
 roam.put("uid", 12345);
 Ice.syncProcess(roam);
 ```

@@ -8,7 +8,7 @@ export const siteConfig = {
   defaultImage: '/images/hero.png',
 }
 
-// 主要关键词（语言无关定位，未来支持多语言 SDK）
+// 主要关键词
 export const keywords = {
   zh: [
     '规则引擎',
@@ -46,7 +46,7 @@ export const keywords = {
   ],
 }
 
-// SEO元数据（语言无关定位）
+// SEO元数据
 export const seoMeta = {
   zh: {
     home: {
@@ -114,6 +114,67 @@ export const seoMeta = {
   },
 }
 
+// 中英文路径映射（用于 hreflang）
+export const localePathMap: Record<string, string> = {
+  '/': '/en/',
+  '/guide/': '/en/guide/',
+  '/guide/getting-started.html': '/en/guide/getting-started.html',
+  '/guide/concepts.html': '/en/guide/concepts.html',
+  '/guide/architecture.html': '/en/guide/architecture.html',
+  '/guide/faq.html': '/en/guide/faq.html',
+  '/sdk/java.html': '/en/sdk/java.html',
+  '/sdk/go.html': '/en/sdk/go.html',
+  '/sdk/python.html': '/en/sdk/python.html',
+  '/reference/node-types.html': '/en/reference/node-types.html',
+  '/reference/roam-api.html': '/en/reference/roam-api.html',
+  '/reference/server-config.html': '/en/reference/server-config.html',
+  '/reference/client-config.html': '/en/reference/client-config.html',
+  '/reference/mock.html': '/en/reference/mock.html',
+  '/CHANGELOG.html': '/en/CHANGELOG.html',
+  '/upgrade/upgrade_guide.html': '/en/upgrade/upgrade_guide.html',
+  '/playground/': '/en/playground/',
+  '/download/': '/en/download/',
+  '/sponsor/sponsor.html': '/en/sponsor/sponsor.html',
+  '/community/community.html': '/en/community/community.html',
+}
+
+// 生成反向映射
+export const reverseLocalePathMap: Record<string, string> = Object.fromEntries(
+  Object.entries(localePathMap).map(([zh, en]) => [en, zh])
+)
+
+// 根据页面路径获取对应语言版本
+export function getAlternatePaths(pagePath: string): { zh: string; en: string } | null {
+  if (pagePath.startsWith('/en/')) {
+    const zhPath = reverseLocalePathMap[pagePath]
+    if (zhPath) return { zh: zhPath, en: pagePath }
+  } else {
+    const enPath = localePathMap[pagePath]
+    if (enPath) return { zh: pagePath, en: enPath }
+  }
+  return null
+}
+
+// 页面更新频率和优先级（用于 sitemap）
+export const sitemapConfig: Record<string, { changefreq: string; priority: number }> = {
+  '/': { changefreq: 'weekly', priority: 1.0 },
+  '/en/': { changefreq: 'weekly', priority: 1.0 },
+  '/guide/getting-started.html': { changefreq: 'monthly', priority: 0.9 },
+  '/download/': { changefreq: 'monthly', priority: 0.9 },
+  '/CHANGELOG.html': { changefreq: 'weekly', priority: 0.8 },
+  '/guide/concepts.html': { changefreq: 'monthly', priority: 0.8 },
+  '/guide/architecture.html': { changefreq: 'monthly', priority: 0.7 },
+  '/sdk/java.html': { changefreq: 'monthly', priority: 0.8 },
+  '/sdk/go.html': { changefreq: 'monthly', priority: 0.8 },
+  '/sdk/python.html': { changefreq: 'monthly', priority: 0.8 },
+  '/reference/node-types.html': { changefreq: 'monthly', priority: 0.7 },
+  '/reference/roam-api.html': { changefreq: 'monthly', priority: 0.7 },
+  '/reference/server-config.html': { changefreq: 'monthly', priority: 0.7 },
+  '/reference/client-config.html': { changefreq: 'monthly', priority: 0.7 },
+  '/playground/': { changefreq: 'monthly', priority: 0.6 },
+  '/guide/faq.html': { changefreq: 'monthly', priority: 0.6 },
+}
+
 // Open Graph和Twitter Card通用配置
 export function generateOGTags(
   locale: 'zh' | 'en',
@@ -141,13 +202,13 @@ export function generateOGTags(
     ['meta', { property: 'og:description', content: description }],
     ['meta', { property: 'og:image', content: image }],
     ['meta', { property: 'og:locale', content: locale === 'zh' ? 'zh_CN' : 'en_US' }],
-    
+
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: title }],
     ['meta', { name: 'twitter:description', content: description }],
     ['meta', { name: 'twitter:image', content: image }],
-    
+
     // 基础SEO
     ['meta', { name: 'description', content: description }],
     ['meta', { name: 'keywords', content: pageInfo.keywords }],
@@ -168,16 +229,3 @@ export function generateHreflangTags(zhPath: string, enPath: string): HeadConfig
 export function generateCanonicalTag(path: string): HeadConfig {
   return ['link', { rel: 'canonical', href: `${siteConfig.hostname}${path}` }]
 }
-
-// 搜索引擎验证标签（这些值需要在实际部署时替换为真实的验证码）
-export const verificationTags: HeadConfig[] = [
-  // Google Search Console验证（需要替换为实际的验证码）
-  // ['meta', { name: 'google-site-verification', content: 'YOUR_GOOGLE_VERIFICATION_CODE' }],
-  
-  // Bing Webmaster Tools验证（需要替换为实际的验证码）
-  // ['meta', { name: 'msvalidate.01', content: 'YOUR_BING_VERIFICATION_CODE' }],
-  
-  // 百度站长平台验证（需要替换为实际的验证码）
-  // ['meta', { name: 'baidu-site-verification', content: 'YOUR_BAIDU_VERIFICATION_CODE' }],
-]
-
