@@ -212,9 +212,9 @@ Object result = roam.get("SEND_AMOUNT");
 ### Asynchronous Execution
 
 ```java
-List<Future<IceContext>> futures = Ice.asyncProcess(pack);
-for (Future<IceContext> future : futures) {
-    IceContext ctx = future.get();
+List<Future<IceRoam>> futures = Ice.asyncProcess(roam);
+for (Future<IceRoam> future : futures) {
+    IceRoam result = future.get();
     // Process result
 }
 ```
@@ -222,10 +222,8 @@ for (Future<IceContext> future : futures) {
 ### Convenience Methods
 
 ```java
-IceRoam roam = Ice.processSingleRoam(pack);    // Single result Roam
-List<IceRoam> roams = Ice.processRoam(pack);    // Multiple result Roams
-IceContext ctx = Ice.processSingleCtx(pack);     // Single result Context
-List<IceContext> ctxList = Ice.processCtx(pack); // Multiple result Contexts
+IceRoam result = Ice.processSingle(roam);       // Single result
+List<IceRoam> roams = Ice.process(roam);         // Multiple results
 ```
 
 ## Error Handling
@@ -240,7 +238,7 @@ Set the node's `iceErrorStateEnum` in the Server configuration interface to spec
 
 ```java
 @Override
-public NodeRunStateEnum errorHandle(IceContext ctx, Throwable t) {
+public NodeRunStateEnum errorHandle(IceRoam roam, Throwable t) {
     log.error("Node execution failed", t);
     return NodeRunStateEnum.NONE; // Return NONE to continue execution
     // return NodeRunStateEnum.SHUT_DOWN; // Terminate the entire flow

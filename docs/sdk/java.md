@@ -212,9 +212,9 @@ Object result = roam.get("SEND_AMOUNT");
 ### 异步执行
 
 ```java
-List<Future<IceContext>> futures = Ice.asyncProcess(pack);
-for (Future<IceContext> future : futures) {
-    IceContext ctx = future.get();
+List<Future<IceRoam>> futures = Ice.asyncProcess(roam);
+for (Future<IceRoam> future : futures) {
+    IceRoam result = future.get();
     // 处理结果
 }
 ```
@@ -222,10 +222,8 @@ for (Future<IceContext> future : futures) {
 ### 便捷方法
 
 ```java
-IceRoam roam = Ice.processSingleRoam(pack);    // 单结果 Roam
-List<IceRoam> roams = Ice.processRoam(pack);    // 多结果 Roam
-IceContext ctx = Ice.processSingleCtx(pack);     // 单结果 Context
-List<IceContext> ctxList = Ice.processCtx(pack); // 多结果 Context
+IceRoam result = Ice.processSingle(roam);       // 单结果
+List<IceRoam> roams = Ice.process(roam);         // 多结果
 ```
 
 ## 错误处理
@@ -240,7 +238,7 @@ List<IceContext> ctxList = Ice.processCtx(pack); // 多结果 Context
 
 ```java
 @Override
-public NodeRunStateEnum errorHandle(IceContext ctx, Throwable t) {
+public NodeRunStateEnum errorHandle(IceRoam roam, Throwable t) {
     log.error("节点执行失败", t);
     return NodeRunStateEnum.NONE; // 返回 NONE 继续执行
     // return NodeRunStateEnum.SHUT_DOWN; // 终止整个流程
