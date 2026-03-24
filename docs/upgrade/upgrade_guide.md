@@ -208,10 +208,10 @@ pip install --upgrade ice-rules
 **Server**
 
 ```bash
-docker pull waitmoon/ice-server:4.0.3
+docker pull waitmoon/ice-server:4.0.4
 ```
 
-或从 [https://waitmoon.com/downloads/4.0.3/](https://waitmoon.com/downloads/4.0.3/) 下载对应平台包。
+或从 [https://waitmoon.com/downloads/4.0.4/](https://waitmoon.com/downloads/4.0.4/) 下载对应平台包。
 
 ---
 

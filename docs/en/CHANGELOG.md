@@ -15,6 +15,22 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.4](https://github.com/zjn-zjn/ice/compare/v4.0.3...v4.0.4) (2026-03)
+
+**Web UI Export Feature Completion**
+
+- Added "Export" button in multi-select mode for batch exporting selected Rules
+- Added "Export" option in folder context menu to export all Rules under a folder
+- Exported JSON arrays can be directly batch-imported via the import feature
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.4 |
+
+---
+
 ## [4.0.3](https://github.com/zjn-zjn/ice/compare/v4.0.1...v4.0.3) (2026-03)
 
 **Web UI Fixes & Improvements**
