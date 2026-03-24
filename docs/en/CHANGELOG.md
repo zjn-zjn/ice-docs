@@ -15,6 +15,24 @@ head:
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.8](https://github.com/zjn-zjn/ice/compare/v4.0.7...v4.0.8) (2026-03)
+
+**Controlled Mode & Publish to Remote**
+
+- Server: Added **controlled mode** (`--mode controlled` or `ICE_MODE=controlled`), prevents creating new Rules and nodes via UI, only allows import and referencing existing nodes — ideal for production environments to prevent accidental changes
+- Server: Added **publish to remote** feature (`--publish-targets` or `ICE_PUBLISH_TARGETS`), export modal can push data directly to configured remote Servers via server-side proxy to avoid CORS
+- Web UI: Renamed "Publish" button to "Apply" to free up the "publish" concept for remote publishing
+- Web UI: Controlled mode displays a "Controlled Mode" badge, hides creation buttons, node form shows reference input only
+- Web UI: Frontend request timeout changed from 10s to 120s
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.8 |
+
+---
+
 ## [4.0.7](https://github.com/zjn-zjn/ice/compare/v4.0.6...v4.0.7) (2026-03)
 
 **Bug Fix**

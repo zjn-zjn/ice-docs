@@ -43,6 +43,6 @@ The interactive demo below implements these campaign rules using Ice. You can ex
 | **Relation Nodes** | Control child node execution: AND (all must pass), ANY (one must pass), ALL (execute all), etc. |
 | **Leaf Nodes** | Execute business logic: Flow (conditional checks), Result (business operations), None (auxiliary operations) |
 | **Roam** | Data container; nodes pass data between each other via Roam, execution metadata stored under `_ice` key |
-| **Hot Reload** | After modifying rules and clicking Publish, Clients automatically load the new configuration within seconds |
+| **Hot Reload** | After modifying rules and clicking Apply, Clients automatically load the new configuration within seconds |
 
 Want to learn more? Read the [Core Concepts](/en/guide/concepts.html) documentation.

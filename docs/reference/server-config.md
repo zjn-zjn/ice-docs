@@ -26,6 +26,8 @@ head:
 | `--recycle-cron` | `ICE_RECYCLE_CRON` | string | 0 3 * * * | 回收定时任务的 cron 表达式 |
 | `--recycle-way` | `ICE_RECYCLE_WAY` | string | hard | 回收方式。soft：标记删除；hard：物理删除 |
 | `--recycle-protect-days` | `ICE_RECYCLE_PROTECT_DAYS` | int | 1 | 回收保护天数。保护期内的版本不会被回收 |
+| `--mode` | `ICE_MODE` | string | open | 运行模式。open：正常模式；controlled：受控模式，禁止通过 UI 新建 Rule 和节点，只允许导入和引用已有节点 |
+| `--publish-targets` | `ICE_PUBLISH_TARGETS` | string | | 发布目标列表，格式 `名称1=URL1,名称2=URL2`。配置后导出弹窗出现「发布到...」按钮，可将数据推送到远程 Server |
 
 ## 配置示例
 
@@ -33,6 +35,9 @@ head:
 
 ```bash
 ./ice-server --port 8121 --storage-path ./ice-data --version-retention 500
+
+# 受控模式 + 发布目标
+./ice-server --mode controlled --publish-targets "生产环境=https://prod.example.com,预发环境=https://staging.example.com"
 ```
 
 ### 环境变量（Docker 推荐）
@@ -60,6 +65,8 @@ services:
       ICE_STORAGE_PATH: /app/ice-data
       ICE_VERSION_RETENTION: 500
       ICE_RECYCLE_CRON: "0 3 * * *"
+      ICE_MODE: controlled
+      ICE_PUBLISH_TARGETS: "生产环境=https://prod.example.com"
     volumes:
       - ./ice-data:/app/ice-data
 ```

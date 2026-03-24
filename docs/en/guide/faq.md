@@ -28,7 +28,7 @@ Ice is a stateless rule engine designed for rule evaluation and business orchest
 No. The Client depends only on the shared storage directory, not on the Server process. When the Server goes down:
 - Running Clients continue to operate normally
 - New Clients can also start successfully (as long as configuration data exists in the storage directory)
-- You will be unable to modify or publish new configurations through the Server interface
+- You will be unable to modify or apply new configurations through the Server interface
 
 ## Client Issues
 
@@ -43,7 +43,7 @@ Checklist:
 ### Configuration updates not taking effect
 
 Common causes:
-1. Configuration was modified in Server but "Publish" was not clicked
+1. Configuration was modified in Server but "Apply" was not clicked
 2. The Client polls every 2 seconds by default, so there may be a few seconds of delay
 3. Check whether `version.txt` has been updated
 4. Check Client logs for configuration loading records

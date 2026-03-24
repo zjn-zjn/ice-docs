@@ -203,7 +203,7 @@ class AmountResult:
 2. Create a new Rule (Ice) and obtain its iceId
 3. Add relation nodes and leaf nodes to compose the rule tree
 4. Configure leaf node parameters
-5. Click **Publish**
+5. Click **Apply**
 
 ### Execute in Code
 
@@ -255,7 +255,7 @@ ice.sync_process(roam)
 Check that `storagePath` points to the same `ice-data` directory as the Server.
 
 **Rule changes not taking effect?**
-Make sure you clicked "Publish" in the Server interface. The Client polls for configuration changes every 2 seconds by default.
+Make sure you clicked "Apply" in the Server interface. The Client polls for configuration changes every 2 seconds by default.
 
 **Node class not found on startup?**
 Verify that the leaf node class is under the scan package path configured in the Client, and that the class name is correct.

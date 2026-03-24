@@ -15,6 +15,24 @@ head:
 
 > 记录 Ice 规则引擎每个版本的功能更新、性能优化和问题修复
 
+## [4.0.8](https://github.com/zjn-zjn/ice/compare/v4.0.7...v4.0.8) (2026-03)
+
+**受控模式 & 发布到远程**
+
+- Server：新增**受控模式**（`--mode controlled` 或 `ICE_MODE=controlled`），禁止通过 UI 新建 Rule 和节点，仅允许导入和引用已有节点，适用于生产环境防误操作
+- Server：新增**发布到远程**功能（`--publish-targets` 或 `ICE_PUBLISH_TARGETS`），导出弹窗可直接将数据推送到配置的远程 Server，通过 Server 代理转发避免跨域
+- Web UI：「发布」按钮重命名为「应用」，为「发布到远程」腾出语义空间
+- Web UI：受控模式下显示「受控模式」标识，隐藏新建相关按钮，节点表单只显示引用输入
+- Web UI：前端请求超时从 10 秒调整为 120 秒
+
+### 📋 版本信息
+
+| 组件 | 版本 |
+|------|------|
+| ice-server | 4.0.8 |
+
+---
+
 ## [4.0.7](https://github.com/zjn-zjn/ice/compare/v4.0.6...v4.0.7) (2026-03)
 
 **Bug 修复**

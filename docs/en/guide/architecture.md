@@ -90,18 +90,18 @@ ice-data/
     +-- bases/              # Rule (Ice) configuration
     +-- confs/              # Node (Conf) configuration
     +-- updates/            # Pending changes
-    +-- versions/           # Published incremental updates
-    +-- history/            # Publish history
+    +-- versions/           # Applied incremental updates
+    +-- history/            # Apply history
 ```
 
 ## Configuration Sync Flow
 
-### Publishing
+### Applying
 
 ```
 User edits rules in Web interface
         |
-Clicks "Publish"
+Clicks "Apply"
         |
 Server updates bases/ and confs/ files
         |

@@ -26,6 +26,8 @@ head:
 | `--recycle-cron` | `ICE_RECYCLE_CRON` | string | 0 3 * * * | Cron expression for the recycling scheduled task |
 | `--recycle-way` | `ICE_RECYCLE_WAY` | string | hard | Recycling method. soft: mark as deleted; hard: physically delete |
 | `--recycle-protect-days` | `ICE_RECYCLE_PROTECT_DAYS` | int | 1 | Recycling protection days. Versions within the protection period will not be recycled |
+| `--mode` | `ICE_MODE` | string | open | Running mode. open: normal mode; controlled: controlled mode, prevents creating new Rules and nodes via UI, only allows import and referencing existing nodes |
+| `--publish-targets` | `ICE_PUBLISH_TARGETS` | string | | Publish target list, format `name1=url1,name2=url2`. When configured, the export modal shows a "Publish to..." button to push data to remote Servers |
 
 ## Configuration Examples
 
@@ -33,6 +35,9 @@ head:
 
 ```bash
 ./ice-server --port 8121 --storage-path ./ice-data --version-retention 500
+
+# Controlled mode + publish targets
+./ice-server --mode controlled --publish-targets "prod=https://prod.example.com,staging=https://staging.example.com"
 ```
 
 ### Environment Variables (Recommended for Docker)
@@ -60,6 +65,8 @@ services:
       ICE_STORAGE_PATH: /app/ice-data
       ICE_VERSION_RETENTION: 500
       ICE_RECYCLE_CRON: "0 3 * * *"
+      ICE_MODE: controlled
+      ICE_PUBLISH_TARGETS: "prod=https://prod.example.com"
     volumes:
       - ./ice-data:/app/ice-data
 ```

@@ -112,7 +112,7 @@ Server and Client synchronize configurations by sharing the same `ice-data` dire
 
 ### 3. Configure Rules and Execute
 
-Configure a rule tree in the Server interface -> click Publish -> Client automatically hot-loads the rules. Call execution in your code:
+Configure a rule tree in the Server interface -> click Apply -> Client automatically hot-loads the rules. Call execution in your code:
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
