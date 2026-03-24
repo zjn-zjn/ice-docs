@@ -275,7 +275,7 @@ roam.Value("level").To(&level)
 
 ## cloneRoam
 
-Shallow-copies the Roam: copies business data and creates a fresh IceMeta process buffer. Primarily used for data isolation during parallel handler execution.
+Shallow-copies the Roam: copies business data and creates a fresh _ice process buffer. Primarily used for data isolation during parallel handler execution.
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
@@ -334,7 +334,7 @@ cloned = roam.clone()
 | `String()` | JSON-formatted output |
 | `Value(key)` | Returns RoamValue with chainable typed getters |
 | `ValueDeep(multiKey)` | Deep access, returns RoamValue |
-| `GetMeta()` | Get IceMeta metadata |
+| `GetMeta()` | Get _ice metadata |
 | `Clone()` | Shallow copy Roam (used during parallel execution) |
 
 ### Python (Roam)
@@ -350,5 +350,5 @@ cloned = roam.clone()
 | `remove(key)` | Remove key |
 | `keys()` | All keys |
 | `to_dict()` | Convert to dict |
-| `get_meta()` | Get IceMeta metadata |
+| `get_meta()` | Get _ice metadata |
 | `clone()` | Shallow copy Roam (used during parallel execution) |

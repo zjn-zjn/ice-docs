@@ -275,7 +275,7 @@ roam.Value("level").To(&level)
 
 ## cloneRoam
 
-浅拷贝 Roam：复制业务数据并创建新的 IceMeta process 缓冲区。主要用于并行 handler 执行时的数据隔离。
+浅拷贝 Roam：复制业务数据并创建新的 _ice process 缓冲区。主要用于并行 handler 执行时的数据隔离。
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
@@ -334,7 +334,7 @@ cloned = roam.clone()
 | `String()` | JSON 格式输出 |
 | `Value(key)` | 返回 RoamValue，支持链式类型转换 |
 | `ValueDeep(multiKey)` | 深层访问，返回 RoamValue |
-| `GetMeta()` | 获取 IceMeta 元数据 |
+| `GetMeta()` | 获取 _ice 元数据 |
 | `Clone()` | 浅拷贝 Roam（并行执行时使用） |
 
 ### Python (Roam)
@@ -350,5 +350,5 @@ cloned = roam.clone()
 | `remove(key)` | 移除 key |
 | `keys()` | 所有 key |
 | `to_dict()` | 转为 dict |
-| `get_meta()` | 获取 IceMeta 元数据 |
+| `get_meta()` | 获取 _ice 元数据 |
 | `clone()` | 浅拷贝 Roam（并行执行时使用） |

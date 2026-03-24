@@ -68,7 +68,7 @@ Simply dismantling, to complete this activity, we need to develop the following 
 ![](/images/introduction/2-dark.png#dark)
 ![](/images/introduction/2-light.png#light)
 
-As shown in the figure, when the user recharges successfully, a data container Roam corresponding to the recharge scenario will be created. The Roam will contain the recharge user's uid, recharge amount cost, recharge time requestTime and other information, along with execution metadata (IceMeta). We can get the value in the Roam through the defined key (similar to map.get(key)).
+As shown in the figure, when the user recharges successfully, a data container Roam corresponding to the recharge scenario will be created. The Roam will contain the recharge user's uid, recharge amount cost, recharge time requestTime and other information, along with execution metadata. We can get the value in the Roam through the defined key (similar to map.get(key)).
 
 There is nothing wrong with how the module is designed. The key point is how to arrange the following to achieve freedom of configuration. Next, through the existing nodes above, we will explain the advantages and disadvantages of different rule engines in the core arrangement, and compare how ice does it.
 

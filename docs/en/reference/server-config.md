@@ -66,7 +66,7 @@ services:
 
 ## Debug Log Levels
 
-The debug field in IceMeta is a bitmask. Combine values by adding them to control log output:
+The debug field in _ice is a bitmask. Combine values by adding them to control log output:
 
 | Value | Name | Description |
 |-------|------|-------------|

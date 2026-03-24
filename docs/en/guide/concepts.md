@@ -1,7 +1,7 @@
 ---
 title: Core Concepts
 description: Deep dive into the core design of the Ice rule engine - tree-based orchestration for decoupling, 5 relation node types, 3 leaf node types, and the Roam data model. Master Ice's orchestration philosophy through a recharge campaign example.
-keywords: rule engine concepts,tree orchestration,relation nodes,leaf nodes,IceRoam,IceMeta,business decoupling,Ice design philosophy
+keywords: rule engine concepts,tree orchestration,relation nodes,leaf nodes,IceRoam,business decoupling,Ice design philosophy
 head:
   - - meta
     - property: og:title
@@ -39,7 +39,7 @@ Decomposed business modules:
 ![](/images/introduction/2-dark.png#dark)
 ![](/images/introduction/2-light.png#light)
 
-When a user recharges, a data container Roam is created containing uid, cost, and other business data along with execution metadata (IceMeta). Each module reads data from the Roam, processes its logic, and writes results back.
+When a user recharges, a data container Roam is created containing uid, cost, and other business data along with execution metadata. Each module reads data from the Roam, processes its logic, and writes results back.
 
 ### Problems with Flowchart Approach
 
@@ -134,9 +134,9 @@ Each type has a single base class with `IceRoam` as the input parameter:
 
 ### Roam (Data Container)
 
-Roam is the sole data carrier for rule execution. It holds both business data and execution metadata (IceMeta) under the reserved `_ice` key.
+Roam is the sole data carrier for rule execution. It holds both business data and execution metadata under the reserved `_ice` key.
 
-**IceMeta fields (stored under `_ice` key):**
+**_ice metadata fields (stored under `_ice` key):**
 
 | Field | Type | Description |
 |-------|------|-------------|
