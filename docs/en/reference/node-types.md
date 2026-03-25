@@ -2,13 +2,6 @@
 title: Node Types
 description: Complete reference for all node types in the Ice rule engine, including 5 relation node types (serial + parallel) and 3 leaf node types with their behavior definitions.
 keywords: node types,relation nodes,leaf nodes,AND,ANY,ALL,Flow,Result,None,parallel nodes
-head:
-  - - meta
-    - property: og:title
-      content: Node Type Reference - Ice Rule Engine
-  - - meta
-    - property: og:description
-      content: Complete reference for all node types in the Ice rule engine.
 ---
 
 # Node Type Reference

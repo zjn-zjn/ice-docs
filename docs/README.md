@@ -4,31 +4,6 @@ title: Ice - 轻量级可视化规则引擎 | 业务编排框架
 description: Ice 是一款轻量级、高性能的可视化规则引擎和业务编排框架。零外部依赖，支持 Java、Go、Python 多语言 SDK，毫秒级执行，Docker 一键部署。
 keywords: 规则引擎,可视化规则引擎,Java规则引擎,Go规则引擎,业务编排框架,决策引擎,轻量级规则引擎,开源规则引擎,低代码,Ice规则引擎,风控引擎
 heroImage: /images/hero.svg
-head:
-  - - meta
-    - property: og:title
-      content: Ice - 轻量级可视化规则引擎 | 业务编排框架
-  - - meta
-    - property: og:description
-      content: Ice 是一款轻量级、高性能的可视化规则引擎和业务编排框架，零外部依赖，支持多语言 SDK。
-  - - meta
-    - property: og:image
-      content: https://waitmoon.com/images/hero.png
-  - - meta
-    - property: og:url
-      content: https://waitmoon.com/
-  - - meta
-    - name: twitter:card
-      content: summary_large_image
-  - - meta
-    - name: twitter:title
-      content: Ice - 轻量级可视化规则引擎 | 业务编排框架
-  - - meta
-    - name: twitter:description
-      content: Ice 是一款轻量级、高性能的可视化规则引擎和业务编排框架
-  - - meta
-    - name: twitter:image
-      content: https://waitmoon.com/images/hero.png
 actions:
   - text: 快速开始
     link: /guide/getting-started.html
@@ -191,7 +166,7 @@ ice.sync_process(roam)
 </div>
 
 <div class="site-footer">
-  Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a>
+  Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="https://beian.miit.gov.cn">沪ICP备2025108706号</a> | <a href="/llms.txt">llms.txt</a>
 </div>
 
 <style>

@@ -2,13 +2,6 @@
 title: Roam API
 description: Complete API reference for the IceRoam data container, including basic read/write, multi-level keys, and reference syntax across Java, Go, and Python.
 keywords: IceRoam,data container,Roam API,multi-level key,reference syntax,getDeep,putDeep
-head:
-  - - meta
-    - property: og:title
-      content: Roam API Reference - Ice Rule Engine Data Container
-  - - meta
-    - property: og:description
-      content: Complete API reference for the IceRoam data container.
 ---
 
 # Roam API
@@ -204,9 +197,9 @@ roam.resolve(100)       # 100
 In the Server configuration interface, leaf node field values can be set as `@key` to dynamically retrieve values from Roam instead of hardcoding them.
 :::
 
-## `_ice` Reserved Key
+## Meta (Execution Metadata)
 
-`"_ice"` is a reserved key in Roam that stores execution metadata (plain Map/dict).
+Roam holds execution metadata in a separate `Meta` struct/object (not in the data map).
 
 Contains the following fields: `id`, `scene`, `nid`, `ts`, `trace`, `debug`, `process`.
 
@@ -275,7 +268,7 @@ roam.Value("level").To(&level)
 
 ## cloneRoam
 
-Shallow-copies the Roam: copies business data and creates a fresh _ice process buffer. Primarily used for data isolation during parallel handler execution.
+Shallow-copies the Roam: copies business data and clones Meta with a fresh process buffer. Primarily used for data isolation during parallel handler execution.
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
@@ -330,11 +323,11 @@ cloned = roam.clone()
 | `PutDeep(multiKey, value)` | Nested write |
 | `GetDeep(multiKey)` | Nested read |
 | `Resolve(union)` | Reference syntax |
-| `Data()` | Return data copy (excluding _ice) |
+| `Data()` | Return data copy (without metadata) |
 | `String()` | JSON-formatted output |
 | `Value(key)` | Returns RoamValue with chainable typed getters |
 | `ValueDeep(multiKey)` | Deep access, returns RoamValue |
-| `GetMeta()` | Get _ice metadata |
+| `GetMeta()` | Get Meta |
 | `Clone()` | Shallow copy Roam (used during parallel execution) |
 
 ### Python (Roam)
@@ -350,5 +343,5 @@ cloned = roam.clone()
 | `remove(key)` | Remove key |
 | `keys()` | All keys |
 | `to_dict()` | Convert to dict |
-| `get_meta()` | Get _ice metadata |
+| `get_meta()` | Get Meta |
 | `clone()` | Shallow copy Roam (used during parallel execution) |

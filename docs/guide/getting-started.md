@@ -2,13 +2,6 @@
 title: 快速开始
 description: 快速接入 Ice 规则引擎的完整指南。包含 Server 部署、Client SDK 集成、叶子节点开发和规则执行的全流程。
 keywords: 规则引擎接入,快速开始,安装教程,Docker部署,Client SDK,Java,Go,Python
-head:
-  - - meta
-    - property: og:title
-      content: Ice 快速开始 - 5 分钟部署并运行第一个规则
-  - - meta
-    - property: og:description
-      content: 快速接入 Ice 规则引擎的完整指南，包含 Server 部署、Client SDK 集成等全流程。
 ---
 
 # 快速开始

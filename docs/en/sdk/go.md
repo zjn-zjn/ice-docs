@@ -2,13 +2,6 @@
 title: Go SDK
 description: Complete integration guide for the Ice Go SDK, including installation, leaf node registration, rule execution, Context integration, and logging configuration.
 keywords: Go SDK,Golang rule engine,ice-go,Go rule engine,Go hot reload,Ice Go client
-head:
-  - - meta
-    - property: og:title
-      content: Go SDK Guide - Ice Rule Engine Go Client
-  - - meta
-    - property: og:description
-      content: Complete integration guide for the Ice Go SDK, with full feature parity with the Java SDK.
 ---
 
 # Go SDK

@@ -2,13 +2,6 @@
 title: Ice 项目简介 - 全新的规则引擎编排思想
 description: 深入了解Ice规则引擎的设计理念和架构思想。通过树形结构实现业务解耦，提供最大的编排自由度，让规则配置更简单、更灵活。
 keywords: 规则引擎原理,业务编排,设计思想,Ice介绍,决策引擎,可视化规则引擎
-head:
-  - - meta
-    - property: og:title
-      content: Ice 项目简介 - 全新的规则引擎编排思想
-  - - meta
-    - property: og:description
-      content: 深入了解Ice规则引擎的设计理念和架构思想。通过树形结构实现业务解耦，提供最大的编排自由度。
 ---
 
 # Ice 规则引擎 - 项目简介

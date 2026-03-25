@@ -2,13 +2,6 @@
 title: 赞助 Ice 规则引擎 - 支持开源项目发展
 description: 支持Ice规则引擎开源项目，您的赞助将帮助项目持续发展。感谢每一位支持Ice规则引擎的开发者和企业。
 keywords: 赞助,开源支持,捐赠,Ice赞助,规则引擎赞助,开源项目
-head:
-  - - meta
-    - property: og:title
-      content: 赞助 Ice 规则引擎 - 支持开源项目
-  - - meta
-    - property: og:description
-      content: 支持Ice规则引擎开源项目发展，让更多开发者受益。
 ---
 
 # 赞助 Ice 规则引擎

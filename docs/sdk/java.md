@@ -2,13 +2,6 @@
 title: Java SDK
 description: Ice Java SDK 完整集成指南，包含依赖配置、Client 初始化、叶子节点开发、Spring 集成、规则执行和错误处理。
 keywords: Java SDK,ice-core,Java规则引擎,Spring集成,叶子节点开发,IceFileClient
-head:
-  - - meta
-    - property: og:title
-      content: Java SDK 指南 - Ice 规则引擎 Java 客户端
-  - - meta
-    - property: og:description
-      content: Ice Java SDK 完整集成指南，包含依赖配置、叶子节点开发、Spring 集成等。
 ---
 
 # Java SDK

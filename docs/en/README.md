@@ -4,31 +4,6 @@ title: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
 description: Ice is a lightweight, high-performance visual rule engine and business orchestration framework. Zero external dependencies, multi-language SDKs for Java, Go, and Python, millisecond-level execution, one-click Docker deployment.
 keywords: rule engine,visual rule engine,Java rule engine,Go rule engine,business orchestration framework,decision engine,lightweight rule engine,open source rule engine,low code,Ice rule engine,risk control engine
 heroImage: /images/hero.svg
-head:
-  - - meta
-    - property: og:title
-      content: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
-  - - meta
-    - property: og:description
-      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework with zero external dependencies and multi-language SDK support.
-  - - meta
-    - property: og:image
-      content: https://waitmoon.com/images/hero.png
-  - - meta
-    - property: og:url
-      content: https://waitmoon.com/en/
-  - - meta
-    - name: twitter:card
-      content: summary_large_image
-  - - meta
-    - name: twitter:title
-      content: Ice - Lightweight Visual Rule Engine | Business Orchestration Framework
-  - - meta
-    - name: twitter:description
-      content: Ice is a lightweight, high-performance visual rule engine and business orchestration framework
-  - - meta
-    - name: twitter:image
-      content: https://waitmoon.com/images/hero.png
 actions:
   - text: Getting Started
     link: /en/guide/getting-started.html
@@ -191,7 +166,7 @@ ice.sync_process(roam)
 </div>
 
 <div class="site-footer">
-  Apache-2.0 Licensed | Copyright 2022-present WaitMoon
+  Apache-2.0 Licensed | Copyright 2022-present WaitMoon | <a href="/llms.txt">llms.txt</a>
 </div>
 
 <style>

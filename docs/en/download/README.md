@@ -2,13 +2,6 @@
 title: Download Ice Server
 description: Download pre-built Ice Server binaries for Linux, macOS, and Windows.
 keywords: download,Ice Server,binary,Linux,macOS,Windows,Docker
-head:
-  - - meta
-    - property: og:title
-      content: Download Ice Server
-  - - meta
-    - property: og:description
-      content: Download pre-built Ice Server binaries for multiple platforms.
 ---
 
 # Download Ice Server

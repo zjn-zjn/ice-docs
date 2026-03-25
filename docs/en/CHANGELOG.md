@@ -2,13 +2,6 @@
 title: Ice Rule Engine Changelog - Version History
 description: Ice rule engine version update history, including new features, performance optimizations, bug fixes and detailed change records.
 keywords: changelog,version history,Ice versions,rule engine updates,release notes
-head:
-  - - meta
-    - property: og:title
-      content: Ice Rule Engine Changelog - Version History
-  - - meta
-    - property: og:description
-      content: Complete version update history of Ice rule engine.
 ---
 
 # Ice Rule Engine Changelog

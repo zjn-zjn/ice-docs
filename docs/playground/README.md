@@ -6,13 +6,6 @@ sidebar: false
 editLink: false
 lastUpdated: false
 contributors: false
-head:
-  - - meta
-    - property: og:title
-      content: Ice 在线演示 - 可视化规则编排体验
-  - - meta
-    - property: og:description
-      content: 在线体验 Ice 规则引擎的可视化规则编排功能。
 ---
 
 # 在线演示
@@ -42,7 +35,7 @@ head:
 |------|------|
 | **关系节点** | 控制子节点的执行方式：AND（全部满足）、ANY（满足一个）、ALL（全部执行）等 |
 | **叶子节点** | 执行业务逻辑：Flow（条件判断）、Result（业务操作）、None（辅助操作） |
-| **Roam** | 数据容器，节点间通过 Roam 传递数据，执行元数据存储在 `_ice` 键下 |
+| **Roam** | 数据容器，节点间通过 Roam 传递数据，执行元数据存储在 Meta 中 |
 | **热更新** | 修改规则后点击应用，Client 在秒级内自动加载新配置 |
 
 想深入了解？阅读 [核心概念](/guide/concepts.html) 文档。

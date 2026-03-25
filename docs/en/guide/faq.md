@@ -2,13 +2,6 @@
 title: FAQ
 description: Frequently asked questions and solutions for the Ice rule engine, covering architecture, Client, Server, and performance topics.
 keywords: Ice FAQ,frequently asked questions,rule engine troubleshooting,debugging,performance optimization
-head:
-  - - meta
-    - property: og:title
-      content: Ice FAQ - Frequently Asked Questions
-  - - meta
-    - property: og:description
-      content: Frequently asked questions and solutions for the Ice rule engine.
 ---
 
 # Frequently Asked Questions

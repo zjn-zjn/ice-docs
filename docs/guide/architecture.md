@@ -2,13 +2,6 @@
 title: 架构设计
 description: 深入理解 Ice 规则引擎的技术架构，包括文件系统同步、版本管理、增量更新、心跳机制和多实例部署方案。
 keywords: Ice架构,规则引擎架构,Server Client,共享存储,文件系统同步,分布式部署,热更新
-head:
-  - - meta
-    - property: og:title
-      content: Ice 架构设计 - Server + Client + 共享存储
-  - - meta
-    - property: og:description
-      content: 深入理解 Ice 规则引擎的技术架构，包括文件系统同步、版本管理和部署方案。
 ---
 
 # 架构设计

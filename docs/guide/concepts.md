@@ -2,13 +2,6 @@
 title: 核心概念
 description: 深入理解 Ice 规则引擎的核心设计：树形编排解耦、5 种关系节点、3 种叶子节点、Roam 数据模型。通过充值活动示例掌握 Ice 的编排思想。
 keywords: 规则引擎概念,树形编排,关系节点,叶子节点,IceRoam,业务解耦,Ice设计思想
-head:
-  - - meta
-    - property: og:title
-      content: Ice 核心概念 - 树形规则编排的设计精髓
-  - - meta
-    - property: og:description
-      content: 深入理解 Ice 规则引擎的核心设计思想，掌握树形编排、关系节点和数据流转。
 ---
 
 # 核心概念
@@ -134,9 +127,9 @@ public class AmountResult extends BaseLeafResult {
 
 ### Roam（数据容器）
 
-Roam 是规则执行的唯一数据载体，既承载业务数据，也通过内置的 `_ice` 保留键存储执行元数据。
+Roam 是规则执行的唯一数据载体，既承载业务数据，也通过独立的 `Meta` 结构体/对象存储执行元数据。
 
-**_ice 元数据字段（存储在 `_ice` 键下）：**
+**Meta 字段：**
 
 | 字段 | 类型 | 说明 |
 |------|------|------|

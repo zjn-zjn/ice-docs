@@ -2,13 +2,6 @@
 title: Java SDK
 description: Complete integration guide for the Ice Java SDK, including dependency configuration, Client initialization, leaf node development, Spring integration, rule execution, and error handling.
 keywords: Java SDK,ice-core,Java rule engine,Spring integration,leaf node development,IceFileClient
-head:
-  - - meta
-    - property: og:title
-      content: Java SDK Guide - Ice Rule Engine Java Client
-  - - meta
-    - property: og:description
-      content: Complete integration guide for the Ice Java SDK, including dependency configuration, leaf node development, Spring integration, and more.
 ---
 
 # Java SDK

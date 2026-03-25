@@ -2,18 +2,39 @@
 title: Ice 规则引擎升级指南 - 版本升级说明
 description: Ice规则引擎版本升级指南，包含每个版本的升级步骤、配置变更、代码修改等详细说明。帮助您顺利升级规则引擎版本。
 keywords: 升级指南,版本升级,迁移指南,Ice升级,规则引擎升级,版本兼容
-head:
-  - - meta
-    - property: og:title
-      content: Ice 规则引擎升级指南 - 版本升级说明
-  - - meta
-    - property: og:description
-      content: Ice规则引擎详细的版本升级指南和迁移说明。
 ---
 
 # Ice 规则引擎升级指南
 
 > ⚠️ **重要提示**：升级 Ice 规则引擎时，请先升级 Server，再升级 Client
+
+## 4.0.8 → 4.0.9
+
+### Meta 从 Roam 数据中抽离
+
+执行元数据（`id`、`scene`、`nid`、`ts`、`trace`、`debug`、`process`）不再存储在 Roam 数据 map 的 `_ice` key 下，改为 Roam 上独立的 `Meta` 结构体/对象。
+
+**变更内容：**
+
+- `getMeta()` / `GetMeta()` / `get_meta()` 返回类型从 `Map` / `map[string]any` / `dict` 变为 `IceMeta` / `*Meta` / `Meta`
+- `Data()` / `to_dict()` 不再包含 `_ice` key，只返回业务数据
+- `_ice` 不再是 Roam 的保留 key，可用于业务数据
+
+**影响范围：**
+
+如果你调用 `getMeta()` 并将结果转为 `Map` / `dict`，或通过 `roam.get("_ice")` 访问元数据，需要更新代码。
+
+如果你只使用便捷方法（`getId()`、`getScene()`、`setId()` 等），**无需修改**。
+
+| 语言 | 之前 | 之后 |
+|------|------|------|
+| Java | `(Map) roam.getMeta()` | `roam.getMeta()` 返回 `IceMeta` |
+| Go | `roam.GetMeta()` 返回 `map[string]any` | `roam.GetMeta()` 返回 `*Meta` |
+| Python | `roam.get_meta()` 返回 `dict` | `roam.get_meta()` 返回 `Meta` |
+
+- Server：无需变更
+
+---
 
 ## 4.0.6 → 4.0.7
 

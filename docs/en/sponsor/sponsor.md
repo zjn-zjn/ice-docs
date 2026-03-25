@@ -2,13 +2,6 @@
 title: Sponsor Ice Rule Engine - Support Open Source Development
 description: Support Ice rule engine open source project. Your sponsorship helps the project continue to develop. Thank you to every developer and enterprise supporting Ice rule engine.
 keywords: sponsor,open source support,donation,Ice sponsorship,rule engine sponsorship,open source project
-head:
-  - - meta
-    - property: og:title
-      content: Sponsor Ice Rule Engine - Support Open Source
-  - - meta
-    - property: og:description
-      content: Support Ice rule engine open source project development to benefit more developers.
 ---
 
 # Sponsor Ice Rule Engine

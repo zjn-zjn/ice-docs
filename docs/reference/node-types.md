@@ -2,13 +2,6 @@
 title: 节点类型
 description: Ice 规则引擎所有节点类型的完整参考，包括 5 种关系节点（串行 + 并行）和 3 种叶子节点的行为定义。
 keywords: 节点类型,关系节点,叶子节点,AND,ANY,ALL,Flow,Result,None,并行节点
-head:
-  - - meta
-    - property: og:title
-      content: 节点类型速查 - Ice 规则引擎参考
-  - - meta
-    - property: og:description
-      content: Ice 规则引擎所有节点类型的完整参考。
 ---
 
 # 节点类型速查

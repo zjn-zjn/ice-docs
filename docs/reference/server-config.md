@@ -2,13 +2,6 @@
 title: Server 配置
 description: Ice Server 的完整配置参数参考，包括端口、存储路径、客户端超时、版本保留、回收策略等。
 keywords: Server配置,ice-server,环境变量,命令行参数,Docker配置
-head:
-  - - meta
-    - property: og:title
-      content: Server 配置参考 - Ice 规则引擎
-  - - meta
-    - property: og:description
-      content: Ice Server 完整配置参数参考。
 ---
 
 # Server 配置参考
@@ -73,7 +66,7 @@ services:
 
 ## Debug 日志级别
 
-_ice 的 debug 字段是位掩码，通过累加控制日志输出：
+Meta 的 debug 字段是位掩码，通过累加控制日志输出：
 
 | 值 | 名称 | 说明 |
 |----|------|------|

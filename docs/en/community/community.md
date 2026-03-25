@@ -2,13 +2,6 @@
 title: Ice Rule Engine Community - Join Technical Discussion Group
 description: Join the Ice rule engine technical community to discuss rule engine technology and business orchestration solutions with developers. WeChat and QQ groups available for support.
 keywords: Ice community,technical discussion,WeChat group,QQ group,rule engine community,developer community
-head:
-  - - meta
-    - property: og:title
-      content: Ice Rule Engine Community - Join Technical Discussion
-  - - meta
-    - property: og:description
-      content: Join Ice rule engine developer community for technical support and discussions.
 ---
 
 # Ice Rule Engine Developer Community

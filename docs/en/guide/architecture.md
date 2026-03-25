@@ -2,13 +2,6 @@
 title: Architecture
 description: Deep dive into the technical architecture of the Ice rule engine, including file system synchronization, version management, incremental updates, heartbeat mechanism, and multi-instance deployment.
 keywords: Ice architecture,rule engine architecture,Server Client,shared storage,file system sync,distributed deployment,hot reload
-head:
-  - - meta
-    - property: og:title
-      content: Ice Architecture - Server + Client + Shared Storage
-  - - meta
-    - property: og:description
-      content: Deep dive into the technical architecture of the Ice rule engine, including file system synchronization, version management, and deployment options.
 ---
 
 # Architecture

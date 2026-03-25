@@ -2,13 +2,6 @@
 title: Roam API
 description: IceRoam 数据容器的完整 API 参考，包括基础读写、多级 key、引用语法等操作在 Java、Go、Python 三种语言中的用法。
 keywords: IceRoam,数据容器,Roam API,多级key,引用语法,getDeep,putDeep
-head:
-  - - meta
-    - property: og:title
-      content: Roam API 参考 - Ice 规则引擎数据容器
-  - - meta
-    - property: og:description
-      content: IceRoam 数据容器的完整 API 参考。
 ---
 
 # Roam API
@@ -204,9 +197,9 @@ roam.resolve(100)       # 100
 在 Server 配置界面中，叶子节点的字段值可以设为 `@key` 形式，实现从 Roam 动态取值，而非硬编码。
 :::
 
-## `_ice` 保留 key
+## Meta（执行元数据）
 
-`"_ice"` 是 Roam 中的保留 key，用于存储执行元数据（plain Map/dict）。
+Roam 通过独立的 `Meta` 结构体/对象存储执行元数据（不在 data map 中）。
 
 包含以下字段：`id`、`scene`、`nid`、`ts`、`trace`、`debug`、`process`。
 
@@ -275,7 +268,7 @@ roam.Value("level").To(&level)
 
 ## cloneRoam
 
-浅拷贝 Roam：复制业务数据并创建新的 _ice process 缓冲区。主要用于并行 handler 执行时的数据隔离。
+浅拷贝 Roam：复制业务数据并克隆 Meta（重建 process 缓冲区）。主要用于并行 handler 执行时的数据隔离。
 
 <CodeGroup>
   <CodeGroupItem title="Java" active>
@@ -330,11 +323,11 @@ cloned = roam.clone()
 | `PutDeep(multiKey, value)` | 嵌套写入 |
 | `GetDeep(multiKey)` | 嵌套读取 |
 | `Resolve(union)` | 引用语法 |
-| `Data()` | 返回数据副本（排除 _ice） |
+| `Data()` | 返回数据副本（不含元数据） |
 | `String()` | JSON 格式输出 |
 | `Value(key)` | 返回 RoamValue，支持链式类型转换 |
 | `ValueDeep(multiKey)` | 深层访问，返回 RoamValue |
-| `GetMeta()` | 获取 _ice 元数据 |
+| `GetMeta()` | 获取 Meta |
 | `Clone()` | 浅拷贝 Roam（并行执行时使用） |
 
 ### Python (Roam)
@@ -350,5 +343,5 @@ cloned = roam.clone()
 | `remove(key)` | 移除 key |
 | `keys()` | 所有 key |
 | `to_dict()` | 转为 dict |
-| `get_meta()` | 获取 _ice 元数据 |
+| `get_meta()` | 获取 Meta |
 | `clone()` | 浅拷贝 Roam（并行执行时使用） |

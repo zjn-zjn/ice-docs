@@ -2,13 +2,6 @@
 title: Client Config
 description: Complete configuration parameter reference for Ice Client SDK, including initialization parameters for Java, Go, and Python.
 keywords: Client configuration,IceFileClient,Client parameters,poll interval,heartbeat interval,lane
-head:
-  - - meta
-    - property: og:title
-      content: Client Configuration Reference - Ice Rule Engine
-  - - meta
-    - property: og:description
-      content: Complete configuration parameter reference for Ice Client SDK.
 ---
 
 # Client Configuration Reference

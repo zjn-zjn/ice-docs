@@ -2,13 +2,6 @@
 title: Getting Started
 description: Complete guide to getting started with the Ice rule engine. Covers Server deployment, Client SDK integration, leaf node development, and rule execution.
 keywords: rule engine setup,getting started,installation guide,Docker deployment,Client SDK,Java,Go,Python
-head:
-  - - meta
-    - property: og:title
-      content: Ice Getting Started - Deploy and Run Your First Rule in 5 Minutes
-  - - meta
-    - property: og:description
-      content: Complete guide to getting started with the Ice rule engine, covering Server deployment, Client SDK integration, and more.
 ---
 
 # Getting Started

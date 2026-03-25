@@ -118,11 +118,11 @@ Each type has one base class, all taking IceRoam as input:
 
 ## 5. Data Model
 
-### Roam + IceMeta (Input)
+### Roam + Meta (Input)
 
-Roam is the unified data container. Execution metadata is stored under the reserved `_ice` key as IceMeta. Create a Roam with `IceRoam.create()` (Java) / `NewRoamWithMeta()` (Go) / `Roam.create()` (Python), then set IceMeta fields and business data.
+Roam is the unified data container. Execution metadata is stored in a separate `Meta` struct/object (not in the data map). Create a Roam with `IceRoam.create()` (Java) / `NewRoam()` (Go) / `Roam.create()` (Python), then set Meta fields and business data.
 
-**IceMeta fields (stored under `_ice`):**
+**Meta fields:**
 
 | Field | Type | Description |
 |-------|------|-------------|

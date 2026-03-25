@@ -2,13 +2,6 @@
 title: Ice 规则引擎社区 - 加入技术交流群
 description: 加入Ice规则引擎技术交流社区，与开发者一起探讨规则引擎技术、业务编排方案。微信群、QQ群随时为您解答使用问题。
 keywords: Ice社区,技术交流,微信群,QQ群,规则引擎社区,开发者社区
-head:
-  - - meta
-    - property: og:title
-      content: Ice 规则引擎社区 - 加入技术交流群
-  - - meta
-    - property: og:description
-      content: 加入Ice规则引擎开发者社区，获取技术支持和交流。
 ---
 
 # Ice 规则引擎开发者社区

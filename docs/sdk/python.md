@@ -2,13 +2,6 @@
 title: Python SDK
 description: Ice Python SDK 完整集成指南，包含安装配置、装饰器注册叶子节点、同步/异步执行、AsyncFileClient 等。
 keywords: Python SDK,Python规则引擎,ice-rules,Python业务编排,AsyncFileClient
-head:
-  - - meta
-    - property: og:title
-      content: Python SDK 指南 - Ice 规则引擎 Python 客户端
-  - - meta
-    - property: og:description
-      content: Ice Python SDK 完整集成指南，支持装饰器注册和 asyncio 异步执行。
 ---
 
 # Python SDK

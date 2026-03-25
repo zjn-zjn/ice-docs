@@ -10,7 +10,7 @@ import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { path } from '@vuepress/utils'
 import {
   head, navbarEn, navbarZh, sidebarEn, sidebarZh,
-  siteConfig, getAlternatePaths, generateHreflangTags, generateCanonicalTag
+  siteConfig, getAlternatePaths, generateHreflangTags
 } from './configs'
 import { version } from './configs/meta'
 
@@ -144,13 +144,19 @@ export default defineUserConfig({
       // 每个页面生成正确的 canonical URL
       canonical: (page) => `${siteConfig.hostname}${page.path}`,
 
-      // 为每个页面注入 hreflang 和 canonical head 标签
+      // 为每个页面注入 hreflang（SEO 插件只生成当前 locale 的 alternate，需要补全双向互链）
       customHead: (head, page) => {
         const alternates = getAlternatePaths(page.path)
         if (alternates) {
+          // 移除 SEO 插件自动生成的不完整 hreflang（仅单向）
+          const filtered = head.filter(
+            (tag) => !(Array.isArray(tag) && tag[0] === 'link' && tag[1]?.hreflang)
+          )
+          head.length = 0
+          head.push(...filtered)
+          // 添加完整的双向 hreflang + x-default
           head.push(...generateHreflangTags(alternates.zh, alternates.en))
         }
-        head.push(generateCanonicalTag(page.path))
       },
 
       // 结构化数据

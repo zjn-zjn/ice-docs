@@ -2,13 +2,6 @@
 title: 下载 Ice Server
 description: 下载 Ice Server 预编译二进制包，支持 Linux、macOS、Windows 多平台。
 keywords: 下载,Ice Server,二进制,Linux,macOS,Windows,Docker
-head:
-  - - meta
-    - property: og:title
-      content: 下载 Ice Server
-  - - meta
-    - property: og:description
-      content: 下载 Ice Server 预编译二进制包，支持多平台。
 ---
 
 # 下载 Ice Server

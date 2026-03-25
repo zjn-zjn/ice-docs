@@ -2,13 +2,6 @@
 title: Go SDK
 description: Ice Go SDK 完整集成指南，包含安装配置、叶子节点注册、规则执行、Context 集成、日志配置等。
 keywords: Go SDK,Golang规则引擎,ice-go,Go规则引擎,Go热更新,Ice Go客户端
-head:
-  - - meta
-    - property: og:title
-      content: Go SDK 指南 - Ice 规则引擎 Go 客户端
-  - - meta
-    - property: og:description
-      content: Ice Go SDK 完整集成指南，功能与 Java SDK 完全对等。
 ---
 
 # Go SDK

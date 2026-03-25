@@ -2,13 +2,6 @@
 title: Server Config
 description: Complete configuration parameter reference for Ice Server, including port, storage path, client timeout, version retention, and recycling policy.
 keywords: Server configuration,ice-server,environment variables,command line arguments,Docker configuration
-head:
-  - - meta
-    - property: og:title
-      content: Server Configuration Reference - Ice Rule Engine
-  - - meta
-    - property: og:description
-      content: Complete configuration parameter reference for Ice Server.
 ---
 
 # Server Configuration Reference
@@ -73,7 +66,7 @@ services:
 
 ## Debug Log Levels
 
-The debug field in _ice is a bitmask. Combine values by adding them to control log output:
+The debug field in Meta is a bitmask. Combine values by adding them to control log output:
 
 | Value | Name | Description |
 |-------|------|-------------|

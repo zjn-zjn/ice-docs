@@ -2,13 +2,6 @@
 title: Ice Introduction - Innovative Rule Engine Orchestration
 description: Deep dive into the design philosophy and architecture of Ice rule engine. Achieve business decoupling through tree structure, providing maximum orchestration freedom for simple and flexible rule configuration.
 keywords: rule engine principles,business orchestration,design philosophy,Ice introduction,decision engine,visual rule engine
-head:
-  - - meta
-    - property: og:title
-      content: Ice Introduction - Innovative Rule Engine Orchestration
-  - - meta
-    - property: og:description
-      content: Deep dive into the design philosophy and architecture of Ice rule engine. Achieve business decoupling through tree structure.
 ---
 
 # Ice Rule Engine - Introduction

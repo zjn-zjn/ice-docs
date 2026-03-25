@@ -2,18 +2,39 @@
 title: Ice Rule Engine Upgrade Guide - Version Upgrade Instructions
 description: Ice rule engine version upgrade guide, including upgrade steps, configuration changes, code modifications and detailed instructions for each version. Help you smoothly upgrade rule engine versions.
 keywords: upgrade guide,version upgrade,migration guide,Ice upgrade,rule engine upgrade,version compatibility
-head:
-  - - meta
-    - property: og:title
-      content: Ice Rule Engine Upgrade Guide - Version Upgrade Instructions
-  - - meta
-    - property: og:description
-      content: Detailed version upgrade guide and migration instructions for Ice rule engine.
 ---
 
 # Ice Rule Engine Upgrade Guide
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
+
+## 4.0.8 → 4.0.9
+
+### Meta Extracted from Roam Data
+
+Execution metadata (`id`, `scene`, `nid`, `ts`, `trace`, `debug`, `process`) is no longer stored under the `_ice` key inside the Roam data map. It is now held in a separate `Meta` struct/object on Roam.
+
+**What changed:**
+
+- `getMeta()` / `GetMeta()` / `get_meta()` now returns a typed `Meta` object instead of `Map` / `map[string]any` / `dict`
+- `Data()` / `to_dict()` no longer contains the `_ice` key — it only returns business data
+- `_ice` is no longer a reserved key in Roam — you can use it for business data if needed
+
+**Who is affected:**
+
+If you call `getMeta()` and cast the result to `Map` / `dict`, or access metadata fields via `roam.get("_ice")`, you need to update your code.
+
+If you only use the convenience accessors (`getId()`, `getScene()`, `setId()`, etc.), **no changes needed**.
+
+| Language | Before | After |
+|----------|--------|-------|
+| Java | `(Map) roam.getMeta()` | `roam.getMeta()` returns `IceMeta` |
+| Go | `roam.GetMeta()` returns `map[string]any` | `roam.GetMeta()` returns `*Meta` |
+| Python | `roam.get_meta()` returns `dict` | `roam.get_meta()` returns `Meta` |
+
+- Server: No changes required
+
+---
 
 ## 4.0.6 → 4.0.7
 

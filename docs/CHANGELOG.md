@@ -2,13 +2,6 @@
 title: Ice 规则引擎更新日志 - 版本历史记录
 description: Ice规则引擎的版本更新历史，包括新功能、性能优化、Bug修复等详细变更记录。了解Ice规则引擎的每个版本改进。
 keywords: 更新日志,版本历史,CHANGELOG,Ice版本,规则引擎更新,新功能
-head:
-  - - meta
-    - property: og:title
-      content: Ice 规则引擎更新日志 - 版本历史记录
-  - - meta
-    - property: og:description
-      content: Ice规则引擎的完整版本更新历史，了解每个版本的新功能和改进。
 ---
 
 # Ice 规则引擎更新日志

@@ -2,13 +2,6 @@
 title: Python SDK
 description: Complete integration guide for the Ice Python SDK, including installation, decorator-based leaf node registration, synchronous/asynchronous execution, and AsyncFileClient.
 keywords: Python SDK,Python rule engine,ice-rules,Python business orchestration,AsyncFileClient
-head:
-  - - meta
-    - property: og:title
-      content: Python SDK Guide - Ice Rule Engine Python Client
-  - - meta
-    - property: og:description
-      content: Complete integration guide for the Ice Python SDK, supporting decorator registration and asyncio-based asynchronous execution.
 ---
 
 # Python SDK

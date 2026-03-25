@@ -2,13 +2,6 @@
 title: 常见问题
 description: Ice 规则引擎使用中的常见问题和解决方案，涵盖架构、Client、Server、性能等方面。
 keywords: Ice FAQ,常见问题,规则引擎问题,故障排查,性能优化
-head:
-  - - meta
-    - property: og:title
-      content: Ice 常见问题 FAQ
-  - - meta
-    - property: og:description
-      content: Ice 规则引擎常见问题和解决方案。
 ---
 
 # 常见问题

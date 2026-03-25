@@ -2,13 +2,6 @@
 title: Mock Execution
 description: Complete reference for Ice Mock execution, including architecture, Server API, Client SDK auto-polling, and Roam key scanning.
 keywords: Mock execution,ice-mock,debugging,remote execution,Roam scanning,form generation
-head:
-  - - meta
-    - property: og:title
-      content: Mock Execution Reference - Ice Rule Engine
-  - - meta
-    - property: og:description
-      content: Complete reference for Ice Mock execution.
 ---
 
 # Mock Execution

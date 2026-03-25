@@ -2,13 +2,6 @@
 title: Mock 执行
 description: Ice Mock 执行的完整参考，包括架构原理、Server API、Client SDK 自动轮询、Roam Key 扫描等。
 keywords: Mock执行,ice-mock,调试,远程执行,Roam扫描,表单生成
-head:
-  - - meta
-    - property: og:title
-      content: Mock 执行参考 - Ice 规则引擎
-  - - meta
-    - property: og:description
-      content: Ice Mock 执行的完整参考。
 ---
 
 # Mock 执行

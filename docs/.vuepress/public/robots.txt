@@ -6,3 +6,7 @@ Allow: /
 Disallow: /assets/
 
 Sitemap: https://waitmoon.com/sitemap.xml
+
+# LLM-friendly documentation
+# https://llmstxt.org/
+LLMs.txt: https://waitmoon.com/llms.txt

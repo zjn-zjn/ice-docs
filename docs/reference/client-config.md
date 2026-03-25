@@ -2,13 +2,6 @@
 title: Client 配置
 description: Ice Client SDK 的完整配置参数参考，包括 Java、Go、Python 三种语言的初始化参数说明。
 keywords: Client配置,IceFileClient,Client参数,轮询间隔,心跳间隔,泳道
-head:
-  - - meta
-    - property: og:title
-      content: Client 配置参考 - Ice 规则引擎
-  - - meta
-    - property: og:description
-      content: Ice Client SDK 完整配置参数参考。
 ---
 
 # Client 配置参考
