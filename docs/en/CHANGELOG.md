@@ -8,6 +8,42 @@ keywords: changelog,version history,Ice versions,rule engine updates,release not
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.10](https://github.com/zjn-zjn/ice/compare/v4.0.9...v4.0.10) (2026-03)
+
+**Change Comparison Feature**
+
+- Server: Added change comparison API (`/conf/changes`) to retrieve single-node or all pending node changes (active vs update)
+- Server: Detail API (`/conf/detail`) now supports `activeOnly` parameter to fetch the pure released tree for dual-tree comparison
+- Web UI: Added **compare button** to node toolbar — click to view single-node property comparison (property table + JSON diff dual tabs)
+- Web UI: Apply/Clean confirm dialog now displays the list of changed nodes, each with a "View" button to see comparison details
+- Web UI: Added full-screen **dual-tree comparison** view (released tree vs current editing tree), changed nodes highlighted, click to view diff details
+- Web UI: Fixed NONE relation node (type=0) unable to be added as child/forward node
+- Web UI: Fixed newly added leaf nodes showing JSON editing mode instead of form mode when re-editing
+- Web UI: Comparison view filters default values (inverse=false, timeType=1, etc.) to avoid meaningless diffs
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.10 |
+
+---
+
+## [4.0.9](https://github.com/zjn-zjn/ice/compare/v4.0.8...v4.0.9) (2026-03)
+
+**Roam Meta Extraction**
+
+- SDK: Extracted Meta from Roam data map into a separate struct
+- SDK: Fixed incorrect log caller depth in Go and Python SDKs
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.9 |
+
+---
+
 ## [4.0.8](https://github.com/zjn-zjn/ice/compare/v4.0.7...v4.0.8) (2026-03)
 
 **Controlled Mode & Publish to Remote**
