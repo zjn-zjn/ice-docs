@@ -8,6 +8,21 @@ keywords: changelog,version history,Ice versions,rule engine updates,release not
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.11](https://github.com/zjn-zjn/ice/compare/v4.0.10...v4.0.11) (2026-03)
+
+**Dark Mode Fix & Change List Improvement**
+
+- Web UI: Fix comparison views dark mode compatibility, use antd theme tokens instead of hardcoded colors
+- Web UI: Show node type name (e.g. AND) for relation nodes in change list
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.11 |
+
+---
+
 ## [4.0.10](https://github.com/zjn-zjn/ice/compare/v4.0.9...v4.0.10) (2026-03)
 
 **Change Comparison Feature**
