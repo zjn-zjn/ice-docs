@@ -6,11 +6,11 @@ keywords: download,Ice Server,binary,Linux,macOS,Windows,Docker
 
 # Download Ice Server
 
-## Current Version: 4.0.8
+## Current Version: 4.0.11
 
 <div class="download-badges">
 
-[![GitHub Release](https://img.shields.io/github/v/release/zjn-zjn/ice?style=flat-square&label=Release)](https://github.com/zjn-zjn/ice/releases/tag/v4.0.8)
+[![GitHub Release](https://img.shields.io/github/v/release/zjn-zjn/ice?style=flat-square&label=Release)](https://github.com/zjn-zjn/ice/releases/tag/v4.0.11)
 [![Docker Image](https://img.shields.io/docker/v/waitmoon/ice-server?style=flat-square&label=Docker&sort=semver)](https://hub.docker.com/r/waitmoon/ice-server)
 
 </div>
@@ -19,11 +19,11 @@ keywords: download,Ice Server,binary,Linux,macOS,Windows,Docker
 
 | Platform | Architecture | Download |
 |----------|-------------|----------|
-| **Linux** | x86_64 (amd64) | [ice-server-4.0.8-linux-amd64.tar.gz](https://waitmoon.com/downloads/4.0.8/ice-server-4.0.8-linux-amd64.tar.gz) |
-| **Linux** | ARM64 | [ice-server-4.0.8-linux-arm64.tar.gz](https://waitmoon.com/downloads/4.0.8/ice-server-4.0.8-linux-arm64.tar.gz) |
-| **macOS** | Intel (amd64) | [ice-server-4.0.8-darwin-amd64.tar.gz](https://waitmoon.com/downloads/4.0.8/ice-server-4.0.8-darwin-amd64.tar.gz) |
-| **macOS** | Apple Silicon (ARM64) | [ice-server-4.0.8-darwin-arm64.tar.gz](https://waitmoon.com/downloads/4.0.8/ice-server-4.0.8-darwin-arm64.tar.gz) |
-| **Windows** | x86_64 (amd64) | [ice-server-4.0.8-windows-amd64.zip](https://waitmoon.com/downloads/4.0.8/ice-server-4.0.8-windows-amd64.zip) |
+| **Linux** | x86_64 (amd64) | [ice-server-4.0.11-linux-amd64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-linux-amd64.tar.gz) |
+| **Linux** | ARM64 | [ice-server-4.0.11-linux-arm64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-linux-arm64.tar.gz) |
+| **macOS** | Intel (amd64) | [ice-server-4.0.11-darwin-amd64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-darwin-amd64.tar.gz) |
+| **macOS** | Apple Silicon (ARM64) | [ice-server-4.0.11-darwin-arm64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-darwin-arm64.tar.gz) |
+| **Windows** | x86_64 (amd64) | [ice-server-4.0.11-windows-amd64.zip](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-windows-amd64.zip) |
 
 ### Docker
 
@@ -38,47 +38,26 @@ docker run -d --name ice-server \
 docker run -d --name ice-server \
   -p 8121:8121 \
   -v ./ice-data:/app/ice-data \
-  waitmoon/ice-server:4.0.8
+  waitmoon/ice-server:4.0.11
 ```
 
 ### Quick Start
 
 ```bash
-tar -xzvf ice-server-4.0.8-linux-amd64.tar.gz
-cd ice-server-4.0.8-linux-amd64
+tar -xzvf ice-server-4.0.11-linux-amd64.tar.gz
+cd ice-server-4.0.11-linux-amd64
 sh ice.sh start
 # Visit http://localhost:8121
 ```
 
 ---
 
-## What's New in 4.0.8
+## What's New in 4.0.11
 
-### New Features
+**Dark Mode Fix & Change List Improvements**
 
-| Feature | Description | Configuration |
-|---------|-------------|---------------|
-| **Controlled Mode** | Prevents creating new Rules and nodes via UI, only allows import and referencing existing nodes — ideal for production environments | `--mode controlled` or `ICE_MODE=controlled` |
-| **Publish to Remote** | Export modal can push data directly to configured remote Servers via server-side proxy to avoid CORS | `--publish-targets "name=url,..."` or `ICE_PUBLISH_TARGETS` |
-
-### Improvements
-
-| Item | Change |
-|------|--------|
-| UI Rename | "Publish" button renamed to "Apply" to free up the "publish" concept for remote publishing |
-| Controlled Badge | Controlled mode displays a "Controlled Mode" badge in the header with hover tooltip |
-| Request Timeout | Frontend HTTP request timeout changed from 10s to 120s |
-
-### Configuration Example
-
-```bash
-# Production: controlled mode + can push to test
-./ice-server --mode controlled \
-  --publish-targets "test=http://test.example.com:8121"
-
-# Test: open mode + can push to production
-./ice-server --publish-targets "prod=http://prod.example.com:8121"
-```
+- Web UI: Fixed color incompatibility in diff view and dual-tree comparison under dark mode, switched to antd theme tokens
+- Web UI: Relation nodes in change list now display type names (e.g. AND)
 
 ---
 
@@ -98,6 +77,8 @@ This release updates Server only. SDK versions remain unchanged:
 
 | Version | Date | Highlights | Download |
 |---------|------|------------|----------|
+| 4.0.10 | 2026-03 | Change comparison feature | [Download](https://waitmoon.com/downloads/4.0.10/) |
+| 4.0.8 | 2026-03 | Controlled mode & publish to remote | [Download](https://waitmoon.com/downloads/4.0.8/) |
 | 4.0.7 | 2026-03 | Fix import ID conflict | [Download](https://waitmoon.com/downloads/4.0.7/) |
 | 4.0.6 | 2026-03 | Logging system overhaul | [Download](https://waitmoon.com/downloads/4.0.6/) |
 | 4.0.5 | 2026-03 | Roam API simplification | [Download](https://waitmoon.com/downloads/4.0.5/) |
