@@ -8,6 +8,32 @@ keywords: upgrade guide,version upgrade,migration guide,Ice upgrade,rule engine 
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## 4.0.10 → 4.0.11
+
+### Dark Mode Fix & Change List Improvements
+
+- Web UI: Fixed color incompatibility in diff view and dual-tree comparison under dark mode, switched to antd theme tokens
+- Web UI: Relation nodes in change list now display type names (e.g. AND)
+
+Server-only update, no SDK changes — just replace the Server binary.
+
+---
+
+## 4.0.9 → 4.0.10
+
+### Change Comparison Feature
+
+- Server: New change comparison API (`/conf/changes`), supports fetching single-node or all pending changes (active vs update)
+- Server: Detail API (`/conf/detail`) adds `activeOnly` parameter for fetching the published-only tree for dual-tree comparison
+- Web UI: New compare button in node toolbar, apply/clear confirmation shows change list
+- Web UI: New full-screen dual-tree comparison view (published tree vs current editing tree) with changed nodes highlighted
+- Web UI: Fixed NONE relation nodes (type=0) not being addable as child/forward nodes
+- Web UI: Fixed new leaf nodes showing JSON mode instead of form mode when editing
+
+Server-only update, no SDK changes — just replace the Server binary.
+
+---
+
 ## 4.0.8 → 4.0.9
 
 ### Meta Extracted from Roam Data
