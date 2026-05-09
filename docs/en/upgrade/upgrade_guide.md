@@ -8,6 +8,18 @@ keywords: upgrade guide,version upgrade,migration guide,Ice upgrade,rule engine 
 
 > ⚠️ **Important**: When upgrading Ice rule engine, upgrade Server first, then Client
 
+## 4.0.11 → 4.0.12
+
+### Version bump fix & new-node property echo fix
+
+- Server: Fixed `ImportData` skipping version increment when only Confs (no Bases) were imported
+- Server: `/conf/edit` single-node creation (editType=1/4) now also returns the full node data
+- Web UI: Fixed empty property form on double-click after adding a child node — page reload is no longer required
+
+Server-only update, no SDK changes — just replace the Server binary.
+
+---
+
 ## 4.0.10 → 4.0.11
 
 ### Dark Mode Fix & Change List Improvements

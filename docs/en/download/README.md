@@ -6,11 +6,11 @@ keywords: download,Ice Server,binary,Linux,macOS,Windows,Docker
 
 # Download Ice Server
 
-## Current Version: 4.0.11
+## Current Version: 4.0.12
 
 <div class="download-badges">
 
-[![GitHub Release](https://img.shields.io/github/v/release/zjn-zjn/ice?style=flat-square&label=Release)](https://github.com/zjn-zjn/ice/releases/tag/v4.0.11)
+[![GitHub Release](https://img.shields.io/github/v/release/zjn-zjn/ice?style=flat-square&label=Release)](https://github.com/zjn-zjn/ice/releases/tag/v4.0.12)
 [![Docker Image](https://img.shields.io/docker/v/waitmoon/ice-server?style=flat-square&label=Docker&sort=semver)](https://hub.docker.com/r/waitmoon/ice-server)
 
 </div>
@@ -19,11 +19,11 @@ keywords: download,Ice Server,binary,Linux,macOS,Windows,Docker
 
 | Platform | Architecture | Download |
 |----------|-------------|----------|
-| **Linux** | x86_64 (amd64) | [ice-server-4.0.11-linux-amd64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-linux-amd64.tar.gz) |
-| **Linux** | ARM64 | [ice-server-4.0.11-linux-arm64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-linux-arm64.tar.gz) |
-| **macOS** | Intel (amd64) | [ice-server-4.0.11-darwin-amd64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-darwin-amd64.tar.gz) |
-| **macOS** | Apple Silicon (ARM64) | [ice-server-4.0.11-darwin-arm64.tar.gz](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-darwin-arm64.tar.gz) |
-| **Windows** | x86_64 (amd64) | [ice-server-4.0.11-windows-amd64.zip](https://waitmoon.com/downloads/4.0.11/ice-server-4.0.11-windows-amd64.zip) |
+| **Linux** | x86_64 (amd64) | [ice-server-4.0.12-linux-amd64.tar.gz](https://waitmoon.com/downloads/4.0.12/ice-server-4.0.12-linux-amd64.tar.gz) |
+| **Linux** | ARM64 | [ice-server-4.0.12-linux-arm64.tar.gz](https://waitmoon.com/downloads/4.0.12/ice-server-4.0.12-linux-arm64.tar.gz) |
+| **macOS** | Intel (amd64) | [ice-server-4.0.12-darwin-amd64.tar.gz](https://waitmoon.com/downloads/4.0.12/ice-server-4.0.12-darwin-amd64.tar.gz) |
+| **macOS** | Apple Silicon (ARM64) | [ice-server-4.0.12-darwin-arm64.tar.gz](https://waitmoon.com/downloads/4.0.12/ice-server-4.0.12-darwin-arm64.tar.gz) |
+| **Windows** | x86_64 (amd64) | [ice-server-4.0.12-windows-amd64.zip](https://waitmoon.com/downloads/4.0.12/ice-server-4.0.12-windows-amd64.zip) |
 
 ### Docker
 
@@ -38,26 +38,27 @@ docker run -d --name ice-server \
 docker run -d --name ice-server \
   -p 8121:8121 \
   -v ./ice-data:/app/ice-data \
-  waitmoon/ice-server:4.0.11
+  waitmoon/ice-server:4.0.12
 ```
 
 ### Quick Start
 
 ```bash
-tar -xzvf ice-server-4.0.11-linux-amd64.tar.gz
-cd ice-server-4.0.11-linux-amd64
+tar -xzvf ice-server-4.0.12-linux-amd64.tar.gz
+cd ice-server-4.0.12-linux-amd64
 sh ice.sh start
 # Visit http://localhost:8121
 ```
 
 ---
 
-## What's New in 4.0.11
+## What's New in 4.0.12
 
-**Dark Mode Fix & Change List Improvements**
+**Version bump fix & new-node property echo fix**
 
-- Web UI: Fixed color incompatibility in diff view and dual-tree comparison under dark mode, switched to antd theme tokens
-- Web UI: Relation nodes in change list now display type names (e.g. AND)
+- Server: Fixed `ImportData` skipping version increment when only Confs (no Bases) were imported, which caused those changes to not propagate to subscribed clients
+- Server: Add-son / add-forward API (`/conf/edit` editType=1/4) now also returns the full node data (including `nodeInfo`) on single-node creation
+- Web UI: Fixed newly-added child node showing an empty property form on double-click — page reload is no longer required
 
 ---
 
@@ -77,6 +78,7 @@ This release updates Server only. SDK versions remain unchanged:
 
 | Version | Date | Highlights | Download |
 |---------|------|------------|----------|
+| 4.0.11 | 2026-03 | Dark mode fix & change list improvement | [Download](https://waitmoon.com/downloads/4.0.11/) |
 | 4.0.10 | 2026-03 | Change comparison feature | [Download](https://waitmoon.com/downloads/4.0.10/) |
 | 4.0.8 | 2026-03 | Controlled mode & publish to remote | [Download](https://waitmoon.com/downloads/4.0.8/) |
 | 4.0.7 | 2026-03 | Fix import ID conflict | [Download](https://waitmoon.com/downloads/4.0.7/) |

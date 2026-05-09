@@ -8,6 +8,22 @@ keywords: changelog,version history,Ice versions,rule engine updates,release not
 
 > Recording feature updates, performance optimizations and bug fixes for each version of Ice rule engine
 
+## [4.0.12](https://github.com/zjn-zjn/ice/compare/v4.0.11...v4.0.12) (2026-05)
+
+**Version bump fix & new-node property echo fix**
+
+- Server: Fix `ImportData` skipping version increment when only Confs (no Bases) were imported, which caused those changes to not propagate to subscribed clients
+- Server: Add-son / add-forward API (`/conf/edit` editType=1/4) now also returns the full node data (including `nodeInfo`) on single-node creation
+- Web UI: Fix newly-added child node showing an empty property form on double-click — page reload is no longer required
+
+### Version Info
+
+| Component | Version |
+|-----------|---------|
+| ice-server | 4.0.12 |
+
+---
+
 ## [4.0.11](https://github.com/zjn-zjn/ice/compare/v4.0.10...v4.0.11) (2026-03)
 
 **Dark Mode Fix & Change List Improvement**
